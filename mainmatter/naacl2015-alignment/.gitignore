@@ -1,0 +1,12 @@
+.DS_Store
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.blg
+*.texpadtmp
+naacl2015.pdf
+naacl2015.bbl

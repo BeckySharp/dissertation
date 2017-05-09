@@ -1,0 +1,162 @@
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{ArchDiagram.png}
+\caption{ Detailed architecture of the model's scoring component.  
+The question, candidate answer, and justification %\edit{(previously obtained through max-pooling)}
+% bs: no - the max pooling happens at the end, after the scoring. 
+ are encoded (by summing their word embeddings) to create vector representations of each. These representations are combined in several ways to create a set of representation-based similarity features that are concatenated to additional explicit features capturing lexical overlap, discourse and IR information and fed into a feed-forward neural network.  The output layer of the network is a single node that represents the score of the justification candidate.}  %\todo{Take out? As described in Section \ref{sec:approach}, we then use max-pooling over these justification scores to assign a score to the answer candidate itself.} }
+ %bs: sure -- it's shown in the arch right next door :)
+\label{fig:arch}
+\vspace{-5mm}
+\end{center}
+\end{figure}
+
+
+\section{Model and Features}
+\label{sec:pipeline}
+%\bs{we're low on space and I'm not sure we really need all the features in table 2... in fact, do we need the table at all? \\similarity features are described in prose, as are discourse features (and example is in sep figure), and IR++ features.  Should we remove the table and move the description of LO features to prose? we could recapture half a column...}.  
+% removed table per mihai email
+Our approach consists of three main components: (a) the retrieval of a pool of candidate answer justifications (Section \ref{sec:justretrieval}); (b) the extraction of features for each (Section \ref{sec:features}); and (c) the scoring of the answer candidate itself based on this pool of justifications (Section \ref{sec:nn_model}).  The architecture of this latter scoring component is shown in Figure \ref{fig:arch}. 
+
+
+%\begin{table}[t]
+%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{p{0.5cm}p{6.5cm}}
+%%\hline
+%%Feature  & Description \\ 
+%\hline
+%\multicolumn{2}{l}{Representation-Based Features (Emb)} \\
+%\hline
+%\multicolumn{2}{l}{$sim(Q,A)$, $sim(Q,J)$, and $sim(Q,J)$} \\
+%  & The pairwise cosine similarities between the question, answer, and justification representations. \\
+%\multicolumn{2}{l}{$sim(Q, uniqueJ)$ and $sim(A, uniqueJ)$} \\
+%& The cosine similarities between each of the question and answer representations and the representation for the terms in the justification which don't overlap with either. \\
+%\multicolumn{2}{l}{$dist(Q + J, A)$} \\
+% & The euclidean distance between the sum of the question and justification representations and that of the answer (see Section \ref{sec:features} for motivation and details).\\
+%\hline
+%\multicolumn{2}{l}{Lexical Overlap Features (LO)} \\
+%\hline
+%\multicolumn{2}{l}{\emph{qCoverage}, \emph{aCoverage}, and \emph{qaCoverage}} \\
+% & The proportion of question words, of answer words, and of the combined set of question and answer words that also appear in the justification. \\
+%% & The proportion of answer words that also appear in the justification. \\
+%% & The proportion of combined question and answer words that also appear in the justification. \\ 
+%\multicolumn{2}{l}{\emph{jNovelty}} \\
+% & The proportion of justification words that do not appear in either the question or the answer. \\
+%\multicolumn{2}{l}{\emph{numWords}} \\
+% & Length of the justification in words.\tablefootnote{We normalized this value by the maximum justification length.} \\
+%
+%\hline
+%\multicolumn{2}{l}{Semi-Lexicalized Discourse Features (lexDisc)} \\
+%\hline
+%\multicolumn{2}{l}{\emph{lexDisc$_0$, ..., lexDisc$_n$}} \\
+% & A set of indicator-like features that capture the presence of semi-lexicalized discourse relations (see Section \ref{sec:features} for details and example). \\
+% \hline
+%\multicolumn{2}{l}{IR-Based Features (IR$^{++}$)} \\
+%\hline
+%\multicolumn{2}{l}{\emph{IR$_{max}$, IR$_{sum}$}} \\
+% & \todo{details} \\
+%\multicolumn{2}{l}{\emph{IR$_{max}^{boosted}$, IR$_{sum}^{boosted}$}} \\
+% & \todo{details} \\
+%
+%%\hline
+%%\multicolumn{2}{l}{Other} \\
+%%\hline
+%\end{tabular}
+%\end{footnotesize}
+%\vspace{-1mm}
+%\caption{{\footnotesize Summary of the features calculated for each candidate justification.  
+% }} 
+%\label{tab:feature_examples}
+%\end{center}
+%\end{table}
+
+\subsection{Candidate Justification Retrieval}
+\label{sec:justretrieval}
+The first step in our process is to use standard information retrieval (IR) methods to retrieve a set of candidate justifications for each candidate answer to a given question.  To do this, we build a bag-of-words (BOW) query using the content lemmas for the question and answer candidate, boosting the answer lemmas to have four times more weight\footnote{We empirically found this answer term boosting to ensure retrieval of documents which were relevant to the particular answer candidate.}.  We used Lucene\footnote{\url{https://lucene.apache.org}} with a \emph{tf-idf} based scoring function to return the top-scoring documents from the KB.  Each of these indexed documents consists of a single sentence from our corpora, and serves as one potential justification.  
+%\todo{Say here that each Lucene document indexes one potential justification, i.e., one sentence from X, or one paragraph from Y?}
+
+\subsection{Feature Extraction}
+\label{sec:features}
+For each retrieved candidate justification, we extract a set of features based on (a) distributed representations of the question, candidate answer, and justification terms; (b) strict lexical overlap; (c) discourse relations present in the justification; and (d) the IR scores for the justification.
+
+{ \flushleft{\bf Representation-based features (Emb):}} To model the similarity between the text of each question ($Q$), candidate answer ($A$), and candidate justification ($J$), we include a set of features that utilize distributed representations of the words found in each.
+%\todo{Needs to explain where the justification vector comes from (e.g. answer passage from IR model)} 
+%bs: I disagree -- I think it's pretty clear from 4.1 above.  I added "text" above to make it clearer.  sorry - but we have no space!!!
+First we encode each 
+%we make a single vector representation for each of the question ($Q$), answer candidate ($A$), and justification ($J$) 
+by summing the vectors for each of their words.\footnote{While this BOW approach is not ideal in many ways, it performed equivalently to far more complicated approaches such as LSTMs and GRUs, also noted by \cite{Iyyer2015}, likely due to the limited training data in this domain.}.  We then compute $sim(Q, A)$, $sim(Q, J)$, and $sim(A, J)$ using cosine similarity.  Using another vector representation of only the \emph{unique} words in the justification, i.e., the words that do not occur in either the question or the candidate answer, we also compute $sim(Q, uniqueJ)$ and $sim(A, uniqueJ)$.  
+
+To create a feature which captures the relationship between the question, answer, \emph{and} justification, we take inspiration from TransE, a popular relation extraction framework \citep{Bordes2013TranslatingEF}.  TransE is based on the premise that if two entities, $e_1$ and $e_2$ are related by a relation $r$, then a mapping into $k$ dimensions, $m(x) \in \mathbb{R}^k$ can be learned such that $m(e_1) + m(r) \approx m(e_2)$.  Here, we modify this intuition for QA by suggesting that given the vectorized representations of the question, answer candidate, and justification above, $Q + J \approx A$, i.e., a question combined with a strong justification will point towards an answer.  Here we model this as an explicit feature, the euclidean distance between $Q + J$ and $A$, and hypothesize that as a consequence the model will learn to select passages that maximize the quality of the justifications.
+%Thus, we calculate a feature which is the euclidean distance between $Q + J$ and $A$.  Our intuition is that a question combined with a strong justification will point towards an answer.  Here we model this as an explicit feature, and hypothesize that as a consequence the model will learn to select passages that maximize the quality of the justifications.
+This makes a total of six features based on distributed representations. %\todo{This is an important theoretical idea, and should be explicitly stated. e.g. (Our intuition is that a question combined with a strong justification will point towards an answer.  Here we model this as an explicit feature, and hypothesize that as a consequence the model will learn to select passages that maximize the quailty of the justifications.)}  
+
+{\flushleft{\bf Lexical overlap features (LO):}} 
+%\todo{This is not a great name, because the next features are also explicit... Maybe, lexical overlap features} 
+We additionally characterize each justification in terms of a simple set of explicit features designed to capture the size of the justification, as well as the lexical overlap (and difference) between the justification and the question and answer candidate.  We include these five features: the proportion of question words, of answer words, and of the combined set of question and answer words that also appear in the justification; the proportion of justification words that do not appear in either the question or the answer; and the length of the justification in words.\footnote{We normalized this value by the maximum justification length.} 
+%The full set of LO features are shown in Table \ref{tab:feature_examples}.
+
+{\flushleft{\bf Semi-Lexicalized Discourse features (lexDisc):}}  These features use the discourse structure of the justification text, which has been shown to be useful for QA~\cite{jansen14,sharp-EtAl:2015:NAACL-HLT, sachan2016science}. %, to generate a set of explicit discourse features.  
+
+We use the discourse parser of \citet{Surdeanu:15} to fragment the text into elementary discourse units (EDUs) and then recursively connect neighboring EDUs with binary discourse relations.
+%which is based on the architecture of \citet{hernault10} and \citet{feng12}.  This parser first parses each justification into its elementary discourse units (EDUs) and then recursively connects neighboring EDUs together, assigning each a binary discourse relation label such as \emph{Elaboration} or \emph{Contrast}. Each of these discourse relations consists of a head, a relation label, and a modifier.  
+%
+For each of the 18 possible relation labels, we create 
+a set of semi-lexicalized discourse features that indicate the presence of a given discourse relation as well as whether or not the head and modifier texts contain words from the question and/or the answer.  %This is similar to the discourse-based features of \citet{sachan2016science}, which were the concatenation of the question word (i.e., \emph{why} or \emph{how}) to the relation labels of background sentences.   
+
+For example, for the question \emph{Q: What makes water a good solvent...?  A: strong polarity}, with a discourse-parsed justification [{\em Water is an efficient solvent}]$_{e1}$ [{\em because of this polarity.}]$_{e2}$, we create the semi-lexicalized feature \emph{Q}\_\emph{cause}\_\emph{A}, because there is a {\em Cause} relation between EDUs $e1$ and $e2$, $e1$ overlaps with the question, and $e2$ overlaps with the answer.
+%For example, for the justification [{\em Water is an efficient solvent}]$_{e1}$ [{\em because of this polarity.}]$_{e2}$, we create the semi-lexicalized feature \emph{Q\_cause\_A}, because there is a {\em Cause} relation between EDUs $e1$ and $e2$, $e1$ overlaps with the question ({\em What makes water a good solvent...?}), and $e2$ overlaps with the answer ({\em strong polarity}).
+Since there are 18 possible discourse relation labels, and the prefix and suffix can be any of \emph{Q, A, QA} or \emph{None}, this creates a set of 288 indicator features.
+
+%\begin{figure}[t]
+%\begin{center}
+%\includegraphics[width=0.5\textwidth]{DiscourseExample.png}
+%\caption{Example showing the discourse feature extracted from a question, answer, and justification.}
+%\label{fig:discourseexample}
+%\vspace{-5mm}
+%\end{center}
+%\end{figure}
+%
+%Consider the example in Figure \ref{fig:discourseexample}, where the justification contains a \emph{Cause} relation whose head contains question words (shown in blue) and whose modifier contains answer words (shown in green).  This corresponds to the semi-lexicalized feature \emph{Q\_cause\_A}.  Since there are 18 possible discourse relation labels, and the prefix and suffix can be any of \emph{Q, A, QA} or \emph{None}, this creates a set of 288 indicator features\footnote{In practice these features can be greater than 1.0.  We wanted to maintain the indicator-like quality of the features while still capturing if a given justification contains several of a certain type of discourse feature.  Thus, we use the fourth-root of the count of each of the discourse features present in the justification as the feature value.}, though in practice many combinations are never found.
+
+{\flushleft{\bf IR-based features (IR$^{++}$):}} 
+%\todo{rework in consideration of query details above}
+Finally, we also use a set of four IR-based features which are assigned at the level of the answer candidate (i.e., these features are identical for each of the candidate justifications for that answer choice).   
+%Given a question and answer candidate, we query the IR system with the content lemmas from both.  
+Using the same query method as described in Section \ref{sec:justretrieval}, for each question and answer candidate we retrieve a set of indexed documents.
+Using the \emph{tf-idf} based retrieval scores of these returned documents, 
+$s(d_i)$ for $d_i \in D$, we rank the answer candidates using two methods: 
+\begin{itemize}
+\item by the maximum retrieved document score for each candidate, and  
+\item by the weighted sum of all retrieved document scores\footnote{Weighted sum was based on the IR scores used in the winning Kaggle system from user Cardal (\scriptsize{ \url{https://github.com/Cardal/Kaggle_AllenAIscience}})}:
+\begin{footnotesize}
+\vspace{-5mm}
+\begin{equation}
+\sum_{d_i \in D} \dfrac{1}{i} s(d_i) 
+\end{equation}
+\vspace{-7mm}
+\end{footnotesize} 
+\end{itemize}
+We repeat this process using an unboosted query as well, for a total of four rankings of the answer candidates.  
+We then use these rankings to make a set of four reciprocal rank features,  IR$^{++}_0$, ..., IR$^{++}_3$, for each answer candidate (i.e., IR$^{++}_0 = 1.0$ for the top-ranked candidate in the first ranking,  IR$^{++}_0 = 0.5$ for the next candidate, etc.)
+%For each answer candidate, we use its position in each of the four rankings above to make a reciprocal rank feature -- these are the IR$^{++}$ features. 
+  
+%For each of these four IR-based rankings of the answer candidates, We transform these four IR-based rankings into a set of four reciprocal rank features for each answer candidate. 
+
+
+\subsection{Neural Network}
+\label{sec:nn_model}
+
+As shown in Figure \ref{fig:arch}, the extracted features for each candidate justification are concatenated and passed into a fully-connected feed-forward neural network (NN).  The output layer is a single node representing the justification score.  We then use max-pooling over these scores to select the current best justification for the answer candidate, and use its score as the score for the answer candidate itself.  For training, the correct answer for a given question is paired with each of the incorrect answers, and each are scored as above.  We compute the pair-wise margin ranking loss for each training pair:
+\vspace{-2mm}
+
+\begin{footnotesize}
+\begin{equation}
+L = \max(0, m - F(a^{+}) + F(a^{-}))
+\end{equation}
+%\vspace{-2mm} 
+\end{footnotesize}where $F(a^+)$ and $F(a^-)$ are the model scores for a correct and incorrect answer candidate and $m$ is the margin, and backpropagate the gradients.
+At testing time, we use the trained model to score each answer choice (again using the maximum justification score) and select the highest-scoring.
+
+As we are interested in not only correctly answering questions, but also selecting valid justification for those answers, we keep track of the scores of \emph{all} justifications and use this information to return the top $k$ justifications for each answer choice.  These are evaluated along with the answer selection performance in Section \ref{sec:results}.

@@ -1,0 +1,115 @@
+%
+% File eacl2014.tex
+%
+% Contact g.bouma@rug.nl yannick.parmentier@univ-orleans.fr
+%
+% Based on the instruction file for ACL 2013 
+% which in turns was based on the instruction files for previous 
+% ACL and EACL conferences
+
+%% Based on the instruction file for EACL 2006 by Eneko Agirre and Sergi Balari
+%% and that of ACL 2008 by Joakim Nivre and Noah Smith
+
+\documentclass[11pt,letterpaper]{article}
+\usepackage{naaclhlt2015}
+\usepackage{times}
+\usepackage{latexsym}
+
+%\documentclass[11pt]{article}
+%\usepackage{acl2014}
+%\usepackage{times}
+%\usepackage{latexsym}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{times}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fixltx2e}
+%\usepackage[options]{natbib}
+\usepackage{float}
+%\usepackage{covington}
+\usepackage{supertabular,booktabs}
+%\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage{afterpage}
+\usepackage{array}
+%\usepackage{setspace}
+\captionsetup{font={footnotesize}}
+
+
+%\special{papersize=210mm,297mm} % to avoid having to use "-t a4" with dvips 
+\setlength\titlebox{5cm}  % You can expand the title box if you really have to
+
+\newcommand{\svmr}{{SVM$^{rank}$}}
+\newcommand{\code}[1]{{\tt {\small #1}}}
+\newcommand{\qn}{{{\bf Q}$^\textbf{{\small N}}$}}
+\newcommand{\ssa}{{{\scriptsize $^{*}$}}}
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+
+\title{Spinning Straw into Gold: Using Free Text to Train Monolingual Alignment Models for Non-factoid Question Answering}
+
+\author{Rebecca Sharp\textsuperscript{1}, Peter Jansen\textsuperscript{1}, Mihai Surdeanu\textsuperscript{1}, {\textnormal {and}} Peter Clark\textsuperscript{2}  \\
+  \textsuperscript{1} University of Arizona, Tucson, AZ, USA \\
+  \textsuperscript{2} Allen Institute for Artificial Intelligence, Seattle, WA, USA \\
+  {\tt \{bsharp,pajansen,msurdeanu\}@email.arizona.edu} \\
+  {\tt peterc@allenai.org} \\
+  \\}
+%\author{Rebecca Sharp, Peter Jansen, {\textnormal {and}} Mihai Surdeanu \\
+ % University of Arizona \\
+ % Tucson, AZ, USA \\
+ % {\tt \{bsharp,pajansen,msurdeanu\}} \\
+ % {\tt @email.arizona.edu} 
+ % \\}
+
+%\date{}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+Monolingual alignment models have been shown to boost the performance of question answering systems by "bridging the lexical chasm" between questions and answers.
+%and associating question words like {\em breakfast} with answer words like {\em pancakes} or {\em cereal}.  %Unfortunately these models have been historically challenging to generate, requiring large and expensive corpora of aligned QA pairs to train.  
+The main limitation of these approaches is that they require semistructured training data in the form of question-answer pairs, which is difficult to obtain in specialized domains or low-resource languages.
+%While these models currently require semistructured training data in the form of question-answer pairs, 
+We propose two inexpensive methods for training alignment models solely using free text, by generating artificial question-answer pairs from discourse structures. Our approach is driven by two representations of discourse: a shallow sequential representation, and a deep one based on Rhetorical Structure Theory. 
+We evaluate the proposed model on two corpora from different genres and domains: one from Yahoo! Answers and one from the biology domain, and two types of non-factoid questions: manner and reason. We show that these alignment models trained directly from discourse structures imposed on free text
+improve performance considerably over an information retrieval baseline and a neural network language model trained on the same data.
+%
+%imposing discourse structure on free text allows high-quality alignment models to be inexpensively trained, and that these models can improve performance up to 49\% (relative) over strong information retrieval and neural network language model baselines. 
+
+\end{abstract}
+
+\input{introduction}
+\input{related_work}
+\input{approach}
+\input{Models}
+\input{experiments}
+%\input{discussion}
+%\input{discussion}
+
+\vspace{-2mm}
+%\begin{small}
+\section*{Acknowledgments}
+\vspace{-2mm}
+We thank the Allen Institute for AI for funding this work.
+%\end{small}
+
+%\bibliographystyle{acl}
+%\bibliography{citations} % add your references to citations, then run bibtex
+
+% If you use BibTeX with a bib file named eacl2014.bib, 
+% you should add the following two lines:
+\bibliographystyle{acl}
+\bibliography{acl2014}
+%\bibliography{refs}
+%\bibliography{citations}
+
+\end{document}

@@ -1,0 +1,120 @@
+\section{Learning Model}
+\label{sec:perceptron}
+
+We perform answer selection by focusing on ranking answer {\em justifications} rather then actual answers. 
+Our algorithm (detailed in Algorithm \ref{alg:perceptron}) determines the best answer to a given question by first finding the highest-scoring TAG (i.e., justification) out of all the TAGs for each of its candidate answers, and then selecting the corresponding answer candidate.  
+This introduces an additional complication during training: while we know which answer candidate is correct, the actual quality of any given TAG is hidden. That is, many TAGs which connect a correct answer to the question do so in the wrong context, producing a poor justification. Conversely, even an incorrect answer can be connected back to the question, otherwise the multiple choice test itself would be too easy. 
+
+We address this issue with a reranking perceptron~\cite{Shen:Joshi:2005,Surdeanu:11} extended with a latent layer that models the correctness of the justifications. 
+During training, we take advantage of the assumption that, with enough knowledge coverage, the best TAG for a correct answer will be better than the best TAG for an incorrect one.  As a result, our algorithm optimizes two goals jointly: choosing a good answer for a given question, and justifying it with a human-readable TAG that connects sentences from our knowledge bases.
+
+\subsection {Learning Algorithm}
+\label{sec:model}
+
+The input to the reranking algorithm consists of a corpus of $n$ training questions, $\boldsymbol{\mathcal{Q}}$, where each $q_i \in \boldsymbol{\mathcal{Q}}$ has a set of $m$ candidate answers, $\boldsymbol{A}$ (in the particular case of the multiple choice test, these are the four multiple choice answers).  Each $a_j \in \boldsymbol{A}$ for a given $q_i$ has a set of TAGs, $\boldsymbol{X_{i,j}}$, which connect $q_i$ to $a_j$.  
+Crucially, for a correct answer, we assume that there is {\em at least one} valid TAG $x_c \in \boldsymbol{X_{i,j}}$, which justifies the correctness of the chosen answer. This assumption is similar to the one made by Hoffmann et al.~\shortcite{hoffmann2011knowledge}, who assumed that, for a binary relation extraction task, for each training relation between two entities, $e_1$ and $e_2$, there exists at least one correct sentence that supports the extraction of the given relation among the sentences that contain both $e_1$ and $e_2$.
+
+The learning algorithm is formalized in Algorithm~\ref{alg:perceptron}. The two fundamental building blocks of the algorithm are the functions $P$ and $F$. 
+Intuitively, the function $P$ identifies which justifications (or TAGs) for a given answer best explain the answer according to the current model. For example, for the question {\em Which organism is a producer?} and the answer {\em grass}, a good justification selected by function $P$ is a TAG that connects the two sentences: {\em Producer is an organism that produces its own food and is food for other organisms: usually a green plant.} and {\em Grass is a green, leafy plant that often covers the ground.} 
+Because $P$ implements a latent operation (i.e., which justification is correct?), its goodness evolves together with the learned model. 
+Note that, at this stage, we do not control how many justifications are produced by function P for a given answer other than constraining it to select {\em at least one}. The function $F$ computes the overall score of a given answer by simply averaging the scores of the justifications chosen by $P$. 
+
+More formally, for a given question $q_i$ and candidate answer $a_j$, $P$ chooses a subset of TAGs from $\boldsymbol{X_{i,j}}$ that are deemed correct, according to the current model. $F$ marginalizes over these TAGs to compute the overall score of the answer $a_j$:
+
+\begin{equation}
+\label{eq:F}
+F(q_i, a_j) = \frac{\sum_{x \in P(q_i, a_j)} \boldsymbol{\Theta} \cdot \Phi(x)}{|P(q_i, a_j)|}
+\end{equation}
+where the score of a given TAG, $x$, is computed as the dot product between the parameter vector $\boldsymbol{\Theta}$  and the vector produced by a feature function, $\Phi$, which operates over individual TAGs. 
+
+Given the functions $P$ and $F$ that control the latent operation of choosing valid answer justifications, the algorithm proceeds similarly to the reranking perceptron~\cite{Shen:Joshi:2005}. If a prediction, i.e., a choice for the correct answer for a given question (line 6), is incorrect (line 7), the algorithm updates its parameter vector, $\boldsymbol{\Theta}$, by adding all valid justifications of the correct answer as produced by $P$ (line 9), and subtracting all TAGs considered valid for the current top answer (line 12). 
+
+
+The fundamental operation here is thus the implementation of $P$. For their classification task, Hoffman et al. implement this function as an edge-cover problem, which guarantees that the overall score for the correct label (similar to our $F$ function) is maximized and at least one sentence supports the correct classification.  
+For our reranking task, we found that a conservative interpretation of this {\em at least one} idea, where {\em exactly} one justification is chosen, performed the best.\footnote{In fact, we found that performance consistently dropped as the number of justifications chosen by $P$ increased.} That is, $P$ returns only the top TAG with the highest score according to the dot product with the current $\boldsymbol{\Theta}$. 
+We discuss the other extreme, i.e., using all TAGs, in Section \ref{sec:controls} (when taken to this level, the latent layer is essentially disregarded entirely, assuming that each TAG for a correct answer is correct, and that each TAG for an incorrect answer is incorrect).  As discussed there, this performed far worse.
+
+
+%\begin{algorithm}[t]
+%%\SetAlgoLined
+%%\linesnumbered
+%\LinesNumbered
+%\KwIn{  $ $\\
+%$T$ -- the number of training epochs\;
+%$\boldsymbol{\Sigma}$ -- the set of $n$ training questions, each of which has $m$ answer candidates\;
+%$\boldsymbol{X_{i,j}}$ -- the set of all paths connecting a question $q_i$ with a candidate answer $a_j$\;}
+%\KwOut{ \\
+%$\boldsymbol{\Theta}$ -- parameter vector\;}
+%\Begin{
+%% {\small \tcp{Initialize parameter vector}}
+%$\boldsymbol{\Theta} = \boldsymbol{0}$\;
+%\For{$t\leftarrow 1$ \KwTo $T$}{
+%	\For{$i\leftarrow 1$ \KwTo $n$} {
+%			$k = \argmax_{j = 1, \dots, m} F(q_i, a_j)$\; 
+%			\If{$k \ne 1$}{
+%				\For{$x \leftarrow P(q_i, a_1)$}{
+%					$\boldsymbol{\Theta} = \boldsymbol{\Theta} + \Phi(x)$\;
+%				}
+%				\For{$x \leftarrow P(q_i, a_k)$}{
+%					$\boldsymbol{\Theta} = \boldsymbol{\Theta} - \Phi(x)$\;
+%				}
+%			}
+%%			compute $ y_1 = F(a_1, X_1)$\\
+%%			\For{$j\leftarrow 2$ \KwTo $m$} {
+%%				%$z_{j}^{*}$ = $ argmax_{\bar{z_{j}}}$($\theta \cdot \bar{z_{j}}$)\; 
+%%				compute $ y_j = F(a_j, X_j)  $\; 
+%%				}
+%%		find $p = argmax_m(Y) $\\
+%%		\If{$ (y_1 - y_{p}) < \lambda $}{
+%%			$ \bar{\theta} = \bar{\theta} + (\Phi(X_1) - \Phi(X_{p})) \tau $ \;
+%%		}
+%}
+%}
+%}
+%\Return{$\boldsymbol{\Theta}$}
+%\vspace{5mm}
+%\caption{{\footnotesize Learning algorithm for the latent reranking perceptron. We consider, without loss of generality, that the correct answer appears at position 1 in training.}}
+%\label{alg:perceptron}
+%\end{algorithm}
+\begin{algorithm}[t]                      % enter the algorithm environment
+                 % and a label for \ref{} commands later in the document
+                 \small
+\begin{algorithmic}[1]                    % enter the algorithmic environment
+    \STATE \textbf{Input:}{$ $\\
+$T$ -- the number of training epochs}\\
+$\boldsymbol{\mathcal{Q}}$ -- the set of $n$ training questions, each of which has $m$ answer candidates\\
+$\boldsymbol{X_{i,j}}$ -- the set of all TAGs connecting a question $q_i$ with a candidate answer $a_j$\\
+    \STATE \textbf{Output:}{ $\boldsymbol{\Theta}$ -- parameter vector\\}
+    \STATE $\boldsymbol{\Theta} = \boldsymbol{0}$\;
+	\FOR{$t\leftarrow 1$ --to-- $T$}
+		\FOR{$i\leftarrow 1$ --to-- $n$} 
+			\STATE $k = \argmax_{j = 1, \dots, m} F(q_i, a_j)$
+			\IF{$k \ne 1$}
+				\FOR{$x \leftarrow P(q_i, a_1)$}
+					\STATE $\boldsymbol{\Theta} = \boldsymbol{\Theta} + \Phi(x)$
+				\ENDFOR
+				\FOR{$x \leftarrow P(q_i, a_k)$}
+					\STATE $\boldsymbol{\Theta} = \boldsymbol{\Theta} - \Phi(x)$
+				\ENDFOR
+			\ENDIF
+		\ENDFOR
+	\ENDFOR
+	\RETURN $\boldsymbol{\Theta}$
+\end{algorithmic}
+\caption{ Learning algorithm for the latent reranking perceptron. We consider, without loss of generality, that the correct answer appears at position 1 in training.}   
+\label{alg:perceptron}
+\end{algorithm}
+
+
+
+{\flushleft{\bf Inference:}}
+%\paragraph{Inference}
+During inference, the algorithm ranks all candidate answers for a given question in descending order of their score (as given by $F$, but using the averaged parameter vector, $\boldsymbol{\Theta_{avg}}$) and returns the top answer.
+
+{\flushleft{\bf Practical concerns:}}
+Two practical issues were omitted in Algorithm~\ref{alg:perceptron} for clarity, but improved performance in practice. First, we used the averaged percetron at inference time~\cite{Collins:2002:DTM}. That is, instead of using the latest $\boldsymbol{\Theta}$ after training, we averaged all parameter vectors produced during training, and used the averaged vector, $\boldsymbol{\Theta_{avg}}$, for inference.
+
+Second, we used a large-margin perceptron, similar to~\cite{Surdeanu:11}. In particular, we update the model not only when the predicted answer is incorrect (line 5), but also when the current model is not confident {\em enough} -- that is, when the predicted answer is correct, but the difference in $F$ scores between this answer and the second predicted answer is smaller than a small positive hyper parameter $\tau$. 
+
+
+

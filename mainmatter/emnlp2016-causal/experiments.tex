@@ -1,0 +1,97 @@
+
+%\section{Experiments and Evaluation}
+%\label{sec:experiments}
+%%\vspace{-2mm}
+%
+%We evaluate our approach at two levels.  First, we directly evaluate the quality of the embedding space in regards to the desired semantic relation.  Then, we evaluate the utility of the approach in an open-domain QA task.
+
+\section{Direct Evaluation}
+\label{sec:directeval}
+
+To determine whether or not the proposed approach is able to capture the semantic relation of interest, causality, we replicate the quantitative evaluation of Levy and Goldberg~\shortcite{levy2014dependency}.  To demonstrate that their embeddings encoded functional similarity as opposed to topical similarity, they used their embeddings to rank a set of word pairs (each of which reflected one of the two types of similarity) using cosine similarity and showed that the word pairs which were functionally similar tended to be ranked higher than those with topical similarity.  Here, we do the same.
+
+%\flushleft{\textbf{Data:}} 
+\subsection{Data:}
+We evaluate on a set of word pairs drawn from the SemEval 2010 Task 8 \todo{cite}, a multiway classification of semantic relations between nominals.  From the training set of this task, we used a total of XX nominal pairs, XX of which were cause-effect and XX which were randomly selected from the other XX relations.  This set was then randomly divided into equally-sized development and test partitions.
+
+%\flushleft{\textbf{Baselines:}} 
+\subsection{Baselines:}
+We compared our embeddings against a standard \texttt{word2vec} model with a sliding window of XX as well as a random baseline where pairs were randomly shuffled. Additionally, we compared against a look-up baseline which counted the number of times a given nominal pair was found in the extracted cause-effect event database. 
+
+\begin{table}[t!]
+\begin{center}
+%\begin{scriptsize}
+\begin{footnotesize}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{l}{ Model } & \multicolumn{1}{l}{MAP} \\ %\multicolumn{1}{l}{Impr.} \\
+%\cline{1-2}
+
+\hline
+%\multicolumn{2}{l}{\textit{Yahoo! Answers}} \\ % 185q (sent) ret=1p c=0.1 
+%\hline
+Random 			& 48.9 	\\
+Lookup			& 93.1 	\\
+Standard  		& 58.4	\\
+Casual  			& 68.2*	\\
+
+\end{tabular}
+\end{footnotesize}
+\caption{{\small Ability of each of the models and baselines to rank causal nominal pairs above non-causal pairs, as measured with mean average precision (MAP). Statistical significance (indicated by *) was determined through bootstrap resampling with 10,000 iterations.}}
+\label{tab:MAP}
+\end{center}
+\end{table}
+%MAP for Custom Vectors: 0.6816675505751166
+%MAP for E2C Vectors: 0.6871338630607531
+%MAP for Bidir Vectors: 0.6684350003582593
+%MAP for Comparison (Baseline) Vectors: 0.5835158858435683
+%MAP for Translation Model with lamda of 0.5 : 0.6156522257806402
+%MAP for counting Matches: 0.9312613087523468
+%MAP for Keras: 0.6752727545259546
+%MAP for Random: 0.4892479543525109
+%p < 0.01
+
+\begin{figure}[t!]
+\begin{center}
+%\includegraphics[width=75mm]{rpcurves_all.png}
+%\vspace{-4mm}
+\caption{{\small Recall-precision curve showing the ability of each model to rank causal pairs above non-causal pairs. }}
+\vspace{-6mm}
+\label{fig:rpcurve_all}
+\end{center}
+\end{figure}
+
+%\flushleft{\textbf{Results:}} 
+\subsection{Results:}
+In Table \ref{tab:MAP} we report the mean average precision (MAP) for each of the models and baselines.  The highest by far is for the look-up baseline.  However, this score is positively skewed by the fact that when pairs are found, there is extremely high confidence that they are of the relation of interest coupled with the fact that approximately 65\% of the pairs were not found in the database and so were all tied in last place.  As a consequence, there were far fewer average precisions to be combined when calculating the MAP, and most of the ones which were there had extremely high precision.  The MAP when using the customized vectors was significantly higher than that of the standard \texttt{word2vec} vectors (68\% versus 58\%), and both were higher than the baseline.  This suggests that while the standard implementation of \texttt{word2vec} encodes some causality information, our method encodes it far more directly. \todo{better word}.
+
+\subsection{Discussion:}
+We also examined the recall-precision curves for all models, shown in Figure \ref{fig:rpcurve}.  The curve for the customized vectors shows an atypical shape, where, despite the success of the customized vectors once recall reaches approximately 15\%, the highest ranked pairs (i.e. lower recall) had far \emph{worse} precision rather than higher precision.  To examine this, we analyzed the top-ranked 15\% of the pairs from the causal vectors.  
+
+\todo{HEDGE THIS - more?}
+Rather than finding that the high associations were due to noise in the training data, we found that the model appeared to be performing approximate inference, but here it was noisy inference.  For example, the top-ranked pair was (\emph{platform}, \emph{scaffold}) and there were no instances in the extracted causal events where \emph{platform} and \emph{scaffold} were found together in the same cause-effect pair.  
+
+Instead, we found that there were only three extracted events with \emph{scaffold} in the effect text.  We checked to see if the words in the cause text of those events had other effect texts which overlapped lexically with \emph{platform}.  Indeed, we found the link illustrated in Figure \ref{fig:noisyinf}, where both \emph{platform} and \emph{malfunction} cause \emph{loss} thus bringing them closer together in the target embedding space, since they cause the same things.  This resulted in \emph{platform} being close to the effects of \emph{malfunction}, including \emph{scaffold}.  This demonstrates that the inference is influenced by frequency effects, as words like \emph{scaffold} and \emph{platform} are too infrequent to have robust representations in the embedding space.  
+
+As this effect is entirely directional, we trained a set of vectors by reversing the input, such that the effects served as the targets and the causes were the contexts.  The recall-precision curve when using these embeddings to rank the SemEval pairs is shown in Figure \ref{fig:rpcurve_all}, labelled as E2C.  As expected, the curve follows that of the original vectors, as it suffers from the same issues, but with different noisy pairs ranked highly.  We then ranked the SemEval pairs using an average of the scores returned by the two causal embeddings, to mitigate the frequency effects.  That final, bidirectional curve is also shown in Figure \ref{fig:rpcurve_all}.
+%Instead, we found that many of the causal events which whose cause argument contained the word \emph{platform} had effects which overlapped lexically with those whose cause arguments contained the word \emph{malfunction}, and that there w.  To illustrate, consider the following sentences 
+%we had several extracted causal events whose cause contained the word \emph{platform} and whose effect contained the words \emph{}
+
+\section{Indirect Evaluation}
+\label{sec:indirecteval}
+
+After having determined that the learned embeddings encoded causality, we designed an experiment to evaluate their utility in a down-stream task.  We chose question-answering (QA) as it has been shown that many questions require complex inference, including causality, in order to be explanably solved \todo{cite}.  
+
+\subsection{Data:}
+As we trained our embeddings using events extracted from open-domain resources, we chose to evaluate on a set of causal questions from Yahoo! Answers \todo{link}, hand-extracted with very simple surface patterns such as \emph{What causes ...}\todo{footnote with details?}.  There were a total of \todo{XX} questions, from which we used \todo{50\%} for training, \todo{25\%} for development, and \todo{25\%} for testing.
+These questions were filtered such that each had at least four candidate answers
+\todo{detail about the avg num answers, etc}
+
+\subsection{Experimental Design:}
+We evaluate the contribution of the causal embeddings model using the standard reranking architecture \todo{cite} of \todo{cite naacl and peters acl}.
+%In pilot experiments, we found that aligning only nouns, verbs, adjectives, and adverbs yielded higher performance. TALK ABOUT?
+In this architecture, the candidate answers are initially ranked using a shallow candidate retrieval (CR) component, then they are re-ranked using the model features along with the CR score. 
+We used SVM rank\todo{cite/link}, a Support Vector Machine adapted for ranking, for our learning framework.
+We compare the performance of the causal embeddings model against the same standard skipgram model used in Section \ref{sec:directeval}.
+As features, we use the same set as \todo{cite naacl and acl}: the maximum and average pairwise cosine similarity between question and answer words, as well as the overall similarity between the composite question and answer vectors.  When using the causal embeddings however, we first determine (through lexical pattern matching) whether the question text is the cause or the effect, thus determining which embeddings to use for the question and candidate answer texts.  For example, in a question such as "Q: What causes X? A: Y", the cosine similarities would be found using the effect vectors for the question words and the cause vectors for the answer candidate words. \todo{good grief, redo this}   
+

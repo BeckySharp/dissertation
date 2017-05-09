@@ -1,0 +1,51 @@
+
+\vspace{-1mm}
+\section{Discussion}
+\label{sec:discussion}
+\vspace{-2mm}
+
+%
+% Alignment performance by part-of-speech association (noun/noun, verb/verb, noun/verb, etc)
+%
+\begin{comment}
+\begin{table}[t!]
+\begin{center}
+%\begin{scriptsize}
+\begin{footnotesize}
+\begin{tabular}{llc}
+\multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{P@1} \\
+\multicolumn{1}{l}{ Model/Features } & \multicolumn{1}{l}{P@1} & \multicolumn{1}{l}{Impr.} \\
+\cline{2-3}
+
+\hline
+\multicolumn{3}{l}{\textit{Yahoo! Answers}} \\ % 185q (sent) ret=1p c=0.1 
+\hline
+CR Baseline 							& 19.00 					&	  				\\
+Full model  							& 29.00 					& +XX\% 			\\
+Verb  $\rightarrow$ Verb 				& {\bf XX.XX\ssa}			& {\bf +XX\%}		\\
+Verb  $\rightarrow$ Noun 				& {\bf XX.XX\ssa}			& {\bf +XX\%}		\\
+Noun  $\rightarrow$ Noun 				& {\bf XX.XX\ssa}			& {\bf +XX\%}		\\
+
+\end{tabular}
+%\end{scriptsize}
+\end{footnotesize}
+%\vspace{-2mm}
+\caption{{\footnotesize \label{font-table} Performance of an alignment model trained with only verb$\rightarrow$verb, verb$\rightarrow$noun, or noun$\rightarrow$noun associations on the Y!A corpus.  Performance suggests the effect is primarily driven by XX$\rightarrow$XX associations. 
+}}
+\label{tab:associationtype}
+%\vspace{-4mm}
+\end{center}
+\end{table}
+\end{comment}
+
+The utility of the proposed approach is clear -- by imposing structure over free text,  monolingual alignment can used (with extremely sparse data) to achieve large performance gains in non-factoid QA.  When discourse parsing is possible for the free text in the domain in question, intersentence and intrasentence alignments can be combined to reach maximal performance.  Otherwise, just a straightforward aligning of adjacent sentences can attain a close approximation of those results.  Both of these models far outperform an RNNLM when trained on limited amounts of data.  
+
+In fact, it is notable how quickly we see performance increases from the alignment models in YA.  In both domains, results are increased due to word self-associations (when the same word appears in both the question and the answer), but with YA there also is a slight correlation between answer length and correctness.  The magnitude of the performance increase due to these factors is essentially shown in the results for the smallest sample size, as one document doesn't contain enough data to provide a real alignment contribution.  Taking this into account, the scores still increase quite rapidly for YA.  It could be the case that associations between high frequency verbs drive much of this performance.  If so, then perhaps for the more technical Bio domain, more world-knowledge (encoded in nouns and other parts of speech) is needed,  explaining why we don't see the same immediate performance gain.  To test this, matrices could be made with only verbs, only nouns, or other combinations to determine if one type of association is driving much of the performance and how the domains compare in this respect. 
+
+After a rapid increase, the performance in YA quickly levels off relative to the amount of input for training.~\footnote{Only a fraction of 1 file is used to achieve the maximal performance for the alignment models.  In pilot experiments, including as many as 20 files did not improve performance. }  This may be a result of a decrease in the signal to noise ratio.  Unlike YA, gigaword is within the news domain.  As more and mode documents are added to training, perhaps the model becomes too far biased towards news to continue to increase performance.  If more sophisticated techniques are implemented, such as topic filtering, potentially the performance in this domain could be even higher.  We don't see the same plateau effect with Bio that we do with YA.  Likely this is due to the fact that the in-domain texbook for Bio was much smaller than gigaword.  With more in-domain data we would expect the results for all models to increase, and perhaps the performance curves would resemble those from YA.
+
+\todo{strong close}
+
+
+
+

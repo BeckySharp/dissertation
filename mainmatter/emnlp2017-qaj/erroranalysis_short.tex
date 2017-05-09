@@ -1,0 +1,121 @@
+%\begin{table}[!th]
+%\begin{center}
+%\begin{footnotesize}
+%\hfill
+%\begin{tabular}{ll}
+%\hline
+%Error Type & Percent \\ 
+%\hline
+%Short justification/High lexical overlap  & 53.3\%\\
+%Complex inference required   & 43.3\% \\
+%Knowledge Base Noise  & 6.7\% \\
+%Word order necessary	 & 6.7\% \\
+%Coverage & 6.7\% \\
+%Negation	& 3.3\% \\
+%Other & 6.7\% \\
+%\end{tabular}
+%\end{footnotesize}
+%\caption{{\footnotesize Summary of the findings of the 30 question error analysis.  
+%%Examples of several categories provided in separate tables. 
+%Note that a given question may fall into more than one category.}} 
+%\label{tab:erroranalysis}
+%\vspace{-5mm}
+%\end{center}
+%\end{table}
+
+
+%\begin{table}[t]
+%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{p{1cm}p{6cm}}
+%\hline
+%Type: & \textbf{Short justification/High lexical overlap}\\
+%\hline
+%Question: & The length of time between night and day on Earth varies throughout the year. This time variance is explained primarily by $\rule{1cm}{0.15mm}$. \\
+%Correct: & Earth 's angle of tilt \\
+%			 & \textit{ ... the days are very short in the winter because the sun's rays hit the earth at an extreme angle ... due to the tilt of the earth's axis. } \\
+%Chosen: &  Earth 's distance from the Sun \\
+%			& \textit{ Is light year time or distance? Distance}	\\
+%\end{tabular}
+%\hfill
+%\end{footnotesize}
+%\caption{{\footnotesize Example of the system preferring a justification for which all the terms were found in either the question or answer candidate. (Justifications shown in italics)
+%}} 
+%\label{tab:ex_lex_overlap}
+%\vspace{-5mm}
+%\end{center}
+%\end{table}
+
+\subsection{Error Analysis}
+\label{sec:erroranalysis}
+
+We performed an error analysis of 30 incorrectly answered questions, %summarized in Table \ref{tab:erroranalysis},
+  examining the top 5 justifications returned for both the correct and chosen answers of each.    
+%Among the questions analyzed we found some interesting trends.   
+Notably, 50\% of the questions had one or more \emph{Good} justifications. %, but the system incorrectly ranked another answer's justification higher.  
+The most common form of error (53.3\%) was due to the system's preference for short justifications with a large degree of lexical overlap with the question and answer choice, %, particularly when the correct answer required more "explanation" to connect the question to the answer.  
+% shown by the example in Table \ref{tab:ex_lex_overlap}.  
+ %This effect was magnified when the correct answer required more "explanation" to connect the question to the answer.  
+suggesting the system has learned that generally many unmatched words are indicative of an incorrect answer.  %While this may typically be true, extending the system to be able to prefer the \emph{opposite} with certain types of questions would potentially help with these errors.  
+The second largest source of errors (43.3\%) came from questions requiring complex inference (causal, process, quantitative, or model-based reasoning), demonstrating the difficulty of the question set and the need for systems that can robustly handle a variety of question types.
+Aside from these main groups, there were some smaller trends including KB noise, and our system's lack of using word order and recognizing negation.\footnote{A much more detailed error analysis is available, and if this paper is accepted will be included.}
+ 
+% as with the question:%.  For example, to answer the question:
+ %\begin{quote}
+%\begin{addmargin}[1em]{2em}% 1em left, 2em right 
+% \begin{footnotesize}
+%  \textit{Q: Mr. Harris mows his lawn ...[and leaves] the clippings on the ground. Which long term effect will this most likely have on his lawn? \\
+%  A: It will provide the lawn with needed nutrients.}
+% \end{footnotesize}
+%%\end{quote}
+%\end{addmargin}
+%To answer this, you would need to link together: \textit{cut grass left on the ground $\rightarrow$ grass decomposes $\rightarrow$ decomposed material provides nutrients}. 
+%These questions constitute a large portion of our errors,   demonstrating not only the difficulty of the question set but also the need for systems that can robustly handle a variety of question types and their corresponding information needs.  
+
+%Aside from these main groups, there were some smaller trends including:  
+%7\% of the incorrectly chosen answers actually had justifications which "validated" them due to KB noise, 7\% required word-order to answer (e.g., \emph{X divided by Y} vs. \emph{Y divided by X}), %another 7\% of questions suffered from lack of coverage of the question concept in the knowledge base,
+%%(see example in Table \ref{tab:ex_coverage}), 
+% and 3\% failed to appropriately handle negation (i.e., questions of the format \emph{Which of the following are NOT ...}). 
+
+
+% bs: no room: - Negative results?
+
+
+%\begin{table}[t]
+%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{p{1cm}p{6cm}}
+%\hline
+%Type: & \textbf{Coverage}\\
+%\hline
+%Question: & Which activity most effectively ensures the proper functioning of osteocytes? \\
+%Correct: & consuming mineral-rich foods\\
+%			& \textit{ most lipids consumed from food are in the form of triglycerids}	\\	
+%Chosen & increasing the respiratory rate 	\\
+%			& \textit{ hyperventilation increased respiratory rate}	\\
+%\end{tabular}
+%\hfill
+%\end{footnotesize}
+%\caption{{\footnotesize Example of a question for which coverage was an issue.  The KB had no coverage for the concept of \emph{osteocyte}.}} % , so the system grasped at proverbial straws.}} 
+%\label{tab:ex_coverage}
+%\end{center}
+%\end{table}
+
+
+%\begin{table}[!th]
+%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{p{1cm}p{6cm}}
+%\hline
+%Type: & \textbf{Complex inference required}\\
+%\hline
+%Question: & Mr. Harris mows his lawn twice each month. He claims that it is better to leave the clippings on the ground. Which long term effect will this most likely have on his lawn? \\
+%Correct: &  It will provide the lawn with needed nutrients. 	\\
+%\end{tabular}
+%\hfill
+%\end{footnotesize}
+%\caption{{\footnotesize Example of a question for which complex inference is required.  In order to answer the question, you would need to assemble the following chain of events: cut grass left on the ground $\rightarrow$ grass decomposes $\rightarrow$ decomposed material provides nutrients.}} 
+%\label{tab:ex_complex_inf}
+%\end{center}
+%\end{table}
+

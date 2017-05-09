@@ -1,0 +1,92 @@
+
+\section{Models and Features}
+\label{sec:model}
+
+
+We propose two separate discourse representation schemes -- one shallow, centered around discourse markers, and one deep, based on RST. 
+%We describe both next.
+
+
+\subsection{Discourse Marker Model}
+\label{sec:features_marker}
+
+
+The discourse marker model (DMM) extracts cross-sentence discourse structures centered around a discourse marker. 
+This extraction process is illustrated in the top part of Figure~\ref{fig:featgen}. 
+These structures are represented using three components: (1) A {\bf discourse marker} from Daniel Marcu's list (see Appendix B in Marcu \shortcite{marcu97}), that serves as a divisive boundary between sentences. Examples of these markers include {\em and, in, that, for, if, as, not, by,} and {\em but}; (2) {\bf two marker arguments}, i.e., text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) {\bf a sentence range} around the marker, which defines the length of these segments (e.g., $\pm$2 sentences).  
+%
+For example, a marker feature may take the form of: 
+\code{QSEG BY OTHER SR2}, 
+which means that the the marker {\em by} has been detected in an answer candidate.  Further, the text preceeding {\em by} matches text from the question (and is therefore labeled \code{QSEG}), while the text after {\em by} differs considerably from the question text, and is labeled \code{OTHER}.  In this particular example, the scope of this similarity matching occurs over a span of $\pm$2 sentences around the marker. 
+
+%uses a {\em tf.idf} scheme,  we have seen two answer segments linked by the discourse marker {\em by} (in a span of $\pm$2 sentences around the marker). The first segment, occurring before {\em by},  is considerably different from the question content and is labeled \code{OTHER}, where the second segment, occurring after the marker, contains words from the question and is labeled \code{QSEG}. We discuss the segment labeling algorithm below.
+%where \code{BY} is the discourse marker, \code{X} and \code{Y} are the pre- and post-marker arguments, respectively (we discuss argument labels next), and \code{SR1} specifies a sentence range of $\pm$1 sentence around the marker.  
+Note that our marker arguments are akin to EDUs in RST, but, in this shallow representation, they are simply constructed around discourse markers and bound by an arbitrary sentence range.  
+
+
+\vspace{-1mm}
+{\flushleft {\bf Argument Labels:}} 
+We label marker arguments based on their similarity to question content.
+%We have only begun to explore the space of possible question segmentation schemes, and one can imagine a variety of methods that vary from fine-grained segmentation (e.g., based on semantic roles) to coarser-grained methods with few segments.  To facilitate robust feature generation, the current model uses a simple feature generation mechanism where the entire question (excluding the "{\em how VBZ"} prefix) is grouped into a single segment, and feature arguments are labeled using this segment.  
+%We currently use a simple algorithm, where a content segment is extracted from the question by excluding the {\em ``how"} prefix, and marker arguments are labeled using this segment.  
+%With this scheme, if pre or post arguments out to a given sentence range match this question segment (with a cosine similarity score larger than a threshold), they take on the label \code{QSEG}, or \code{OTHER} otherwise.  
+If text before or after a marker out to a given sentence range matches the entire text of the question (with a cosine similarity score larger than a threshold), that argument takes on the label \code{QSEG}, or \code{OTHER} otherwise.  
+In this way the features are only partially lexicalized with the discourse markers. Argument labels indicate only if lemmas from the question were found in a discourse structure present in an answer candidate, and do not speak to the specific lemmas that were found. We show in \S\ref{sec:experiments} that these lightly lexicalized features perform well in domain and transfer between domains. We explore other argument labeling strategies in \S\ref{sec:alternativeqseg}.
+
+%This segmentation scheme allows for features that contain one or two QSEG segments.
+% (e.g., QSEG BY OTHER SR1) or two (e.g., QSEG BY QSEG SR1).  
+%Features containing only arguments that do not match the question text (e.g., OTHER BY OTHER SR1) are eliminated.
+% discourse connective matches and that do not match based on a question segment (e.g. OTHER BY OTHER SR1) are discluded, as pilot simulations showed they did not significantly improve performance.  
+% The entire segmentation and feature generation process for discourse marker features is illustrated in Figure~\ref{fig:featgen}. 
+
+{\flushleft {\bf Feature Values:}}
+Our reranking framework uses real-valued features. 
+%The value of the IR feature is the overall cosine similarity between question and answer candidate. 
+The values of the discourse features are the mean of the similarity scores (e.g., cosine similarity using {\em tf.idf} weighting) of the two marker arguments and the corresponding question. For example, the value of the \code{QSEG BY QSEG SR1} feature in Figure~\ref{fig:featgen} is the average of the cosine similarities of the question text with the answer texts before/after {\em by} out to a distance of one sentence before/after the marker.%\footnote{The cosine similarity between \code{OTHER} marker arguments and the corresponding question is $0$. IS THIS TRUE? OR IS IT THE VALUE UNDER THE THRESHOLD?} When an answer contains more than one of the same feature, the highest value for that feature is used. 
+
+%Cusp features generate a score whenever their cusp word is present in an answer candidate.  To illustrate this process, consider an answer candidate that contains the following sentences:
+%
+%\vspace{-2mm}
+%\begin{center}
+%"The pool began to leak.  I searched for cracks, because of this.  Ultimately, several were found." {\color{red}TODO: BETTER EXAMPLE}
+%\end{center}
+%%\vspace{-4mm}
+%
+%Here, the cusp word "because" is located.  Using the IR module, the cosine similiarity of a BOW vector argument X is matched with the text immediately preceeding the cusp word "because" out to a distance of 1 additional sentence (SR1), or  specifically "The pool began to leak.  I searched for cracks".  Similarly, the cosine similarity of Y is matched with the text immediately following the connective out to a distance of one additional sentence, "of this. Ultimately, several were found".  The total score of the feature "X BECAUSE Y SR1" on this passage is then calculated as the average of the IR retrieval scores for the two arguments. 
+
+It is important to note that these discourse features are more expressive than features based on discourse markers alone~\cite{Higashinaka:08,Verberne:10}. First, the argument sequences used here capture cross-sentence discourse structures.  Second, these features model the intensity of the match between the text surrounding the discourse structure and the question text using both the assigned argument labels and the  feature values.
+
+\subsection{Discourse Parser Model}
+\label{sec:features_parser}
+
+The discourse parser model (DPM) is based on the RST discourse framework~\cite{mann88}. 
+In RST, the text is segmented into a sequence of non-overlapping fragments called elementary discourse units (EDUs), and binary discourse relations recursively connect neighboring units. Most relations are {\em hypotactic}, where one of the units in the relation (the {\em nucleus}) is considered more important than the other (the {\em satellite}). A few relations are {\em paratactic}, where both participants have equal importance. In the bottom part of Figure~\ref{fig:featgen}, we show hypotactic relations as directed arrows, from the nucleus to the satellite. 
+In this work, we construct the RST discourse trees using the parser of Feng and Hirst~\shortcite{feng12}. 
+
+Relying on a proper discourse framework facilitates the modeling of the numerous implicit relations that are not driven by discourse markers (see Ch. 21 in Jurafsky and Martin~\shortcite{jurafsky09}). However, this also introduces noise because discourse analysis is a complex task and discourse parsers are not perfect. 
+To mitigate this, we used a simple feature generation strategy, which creates one feature for each individual discourse relation by concatenating the relation type with the labels of the discourse units participating in it. 
+To this end, for every relation, we extract the entire text dominated by each of its arguments, and we generate labels for the two participants in the relation using the same strategy as the DMM (based on the similarity with the question content). 
+%Note that, because of the cosine similarity normalization, the label of a discourse unit may be different from the labels of the EDUs that it dominates. This is illustrated in Figure~\ref{fig:featgen}, where the larger discourse unit ({\em ``There are ... of String.''}) is labeled \code{OTHER}, while one of the EDUs that it dominates is labeled \code{QSEG}. 
+Similar to the DMM, these features take real values obtained by averaging the cosine similarity of the arguments with the question content.\footnote{We investigated more complex features, e.g., by exploring depths of two and three in the discourse tree, and also models that relied on tree kernels over these trees, but none improved upon this simple representation. This suggests that, in the domains explored here, there is a degree of noise introduced by the discourse parser, and the simple features proposed here are the best strategy to avoid overfitting on it.} Fig.~\ref{fig:featgen} shows several such features, created around two RST \code{Elaboration} relations,  indicating that the latter sentences expand on the information at the beginning of the answer.  
+Other common relations include \code{Attribution}, \code{Contrast}, \code{Background}, and \code{Evaluation}.
+
+\subsection{Lexical Semantics Model}
+\label{sec:lexicalsemantics}
+
+Inspired by the work of Yih et al.~\shortcite{yih13}, we include lexical semantics in our reranking model. 
+Several of their proposed models rely on proprietary data; here we focus on LS models that rely on open-source data and frameworks. 
+In particular, we use the recurrent neural network language model (RNNLM) of Mikolov et al.~\shortcite{mikolov13,mikolov10}.
+Like any language model, a RNNLM estimates the probability of observing a word given the preceding context, but, in this process, it learns word embeddings into a latent, conceptual space with a fixed number of dimensions. 
+Consequently, related words tend to have vectors that are close to each other in this space.
+
+We derive two LS measures from these vectors, which are then are included as features in the reranker.  The first is a measure of the overall LS similarity of the question and answer candidate, which is computed as the cosine similarity between the two composite vectors of the question and the answer candidate.  These composite vectors are assembled by summing the vectors for individual question (or answer candidate) words, and re-normalizing this composite vector to unit length.  Both this overall similarity score, as well as the average pairwise cosine similarity between each word in the question and answer candidate, serve as features. 
+
+
+%\subsection{Meta Reranker}
+%\label{sec:metareranker}
+%
+%Both the discourse marker and discourse parser features exist in separate rerankers, and produce separate lists of reranked answer candidates.  These lists are combined into a single output using a meta reranking model based on a weighted voting algorithm.  
+%We first normalize the \svmr~scores using a softmax function. Then, 
+%the voting algorithm linearly interpolates the normalized scores of each answer candidate from the two discourse models using a weight parameter $\lambda$.  This set of combined scores is then sorted to produce a final list of reranked candidates based on input from both discourse models.
+%% \footnote{XXX: TO DO MIHAI} % no space!!!
+

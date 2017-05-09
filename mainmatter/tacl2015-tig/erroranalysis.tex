@@ -1,0 +1,629 @@
+\section{Error Analysis}
+\label{sec:erroranalysis}
+
+%
+% Connection Types in Correct vs Incorrect Answers
+%
+\begin{table}[t]
+\caption{{ \label{font-table} Proportion of good justifications with a given number of connecting word categories (Q, A, X) for both correct and incorrect answers. (Top 6) }}
+\small
+\label{tab:errorconnectiontypes}
+\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{lcc}
+%\cline{2-3}
+\begin{tabular}{ccc}
+\hline
+\multicolumn{1}{l}{Connecting Categories} & \multicolumn{1}{c}{Correct} & \multicolumn{1}{c}{Incorrect}  \\
+\cline{2-3}
+\hline
+1				&	31.0\%		& 57.6\%	\\
+2				&	56.3\%		& 39.4\%	\\
+3				&	12.7\%		& 3.0\%	\\
+\end{tabular}
+%\end{footnotesize}
+
+
+
+\end{center}
+\end{table}
+
+At a high-level, our sentence aggregation model can be thought of as a system for building and evaluating answer justifications.  When questions are answered incorrectly, it is unclear whether the system was unable to \emph{build} a good justification for the correct answer, or unable to \emph{detect} a good justification that was successfully built.  To examine this, in addition to evaluating justification quality for correct answers, we also evaluated the top six justifications for 100 questions that the TAG system answered incorrectly.  We investigated the type of TAG patterns in the correct justifications  (from Section \ref{sec:characterizing}), as well as the kinds of inference required for questions that were answered incorrectly.  In addition, we conducted a large open-ended error analysis and identified several broad classes of issues that contribute to poor system performance.\footnote{Our current focus word extractor is not yet well suited to complex multisentence questions. While the question corpus as a whole consists of 62\% single-sentence questions, 25\% two-sentence questions, and 14\% questions which are three sentences or longer, we elected to focus on shorter single-sentence questions for this error analysis whenever possible.  As a result, 96\% of the questions analyzed were single-sentence and 4\% were two-sentence.}
+
+{\flushleft {\bf What patterns of lexical overlap do we observe in justification sentences?}}
+We begin with an encouraging result. For questions that were answered incorrectly, nearly half (45.1\%) contain at least one \emph{good} justification within the top 6 for the correct answer.  This suggests that the current model is much better at generating and broadly ranking justifications than it is at the final step -- pushing the correct justification from the top 6 to the top position.  This result suggests that the TAG model may benefit from an improved ranking model. For example, while we currently use lexicalization to model TAG structures and quantify the overlap between candidate TAGs and the question, none of the features used by the ranking perceptron are explicitly lexicalized. We explored some neural network variants of our models in Section \ref{sec:nn}, which were better able to incorporate lexicalization, but did not see a performance gain.  These models can be extended in future work, however, to see if it is ultimately possible to make use of this lexicalization.
+
+
+Further, for questions answered correctly, the \emph{good} justifications in the top 6 tend to connect on several of the three lexical overlap categories (i.e., question focus words, answer focus words, other shared non-focus words).  Table \ref{tab:errorconnectiontypes} shows that for questions answered correctly, in 69\% of cases good justifications are connected on 2 or 3 lexical overlap categories.  
+Conversely, for questions that are answered incorrectly, the \emph{good} justifications are far more likely to contain sentences that only connect on a single lexical overlap category (57.6\% vs 31.0\% for questions answered correctly). 
+This suggests that while less lexically connected answer justifications are not necessarily less numerous or of lower quality, they are much more challenging to detect given our current connectivity-centered features.  That is, the current features are very good at detecting well connected answer justifications, which correlate with good answers, but the features aren't able to directly detect good answer justifications, which is a more challenging theoretical problem.
+
+
+
+
+%
+% Knowledge Types
+%
+\begin{table}[t]
+
+\caption{{  A summary of the inference type necessary for incorrectly answered questions.  The summary is broken down into three categories: incorrectly answered questions with a good justification in the top six, incorrectly answered questions without a good justification in the top six, as well as the overall proportions across these two conditions. }} 
+\small
+\begin{center}
+\begin{tabular}{lccc}
+
+%\cline{2-3}
+%\begin{tabular}{p{20mm}cc}
+\hline
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{Good} &\multicolumn{1}{c}{No Good} & \multicolumn{1}{c}{}  \\
+\multicolumn{1}{l}{Inference Type} & \multicolumn{1}{c}{Justification} &\multicolumn{1}{c}{Justification} & \multicolumn{1}{c}{Overall}  \\
+
+%\cline{2-3}
+\hline
+Retrieval 			& 58\%		&	23\%		& 39\%	\\
+General Inference	& 29\%		&	43\%		& 37\%	\\
+Model-Based			& 13\%		&	34\%		& 25\%	\\
+\hline
+\end{tabular}
+\label{tab:knowledgetype}
+\end{center}
+\end{table}
+
+{\flushleft {\bf Is it harder to detect justifications for certain kinds of inference? }}
+We predict that questions requiring more challenging kinds of inference as identified by Clark et al.~\shortcite{clark:2013}, like model-based or general inference questions, are likely more difficult for the TAG system to answer than simpler retrieval-based questions. 
+Following the criteria described by Clark et al., we classified the 100 questions in the error analysis based on the inference type required to answer them correctly. 
+This analysis, shown in Table~\ref{tab:knowledgetype}, suggests that it is much more challenging to detect \emph{good} justifications for questions that contain challenging inference.  Where 58\% of retrieval-based questions contained a \emph{good} justification within the top 6, this decreased to 29\% for questions requiring general inference, and to 13\% for questions requiring complex model-based reasoning.  Taken in conjunction with our analysis of lexical overlap categories, this suggests that good justifications for complex inference may tend to be less lexically connected, and thus more challenging to detect with our current framework. This suggests important avenues for future work.
+
+\subsection{Broader Error Classes}
+
+\begin{table}[!tb]
+
+\caption{{  A summary of the classes of the errors made by the system. On any given question, more than one error may have been made. The summary is broken down into three categories: incorrectly answered questions with a good justification in the top six, incorrectly answered questions without a good justification in the top six, as well as the overall proportions across these two conditions.}} 
+\small
+\begin{center}
+\begin{tabular}{lccc}
+
+%\cline{2-3}
+%\begin{tabular}{p{20mm}cc}
+\hline
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{Good} &\multicolumn{1}{c}{No Good} & \multicolumn{1}{c}{}  \\
+\multicolumn{1}{l}{Error Class} & \multicolumn{1}{c}{Justification} &\multicolumn{1}{c}{Justification} & \multicolumn{1}{c}{Overall}  \\
+
+%\cline{2-3}
+\hline
+\textbf{FOCUS WORDS}  	& 		&		& 	\\
+%Focus Word - Question - Major Issues 	& 	27\%		&	30\% 	& 	29\%	\\
+%Focus Word - Question - Minor Issues 	& 	22\%		&	16\%		& 	19\%	\\
+%Focus Word - Answer - Major Issues 		& 	11\%		&	7\%		& 	9\%	\\
+%Focus Word - Answer - Minor Issues 		& 	9\%		&	25\%		& 	18\%	\\
+Focus Word --- Question 					& 	49\%		&	46\% 	& 	48\%	\\
+Focus Word --- Answer 						& 	20\%		&	32\% 	& 	27\%	\\
+Focus Word --- Answer Lists 				& 	7\%		&	5\%		& 	6\%	\\
+Focus Word --- Compounds/Collocations 		& 	9\%		&	16\%		& 	13\%	\\
+%Focus Word - Answer-type words  			& 	2\%		&	5\%		& 	4\%	\\
+\hline
+\textbf{NOISE IN THE KNOWLEDGE BASE}		& 			&			& 	\\
+Excessively Long Sentence (Chosen Ans) 	& 	33\%		&	9\% 		& 	20\%	\\
+Excessively Long Sentence (Correct Ans) 	& 	13\%		&	4\% 		& 	8\%	\\
+\hline
+\textbf{COMPLEX INFERENCE}				& 			&			& 	\\
+More Sentences Required 					& 	4\%		&	16\% 	& 	11\%	\\
+Causal or Process Reasoning 				& 	27\%		&	30\%		& 	29\%\\
+Quantifiers	 							& 	4\%		&	23\% 	& 	15\%	\\
+Negation	 								& 	2\%		&	9\% 		& 	6\%	\\
+\hline
+\textbf{MISCELLANEOUS}					& 			&			& 	\\
+Semantic Cluster Matching				& 	16\%		&	5\%		& 	10\%\\
+Coverage of Knowledge Bases				& 	4\%		&	36\%		& 	22\%\\
+Other									& 	29\%		&	9\%		& 	18\%\\
+\hline
+\end{tabular}
+\label{tab:errorclasses}
+\end{center}
+\end{table}
+
+To expand on the above two issues, we conducted a broader, open-ended error analysis, and identified six main error classes made by the system: focus word failures, noise in the knowledge base, complex inference, semantic cluster matching, coverage of the knowledge bases, and other errors.  The distribution of these errors is shown in Table \ref{tab:errorclasses} and detailed below.
+
+% -------------- FW - MAJOR
+ 
+\begin{table}[]
+\caption{{  Example of failure to extract appropriate focus words from the question. }} 
+\begin{footnotesize}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+\hline
+\multicolumn{2}{l}{Focus Words --- Question} \\
+\hline
+% Question Info
+Question 		& What type of simple machine is Bruce using as he opens a twist top bottle of soda? (GR:5) \\
+Focus Word(s) 	& (NN\_bruce, 0.22) (VB\_open, 0.22) (NN\_twist, 0.22) (JJ\_top, 0.22) (NN\_bottle, 0.05) (NN\_soda, 0.03) (NN\_machine, 0.02)		     \\
+\textbf{Issue}	& The concept the question is testing is embedded in a complex example that the focus word extractor is only partially able to suppress. Here, the most critical word for the inference is \emph{twist}, but some example words (\emph{bruce, open} and \emph{top}) are not suppressed, and receive the same weight as \emph{twist}. \\
+ %which should be removed by the focus word extractor along with \emph{bottle} and \emph{soda}.}\\
+\hline
+\end{tabularx}
+\end{footnotesize}
+\label{ex:majorfw}
+\end{table}
+
+
+{\flushleft {\bf FOCUS WORD ERRORS: }}
+Extracting focus words from questions and answers can be difficult, as often these questions are grounded in complex examples.  Moreover, while examples can often be filtered out, sometimes they are necessary to the question. Within the larger category of focus word errors, we subdivided these errors into more specific categories: 
+
+{\flushleft \emph{Question and Answer Focus Words: }}
+We considered a question or answer to have focus word issues if either the words selected by the focus word extractor were not critical to the inference, or if the weights did not reflect the relative importance of each word to the inference.  An example of this can be seen in Table~\ref{ex:majorfw}.
+
+{\flushleft \emph{Answer Choice Lists: }}
+Candidate answers may not be single choices, but occasionally take the form of lists, as in the question \emph{which of the following organisms are decomposers?} and its correct answer \emph{worms, mushrooms, and insects}.  In these cases each list item for a given answer candidate must be independently verified for correctness, as incorrect lure answers often contain one or more correct list items.  The current system does not handle this type of complex problem solving method. 
+
+{\flushleft \emph{Compounds/Collocations: }}
+The current focus word extractor operates at the level of the word, and does not join noun--noun compounds or collocations, such as \emph{simple machine} or \emph{water cycle}.  This causes compounds to be split, with different focus weights assigned to each word.  This also adds noise to the inference process, as (for example) a justification sentence that contains \emph{simple} but not \emph{machine} is less likely to be on context. 
+  
+
+{\flushleft {\bf NOISE IN THE KNOWLEDGE BASE:}}
+We included nearly all sentences contained in each of the five science-domain corpora.  While most of this is high-quality text, occasionally extremely long sentences are present (e.g., prefacing a chapter with a list of keywords).  These sentences can cause broad topic-level lexical connections between sentences that are only marginally related to each other, and are a source of noise in the justification building process.  
+
+
+
+% -------------- LONGER CHAINS
+ 
+\begin{table}[]
+\caption{{  Example of a question that needs more than two sentences to answer. }} 
+\begin{footnotesize}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+\hline
+\multicolumn{2}{l}{Complex Inference --- More sentences required to construct a complete answer} \\
+\hline
+% Question Info
+Question 		& Which of the following would result in a decrease in the polar bear population in the arctic? (GR:5) \\
+Focus Word(s) 	& (JJ\_polar, 0.29) (NN\_population, 0.29) (NN\_arctic, 0.29) (VB\_result, 0.07) (NN\_decrease, 0.04) (NN\_bear, 0.02) \\
+\textbf{Issue}	&  Requires additional graphlets, including that \emph{bears} eat \emph{fish}, \emph{eating} an animal makes you a \emph{predator} and it your \emph{prey}, and a decrease in \emph{prey} population also causes a decrease in \emph{predator} population.  Here, with a limited justification length of two sentences, the system is not able to construct a justification that includes all the crucial focus words, and all answer candidates are left with the same general justification fragment that includes the highest-weighted focus words. \\
+\hline
+% Correct Answer Info
+Correct Answer 	&  a decrease in the fish population \\
+Focus Word(s) 	&  (NN\_population, 0.80) (NN\_decrease, 0.13) (NN\_fish, 0.07) \\
+Justification 	& A polar bear is a big, white bear that lives in the arctic. (Wiktionary)\\
+ 				& The population of a place is the people or animals that live there.  (Wiktionary)\\
+\hline
+% Chosen Answer Info
+Chosen Answer 	& a decrease in the human population \\
+Focus Word(s) 	& (NN\_population, 0.92) (NN\_decrease, 0.08) \\
+Justification 	& A polar bear is a big, white bear that lives in the arctic. (Wiktionary)\\
+ 				& The population of a place is the people or animals that live there.  (Wiktionary)\\
+\hline
+\end{tabularx}
+\end{footnotesize}
+\label{ex:longerchains}
+\end{table}
+
+% -------------- CAUSAL REAS.
+ 
+\begin{table}[]
+\caption{{  Example of a question that requires reasoning over a causal structure or process. }} 
+\begin{footnotesize}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+\hline
+\multicolumn{2}{l}{Complex Inference --- Causal or Process Reasoning} \\
+\hline
+% Question Info
+Question & In the water cycle, which process occurs {\bf after} condensation? (GR:5)  \\
+Focus Word(s) & (NN\_condensation, 0.75) (VB\_occur, 0.13) (NN\_water, 0.06) (NN\_cycle, 0.06)\\
+\textbf{Issue}		& Requires knowing that the water cycle is a stage-like process that proceeds as follows: \emph{evaporation}, \emph{condensation}, \emph{precipitation}.  The focus word extractor does not currently detect causal or process markers, and as such the focus words for the question do not include \emph{after}. \\ 
+\hline
+% Correct Answer Info
+Correct Answer &  Precipitation \\
+%Focus Word(s) &  (NN\_precipitation, 1.00) \\
+Justification 	& Condensation, in the water cycle, {\bf this step leads to} precipitation. (Science Dictionary)\\
+ 				& When the humidity reaches 100 percent it is very likely that some form of precipitation will occur, depending on the temperature. (Barrons SG)\\
+\hline
+% Chosen Answer Info
+Chosen Answer & Evaporation\\
+%Focus Word(s) &  (NN\_evaporation, 1.00)\\
+Justification 	& When water vapor changes to liquid water it is called condensation. (Barrons SG)\\
+ 	& Evaporation is defined as the change of water from its liquid phase to its gaseous phase. (Barrons SG)\\
+\hline
+\end{tabularx}
+\end{footnotesize}
+\label{ex:structure}
+
+\end{table}
+
+
+% -------------- QUANTIFIERS
+ 
+\begin{table}[]
+\caption{{  Example of a question that requires an understanding of the quantifiers in both the question and the answers. }} 
+\begin{footnotesize}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+\hline
+\multicolumn{2}{l}{Complex Inference --- Quantifiers} \\
+\hline
+%% Question Info
+Question 		& Which of the following is a factor that will cause different species to compete {\bf less?} (GR:5)  \\
+Focus Word(s) 	& (NN\_species, 0.50) (JJ\_less, 0.17) (VB\_compete, 0.13) (VB\_cause, 0.10) (JJ\_different, 0.07) (NN\_factor, 0.03)\\
+\textbf{Issue}			&  Requires connecting the idea that a \emph{large} supply causes \emph{less} competition.  The focus word extractor does not currently detect quantifiers, and as such the focus words for the correct answer do not include \emph{large}. \\
+\hline
+%% Correct Answer Info
+Correct Answer 	&  A {\bf large} supply of resources\\
+Focus Word(s) 	&  (NN\_supply, 0.92) (NN\_resource, 0.08)\\
+%Justification 	& Individuals in a species may compete with each other for food, mates, space, water, and shelter within their environment. (Barrons SG)\\
+% 				&  A place's infrastructure is the basic public works such as roads, electricity \& water supply, and schools, that allow it to function.  (Wiktionary)\\
+\hline
+%% Chosen Answer Info
+Chosen Answer & {\bf Lack} of space \\
+Focus Word(s) &  (NN\_space, 0.92) (NN\_lack, 0.08)\\
+%Justification 	& The energy from the sun heated the water and caused it to evaporate - change from liquid water to water vapor. (Barrons SG)\\
+% 	& Individuals in a species may compete with each other for food, mates, space, water, and shelter within their environment. (Barrons SG)\\
+\hline
+\end{tabularx}
+\end{footnotesize}
+\label{ex:quantifiers}
+\end{table}
+
+% -------------- NEGATION
+ 
+\begin{table}[]
+\caption{{  Example of a question that requires an understanding of negation. }} 
+\begin{footnotesize}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+\hline
+\multicolumn{2}{l}{Complex Inference --- Negation} \\
+\hline
+% Question Info
+Question & Which of the following is an example of a chemical change? (GR:5)  \\
+%Focus Word(s) & (JJ\_chemical, 0.92) (NN\_change, 0.08)\\
+\textbf{Issue}			&  Requires detecting negation in the graphlets.  The chosen answer justification contains negative evidence against itself. \\
+\hline
+% Correct Answer Info
+Correct Answer &  Milk souring\\
+%Focus Word(s) &  (NN\_souring, 0.67) (NN\_milk, 0.33)\\
+Justification 	& Examples of chemical properties include the souring of milk and the ability to burn in the presence of oxygen. (Barrons SG)\\
+ 				& Evidence of a chemical change could be change in temperature, light, heat, or sound given off, or the formation of gasses. (Science Dictionary)\\
+\hline
+% Chosen Answer Info
+Chosen Answer & Ice cream melting\\
+%Focus Word(s) &  (NN\_melting, 0.80) (NN\_cream, 0.13) (NN\_ice, 0.07) \\
+Justification 	& Melting of ice is a physical change, {\bf not a chemical change}. (Barrons SG)\\
+ 	& Melting is a process of an object changing from the solid state to the liquid state without a change in temperature. (Wiktionary)\\
+\hline
+\end{tabularx}
+\end{footnotesize}
+\label{ex:negations}
+
+\end{table}
+
+
+
+{\flushleft {\bf COMPLEX INFERENCE:}}
+Some questions require complex inference to be answered correctly.  This may take the form of requiring longer sequences of graphlets to construct a complete answer justification, requiring an understanding of quantifiers or negation, or a complex inference process. 
+
+{\flushleft \emph{More sentences required: }}
+In our knowledge base, a sentence tends to capture a single step in some process. While two sentences are often sufficient to construct a good justification for retrieval-based questions, for general inference and model-based reasoning questions, an inference may require more than two steps.  Further, for questions that are grounded in a concrete example, additional graphlets may be needed to elevate the example words to the more general level of the concepts in our knowledge base -- for example, elevating \emph{polar bear} to \emph{predator} or \emph{animal}, in Table~\ref{ex:longerchains}. 
+
+{\flushleft \emph{Causal or Process Reasoning: }} 
+Questions that require causal or process reasoning often require a small structured and ordered representation of that process.  For example, in Table~\ref{ex:structure}, a knowledge of the sequential nature of the water cycle -- that \emph{evaporation} leads to \emph{condensation}, and that \emph{condensation} leads to \emph{precipitation} -- is necessary to answer the question. 
+
+{\flushleft \emph{Quantifiers: }} Some questions require an understanding of quantifiers or scope to arrive at a correct answer, whether these quantifiers are included in the question, answer, or knowledge base.  As illustrated in Table~\ref{ex:quantifiers}, our current system does not implement a knowledge of quantifiers, nor their relationship to each other (e.g., \emph{some} is less than \emph{most}, \emph{smaller} is less than \emph{big}, etc.). 
+
+{\flushleft \emph{Negation: }} Our current framework does not implement a knowledge of negation.  Within the scope of elementary science exams, where questions tend to ask for positive rather than negative evidence, this is often not an issue, with the overall prevalence of questions requiring negation at 6\%.  However, our knowledge bases do include many negated sentences or phrases that provide a contrast between two categories of items through negation (e.g., \emph{melting is a physical change, not a chemical change}). As can be seen in Table~\ref{ex:negations}, these sentences can be misused by our system. 
+
+
+% -------------- CLUSTER MATCHING
+ 
+\begin{table}[]
+\caption{{  Example of a failure to recognize relatedness or equivalence of words. }} 
+\begin{footnotesize}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+\hline
+\multicolumn{2}{l}{Semantic Cluster Matching} \\
+\hline
+% Question Info
+Question & Which is an example of water condensing? (GR:4)   \\
+Focus Word(s) &  (NN\_condensing, 0.92) (NN\_water, 0.08) \\
+\textbf{Issue}		& Requires connecting \emph{condensing} in the question with \emph{condensation} in the correct answer justification, based on their high degree of semantic relatedness. \\
+\hline
+% Correct Answer Info
+Correct Answer &  Dew forming on plants during a cold night \\
+Focus Word(s) &  (JJ\_cold, 0.68) (NN\_dew, 0.16) (NN\_night, 0.11) (NN\_plant, 0.05) \\
+Justification 	& Clouds, dew, water droplets on the outside of a glass on a hot day, are all caused by {\bf condensation}. (Virginia Flash Cards) \\
+ 				& Think back to a hot summer day, when you poured yourself a glass of cold water and took it outside.  (Barrons SG) \\
+\hline
+% Chosen Answer Info
+Chosen Answer & A puddle disappearing on a hot summer afternoon \\
+Focus Word(s) &  (NN\_summer, 0.41) (NN\_afternoon, 0.41) (JJ\_hot, 0.09) (VB\_disappear, 0.06) (NN\_puddle, 0.03) \\
+Justification 	& After a few hours or days those puddles disappear. (Barrons SG) \\
+			 	& Think back to a hot summer day, when you poured yourself a glass of cold water and took it outside.  (Barrons SG) \\
+\hline
+\end{tabularx}
+\end{footnotesize}
+\label{ex:clustermatching}
+
+\end{table}
+
+
+{\flushleft {\bf MISCELLANEOUS:}}
+
+{\flushleft \emph{Semantic Cluster Matching: }}
+While the current system reduces noise by making lexical connections only between words in sentences that have the same lemma and part of speech, this strict criterion prevents some \emph{good} justifications from being built, and others from being recognized as \emph{good} justifications.  Ideally, semantically-related terms such as \emph{condensation} and \emph{condensing} (as in Table~\ref{ex:clustermatching}), or \emph{heredity} and \emph{inherit}, could be clustered together to facilitate building more robust answer justifications independent of lexical choice. 
+
+{\flushleft \emph{Coverage of Knowledge Bases: }}
+Inevitably our knowledge base suffers from a degree of sparsity, where some topics or specific concepts included in questions are not discussed in any of our corpora.  This rarely happens with grade-appropriate science topics (but does occur for topics such as \emph{competition}).  Coverage issues are much more frequent with the concrete examples that ground the questions, though we  mitigate this by including the simple Wiktionary as a grade-appropriate general knowledge resource.
+
+{\flushleft \emph{Other: }}
+While we were able to determine the source for the majority of errors, for 18\% of incorrect questions we were unable to readily identify the issue.  Due to the difficulty of this QA task, we hypothesize that many of these cases may result from the limitations of learning complex latent variables with our learning framework and limited training data. 
+
+
+
+\subsection{Summary of Errors}
+
+\vspace{1mm}
+To summarize, this error analysis suggests that a majority of errors are caused by surface issues, and not fundamental limitations of this approach to question answering for science exams.  Were we to solve these issues, including including focus-word extraction errors, noise in the knowledge base, knowledge coverage, and semantic cluster matching, our analysis suggests that 50.5\% of questions answered incorrectly could then be answered correctly.  Using this figure, the ceiling performance for the current model is estimated to be 71.4\%. 
+
+The remainder of errors center on difficulties with complex questions, including questions requiring a knowledge of causality or processes to answer, longer inference chains, or a knowledge of quantifiers or negation.  We hypothesize that many of these questions can be addressed by extending the current model towards including more structure, and making better use of the existing structure within graphlets.  For example, much of the structure within a sentence that explicitly conveys causal or process information (e.g., \emph{from a solid to a liquid}) is not explicitly labelled within a graphlet, or used in a targeted way towards addressing questions that require these kinds of complex inference.  By extending our general methods of justification construction and evaluation to address the specific information needs of these complex questions, we believe that the ceiling performance can be increased considerably, limited only by questions that require complex domain-specific mechanisms, such as spatial reasoning, to answer.  The tradeoff between generality versus domain specificity appears intimately coupled with a model's performance, and other QA systems such as IBM Watson approach QA by assembling a large ensemble of domain-specific models tailored to a given problem representation. 
+To surpass the ceiling we observe in our error analysis, one would likely also have to adopt this approach, and implemented dedicated domain-specific methods for the difficult problems left unsolved by our approach. 
+
+
+
+
+
+
+%--------------------------------
+%  		UNUSED EXAMPLE TABLES
+% -------------------------------
+
+
+% -------------- FW - Minor
+ 
+%\begin{table}[]
+%\caption{{  Examples of minor failures to extract appropriate focus words from either the question or answer. }} 
+%\begin{footnotesize}
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{11cm}}
+%\hline
+%\multicolumn{2}{l}{EXAMPLE: Focus Word - Question - Minor Issues} \\
+%\hline
+%% Question Info
+%Question & When gasoline and oxygen mix together in a car engine, what happens to the energy in the system? (GR:5)   \\
+%Focus Word(s) & (NN\_gasoline, 0.21) (NN\_oxygen, 0.21) (NN\_mix, 0.19) (NN\_energy, 0.19) (NN\_system, 0.06) (RB\_together, 0.05) (NN\_engine, 0.04) (NN\_car, 0.03) (VB\_happen, 0.01)\\
+%\textbf{Issue}			&  While the most important words in the question have the highest weight, here the focus word extractor was unable to remove the extraneous question words (e.g. \emph{car, system,} and \emph{together}). \\
+%\hline
+%% Correct Answer Info
+%Correct Answer & It is transferred to motion and heat.\\
+%Focus Word(s) & (NN\_motion, 0.34) (NN\_heat, 0.34) (VB\_transfer, 0.31)\\
+%Justification 	& Heat energy can be transferred from one object to another object. (Barrons SG)\\
+% 				& Generator is a machine that converts mechanical energy (energy in motion) to electrical energy. (Science Dictionary)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & It is transferred to motion and light.\\
+%Focus Word(s) & (NN\_motion, 0.34) (NN\_light, 0.34) (VB\_transfer, 0.31)\\
+%Justification 	& When you turn on your television, electrical energy is transferred into sound and light energy. (Barrons SG)\\
+% 				& The major topics developed in this strand include magnetism, types of motion, simple and compound machines, and energy forms and transformations, especially electricity, sound, and light. (Virginia Framework)\\
+%\hline
+%\hline
+%
+%% Answer FW Example 
+%\multicolumn{2}{l}{EXAMPLE: Focus Word - Answer - Minor Issues} \\
+%\hline
+%% Question Info
+%Question & Which of the following is the best example of a chemical reaction that produces light, sound, and heat energy? (GR:5)  \\
+%Focus Word(s) & (NN\_light, 0.20) (NN\_sound, 0.20) (NN\_energy, 0.20) (VB\_produce, 0.18) (NN\_heat, 0.18) (NN\_chemical, 0.02) (NN\_reaction, 0.02)\\
+%\textbf{Issue}			& The answer focus word \emph{firework} received too low a weight for it to be useful. \\
+%\hline
+%
+%% Chosen Answer Info
+%Correct Answer & A fireworks display in the sky\\
+%Focus Word(s) & (VB\_display, 0.80) (NN\_sky, 0.13) (NN\_firework, 0.07)\\
+%Justification 	& Evidence of a chemical change could be change in temperature, light, heat, or sound given off, or the formation of gasses. (Science Dictionary)\\
+% 				& Plasma also can be produced in fluorescent lights and plasma display televisions. (Science Dictionary)\\
+%\hline
+%
+%% Chosen Answer Info
+%Chosen Answer & Turning on an electric blanket\\
+%Focus Word(s) & (VB\_turn, 0.48) (JJ\_electric, 0.48) (NN\_blanket, 0.04)\\
+%Justification 	& When you turn on your television, electrical energy is transferred into sound and light energy. (Barrons SG)\\
+% 				& Chemical energy changes to electric energy in a battery. (Barrons SG)\\
+%\hline
+%
+%\end{tabularx}
+%\end{footnotesize}
+%\label{ex:minorfw}
+%
+%\end{table}
+
+% -------------- FW - A LISTS
+ 
+%\begin{table}[!htb]
+%\caption{{  Example of a failure to correctly handle lists in the answer choices. }} 
+%\begin{footnotesize}
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{11cm}}
+%\hline
+%\multicolumn{2}{l}{EXAMPLE: /todo{Answer - Lists}} \\
+%\hline
+%% Question Info
+%Question & Which of the following organisms are decomposers? (GR:5)  \\
+%Focus Word(s) & (NN\_decomposer, 0.67) (NN\_organism, 0.33)\\
+%\textbf{Issue}			& While the focus word extractor currently detects lists, we haven't implemented a problem solving pattern that tries to independently find each element in that list.  \\
+%\hline
+%% Correct Answer Info
+%Correct Answer & Worms, mushrooms, and insects\\
+%Focus Word(s) & (NN\_worm, 0.33) (NN\_mushroom, 0.33) (NN\_insect, 0.33)\\
+%Justification 	& Decomposer is an organism that breaks down dead animals and decaying matter into other substances. (Science Dictionary)\\
+% 				& A creepy-crawly is a small animal that crawls, such as an insect, spider, or worm; this word describes the way these animals move.  (Wiktionary)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & Fish, birds, and animals\\
+%Focus Word(s) & (NN\_fish, 0.33) (NN\_bird, 0.33) (NN\_animal, 0.33)\\
+%Justification 	& Decomposer is an organism that breaks down dead animals and decaying matter into other substances. (Science Dictionary)\\
+% 				& A stuffed animal is a furry toy that is filled with a smooth, white textile substance looking like cotton, the plush. (Wiktionary)\\
+%\hline
+%
+%\end{tabularx}
+%\end{footnotesize}
+%\label{ex:lists}
+%
+%\end{table}
+
+%% -------------- FW - COMPOUNDS
+% 
+%\begin{table}[!htb]
+%\caption{{  Example of a failure to recognize and incorporate compounds and collocations  \note{Remove?}}} 
+%\begin{footnotesize}
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+%\hline
+%\multicolumn{2}{l}{EXAMPLE: Focus Word - Compounds/Collocations} \\
+%\hline
+%% Question Info
+%Question & The purpose of simple machines is to \_\_\_. (GR:5) \\
+%Focus Word(s) & (NN\_machine, 0.80) (JJ\_simple, 0.13) (NN\_purpose, 0.07)\\
+%\textbf{Issue}			&  Here, by not recognizing \emph{simple machine} as a compound, the top justification for the correct answer is very much off-context.\\
+%\hline
+%% Correct Answer Info
+%Correct Answer & decrease the amount of force needed to do work\\
+%Focus Word(s) & (NN\_force, 0.41) (VB\_work, 0.41) (NN\_amount, 0.09) (VB\_decrease, 0.06) (VB\_need, 0.03)\\
+%Justification 	& Your body is like a very delicate machine that needs to be cared for to work and feel its best. (Barrons SG)\\
+% 				& Newton (N) is equal to the amount of force needed to accelerate a mass of one kilogram at a rate of one meter per second per second. (Wiktionary)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & increase the energy used to move objects\\
+%Focus Word(s) & (NN\_energy, 0.48) (VB\_move, 0.48) (VB\_increase, 0.04)\\
+%Justification 	& Simple Machine is a device without moving parts that is used to make work easier. (Science Dictionary)\\
+% 				& A turbine is a machine that uses the kinetic energy of a constant stream of liquid to move a shaft. (Wiktionary)\\
+%\hline
+%
+%\end{tabularx}
+%\end{footnotesize}
+%\label{ex:compounds}
+%
+%\end{table}
+
+% -------------- FW - ATYPE
+ 
+%%% PETER'S NOTE: Shouldn't answer-type words only be from the question?  Why is it finding an answer type word in an answer?  
+ 
+%\begin{table}[!htb]
+%\caption{{  Example of an inappropriate suppression of words in the answer considered to be </emph answer-type} words. }} 
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{11cm}}
+%\hline
+%\multicolumn{2}{l}{EXAMPLE: Focus Word - Answer-type words} \\
+%\hline
+%% Question Info
+%Question & Air pollution in the city can be reduced by \_\_\_. (GR:5)  \\
+%Focus Word(s) & (NN\_air, 0.44) (NN\_pollution, 0.44) (NN\_city, 0.07) (VB\_reduce, 0.04)\\
+%\textbf{Issue}			&  In the correct answer, since \emph{vehicle} is considered to be an {\emph answer-type} word, the system does not apply enough weight and so the justification drifts off-context.\\
+%\hline
+%% Correct Answer Info
+%Correct Answer &  limiting the number of vehicles that drive into the city\\
+%Focus Word(s) & (NN\_number, 0.41) (VB\_drive, 0.41) (NN\_city, 0.09) (VB\_limit, 0.06) (NN\_vehicle, 0.03)\\
+%Justification 	& has more food for organisms, but the organisms usually have to deal with large temperature and salinity changes, high silt content and pollution. (Virginia SG)\\
+% 				& The weather in a place is the air temperature, the number of clouds, and the amount of wind and rain or snow.  (Wiktionary)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & limiting the number of people who ride buses and subways\\
+%Focus Word(s) &  (NN\_bus, 0.25) (NN\_subway, 0.25) (NN\_number, 0.23) (VB\_ride, 0.23) (VB\_limit, 0.04) (NN\_people, 0.02)\\
+%Justification 	& The weather in a place is the air temperature, the number of clouds, and the amount of wind and rain or snow.  (Wiktionary)\\
+% 				& A bus is a vehicle that carries a large number of people on roads. (Wiktionary)\\
+%\hline
+%
+%\end{tabularx}
+%\label{ex:atype}
+%
+%\end{table}
+
+% -------------- TOO LONG GRAPHLET
+ 
+%\begin{table}[]
+%\caption{{  Example of a question where the inclusion of excessively long graphlets contributed to semantic drift. }} 
+%\begin{footnotesize}
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{11cm}}
+%\hline
+%\multicolumn{2}{l}{EXAMPLE: Excessively Long Graphlet} \\
+%\hline
+%% Question Info
+%Question & Which property of air does a barometer measure? (GR:5) \\
+%Focus Word(s) & (NN\_measure, 0.75) (NN\_barometer, 0.13) (NN\_property, 0.06) (NN\_air, 0.06)\\
+%\textbf{Issue}		& Here, both the correct and chosen answers have noisy graphlets, which allowed the system to make numerous poor connections.\\
+%\hline
+%% Correct Answer Info
+%Correct Answer &  pressure\\
+%Focus Word(s) &  (NN\_pressure, 1.00)\\
+%Justification 	& Relative humidity is a measure of the amount of water vapor in the air compared to the total amount of water that the air can hold at that temperature. (Virginia SG)\\
+% 				& Key concepts include a) weather measurements and meteorological tools (air pressure  barometer, wind speed  anemometer, rainfall  rain gauge, and temperature  thermometer); and b) weather phenomena (fronts, clouds, and storms). (Virginia Framework)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & humidity\\
+%Focus Word(s) &  (NN\_humidity, 1.00)\\
+%Justification 	& Relative humidity is a measure of the amount of water vapor in the air compared to the total amount of water that the air can hold at that temperature. (Virginia SG)\\
+% 	& Standard 4.1 The student will plan and conduct investigations in which a) distinctions are made among observations, conclusions, inferences, and predictions; b) hypotheses are formulated based on cause-and-effect relationships; c) variables that must be held constant in an experimental situation are defined; d) appropriate instruments are selected to measure linear distance, volume, mass, and temperature; e) appropriate metric measures are used to collect, record, and report data; f) data are displayed using bar and basic line graphs; g) numerical data that are contradictory or unusual in experimental results are recognized; and h) predictions are made based on data from picture graphs, bar graphs, and basic line graphs. (Virginia Framework)\\
+%\hline
+%\end{tabularx}
+%\end{footnotesize}
+%\label{ex:toolonggraphlet}
+%
+%\end{table}
+
+
+ 
+% -------------- COVERAGE
+ 
+%\begin{table}[]
+%\caption{{  Example of a lack of topic coverage in our knowledge bases. \todo{Another example} }} 
+%\begin{footnotesize}
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
+%\hline
+%\multicolumn{2}{l}{Coverage of Knowledge Bases} \\
+%\hline
+%% Question Info
+%Question & Which of the following is an example of a chemical change? (GR:5)    \\
+%Focus Word(s) &  (JJ\_chemical, 0.92) (NN\_change, 0.08) \\
+%\textbf{Issue} 		& Our knowledge bases don't contain information about what happens to an egg when it boils, resulting in our inability to assemble a good justification for the correct answer. \\
+%\hline
+%% Correct Answer Info
+%Correct Answer &  Boiling an egg \\
+%Focus Word(s) &  (VB\_boil, 0.92) (NN\_egg, 0.08) \\
+%Justification 	& Evidence of a chemical change could be change in temperature, light, heat, or sound given off, or the formation of gasses.  (Science Dictionary)\\
+% 				& Boil is to get to a temperature that a liquid lets out bubbles and gas at. (Wiktionary)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & Breaking an egg \\
+%Focus Word(s) &  (VB\_break, 0.92) (NN\_egg, 0.08) \\
+%Justification 	& Sedimentary rock can form from particles of rock, from remains of plants or animals, or from chemical reactions are classified by their composition and by the way they were formed are formed from the cementing together of small pieces of rocks or shells are called sedimentary rocks are usually found near water are found in flat layers or strata. (Virginia SG)\\
+% 	& Physical change examples: Water melting or freezing, crumpling a piece of paper, liquid evaporating, breaking glass (Science Dictionary)\\
+%\hline
+%\end{tabularx}
+%\end{footnotesize}
+%\label{ex:coverage}
+%
+%\end{table}
+
+% -------------- OTHER
+
+%\begin{table}[]
+%\caption{{  Example of a questions for which the reason for error is not apparent. }} 
+%\begin{tabularx}{\textwidth}{p{2.5cm}p{11cm}}
+%\hline
+%\multicolumn{2}{l}{EXAMPLE: Other} \\
+%\hline
+%% Question Info
+%Question & Which of the following is an example of a form of energy? (GR:5)  \\
+%Focus Word(s) &  (NN\_energy, 1.00) \\
+%\textbf{Issue}		&	It is not clear why the system chose the incorrect answer. \\
+%\hline
+%% Correct Answer Info
+%Correct Answer &  the sound in a loud classroom \\
+%Focus Word(s) &  (NN\_sound, 0.48) (JJ\_loud, 0.48) (NN\_classroom, 0.04) \\
+%Justification 	& Sound is energy (noise) that we hear when matter vibrates and the particles in the matter hit each other. (Barrons SG)\\
+% 				& If something thumps, it hits something else, making a loud, low sound. (Wiktionary)\\
+%\hline
+%% Chosen Answer Info
+%Chosen Answer & the water in a small puddle (GR:5)  \\
+%Focus Word(s) &  (NN\_puddle, 0.67) (NN\_water, 0.33) \\
+%Justification 	& Evaporation is the process in the water cycle in which water from the oceans and lakes is heated up enough by the sun to turn into water vapor in the atmosphere. (Science Dictionary)\\
+% 	& The energy from the sun heated the water and caused it to evaporate - change from liquid water to water vapor. (Barrons SG)\\
+%\hline
+%\end{tabularx}
+%\label{ex:other}
+%
+%\end{table}
+
+
+\FloatBarrier		% Prevent the References from getting interspersed with the Tables
+
+
+
+

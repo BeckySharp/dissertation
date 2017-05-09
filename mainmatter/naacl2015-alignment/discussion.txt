@@ -1,0 +1,31 @@
+
+\section{Discussion}
+\label{sec:discussion}
+
+This work focuses on two important aspects of answer reranking for non-factoid QA: similarity between question and answer content, and answer structure. While the former has been addressed with a variety of lexical-semantic models, the latter has received little attention. Here we show how to model answer structures using discourse and how to integrate the two aspects into a holistic framework. Empirically we show that modeling answer discourse structures is complementary to modeling lexical semantic similarity and that the best performance is obtained when they are tightly integrated. We evaluate the proposed approach on multiple genres and question types and obtain benefits of up to 24\% relative improvement over a strong baseline that combines information retrieval and lexical semantics. 
+%
+%This work demonstrates that lexical semantics provide dramatic benefits to answer reranking for non-factoid QA across domains and genres, particularly when coupled with discourse models that identify answer structures.  We show that both discourse and lexical semantics are individually useful for AR, and that these benefits are most useful when tightly integrated, performing better than the sum of their parts -- with our best performing model achieving +24\% relative performance boost to a strong baseline that combines information retrieval and lexical semantics.  
+%
+%We further demonstrate that discourse features are capable of achieving in-domain transfer performance when training and testing on corpora of different genres and domains
+% and that the capability of transferring discourse models that include lexical semantics depends closely upon the scope and utility of lexical semantic training data in the source and target domains. 
+%
+We further demonstrate that answer discourse structures are largely independent of domain and transfer well, even between radically different datasets.
+
+This work is open source and available at:
+{\footnotesize \url{http://nlp.sista.arizona.edu/releases/acl2014}}.
+
+
+\vspace{-2mm}
+\section*{Acknowledgements}
+\vspace{-2mm}
+
+We thank the Allen Institute for Artificial Intelligence for funding this work.  We would also like to thank the three anonymous reviewers for their helpful comments and suggestions. 
+
+%We proposed a robust reranking model that uses discourse-based features that are both shallow (based on discourse markers) and deep (based on an RST discourse parser). We showed that this reranker yields statistically significant improvements over a strong IR baseline of over 25\% (relative) on P@1 for non-factoid, manner questions in three corpora from different genres (CQA and formal text) and different domains (open domain, programming, and biology). 
+%We also demonstrated domain transfer performance between these corpora that approaches in-domain training. This suggests that the proposed approach captures discourse information that is generally applicable across genres and domains, and can be used to mitigate limited training data in highly-specialized domains.
+
+%In summary, we suggest that cusp-based discourse representations (a) are robust, modeling variable length spans; (b) model the intensity of the match in the feature score; (c) decompose discourse structure into individual n-gram-like structures centered around connectives; and (d) are able to provide significant performance benefits to non-factoid QA tasks.  
+
+% mihai: no space for future work!
+%Future work will examine the utility of more complex semantic and syntactic segmentation schemes, as well as applying these features to larger corpora.
+

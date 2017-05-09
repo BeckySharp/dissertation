@@ -1,0 +1,2 @@
+The PDFs were created under macOS Sierra (10.12.1), using TexShop version 3.75.
+We used MacTeX-2015, and only fonts and packages included in the vanilla distribution.

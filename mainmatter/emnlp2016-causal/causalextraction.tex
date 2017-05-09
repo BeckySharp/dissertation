@@ -1,0 +1,110 @@
+
+\section{Extracting Cause-Effect Tuples}
+\label{sec:causalextraction}
+%\vspace{-2mm}
+
+%Information extraction (IE) systems which are designed to extract events typically make use of either machine learning (ML) or hand-built rules or patterns.  %IE classifiers which use ML are generally considered to be either fully supervised (trained only on annotated data), semi-supervised (trained on a combination of labelled data and the data which is bootstrapped from it or by using a large database of pre-known event tuples), or unsupervised (when no labelled data is available for training).
+%For causal events, we have neither labelled data nor an existing, large database of cause-effect pairs from which we could use ML to train a supervised or semi-supervised classifier.  Additionally, while unsupervised or distant supervision approaches are well-suited to situations where the desired event types and the patterns that would identify them are unknown, here we know exactly what relation we want (causality) and the patterns needed to find these events are relatively explicit.  For these reasons, we opted to use boostrapping to extract a large number of cause-effect pairs from a small set of patterns.
+
+Because the success of embedding models depends on large training datasets \cite{sharp2015spinning}, and such datasets do not exist for open-domain causality, we opted to bootstrap a large number of cause-effect pairs from a small set of patterns.
+%
+We wrote these patterns using Odin~\cite{valenzuela2016runes}, a rule-based information extraction framework which has the distinct advantage of 
+being able to operate over multiple representations of content (i.e., surface and syntax).
+%being \emph{expressive}.  That is, while most open-source rule languages operate over one representation of text (e.g., GATE~\cite{Cunningham2011a} generally operates over surface sequences, whereas Semgrex~\cite{chambers2007learning} operates over syntactic dependencies), Odin has the flexibility to use either (or both) depending on the user's need.  
+For this work, we make use of rules that operate over both surface sequences as well as dependency syntax in the grammars introduced in steps (2) and (3) below.
+
+Odin operates as a cascade, % of grammars, 
+allowing us to implement a two-stage approach.
+%. Taking advantage of this architecture, we implemented a two-stage approach.
+First, we identify potential participants in causal relations, i.e., the potential causes and effects, which we term {\bf causal mentions (CM)}. A second grammar then identifies actual causal relations that take these CMs as arguments.
+
+We consider both noun phrases (NP) as well as entire %non-causal
+clauses to be potential CMs, since causal patterns form around participants that are syntactically more complex than flat NPs.  
+%For example, in the sentence \emph{The hurricane caused significant damage}, both the cause ({\em hurricane}) and effect ({\em damage}) are non-recursive noun phrases.  On the other hand, 
+For example, in the sentence \emph{The collapse of the housing bubble caused stock prices to fall}, both the cause ({\em the collapse of the housing bubble}) and effect ({\em stock prices to fall}) are more complicated nested structures.  Reducing these arguments to non-recursive NPs (e.g., {\em The collapse} and {\em stock prices}) is clearly insufficient to capture the relevant context.
+
+%Examples of the rules to extract CMs as well as causal events are shown in Table \ref{tab:rule_examples}\todo{rule examples table}, 
+
+%\begin{table}[t!]
+%\begin{center}
+%%\begin{scriptsize}
+%\begin{footnotesize}
+%\begin{tabular}{ll}
+%\hline
+%\multicolumn{1}{l}{ Rule } & \multicolumn{1}{l}{Example Sentence} \\ %\multicolumn{1}{l}{Impr.} \\
+%%\cline{1-2}
+%
+%\hline
+%%\multicolumn{2}{l}{\textit{Yahoo! Answers}} \\ % 185q (sent) ret=1p c=0.1 
+%%\hline
+%			  &  	\\
+%			& 	\\
+%	  		& 	\\
+%			& 	\\
+%
+%\end{tabular}
+%\end{footnotesize}
+%\caption{{\small caption}}
+%\label{tab:rules}
+%\end{center}
+%\end{table}
+
+
+
+Formally, we extract our causal relations using the following algorithm:
+{\flushleft \textbf{(1) Pre-processing:}} Much of the text we use to extract causal relation tuples comes from the Annotated Gigaword \cite{napoles2012annotated}.  This text is already fully annotated and no further processing is necessary.  We additionally use text from the Simple English Wikipedia\footnote{{\scriptsize \url{https://simple.wikipedia.org/wiki/Main_Page}}.  The Simple English version was preferred over the full version due to its simpler sentence structures, which make extracting cause-effect tuples more straightforward.}, which we processed using the Stanford CoreNLP toolkit~\cite{Manning:14} and the dependency parser of Chen and Manning~\shortcite{chen14}.
+
+{\flushleft \textbf{(2) CM identification:}} \label{step:cm} We extract causal mentions (which are able to serve as arguments in our causal patterns) using a set of rules % (shown in Table \ref{tab:cm_rules}) 
+designed to be robust to the variety that exists in natural language. %, and therefore in the dependency parses.  
+Namely, to find CMs that are noun phrases, we first find words that are tagged as nouns, then follow outgoing dependency links for modifiers and attached prepositional phrases\footnote{The outgoing dependency links from the nouns which we followed were: \texttt{nn, amod, advmod, ccmod, dobj, prep\_of, prep\_with, prep\_for, prep\_into, prep\_on, prep\_to}, and \texttt{prep\_in}.}, to a maximum depth of two links.  To find CMs that are clauses, we first find words that are tagged as verbs (excluding verbs which themselves were considered to signal causation\footnote{The verbs we excluded were: \emph{cause, result, lead, create}.}), then again follow outgoing dependency links for modifiers and arguments.  We used a total of four rules to label CMs.%\footnote{The two complete grammars, for both CM and causal relation identification, were submitted as supplemental material. \todo{This is no longer relevant. Please remove.}}
+%There were a total of four rules used to label CMs, and examples are shown in Table~\ref{tab:rules}.
+
+{\flushleft \textbf{(3) Causal tuple extraction:}} \label{step:causalext} After CMs are identified, a grammar scans the text for causal relations that have CMs as arguments.  Different patterns have varying probabilities of signaling causation~\cite{khoo1998automatic}.  To minimize the noise in the extracted pairs, we restrict ourselves to a set of 13 rules designed to find unambiguously causal patterns, such as {\em CAUSE led to EFFECT}, where {\em CAUSE} and {\em EFFECT} are CMs.
+The rules operate by looking for a \emph{trigger} phrase, e.g., {\em led}, and then following the dependency paths to and/or from the trigger phrase to see if all required CM arguments exist.
+%, which tells the rule to fire.  Once a trigger is found, the rule follows the dependency paths to and/or from the trigger phrase to see if all specified arguments exist, e.g.,  following an outgoing {\tt nsubj} to identify the cause in the previous example.
+%An example of this is shown in Figure \ref{fig:rule_ex}. Here, when the rule scans the sentence \emph{SENTENCE TEXT}, the trigger verb \emph{cause} is found, then the rule checks for an outgoing \texttt{nsubj} dependency link and an outgoing \texttt{dobj} link to previously found CMs.  
+%%Our grammars also ensure that the triggers are not negated (we used Odin lookaround assertions to check that outgoing \texttt{neg} dependencies are not attached to triggers).  % Since in this example, all conditions are met, the rule returns the causal event in the form of the tuple (\todo{example}).
+
+% ms: removed for space
+%At step~2, the identification of CMs, we place few restrictions on the CM syntactic subgraph, favoring recall since in step 3 we use high-precision rules.  The rule set for step \ref{step:causalext}, in fact, was winnowed down after early experiments showed that many patterns which \emph{can} indicate causation (e.g., {\em X happened due to Y}) often are non-causal (\todo{example}).  
+
+\begin{table}[t!]
+\begin{center}
+%\begin{scriptsize}
+\begin{footnotesize}
+\begin{tabular}{lc}
+\hline
+Corpus		&	Extracted Tuples		 \\
+\hline
+%\multicolumn{2}{l}{\textit{Yahoo! Answers}} \\ % 185q (sent) ret=1p c=0.1 
+%\hline
+Annotated Gigaword	& 798,808 	\\
+Simple English Wikipedia		& 16,425 	\\
+\hline
+Total		& 815,233 	\\
+\end{tabular}
+\end{footnotesize}
+\caption{{\footnotesize Number of causal tuples extracted from each corpus.}} 
+\label{tab:causalstats}
+\vspace{-4mm}
+\end{center}
+\end{table}
+
+%ltw_mar30_combo.argsC: 55882
+%nyt_mar30_combo.argsC: 260460
+%wpb_mar30_combo.argsC: 7522
+%apw_mar30_combo.argsC: 219348
+%xin_mar30_combo.argsC: 76183
+%simpleWiki_mar19b_combo.argsC: 14057
+%cna_mar30_combo.argsC: 7913
+%afp_mar30_combo.argsC: 133003
+%sum: 774368
+
+Applying this causal grammar over Gigaword and Simple English Wikipedia produced %774,368 casual tuples, after stop-word and part-of-speech filtering.
+815,233 causal tuples, as summarized in Table~\ref{tab:causalstats}. As bootstrapping methods are typically noisy, we manually evaluated the quality of approximately 250 of these pairs selected at random.  Of the tuples evaluated, approximately 44\% contained some amount of noise. For example, from the sentence \emph{Except for Springer's show, which still relies heavily on confrontational topics that lead to fistfights virtually every day...}, while ideally we would only extract (\emph{confrontational topics $\rightarrow$ fistfights}), instead we extract the tuple (\emph{show which still relies heavily on confrontational topics} $\rightarrow$ \emph{fistfights virtually every day}), which contains a large amount of noise: \emph{show, relies, heavily}, etc.
+%\todo{Add one example here that is approximately wrong, that is, has some causality but is not ideal. This is to emphasize that, minimally, our tuples capture dist. sim.} 
+This finding prompted our noise-aware model described at the end of Section~\ref{sec:models}.
+
+%While this limiting of the rules greatly improved the quality of the extracted causal events, there is still a considerable amount of noise in the data -- a problem we discuss and address in Section \ref{sec:noise} \todo{noise section}. 
+
+

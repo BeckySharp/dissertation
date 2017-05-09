@@ -1,0 +1,573 @@
+TODO: need a general summary of the changes here. Basically:
+- Much better comparison: NN + AI2 system
+- Expanded related work to include tree kernels and Watson
+- Addressed all other specific points raised by the reviewers.
+Please see below our responses. They are interleaved with the original reviews, and marked with "RESPONSE".
+
+===============================================================================
+REVIEWER A:
+
+WEAKNESSES:
+1. Despite authors defend that the QA system architecture is general, there
+are many components that are application dependant and require significant
+manual engineering (see detailed comments below). Not completely clear if
+the system is portable to other application domains with a low effort.
+
+2. Some of the claims from the authors regarding the virtues of the system
+and its results are a bit overstated in my opinion (see more comments
+below). I believe the paper would benefit if authors tone down some of the
+conclusions.
+
+RESPONSE: Thank you! We agree that overstating the virtues of the system would be incorrect. This was certainly not our intention. We toned down the claims in the paper. Please see below for specific comments.
+
+3. The features used for learning to score candidate answer justifications
+are surprisingly very shallow and simple; for instance they do not include
+any for of lexicalization or working with distributed representations of the
+words/text.
+
+TO DO: Peter, can you please say something here?
+
+MINOR REVISIONS REQUIRED
+- Authors advocate for the generality of their approach. I do not disagree
+frontally to this claim but I also see several aspects of the system wich
+are developed specifically for the task being solved (i.e., answering
+multiple choice science exams). The system requires a significant amount of
+manual engineering effort, especially in the part of focus word extraction,
+wich is mainly rule-based. Other parts are also heavily engineered. So, I am
+not totally sure about the cost of porting the system to other QA domains
+and applications. Another bottleneck for the adaptability is the
+availability of approriate and high-coverage knowledge bases. If the KBs are
+not good, the full search for the right answer-justification may fail. In
+that scenario the system could probably perform below the pure
+lexical-matching approaches. In summary, the requirements and the effort
+needed to implement the authors' approach are probably stronger than
+suggested by the authors. I'd appreciate some more discussion on this point.
+
+TO DO: go through the paper, tone it down - PETER
+
+- The treelet structures are fundamentally based on the dependency parse
+trees, while the linkage between different sentences is done on the basis of
+the shared words in the treelets. So, the information used is mainly lexical
+and syntactic (with the addition of some dictionaries and predefined
+relation labels). It is surprising---or maybe not---that the structure does
+not incorporate any information from automatic semantic role labeling,
+co-reference, discourse analysis, etc. The NLP community has spent years
+trying to develop automatic tools for these levels of semantic and discourse
+analysis (including some of the authors, who are experts in these areas). Is
+the quality of these tools still too low for them to be incorporated
+successfully? Are they operating with too general/abstract annotation
+schemes that they become not useful for a practical application? I am
+curious about these aspects and I'd appreciate some more discussion in the
+paper.
+
+RESPONSE: We are also curious about these aspects! The reviewer's intuitions are correct, and we plan to look into incorporating semantic role and discourse information in a future work. This discussion is now included in the paper (Section 5: Text Aggregation Graphs, last paragraph):
+"Currently, the graphlets and TAGs make use of lexical and syntactic structure only. While this provides a robust representation of much of the structure in text, in a future system we would also like to explore adding semantic role and discourse information in our graphlets. Both of these have been shown to be useful, albeit for simpler QA tasks (Surdeanu, Ciaramita, and Zaragoza 2011; Jansen, Surdeanu, and Clark 2014)."
+
+
+- The features used for the perceptron learning are quite shallow and simple
+(despite the type specialization, which proves to be a good idea). It is
+striking that you do not attempt to use any lexicalized features and/or
+distributed representations of words and fragments of text. What is the
+reason? It is true that you comment on this for the future work, but it
+seems strange to me that you did not experimented already with them. This
+connects with the fact that your approach is quite "classical" compared to
+current trend of using deep NN approaches for NLP, including many recent
+papers on question answering. You have knowledge-based modules, heuristic
+rules, explicit representation of structures, word level alignment, etc. Can
+you discuss more your approach in the context of the recent NN-based
+approaches to QA?
+
+TO DO: add a new (sub)section at the end of section 8: "From Latent Perceptron to Latent NNs". Introduce the new architecture. Compare against DAN. Results: DAN (our implementation), DAN+IR, DAN+IR+JUSTIFICATION, your full system. - BECKY
+
+TO DO (optional, maybe skip): add an extra column to Table for TAG_nn?
+
+- In Table 6 your "star" models are voted combinations of some variants of
+your proposed system with the CR baseline (rows 6 and 7 in Table 6). These
+are the systems whose results are statistically better than the baselines
+(as noted in Table 6). Regarding the best variant of your proposed model
+(Row 5 in Table 6): you don't mention that it is significantly better than
+the CR baseline. Is it? If not you should probably tone down some of the
+conclusions and claims, as your system alone is not improving significantly
+over CR in terms of P@1 and MRR (no discussion on the fact that the
+justifications provided are better). Of course, it is true that they do
+qualitatively different things and when combined the voted approach is
+better than both. In this case, is it also *statistically* better than
+1G_CT+2G_CT?
+
+TO DO: clarify that rows 4 and 5 are NOT full systems (they illustrate the benefits of CT). Tone down the text where we say row 5 is awesome. Motivate better the combo between CR and TAG (one is retrieval, one is aggregation; they are complementary) - BECKY
+
+INTERNAL: I am not sure we should do the first part of the TODO -- they are kinda full systems
+I toned down the text and motivated the combo
+(do we need a response for this? Please rework my response... :( )
+
+RESPONSE:  
+We appreciate your comment.  While the 1G_CT+2G_CT TAG model (Table 6, line 5)
+offers a significant improvement when combined with the CR baseline, by itself
+the performance gain is not significant, and as suggested we have modified the text:
+(Section 8.4.2, Combined Models) "... when the models are connection-type aware, there is greater
+benefit to combining the different path lengths – the connection-type-aware 1GCT + 2GCT model
+(line 5) increases performance to 42.9% P@1 (compare to the static-length 2GCT performance
+of 39.9%)."
+Though the voting models (lines 6 and 7) are significantly better than the CR baseline, 
+they are not significantly better than the higher performing 1G_CT+2G_CT TAG system (line 5).
+
+- Along the lines of the previous comment: your joint TAG-based system seems
+to perform well in combination with the retrieval-oriented CR baseline, as
+probably CR works as an informed backoff when the TAG-based system fails at
+producing a good justification. In order to construct an even better system
+for the "complex inference" examples presented in the error analysis, would
+it make sense to have a combined approach using a formal logic
+reasoning-based system combined with your TAG approach and the CR baseline?
+It seems unreasonable that with the current technology a single system would
+be able to do complex inferences and at the same time be robust, high
+coverage and adaptable.
+
+RESPONSE: the reviewer is correct that it is unlikely that a single model will solve a complete QA task. This is is now highlighted in the Error Analysis section (Section 10) as well as in Related Work (Section 2) where we compare against more complex QA systems such as Watson, which implement such combined approaches.
+
+More concrete comments, clarifications, etc.:
+
+- The two tricks used to improve the performance of the perceptron are
+usually known as "averaged perceptron" and "large-margin perceptron". You
+could use these names.
+
+RESPONSE: Thank you! We adjusted the language in Section 7.3 (Practical concerns) accordingly.
+
+- Page 16: "include the top 25 TAGs by focus word mass": given that, due to
+ties, the actual average number is 141 TAGs per candidate answer, this 25
+becomes very misleading. Please, say that you limited the number of TAGs to
+the ones having higher focus word mass and then you can specify that
+limiting this to 25 and including ties it results on an average of 141 TAGS
+per answer.
+
+TO DO: change language - PETER
+
+- Page 16, "we used an ensemble of 50 perceptron models": this is on top of
+the averaging, right? How are they combined? Is this a voting scheme?
+weighted average? I'd like to see the results of a system with a single
+averaged perceptron compared to the ensemble.
+
+RESPONSE: We found a somewhat large variance in the model performance depending on
+the random seed, and so added the ensemble to stabilize the overall performance. Ensemble strategies are common in Neural Network literature as well, as NNs are also very susceptible to variations due to random initialization.
+We added detail in the submission to better explain the way that we combined the scores of the ensemble and to motivate its inclusion (Section 8.2, third paragraph):
+"Since model results can vary depending on the random seed used for initialization, rather than using a single perceptron we use an ensemble of 50 perceptron models initialized with random weights.  These models are combined in a simple voter, where each model casts a single vote for each question (distributing the vote only in the case of ties)."
+
+- Page 16, Feature Normalization: at test time what do you do with feature
+values that fall outside the [-1,1] interval?
+
+RESPONSE: we keep these values as such. This has been clarified in the Feature Normalization block of Section 8.2 (Tuning).
+
+- Page 18; "...performance begins to fall as the number of sentences in a
+justification increases beyond two...": you only have one point beyond 2 (3
+sentences). The explanation in this paragraph is done as if you had almost a
+continuous function. But actually you only have three points (1,2, and 3
+sentences). Please, comment this in a more "discrete" way. BTW, did you try
+with 4 sentences and above?
+
+TO DO: mention that 4 is very expensive in response letter. Tone down the language: "we hypothesize based on previous work" - PETER
+
+- You include some statistical tests of significance (for table 6), but in
+other cases you are ignoring them. You could add them e.g., in table 5 to
+show that "connection-type aware features" is significantly better than the
+"normal" setting.
+
+RESPONSE: The differences between the models in Table 5 are not statistically significant. But all these improvements in combination lead to results that are (see Table 6, where full systems are analyzed). We improved the statistical analysis in Table 6, to include comparisons not only against baselines, but also against the previous system on the evalutionary scale (see line 5 vs. line 4).
+
+- Who did the manual evaluation in 8.4.3? Can you describe a bit the
+annotators, setting, etc.?
+
+RESPONSE: Additional detail was added to the submission to clarify (first paragraph of Section 8.4.3): "The correctness of justifications was independently annotated by two of the authors. Any detected conflicts were resolved post hoc by the two annotators working together."
+
+- Table 10: The data sets for Grade 3 and Grade 4 questions are quite small.
+You might want to draw conclusions with a grain of salt from this
+experiment.
+
+TO DO: tone down language - PETER
+
+- Page 23: why solving ties by chance? Why not using a weighted voting
+taking into account the scores of the systems (at the answer level)?
+
+TO DO: no straightforward way of obtaining scores, because of the 50-perceptron ensemble.
+
+TYPOS:
+- Footnotes 4 and 5 are ugly. You could use a table, or an appendix to list
+in detail all these elements.
+- "e.g." => "e.g.,"
+- "i.e." => "i.e.,"
+- Avoid the use of \Sigma to denote the training corpus. It looks like a
+summation symbol.
+- Do you really need a Subsection (7.2) for a single sentence? You could use
+a \paragraph
+- Table 16: "cricial" => "crucial"
+- The References are not correctly formatted according to the journal style
+
+TO DO: fix typos - PETER
+
+
+============================================================================
+REVIEWER B:
+
+WEAKNESSES:
+- No comparison with accurate models from related work (except for the
+authors' one).
+- Incredibly missing very related work and models, e.g., Watson and kernel
+research.
+- The proposed baselines seem to be suboptimal: this mixed with the points
+above prevent the reader to assess if the improvement of the proposed models
+are absolute or just relative to weak models.
+
+RESPONSE: Thank you! We extended the related work section to include a discussion of kernel methods and Watson. Further, we included additional systems in the experimental section that are based both on neural networks and approaches that reason over structured knowledge bases (PETER - do we have PC's results in the paper?).
+
+SUBSTANTIVE REVISIONS REQUIRED:
+ 1. Rewriting the introduction and in general some required parts of the
+papers in the light of answer selection.
+- once the answer selection task is described, the authors may claim some
+novelty in the evaluation of justification.
+
+TO DO: Peter, please mention answer selection in Intro.
+
+2. Comparison with related work. In addition the needed of citing several
+papers related to Watson and Tree Kernel models.
+I have highlighted several similarities with Watson and tree kernel models
+that should be discussed.
+I see the differences but the authors should described them also to non
+experts.
+
+RESPONSE: Thank you! We extended the related work section considerably. Please see below for specific comments.
+
+3. Extend CR with learning to rank methods to have a simple and strong IR
+baseline.
+
+TO DO: PETER - doesn't our CR baseline already use learning to rank (svm-rank)? If so, please state that. And clarify in the text that CR uses svm-rank.
+
+4. Additionally, a variation of CR should use the closed answers in terms of
+strong constraints and not just in the scalar product.
+
+TO DO: I am not sure what this means... Any ideas? PETER, BECKY
+
+5. Carry out a fair comparison between the selection of the justification
+from the CR models versus the justification selected from TAG:
+- same amount of characters used for both; and
+- taking the best 1 for both or the best 6 for both.
+
+TO DO: PETER
+
+Comments for the authors
+1. I understand that to make the paper interesting targeting answer
+justification is important.
+However, what has been done should be fairly explained, otherwise the reader
+comprehension will be limited:
+
+        a. A lot can be told about answer justification, e.g., the close questions
+naturally need a justification, but at the end of the day what the authors
+modeled, proposed and experimented is a pure sentence selection.
+Indeed, the task simply consist in (i) ranking the sentences
+(justifications) containing the answer and in providing the answers
+contained in the top-ranked sentences.
+This is standard answer selection, with a specialization to having 4 fixed
+candidates.
+
+The reason of why this is a pure answer selection task is because the
+authors do have and so do not use annotation of correct justifications.
+This is exactly the condition on which the answer selection models work.
+
+It is important to realize that the task is answer selection because the
+authors can try their model on recently developed datasets, e.g., TREC13 and
+WikiQA. This would enable comparison with many models from previous work and
+thus provide the reader with referring points.
+
+I do not expect that the proposed model will outperform the state of the art
+as, indeed, it was proposed for a specific domain.
+However, it would be nice to at least see that it does not even perform very
+poorly.
+
+        b. The answer selection task provides the top ranked sentences, which are
+also supposed to be a justification for the answer.
+Sometime the sentence may not be complete or provide a consistent
+explanation: this fact can be evaluated as the authors did.
+So, at the end of the day, I believe this is the only difference with
+standard passage/sentence reranking/selection and should be pointed out in
+the paper.
+More specifically, the paper should start from answer selection and
+explaining that, although the traditional learning to rank algorithms
+naturally rank sentences based on their justifications, they may be improved
+by targeting the human readability aspect.
+
+TO DO: our work is NOT answer selection: it is information *aggregation*. Explain this in text. And VERY politely in the response - PETER
+
+
+2. The related work looks rather competent and throughout, thus I am even
+more surprised to not seeing a wide discussion on the work of IBM Watson
+(e.g., see IBM journal: Issue 3.4 • Date May-June 2012, This is Watson
+http://ieeexplore.ieee.org/xpl/tocresult.jsp?reload=true&isnumber=6177717).
+
+This is very important for a series of reasons:
+
+        a. It was and probably still is the most accurate QA system ever. It
+targets factoid questions as the models in the submitted paper do.
+It showed a performance over 80% (F1) and most probably would reach an
+accuracy close to perfection on the task proposed in the submitted paper.
+
+        b. I completely understand that academia cannot count on 30 experienced
+researchers to build their systems but at least comparing with what has been
+done in Watson is interesting for the readers.
+Indeed the authors of the submitted paper proposed several methods, e.g.,
+(i) graphlets, which are a reminiscent of Prismatic used in Watson;  (ii)
+the use of six databases, Watson used several as well; and (iii) most
+notably, the author model uses latent perceptron to jointly modeling
+sentence and answer selection, whereas Watson more simply multiplied the
+number of answers by the number of sentences and then applied a ranker.
+Comparing with this simpler model would show if the authors' models are
+better solutions.
+
+        c. In Watson, there is one component called evidence retrieval, which
+corresponds to the CR model proposed by the authors.
+
+RESPONSE: Thank you! We have added a paragraph (the last in Section 2: Related Work) comparing our work against Watson. As the reviewer correctly pointed out, there are similarities as well as differences between Watson and our work. They are now highlighted in the paper. - PETER please check for politeness
+
+2. Regarding related work I am also surprised to not see the tree kernel
+work by Moschitti and colleagues, for the following reasons:
+
+        a. It fits very well as the middle class, between full shallow and logic
+based models, as the tree kernel models use complex graphs built using
+syntactic parses and also semantic information and, at the same time, the
+used structures are automatic and the features are automatically generated.
+
+        b. I believe they achieved the state of the art on the sentence selection
+task:
+
+  [recommended papers excluded for brevity]
+
+        c. The use of the syntactic information as well as the definition of links
+based on focus words and other important the graphlet methods, seem to be
+the main building blocks of the work proposed in
+(Severyn&Moschitti, SIGIR2013), (Tymoshenko&Moschitti, 2015).
+
+Actually, the graphlets seem to have some good points more, e.g., they are
+combination of sentences that are not just consecutive as in the above
+papers. Thus, I believe the kernels proposed in such paper may be very
+interesting to generate powerful features in addition to those proposed by
+the authors.
+
+RESPONSE: The reviewer is correct that this was a gap in our initial related work review. We have expanded the related work section to include a discussion of tree kernel methods (4th paragraph in Section 2). As mentioned before in this document, a key difference between our work and methods based on tree kernels is that rather than selecting a contiguous segment of text (sentence or paragraph) our justifications are aggregated from multiple sentences from different documents. Because of this setup, we explore content representations that continue to use syntax, but combined with robust strategies for cross-sentence connections. This is now discussed in related work.
+
+3. The lack of comparison in terms of theoretical models is also reflected
+in a not-so-accurate models comparisons.
+A comparison with the best models from answer selection should be included
+in the paper.
+Assuming that for some reasons this cannot be done, I believe that the CR
+model should be extended with learning to rank approach, i.e., to have a
+fair comparison with a model using supervised data.
+I noted that the authors compare with some other baselines using learning to
+rank. This is not enough, the CR baseline is very basic: it is required to
+extend it with learning to rank.
+The reranker should be fed with several similarity features between question
+and candidate answers and perhaps also some of those used for graphlets.
+
+TO DO: explain that CR is IR + learning to rank - PETER
+TO DO: add NN models (see above) - BECKY
+
+Additionally, I am not sure that the proposed CR is an optimal IR model, I
+would have removed all candidates not containing one of the 4 answers from
+the rank.
+
+TO DO: explain in response letter that we rely on a SOA IR model, and we rely on it since it's a baseline.
+
+4. I have some concerns with the comparison of the justification selection
+between CR and TAG.
+
+        a. I do not understand why 6 candidates, one for each KB, must be taken.
+A fair comparison should be carried out with the top one, i.e., the one that
+generated the best answer.
+I do not see problems for this comparison as the best  answer is both
+selected for TAG and CR models.
+
+        b. Selecting 6 candidates from CR look like an advantage for TAG, for
+which, we select the best out of the first 6. This probably is not the case
+for CR.
+
+TO DO: IR is also an ensemble between the 6 candidates. If you don't do it, results are consistently worse. Explain this in the response letter - PETER
+
+        c. The amount of characters from CR and from TAG must be the same otherwise
+it would not be a fair comparison.
+
+TO DO: ???
+
+        d. A fair comparison is rather important as it is very difficult to believe
+that the generated justification from TAG is better than sentence-based of
+CR. See results in summarization or just watch what Google returns as a
+justification (text snippets).
+
+TO DO: explain politely that justifications because they are aggregated from the best KB for the information need. Skip discussion on Google snippets, since we don't know what they have.
+
+Final Remark:
+
+I understand that after the new comparisons some of the nice points of the
+paper may not be supported anymore but I still believe that a paper reported
+few and precise aspects is much more useful than one claiming things
+difficult to be proved.
+
+TO DO: say politely that we have the same goal - PETER
+
+
+REVISIONS TO BE ENCOURAGED:
+1. I would like to see how the best model proposed by the authors perform
+on the corpora:
+- TREC13
+M. Wang, N. A. Smith, and T. Mitamura. What is the jeopardy model? a
+quasi-synchronous grammar for qa. In EMNLP-CoNLL, 2007.
+- WikiQA
+EMNLP-2015, "WikiQA: A Challenge Dataset for Open-Domain Question Answering"
+[Yang et al. 2015]
+
+I understand that the authors may get a low result with their system but if
+this happens, it would be important to inform the reader on the
+applicability of the proposed models.
+
+TO DO: don't do this. explain that these are sentence selection systems. we focus on info aggregation - PETER
+
+2. For selecting the answer, summing the scores of the different supporting
+justifications may work better than just averaging them or taking their max.
+
+TO DO: we tried this. it didn't work better - BECKY
+INTERNAL: Done.
+
+RESPONSE: Thank you for the suggestion, you are right that it was a clear option to try.  We ran the experiment
+and added the performance number to section 8.4.4, finding it consistent with the other variations: 
+"Alternatively, we experimented with using the sum of the TAG scores and the maximum TAG score as the 
+candidate score, while still doing updates with all TAGs.  These configurations decreased performance to 
+34.46 and 38.09 P@1, respectively."  
+
+MINOR REVISIONS REQUIRED:
+  - "While contemporary question answering (QA) systems have achieved
+steadily increasing performance, much of this progress has been seen in
+factoid QA, where complex inference is generally not required (Yih et al.
+2013; Iyyer et al. 2014; Yao and Van Durme 2014; Hermann et al. 2015, inter
+alia). "
+
+--> I do not think that factoid questions do not offer challenging
+inference: just watch a jeopardy! question.
+The real problem is that we do not know how to carry out inference for
+non-factoid.
+
+--> I do not think the proposed references show that the inference is easy,
+so better move them just after "factoid QA".
+
+TO DO: tone down language on factoid QA - PETER
+
+- In the related work in not evident to me the differences between terms:
+unstructured models that use lexical semantics and lexical semantic models.
+Perhaps you want to rewrite, lexical semantic models using graph
+information?
+
+RESPONSE: The reviewer is correct that there is no difference between unstructured models that use lexical semantics and lexical semantic models. We revised the Related Work section to make sure the terminology is simplified and consistent.
+
+- TAG:
+--> I believe I have understood that some connections are done offline and
+other online (when the question is available).
+For example, the connection with the question focus must be done online.
+Could you better specify this as a non-expert will never get it.
+
+TO DO: rewrite, clarify - PETER
+
+- "To reduce individual variation in a given perceptron model, we used an
+ensemble of 50 perceptron models initialized with random weights, and
+averaged the results."
+--> so in your case this is an average of the average perceptron results?
+
+TO DO: explain voting. see other on voting - BECKY
+
+- Here we adapt this setup to multiple choice exams by: (a) using query
+vectors that contain words from both the question and multiple choice answer
+candidate, and (b) finding the top tf.idf score for each answer candidate in
+a given question, and selecting the answer candidate with the highest score
+as winner.
+
+---> Should not the authors match one of the 4 answers in the text.
+This is a super strong information cannot be diluted in a scalar product.
+
+TO DO: thank you. great suggestion for future work. we rely on a SOA IR model and build on top of it. Peter says we might be doing something like this; we will check - PETER
+
+- Tables 7 and 8 refer to different examples: the example ranked by CR is
+more complex to solve than the one for TAG.
+
+TO DO: the language is simpler; but the inference is not simpler? say it in the response letter - PETER
+
+- Section 8.4.3
+--> as already written the comparison should be done between the top 1
+justification or using the top 6. Taking the 6 one for each resource for CR
+is rather unfair.
+
+TO DO: repeat the IR is ensemble as well - PETER
+
+- Section 8.4.4
+--> I believe you should try the sum of the score rather than the average.
+This is what researchers do for answer extraction.
+
+TO DO: do this: change to sum in 8.4.4. report both average and sum. - BECKY
+
+TYPOS:
+- "to contribute much less utility" ?
+- - "We connect two information nuggets within the same sentence if there
+are any syntactic dependencies that connect any words in these nuggets."
+--> Something strange, here one would expect "if there are not"
+
+TO DO: respond in the letter. maybe rephrase the text? - PETER
+
+
+============================================================================
+REVIEWER D:
+
+WEAKNESSES:
+Some details of the proposed approach and experiment part can be further
+improved.
+1) the concept of "focus word" is different to that in traditional QA, where
+focus words mean those question word which are replaced by the answer.
+However, in the paper, "focus word" mean keywords.
+
+RESPONSE: We agree that the terminology is somewhat overloaded. However, at a high level, focus words for both factoid QA and multiple-choice QA identify the information need of a question. For this reason, we continue to use the same terminology in this work. We clarified the distinction between the two QA setups in the second paragraph of Section 4 (Focus Word Extraction).
+
+2) the idea of choosing words that are approximately 50% to 80% concrete as
+important words is not convincing enough. The heuristic method to score
+question word can be replaced by learning based approach.
+
+RESPONSE: We agree that better learning-based algorithms can be implemented. However, such algorithms would also require considerable data annotations, which is beyond the scope of this work. The simple unsupervised algorithm proposed manages to capture the intuition that some words in the question contribute more towards the overall information need than others. We demonstrate that, despite its simplicity, this has a considerable impact on overall performance, in Section 8.4.4. We added this discussion to the last paragraph of Section 4 (Focus Word Extraction).
+
+3) the formal notation is equations 1 and algorithm 1 is not clear enough.
+
+RESPONSE: Thank you! We hopefully clarified the equation and algorithm in the second paragraph of Section 7.1 (Learning Algorithm), where we now define the functions P and F more intuitively.
+
+4) the proposed method is compared with three baselines, random, candidate
+retrieval, and the authors' previous approach. The make the results and
+conclusion more convincing, an inference based baseline is expected, for
+example, Markov logic network based, logical form based, or those methods
+proposed for text entailment.
+
+TO DO: add results on Monarch from Peter Clark - PETER
+TO DO: refer back to the NN results in the response letter
+
+MINOR REVISIONS REQUIRED:
+Some details in the approach and experimental can be further improved to
+make the paper more concrete.
+1) the concept of "focus word" is different to that in traditional QA, where
+focus words mean those question word which are replaced by the answer.
+However, in the paper, "focus word" mean keywords.
+
+RESPONSE: addressed. see above
+
+2) the idea of choosing words that are approximately 50% to 80% concrete as
+important words is not convincing enough. The heuristic method to score
+question word can be replaced by learning based approach.
+
+RESPONSE: addressed. see above
+
+3) the formal notation is equations 1 and algorithm 1 is not clear enough.
+
+RESPONSE: addressed. see above
+
+4) the proposed method is compared with three baselines, random, candidate
+retrieval, and the authors' previous approach. The make the results and
+conclusion more convincing, an inference based baseline is expected, for
+example, Markov logic network based, logical form based, or those methods
+proposed for text entailment.
+
+RESPONSE: addressed. see above

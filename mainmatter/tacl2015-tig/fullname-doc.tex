@@ -1,0 +1,107 @@
+\documentstyle[fullname]{article}
+
+\addtolength{\textwidth}{40pt}
+\addtolength{\oddsidemargin}{-20pt}
+
+\title{The Fullname Citation Style}
+\author{Stuart Shieber}
+
+\begin{document}
+
+\maketitle
+
+The fullname bibliography and citation style is implemented with two files, a
+Bib\TeX\ style file {\tt fullname.bst} and a \LaTeX\ document-style
+option file {\tt fullname.sty}.  These are specified in the 
+\LaTeX\ source file as follows:
+
+\begin{verbatim}
+      \documentstyle[fullname]{article}
+      \bibliographystyle{fullname}
+\end{verbatim}
+
+Three citation macros are defined.  Normal citations are specified
+with \verb|\cite|, which specifies a parenthesized citation giving the
+authors' last names (up to three authors) and the year of publication.
+Here are citations for articles of from one to four authors: 
+
+\begin{verse}\begin{tabular}{ll}
+\verb|\cite{dewey1}| & \cite{dewey1}\\
+\verb|\cite{dewey2}| & \cite{dewey2}\\
+\verb|\cite{dewey3}| & \cite{dewey3}\\
+\verb|\cite{dewey4}| & \cite{dewey4}
+\end{tabular}\end{verse}
+
+An optional argument allows for specifying further information in the
+parentheses.
+
+\begin{verse}\begin{tabular}{ll}
+\verb|\cite[page 15]{dewey1}| & \cite[page 15]{dewey1}\\
+\verb|\cite[page 15]{dewey2}| & \cite[page 15]{dewey2}\\
+\verb|\cite[page 15]{dewey3}| & \cite[page 15]{dewey3}\\
+\verb|\cite[page 15]{dewey4}| & \cite[page 15]{dewey4}
+\end{tabular}\end{verse}
+
+Multiple citations can be placed in a single parenthetical.
+
+\begin{verse}\begin{tabular}{l}
+\verb|\cite{dewey2,cheatham,howe}| \\
+  \qquad  \cite{dewey2,cheatham,howe}\\
+\verb|\cite[page 15]{dewey2,cheatham,howe}| \\
+  \qquad  \cite[page 15]{dewey2,cheatham,howe}
+\end{tabular}\end{verse}
+
+The \verb|\namecite| macro places the names of the authors outside of
+and before the parenthesized date.  This is useful for citations in
+the text where the names are part of the sentence, as first described
+by \namecite{dewey2}.
+
+\begin{verse}\begin{tabular}{ll}
+\verb|\namecite{dewey1}| & \namecite{dewey1}\\
+\verb|\namecite{dewey2}| & \namecite{dewey2}\\
+\verb|\namecite{dewey3}| & \namecite{dewey3}\\
+\verb|\namecite{dewey4}| & \namecite{dewey4}\\
+\verb|\namecite[page 15]{dewey1}| & \namecite[page 15]{dewey1}\\
+\verb|\namecite[page 15]{dewey2}| & \namecite[page 15]{dewey2}\\
+\verb|\namecite[page 15]{dewey3}| & \namecite[page 15]{dewey3}\\
+\verb|\namecite[page 15]{dewey4}| & \namecite[page 15]{dewey4}
+\end{tabular}\end{verse}
+
+The \verb|\shortcite| macro does not place the authors' names at all.
+This is useful if the authors' names occur in the sentence, but not
+next to where the citation itself should be.  Dewey and Cheatham first
+used this method \shortcite{dewey2}.  Here are examples of the use of 
+\verb|\shortcite| in its various forms.
+
+\begin{verse}\begin{tabular}{ll}
+\verb|\shortcite{dewey1}| & \shortcite{dewey1}\\
+\verb|\shortcite{dewey2}| & \shortcite{dewey2}\\
+\verb|\shortcite{dewey3}| & \shortcite{dewey3}\\
+\verb|\shortcite{dewey4}| & \shortcite{dewey4}\\
+\verb|\shortcite[page 15]{dewey1}| & \shortcite[page 15]{dewey1}\\
+\verb|\shortcite[page 15]{dewey2}| & \shortcite[page 15]{dewey2}\\
+\verb|\shortcite[page 15]{dewey3}| & \shortcite[page 15]{dewey3}\\
+\verb|\shortcite[page 15]{dewey4}| & \shortcite[page 15]{dewey4}
+\end{tabular}\end{verse}
+
+
+It doesn't make sense to use \verb|\namecite| or \verb|\shortcite|
+with multiple citations.  The output would look like this:
+
+\begin{verse}
+\begin{tabular}{ll}
+\verb|\namecite{dewey2,cheatham,howe}| \\
+  \qquad  \namecite{dewey2,cheatham,howe}\\
+\verb|\shortcite{dewey2,cheatham,howe}| \\
+  \qquad  \shortcite{dewey2,cheatham,howe}
+\end{tabular}
+\end{verse}
+
+The corresponding bibliography style places entries in alphabetical
+order by first author's last name, and inverts the first author's name
+to emphasize the ordering.
+
+\bibliographystyle{fullname}
+\bibliography{fullname-doc}
+
+\end{document}

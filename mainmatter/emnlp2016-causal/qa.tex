@@ -1,0 +1,147 @@
+%\section{Downstream QA Evaluation}
+%\label{sec:indirecteval}
+
+%The main objective of our work is to investigate the impact of problem-specific solving components for QA. 
+%Here we focus on causal QA.
+% develop dedicated question-answering (QA) system components for specific question types.  We therefore evaluate our causal models, which we previously determined to encode causality (Section \ref{sec:indirecteval}), in a down-stream (QA) task with causal questions. 
+
+
+\begin{table}[t!]
+\begin{center}
+%\begin{footnotesize}
+\begin{footnotesize}
+\begin{tabular}{lll}
+\hline
+\# & Model & P@1 \\ 
+\hline
+& Baselines & \\
+\hline
+1	&	Random 				& 16.43 	\\
+2	&	CR					& 24.31	\\
+3	&	CR + vEmbed 			& 34.61	\\
+4	&	CR + vAlign			& 19.24	\\
+5	&	CR + Look-up	 (LU)	& 29.56 	\\
+\hline
+& Single Causal Models 		& \\
+\hline
+6	&	CR + cEmbedBi       & 31.32\\
+7	&	CR + cEmbedBiNoise  & 30.15 \\ 
+8	&	CR + cAlign  		& 23.49 \\
+9	&	CR + cCNN  			& 24.66	\\
+\hline
+& Model Combinations & \\
+\hline
+10	&	CR + vEmbed + cEmbedBi		& 37.08$^{*}$	\\ %p < 0.001
+11	& 	CR + vEmbed + cEmbedBiNoise 	& 35.50$^*$	\\ %p < 0.05
+12	&	CR + vEmbed + cEmbedBi + LU	& 36.75$^{*}$	\\ %p < 0.001
+13	&	CR + vEmbed + cAlign		& 	34.31 	\\ %if worse, we can remove and just say that it doesn't stack, per Mihai
+14	&	CR + vEmbed + cCNN		& 	33.45 \\
+\hline
+& Model Stacking & \\
+\hline
+%15	&	CR + vEmbed + cEmbedBi + cEmbedBi$^2$	& 37.22	\\
+15	& 	CR + vEmbed + cEmbedBi + cEmbedBiNoise 	& {\bf 37.28$^{*}$}	\\ 
+
+\end{tabular}
+\end{footnotesize}
+\vspace{-1mm}
+\caption{{\footnotesize Performance in the QA evaluation, measured by precision-at-one (P@1).  The ``Bi'' suffix indicates a bidirectional model; the ``Noise'' suffix indicates a model that is noise aware. $^*$  indicates that the difference between the corresponding model and the CR + vEmbed baseline is statistically significant ($p < 0.05$), %. Statistical significance was 
+determined through a one-tailed bootstrap resampling test with 10,000 iterations. }} 
+\label{tab:QA}
+\vspace{-8mm}
+\end{center}
+\end{table}
+
+\subsection{Results}
+The overall results are summarized in Table~\ref{tab:QA}.
+Lines 1--5 in the table show that each of our baselines performed better than CR by itself, except for vAlign, suggesting that the vanilla alignment model does not generate accurate predictions for causal questions.
+The strongest baseline was CR + vEmbed (line 3), the vanilla embeddings trained over Gigaword, at 34.6\% P@1. For this reason, we consider this to be the baseline to ``beat'', and perform statistical significance of all proposed models with respect to it. 
+
+Individually, the cEmbedBi model is the best performing of the causal models.  While the performance of cAlign in the direct evaluation was comparable to that of cEmbedBi, here it performs far worse (line 6 vs 8), suggesting that the robustness of embeddings is helpful in QA.  Notably, despite the strong performance of the cCNN in the low-recall portion of the PR curve in the direct evaluation, here the model performs poorly (line 9).
+
+No individual causal model outperforms the strong vanilla embedding baseline (line 3), likely owing to the reduction in generality inherent to building task-specific QA models.
+However, comparing lines 6--9 vs. 10--14 shows that the vanilla and causal models are capturing different and complementary kinds of knowledge (i.e., causality vs. association through distributional similarity), and are able to be combined to increase overall task performance (lines 10--12).  These results highlight that QA is a complex task, where solving methods need to address the many distinct information needs in question sets, including both causal and direct association relations.  This contrasts with the direct evaluation, which focuses strictly on causality, and where the vanilla embedding baseline performs near chance. This observation highlights one weakness of word similarity tasks: their narrow focus may not directly translate to estimating their utility in real-world NLP applications. % \footnote{Continuing the food analogies initiated by Chris Manning, the direct evaluation is the equivalent of taking vitamin C instead of eating the whole orange (the downstream task).}
+
+%Of the causal models, the highest performing was cEmbedBi, the bidirectional causal embedding model.  
+%Additionally, we see that both of the causal embeddings models stack with the vEmbed model (lines 10 and 11).  
+Adding in the lookup baseline (LU) to the best-performing causal model does not improve performance (compare lines 10 and 12), suggesting that the bidirectional causal embeddings subsume the contribution of the LU model.  
+cEmbedBi (line 10) also performs better than cEmbedBiNoise (line 11). We conjecture that the ``noise'' filtered out by cEmbedBiNoise contains distributional similarity information, which is useful for the QA task.  cEmbedBi vastly outperforms cCNN (line 14), suggesting that strong overall performance across the precision-recall curve better translates to the QA task.  We hypothesize that the low cCNN performance is caused by insufficient training data, preventing the CNN architecture from generalizing well. 
+
+%We see a small increase when we combine both variants of the causal embeddings model (cEmbedBi and cEmbedBiNoise -- line 15), showing that they contribute slightly different information. 
+Our best performing overall model combines both variants of the causal embedding model (cEmbedBi and cEmbedBiNoise), reaching a P@1 of 37.3\%, which shows a 7.7\% relative improvement over the strong CR + vEmbed baseline.
+
+% ms: replaced with text above
+%Additionally, on the simpler direct evaluation, where the task consisted entirely of determining causality between two words, the causal models were superior to the baselines and seemingly more sufficient for the task.  The QA task, however, is more complex and not purely about determining causality.  Here we need both similarity \emph{and} causality to do well, as demonstrated by the significant improvement gained by stacking the cEmbed model with the vEmbed model.
+
+% this is future work: I propose to skip it due to lack of space? Also, one of our main contribution is that this knowledge acquisition process is implemented independently of the evaluations. This paragraph negates that.
+%\todo{discuss the noise variant and its lack of better performance}
+%The failure of the noise-aware causal embeddings model to do better on the QA task suggests that the method we employed is not sufficient to the task.  For example, by weighing some examples more highly than others, we are not actually \emph{removing} the noise, only hoping to downplay it.  Additionally, the manner by which we weighed the extracted tuples was entirely disconnected from the training process as well as the down-stream task.  We suspect that learning the quality of the tuples jointly during training~\cite{tibshirani2014robust} might result in more robust task-specific noise-handling.
+
+
+%\begin{table}[t!]
+%\begin{center}
+%%\begin{footnotesize}
+%\begin{footnotesize}
+%\begin{tabular}{ll}
+%\hline
+%Feature 	& SVM weight \\
+%\hline
+%CR	&	\\
+%vEmbed max similarity		&	0.021\\
+%cEmbed max similarity		&	0.828\\
+%vEmbed min similarity		&	-1.703\\
+%cEmbed min similarity		&	-0.445\\
+%vEmbed avg similarity		&	-1.842\\
+%cEmbed avg similarity		&	-2.177\\
+%vEmbed overall similarity	&	2.867\\
+%cEmbed overall similarity	&	1.725\\
+%
+%\end{tabular}
+%\end{footnotesize}
+%
+%\caption{{\footnotesize SVM weights learned for each of the features in . }} 
+%\label{tab:weights}
+%\vspace{-8mm}
+%\end{center}
+%\end{table}
+
+\begin{table}[t!]
+\begin{center}
+%\begin{footnotesize}
+\begin{footnotesize}
+\begin{tabular}{ll}
+\hline
+Error/observation 	& \% Q \\
+\hline
+Both chosen and gold are equally good answers 	& 	45\% \\ 
+%Chosen answer is longer 							&	35\% \\
+Causal max similarity of chosen is higher		&	35\% \\
+Vanilla overall similarity of chosen is higher	&	35\% \\
+Chosen answer is better than the gold answer		&	25\% \\
+The question is very short / lacks content words	&	15\%	 \\
+Other 											&	10\% \\
+\end{tabular}
+\end{footnotesize}
+
+\caption{{\footnotesize Results of an error analysis performed on a random sample of 20 incorrectly answered questions showing the source of the error and the percentage of questions that were affected. Note that questions can belong to multiple categories. }} 
+\label{tab:ea}
+\vspace{-8mm}
+\end{center}
+\end{table}
+
+
+\subsection{Error Analysis}
+\label{sec:erroranalysis}
+
+We performed an error analysis to gain more insight into our model as well as the source of the remaining errors.  For simplicity, we used the combination model CR + vEmbed + cEmbedBi. Examining the model's learned feature weights, we found that the vanilla overall similarity feature had the highest weight, followed by the causal overall similarity and causal maximum similarity features.  This indicates that even in causal question answering, the overall \emph{topical} similarity between question and answer is still useful and complementary to the causal similarity features.
+
+
+To determine sources of error, we randomly selected 20 questions that were incorrectly answered and analyzed them according to the categories shown in Table \ref{tab:ea}.  We found that for 70\% of the questions, the answer chosen by our system was as good as or better than the gold answer, often the case with community question answering datasets.
+
+
+Additionally, while the maximum causal similarity feature is useful, it can be misleading due to embedding noise, low-frequency words, and even the bag-of-words nature of the model (35\% of the incorrect questions).  For example, in the question \emph{What are the effects of growing up with an older sibling who is better than you at everything?}, the model chose the answer \emph{...You are you and they are them - you will be better and different at other things...}  largely because of the high causal similarity between (\emph{grow} $\rightarrow$ \emph{better}).  While this could arguably be helpful in another context, here it is irrelevant, suggesting that in the future improvement could come from models that better incorporate textual dependencies.
+
+
+
+
+

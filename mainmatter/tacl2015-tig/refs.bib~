@@ -1,0 +1,1414 @@
+@Conference{Agichtein:08,
+  author = "Eugene Agichtein and Carlos Castillo and Debora Donato and Aristides Gionis  and Gilad Mishne",
+  title = "Finding High-Quality Content in Social Media, with an Application to Community-based Question Answering",
+  booktitle = "Proceedings of the Web Search and Data Mining Conference (WSDM)",
+  year = 2008,
+  pages = "183--194",
+  address = {Stanford, CA, USA}
+}
+
+@inproceedings{moldovan2001logic,
+  title={Logic form transformation of wordnet and its applicability to question answering},
+  author={Moldovan, Dan I and Rus, Vasile},
+  booktitle={Proceedings of the 39th Annual Meeting on Association for Computational Linguistics},
+  pages={402--409},
+  year={2001},
+  organization={Association for Computational Linguistics}
+}
+
+@inproceedings{finkel2010hierarchical,
+  title={Hierarchical joint learning: Improving joint parsing and named entity recognition with non-jointly labeled data},
+  author={Finkel, Jenny Rose and Manning, Christopher D},
+  booktitle={Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics},
+  pages={720--728},
+  year={2010},
+  organization={Association for Computational Linguistics}
+}
+
+@Conference{Agichtein:01,
+  author = "Eugene Agichtein and Steve Lawrence and Luis Gravano",
+  title = "Learning Search Engine Specific Query Transformations for Question Answering",
+  booktitle = "Proceedings of the World Wide Web Conference",
+  year = 2001,
+  pages = "169--178",
+  address = {Hong Kong, China}
+}
+
+@Conference{Berger:00,
+  author = "Adam Berger and Rich Caruana and David Cohn and Dayne Freytag and Vibhu Mittal",
+  title = "Bridging the Lexical Chasm: Statistical Approaches to Answer Finding",
+  booktitle = "Proceedings of the 23rd Annual International ACM SIGIR Conference on Research \& Development on Information Retrieval",
+  year = 2000,
+  address = {Athens, Greece}
+}
+
+@Conference{Bilotti:07,
+  author = "Matthew W. Bilotti and Paul Ogilvie and Jamie Callan and Eric Nyberg",
+  title = "Structured Retrieval for Question Answering",
+  booktitle = "Proceedings of the 30th Annual International ACM SIGIR Conference on Research \& Development on Information Retrieval",
+  year = 2007,
+  pages = "351--358",
+  address = "Amsterdam, The Netherlands"
+}
+
+@Conference{Brill:01,
+  author = "Eric Brill and Jimmy Lin and Michele Banko and Susan Dumais and Andrew Ng",
+  title = "Data-Intensive Question Answering",
+  booktitle = "Proceedings of the Text REtrieval Conference (TREC)",
+  year = 2001,
+  address = {Gaithersburg, MD, USA}
+}
+
+@Article{Brown:93,
+  author = "Peter F. Brown and Stephen A. Della Pietra and Vincent J. Della Pietra and Robert L. Mercer",
+  title = "The Mathematics of Statistical Machine Translation: Parameter Estimation",  
+  journal = "Computational Linguistics",
+  year = 1993,
+  volume = 19,
+  number = 2,
+  pages = "263--311",
+}
+
+@Conference{Charniak:00,
+  author = "Eugene Charniak",
+  title = "A Maximum-entropy-inspired Parser",
+  booktitle = "Proceedings of the North American Chapter of the Association for Computational Linguistics (NAACL)",
+  year = 2000,
+  pages = "132--139",
+  address = {Seattle, Washington, USA}
+}
+
+@Conference{Surdeanu:15,
+  author = "Mihai Surdeanu and Thomas Hicks and Marco A. Valenzuela-Esc\'{a}rcega",
+  title = "Two Practical Rhetorical Structure Theory Parsers",
+  booktitle = "Proceedings of the North American Chapter of the Association for Computational Linguistics (NAACL): Software Demonstrations",
+  year = 2015,
+}
+
+@Conference{Ciaramita:06,
+  author = "Massimiliano Ciaramita and Yasemin Altun",
+  title = "Broad Coverage Sense Disambiguation and Information Extraction with a Supersense Sequence Tagger",
+  booktitle = "Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+  year = 2006,
+  pages = "594--602",
+  address = {Sidney, Australia}
+}
+
+@Article{Ciaramita:etal:2008,
+  author = "Massimiliano Ciaramita and Vanessa Murdock and Vassilis Plachouras",
+  title = "Semantic Associations for Contextual Advertising",  
+  journal = "Journal of Electronic Commerce Research - Special Issue on Online Advertising and Sponsored Search",
+  year = 2008,
+  volume = 9,
+  number = 1,
+  pages = "1--15"
+}
+
+@Conference{Ciaramita:etal:WWW2008,
+  author = "Massimiliano Ciaramita and Vanessa Murdock and Vassilis Plachouras",
+  title = "Online Learning from Click Data for Sponsored Search",
+  booktitle = "Proceedings of the World Wide Web Conference (WWW)",
+  year = 2008,
+  pages = "227--236",
+  address = {Beijing, China}
+}
+
+@Conference{Collins:Duffy:2001,
+  author = "Michael Collins and Nigel Duffy",
+  title = "Convolution Kernels for Natural Language",
+  booktitle = "Proceedings of the Neural Information Processing Systems Conference (NIPS)",
+  year = 2001,
+  address = {Vancouver, Canada}
+}
+
+@Conference{Cui:05,
+  author = "Hang Cui and Renxu Sun and Keya Li and Min-Yen Kan and Tat-Seng Chua",
+  title = "Question Answering Passage Retrieval Using Dependency Relations",
+  booktitle = "Proceedings of the 28th Annual International ACM SIGIR Conference on Research \& Development in Information Retrieval",
+  year = 2005,
+  pages = "400--407",
+  address = {Salvador, Brazil}
+}
+
+@Conference{Dredze:etal:2007,
+  author = "Mark Dredze and John Blitzer and Partha Pratim Talukdar and Kuzman Ganchev and Joao Graca and Fernando Pereira",
+  title = "Frustratingly Hard Domain Adaptation for Parsing",
+  booktitle = "Proceedings of the Shared Task of the Conference on Computational Natural Language Learning (CoNLL)",
+  pages = "1051--1055",
+  address = {Prague, Czech Republic},
+  year = 2007
+}
+
+@Conference{Echihabi:03,
+  author = "Abdessamad Echihabi and Daniel Marcu",
+  title = "A Noisy-Channel Approach to Question Answering",
+  booktitle = "Proceedings of the 41st Annual Meeting of the Association for Computational Linguistics (ACL)",
+  year = 2003,
+  pages = "16--23",
+  address = {Sapporo, Japan}
+}
+
+@Article{Freund:Schapire:1999,
+  author = "Yoav Freund and Robert E. Schapire",
+  title = "Large margin classification using the perceptron algorithm",  
+  journal = "Machine Learning",
+  year = 1999,
+  volume = 37,
+  pages = "277--296"
+}
+
+@Article{Lee:13,
+  author    = {Heeyoung Lee and Angel Chang and Yves Peirsman and Nathanael Chambers and Mihai Surdeanu and Dan Jurafsky},
+  title     = {Deterministic coreference resolution based on entity-centric, precision-ranked rules},
+  journal = {Computational Linguistics},
+  volume = {39},
+  number = {4},
+  year      = {2013},
+}
+
+@Conference{Girju:03,
+  author = "Roxana Girju",
+  title = "Automatic Detection of Causal Relations for Question Answering",
+  booktitle = "Proceedings of the 41st Annual Meeting of the Association for Computational Linguistics (ACL), Workshop on Multilingual Summarization and Question Answering",
+  year = 2003,
+  pages = "76--83",
+  address = {Sapporo, Japan}
+}
+
+@Conference{Harabagiu:00,
+  author = "Sanda Harabagiu and Dan Moldovan and Marius Pasca and Rada Mihalcea and Mihai Surdeanu and Razvan Bunescu and Roxana Girju and Vasile Rus and Paul Morarescu",
+  title = "Falcon: Boosting Knowledge for Answer Engines",
+  booktitle = "Proceedings of the Text REtrieval Conference (TREC)",
+  year = 2000,
+  address = {Gaithersburg, MD, USA}
+}
+
+@Conference{Higashinaka:08,
+  author = "Ryuichiro Higashinaka and Hideki Isozaki",
+  title = "Corpus-based Question Answering for Why-Questions",
+  booktitle = "Proceedings of the Proceedings of the Third International Joint Conference on Natural Language Processing (IJCNLP)",
+  year = 2008,
+  pages = "418--425",
+  address = {Hyderabad, India}
+}
+
+@Conference{Jeon:05,
+  author = "Jiwoon Jeon and W. Bruce Croft and Joon Hoo Lee",
+  title = "Finding Similar Questions in Large Question and Answer Archives",
+  booktitle = "Proceedings of the ACM Conference on Information and Knowledge Management (CIKM)",
+  year = 2005,
+  pages = "84--90",
+  address = {Bremen, Germany}
+}
+
+@Conference{Jeon:06,
+  author = "Jiwoon Jeon and W. Bruce Croft and Joon Hoo Lee and Soyeon Park",
+  title = "A Framework to Predict the Quality of Answers with Non-Textual Features",
+  booktitle = "Proceedings of the 29th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval",
+  year = 2006,
+  pages = "228--235",
+  address = {Seattle, Washington, USA}
+}
+
+@Conference{Ko:07,
+  author = "Jeongwoo Ko and Teruko Mitamura and Eric Nyberg",
+  title = "Language-independent Probabilistic Answer Ranking for Question Answering",
+  booktitle = "Proceedings of the 45th Annual Meeting of the Association for Computational Linguistics",
+  year = 2007,
+  pages = "784--791",
+  address = {Prague, Czech Republic}
+}
+
+@Article{Li:06,
+  author = "Xin Li and Dan Roth",
+  title = "Learning Question Classifiers: The Role of Semantic Information",
+  journal = "Natural Language Engineering",
+  year = 2006,
+  pages = "229-249",
+  address = {New York, NY, USA}
+}
+
+@Conference{Magnini:02,
+  author = "Bernardo Magnini and Matteo Negri and Roberto Prevete and Hristo Tanev",
+  title = "Comparing Statistical and Content-Based Techniques for Answer Validation on the Web",
+  booktitle = "Proceedings of the VIII Convegno AI*IA",
+  year = 2002,
+  address = {Siena, Italy}
+}
+
+@Article{Marcus:etal:1993,
+  author = "Mitchell P. Marcus and Beatrice Santorini and Mary Ann Marcinkiewicz",
+  title = "Building a large annotated corpus of English: The Penn TreeBank",  
+  journal = "Computational Linguistics",
+  year = 1993,
+  volume = 19,
+  number = 2,
+  pages = "313--330"
+}
+
+@Conference{Moldovan:99,
+  author = "Dan Moldovan and Sanda Harabagiu and Marius Pasca and Rada Mihalcea and Richard Goodrum and Roxana Girju and Vasile Rus",
+  title = "LASSO - A Tool for Surfing the Answer Net",
+  booktitle = "Proceedings of the Text REtrieval Conference (TREC)",
+  year = 1999,
+  address = {Gaithersburg, MD, USA}
+}
+
+@Article{Palmer:05,
+  author = "Martha Palmer and Daniel Gildea and Paul Kingsbury",
+  title = "The Proposition Bank: An Annotated Corpus of Semantic Roles",  
+  journal = "Computational Linguistics",
+  year = 2005,
+  volume = 31,
+  number = 1,
+  pages = "71--106"
+}
+
+@Conference{Robertson:97,
+  author = "Stephen Robertson and Stephen G. Walker",
+  title = "On relevance Weights with Little Relevance Information",
+  booktitle = "Proceedings of the Annual International ACM SIGIR Conference on Research and Development in Information Retrieval",
+  year = 1997,
+  pages = {16--24},
+  address = {New York, NY, USA}
+}
+
+@Article{Soricut:06,
+  author = "Radu Soricut and Eric Brill",
+  title = "Automatic Question Answering Using the Web: Beyond the Factoid",  
+  journal = "Journal of Information Retrieval - Special Issue on Web Information Retrieval",
+  year = 2006,
+  volume = 9,
+  number = 2,
+  pages = "191--206"
+}
+
+@Article{Shen:Joshi:2005,
+  author = "Libin Shen and Aravind K. Joshi",
+  title = "Ranking and Reranking with Perceptron",  
+  journal = "Machine Learning. Special Issue on Learning in Speech
+and Language Technologies",
+  year = 2005,
+  volume = 60,
+  number = 1,
+  pages = "73--96"
+}
+
+@Conference{Riezler:etal:2007,
+  author = "Stefan Riezler and Alexander Vasserman and Ioannis Tsochantaridis and Vibhu Mittal and Yi Liu",
+  title = "Statistical Machine Translation for Query Expansion in Answer Retrieval",
+  booktitle = "Proceedings of the 45th Annual Meeting of the Association for Computational Linguistics (ACL)",
+  year = 2007,
+  pages = "464--471"
+}
+
+@Article{surdeanu:07,
+  author = "Mihai Surdeanu and Lluis Marquez and Xavier Carreras and Pere R. Comas",
+  title = "Combination strategies for semantic role labeling",
+  journal = "Journal of Artificial Intelligence Research",
+  year = 2007,
+  volume = 29,
+  pages = "105--151"
+}
+
+@Article{mann88,
+  author = "William C. Mann and Sandra A. Thompson",
+  title = "Rhetorical Structure Theory: Toward a Functional Theory of Text Organization",
+  journal = "Text",
+  year = 1988,
+  volume = 8,
+  number = 3,
+  pages = "243--281"
+}
+
+@Conference{surdeanu:08,
+  author = "Mihai Surdeanu and Richard Johansson and Adam Meyers and Lluis Marquez and Joakim Nivre",
+  title = "The CoNLL-2008 Shared Task on Joint Parsing of Syntactic and Semantic Dependencies",
+  booktitle = "Proceedings of the Conference on Computational Natural Language Learning (CoNLL)",
+  year = 2008,
+  pages = "159--177",
+  address = {Machester, United Kingdom}
+}
+
+@Conference{ciaramita:08,
+  author = "Massimiliano Ciaramita and Giuseppe Attardi and Felice Dell'Orletta and Mihai Surdeanu",
+  title = "DeSRL: A Linear-Time Semantic Role Labeling System",
+  booktitle = "Proceedings of the Shared Task of the 12th Conference on Computational Natural Language Learning (CoNLL-2008)",
+  year = 2008,
+  pages = "258--262",
+  address = {Manchester, United Kingdom}
+}
+
+@Conference{Attardi:etal:2007,
+  author = "Giuseppe Attardi and Felice Dell'Orletta and Maria Simi and Atanas Chanev and Massimiliano Ciaramita",
+  title = "Multilingual Dependency Parsing and Domain Adaptation using {DeSR}",
+  booktitle = "Proceedings of the Shared Task of the Conference on Computational Natural Language Learning (CoNLL)",
+  year = 2007,
+  pages = "1112--1118",
+  address = {Prague, Czech Republic}
+}
+
+@Conference{Tao07,
+  author = "Tao Tao and ChengXiang Zhai",
+  title = "An exploration of proximity measures in information retrieval",
+  booktitle = "Proceedings of the 30th annual international ACM SIGIR conference on Research and development in information retrieval",
+  year = 2007,
+  pages = "259--302",
+  address = {Amsterdam, The Netherlands}
+}
+
+@inproceedings{Ciaramita-Johnson:2003:EMNLP,
+  author = {Ciaramita, Massimiliano  and  Johnson, Mark},
+  title  = {Supersense Tagging of Unknown Nouns in {WordNet}},
+  booktitle = {Proceedings of the 2003 Conference on Empirical Methods in Natural Language Processing},
+  year   = 2003,
+  pages  = {168--175},
+  address = {Sapporo, Japan}
+}
+
+@inproceedings{Tsochantaridis:etal:2004,
+ author = {Tsochantaridis, Ioannis and Hofmann, Thomas and Joachims, Thorsten and Altun, Yasemin},
+ title = {Support vector machine learning for interdependent and structured output spaces},
+ booktitle = {ICML '04: Proceedings of the twenty-first international conference on Machine learning},
+ year = {2004},
+ isbn = {1-58113-828-5},
+ pages = {104--111},
+ location = {Banff, Alberta, Canada},
+ publisher = {ACM},
+ address = {New York, NY, USA}
+ }
+
+@inproceedings{Yue:etal:2007,
+ author = {Yue, Yisong and Finley, Thomas and Radlinski, Filip and Joachims, Thorsten},
+ title = {A support vector method for optimizing average precision},
+ booktitle = {SIGIR '07: Proceedings of the 30th annual international ACM SIGIR conference on Research and development in information retrieval},
+ year = {2007},
+ pages = {271--278},
+ location = {Amsterdam, The Netherlands},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{Joachims:2006,
+ author = {Joachims, Thorsten},
+ title = {Training linear SVMs in linear time},
+ booktitle = {KDD '06: Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining},
+ year = {2006},
+ pages = {217--226},
+ location = {Philadelphia, PA, USA},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{hickl2006recognizing,
+  title={Recognizing textual entailment with LCC’s GROUNDHOG system},
+  author={Hickl, Andrew and Williams, John and Bensley, Jeremy and Roberts, Kirk and Rink, Bryan and Shi, Ying},
+  booktitle={Proceedings of the Second PASCAL Challenges Workshop},
+  year={2006}
+}
+
+@inproceedings{echihabi2003noisy,
+  title={A noisy-channel approach to question answering},
+  author={Echihabi, Abdessamad and Marcu, Daniel},
+  booktitle={Proceedings of the 41st Annual Meeting on Association for Computational Linguistics-Volume 1},
+  pages={16--23},
+  year={2003},
+  organization={Association for Computational Linguistics}
+}
+
+@inproceedings{yao2013,
+  title={Semi-Markov Phrase-based Monolingual Alignment.},
+  author={Yao, Xuchen and Van Durme, Benjamin and Callison-Burch, Chris and Clark, Peter},
+  booktitle={Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year={2013}
+}
+
+@inproceedings{jansen14,
+ author = {Peter Jansen and Mihai Surdeanu and Peter Clark},
+ title = {Discourse Complements Lexical Semantics for Non-factoid Answer Reranking},
+ booktitle = {Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (ACL)},
+ year = {2014},
+ }
+
+@article{sultan-etal:2014:TACL,
+title = {Back to Basics for Monolingual Alignment: Exploiting Word Similarity and Contextual Evidence},
+author = {Md. Arafat Sultan and Steven Bethard and Tamara Sumner},
+url = {http://www.transacl.org/wp-content/uploads/2014/05/53.pdf},
+year = {2014},
+date = {2014-01-01},
+journal = {Transactions of the Association for Computational Linguistics},
+volume = {2},
+pages = {219--230},
+keywords = {text similarity}
+}
+
+
+@article{Punyakanok2004,
+author = {Punyakanok, Vasin and Roth, Dan and Yih, Wen-tau},
+journal = {Proceedings of AI\&Math 2004},
+keywords = {qa},
+mendeley-tags = {qa},
+title = {{Mapping dependencies trees: An application to question answering}},
+year = {2004},
+  pages = "1--10",
+  address = {Fort Lauderdale, Florida, USA}
+}
+
+@inproceedings{Shen:Klakow:2006,
+author = {Shen, Dan and Klakow, Dietrich},
+booktitle = {Proceedings of the 21st International Conference on Computational Linguistics and the 44th annual meeting of the Association for Computational Linguistics},
+keywords = {qa},
+mendeley-tags = {qa},
+pages = {889--896},
+location = {Sydney, Australia},
+publisher = {Association for Computational Linguistics},
+title = {{Exploring correlation of dependency relation paths for answer extraction}},
+year = {2006}
+}
+
+@article{Wang:2007,
+author = {Wang, Mengqiu and Smith, Noah A. and Mitamura, Teruko},
+journal = {Proc. of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
+keywords = {qa},
+mendeley-tags = {qa},
+title = {{What is the Jeopardy model? A quasi-synchronous grammar for QA}},
+year = {2007},
+  pages = "22--32",
+  address = {Prague, Czech Republic}
+}
+
+@Conference{Xue08,
+  author = "Xue, Xiaobing and Jeon, Jiwoon and Croft, W. Bruce",
+  title = "Retrieval Models for Question and Answer Archives",
+  booktitle = "Proceedings of the Annual ACM SIGIR Conference on Research and Development in Information Retrieval",
+  year = 2008,
+  pages = {475--482},
+  location = {Singapore, Singapore}
+}
+
+@Conference{Voorhees:01,
+  author = "Voorhees, Ellen M.",
+  title = "Overview of the TREC-9 Question Answering Track",
+  booktitle = "Proceedings of the Text REtrieval Conference (TREC) TREC-9 Proceedings",
+  year = 2001,
+  address = {Gaithersburg, MD, USA}
+}
+
+@Conference{Murdock:05,
+  author = "Murdock, Vanessa and Croft, W. Bruce",
+  title = "A translation model for sentence retrieval",
+  booktitle = "Proceedings of the conference on Human Language Technology and Empirical Methods in Natural Language Processing",
+  year = 2005,
+ pages = {684--691},
+ location = {Vancouver, British Columbia, Canada}
+}
+
+@Article{Verberne:10,
+  author = "Verberne, Suzan and Boves, Lou and Oostdijk, Nelleke and Coppen, Peter-Arno",
+  title = "What is not in the bag of words for why-qa?",  
+  journal = "Computational Linguistics",
+  year = 2010,
+  volume = 36,
+  number = 2,
+  pages = "229--245"
+}
+
+@Article{Surdeanu:11,
+  author = "Surdeanu, Mihai and Ciaramita, Massimiliano and Zaragoza, Hugo",
+  title = "Learning to Rank Answers to Non-Factoid Questions from Web Collections",  
+  journal = "Computational Linguistics",
+  year = 2011,
+  volume = 37,
+  number = 2,
+  pages = "351--383"
+}
+
+@inproceedings{yaoyong:etal:2002,
+ author = {Li, Yaoyong and Zaragoza, Hugo and Herbrich, Ralf and Shawe-Taylor, John and Kandola, Jaz S.},
+ title = {The Perceptron Algorithm with Uneven Margins},
+ booktitle = {Proceedings of the Nineteenth International Conference on Machine Learning},
+ year = {2002},
+ pages = {379--386},
+  address = {Sidney, Australia}
+}
+
+@inproceedings{surdeanu:2007b,
+ author = {Surdeanu, Mihai and Ciaramita, Massimiliano},
+ title = {Robust Information Extraction with Perceptrons},
+ booktitle = {Proceedings of the NIST 2007 Automatic Content Extraction Workshop (ACE07)},
+ year = {2007},
+  address = {College Park, Maryland, USA}
+}
+
+@Conference{Moschitti:04,
+  author = "Alessandro Moschitti",
+  title = "A study on Convolution Kernels for Shallow Semantic Parsing",
+  booktitle = "Proceedings of the 42th Annual Meeting of the Association for Computational Linguistics (ACL)",
+  year = 2004
+}
+
+@Conference{Moschitti:07,
+  author = "Alessandro Moschitti and Silvia Quarteroni and Roberto Basili and Suresh Manandhar",
+  title = "Exploiting Syntactic and Shallow Semantic Kernels for Question/Answer Classification",
+  booktitle = "Proceedings of the 45th Annual Meeting of the Association for Computational Linguistics (ACL)",
+  year = 2007,
+  pages = {776--783},
+  address = {Prague, Czech Republic}
+}
+
+@InProceedings{prasad08,
+    author = {Rashmi Prasad and Nikhil Dinesh and Alan Lee and Eleni Miltsakaki and Livio Robaldo and Aravind Joshi and Bonnie Webber},
+    title = {The Penn Discourse Treebank 2.0},
+    booktitle = {Proceedings of the 6th International Conference on Language Resources and Evaluation (LREC)},
+    year = 2008,
+}  
+
+@InProceedings{feng12,
+    author = {Vanessa Wei Feng and Graeme Hirst},
+    title = {Text-level Discourse Parsing with Rich Linguistic Features},
+    booktitle = {Proceedings of the Association for Computational Linguistics},
+    year = 2012,
+} 
+
+@Article{lin12,
+  author = {Ziheng Lin and Hwee Tou Ng and Min-Yen Kan},
+  title = {A {PDTB}-styled end-to-end discourse parser},
+  journal = {Natural Language Engineering},
+  volume = {1},
+  number = {1},
+  pages = {1--35},
+  year = {2012},
+}
+
+@Article{domingos12,
+  author = {Pedro Domingos},
+  title = {A Few Useful Things to Know about Machine Learning},
+  journal = {Communications of the ACM},
+  volume = {55},
+  number = {10},
+  year = {2012},
+}
+
+@BOOK{manning08,
+AUTHOR    = {Christopher D. Manning and Prabhakar Raghavan and Hinrich Sch\"{u}tze}, 
+TITLE     = {Introduction to Information Retrieval},
+PUBLISHER = {Cambridge University Press},
+YEAR      = {2008},
+}
+
+@BOOK{hastie09,
+AUTHOR    = {Hastie, Trevor and Robert Tibshirani and Jerome Friedman}, 
+TITLE     = {The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition},
+PUBLISHER = {Springer},
+YEAR      = {2009},
+}
+
+@BOOK{jurafsky09,
+AUTHOR    = {Dan Jurafsky and James H. Martin}, 
+TITLE     = {Speech and Language Processing, Second Edition},
+PUBLISHER = {Prentice Hall},
+YEAR      = {2009},
+}
+
+@phdthesis{marcu97,
+  author      = {Daniel Marcu},
+  title       = {The Rhetorical Parsing, Summarization, and Generation of Natural Language Texts},
+  school      = {University of Toronto},
+  year        = {1997}
+}
+
+@inproceedings{Prager:2000,
+ author = {Prager, John and Brown, Eric and Coden, Anni and Radev, Dragomir},
+ title = {Question-answering by predictive annotation},
+ booktitle = {Proceedings of the 23rd annual international ACM SIGIR conference on Research and development in information retrieval},
+ series = {SIGIR '00},
+ year = {2000},
+ isbn = {1-58113-226-3},
+ location = {Athens, Greece},
+ pages = {184--191},
+ numpages = {8},
+ url = {http://doi.acm.org/10.1145/345508.345574},
+ doi = {10.1145/345508.345574},
+ acmid = {345574},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@article{Verberne:2011,
+ author = {Verberne, Suzan and Halteren, Hans and Theijssen, Daphne and Raaijmakers, Stephan and Boves, Lou},
+ title = {Learning to rank for why-question answering},
+ journal = {Inf. Retr.},
+ issue_date = {April     2011},
+ volume = {14},
+ number = {2},
+ month = apr,
+ year = {2011},
+ issn = {1386-4564},
+ pages = {107--132},
+ numpages = {26},
+ url = {http://dx.doi.org/10.1007/s10791-010-9136-6},
+ doi = {10.1007/s10791-010-9136-6},
+ acmid = {1969508},
+ publisher = {Kluwer Academic Publishers},
+ address = {Hingham, MA, USA},
+ keywords = {Learning to rank, Question answering, Why-questions},
+} 
+
+@article{Verberne:2007,
+  title={Discourse-based answering of why-questions},
+  author={Verberne, Susan and Boves, Lou and Oostdijk, Nelleke and Coppen, Peter-Arno and others},
+  journal={Traitement Automatique des Langues, Discours et document: traitements automatiques},
+  volume={47},
+  number={2},
+  pages={21--41},
+  year={2007}
+}
+
+@incollection{Carlson:2003,
+  added-at = {2011-03-09T04:36:39.000+0100},
+  author = {Carlson, Lynn and Marcu, Daniel and Okurowski, Mary Ellen},
+  biburl = {http://www.bibsonomy.org/bibtex/24e4da5db46fc21cf52c942d6b68ed250/kabloom},
+  booktitle = {{C}urrent {D}irections in {D}iscourse and {D}ialogue},
+  editor = {{van Kuppevelt}, Jan and Smith, Ronnie},
+  interhash = {63d0bcf9949d7d316f9f73683a62822f},
+  intrahash = {4e4da5db46fc21cf52c942d6b68ed250},
+  keywords = {imported},
+  pages = {85--112},
+  publisher = {{K}luwer {A}cademic {P}ublishers},
+  timestamp = {2011-03-09T04:36:39.000+0100},
+  title = {{B}uilding a {D}iscourse-{T}agged {C}orpus in the
+		 {F}ramework of {R}hetorical {S}tructure {T}heory},
+  topics = {area.RST,area.corpora},
+  url = {http://www.isi.edu/~marcu/papers/sigdialbook2002.pdf},
+  year = 2003
+}
+
+@book{Reece:2011,
+  title={Campbell Biology},
+  author={Reece, J.B. and Urry, L.A. and Cain, M.L. and Wasserman, S.A. and Minorsky, P.V.},
+  isbn={9780321558237},
+  lccn={2010020623},
+  url={http://books.google.com/books?id=39vMSgAACAAJ},
+  year={2011},
+  publisher={Pearson Benjamin Cummings}
+}
+
+@inproceedings{Hashimoto:2012,
+  added-at = {2012-08-15T00:00:00.000+0200},
+  author = {Hashimoto, Chikara and Torisawa, Kentaro and Saeger, Stijn De and Oh, Jong-Hoon and Kazama, Jun'ichi},
+  biburl = {http://www.bibsonomy.org/bibtex/269ee9436a25ff0eaa640538bebd74485/dblp},
+  booktitle = {Proceedings of the Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning (EMNLP-CoNLL)},
+  crossref = {conf/emnlp/2012},
+  ee = {http://www.aclweb.org/anthology/D12-1057},
+  interhash = {7560332877ad84eda6e2830d2be68947},
+  intrahash = {69ee9436a25ff0eaa640538bebd74485},
+  isbn = {978-1-937284-43-5},
+  keywords = {dblp},
+  pages = {619-630},
+  publisher = {ACL},
+  timestamp = {2012-08-15T00:00:00.000+0200},
+  title = {Excitatory or Inhibitory: A New Semantic Orientation Extracts Contradiction and Causality from the Web.},
+  url = {http://dblp.uni-trier.de/db/conf/emnlp/emnlp2012.html#HashimotoTSOK12},
+  year = 2012
+}
+
+@InProceedings{Oh:2013,
+  author    = {Oh, Jong-Hoon  and  Torisawa, Kentaro  and  Hashimoto, Chikara  and  Sano, Motoki  and  De Saeger, Stijn  and  Ohtake, Kiyonori},
+  title     = {Why-Question Answering using Intra- and Inter-Sentential Causal Relations},
+  booktitle = {Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  month     = {August},
+  year      = {2013},
+  address   = {Sofia, Bulgaria},
+  publisher = {Association for Computational Linguistics},
+  pages     = {1733--1743},
+  url       = {http://www.aclweb.org/anthology/P13-1170}
+}
+
+@inproceedings{yih13,
+ author = {Yih, Wen-tau  and Ming-Wei Chang and Christopher Meek and Andrzej Pastusiak},
+ title = {Question Answering Using Enhanced Lexical Semantic Models},
+ booktitle = {Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (ACL)},
+ year = {2013},
+ }
+ 
+ @inproceedings{wang09,
+ author = {Wang, Xin-Jing and Xudong Tu and Dan Feng and Lei Zhang},
+ title = {Ranking Community Answers by Modeling Question-Answer Relationships via Analogical Reasoning},
+ booktitle = {Proceedings of the Annual ACM SIGIR Conference},
+ year = {2009},
+ }
+ 
+ @phdthesis{pasca01,
+  author      = {Marius Pasca},
+  title       = {High-Performance, Open-Domain Question Answering from Large Text Collections},
+  school      = {Southern Methodist University},
+  year        = {2001}
+ }
+
+@inproceedings{mikolov10,
+   author = {Tomas Mikolov and Martin Karafiat and Lukas Burget and Jan
+	Cernocky and Sanjeev Khudanpur},
+   title = {Recurrent neural network based language model},
+   booktitle = {Proceedings of the 11th Annual Conference of the
+	International Speech Communication Association (INTERSPEECH
+	2010)},
+   year = {2010},
+ }
+
+@inproceedings{mikolov13,
+   author = {Tomas Mikolov and Kai Chen and Greg Corrado and Jeffrey Dean},
+   title = {Efficient Estimation of Word Representations in Vector Space},
+   booktitle = {Proceedings of the International Conference on Learning Representations (ICLR)},
+   year = {2013},
+}
+
+@book{halliday2014cohesion,
+  title={Cohesion in english},
+  author={Halliday, Michael Alexander Kirkwood and Hasan, Ruqaiya},
+  year={2014},
+  publisher={Routledge}
+}
+
+@inbook{halliday2014cohesionintroduction,
+  author={Halliday, Michael Alexander Kirkwood and Hasan, Ruqaiya},
+  chapter={Introduction},
+  crossref={halliday2014cohesion}
+}
+
+@ARTICLE{och03,
+AUTHOR = {Franz Josef Och and Hermann Ney},
+TITLE = {A Systematic Comparison of Various Statistical Alignment Models},
+JOURNAL= {Computational Linguistics},
+NUMBER = 1,
+VOLUME = 29,
+YEAR = 2003,
+PAGES = {19--51}}
+
+@article{fried2015higher,
+  title={Higher-order Lexical Semantic Models for Non-factoid Answer Reranking},
+  author={Fried, Daniel and Jansen, Peter and Hahn-Powell, Gustave and Surdeanu, Mihai and Clark, Peter},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={3},
+  pages={197--210},
+  year={2015}
+}
+
+
+
+@inproceedings{napoles2012,
+ author = {Napoles, Courtney and Gormley, Matthew and Van Durme, Benjamin},
+ title = {Annotated Gigaword},
+ booktitle = {Proceedings of the Joint Workshop on Automatic Knowledge Base Construction and Web-scale Knowledge Extraction},
+ series = {AKBC-WEKEX '12},
+ year = {2012},
+ location = {Montreal, Canada},
+ pages = {95--100},
+ numpages = {6},
+ url = {http://dl.acm.org/citation.cfm?id=2391200.2391218},
+ acmid = {2391218},
+ publisher = {Association for Computational Linguistics},
+ address = {Stroudsburg, PA, USA},
+} 
+
+@article{graff2003english,
+  title={English gigaword, LDC2003T05},
+  author={Graff, David and Kong, Junbo and Chen, Ke and Maeda, Kazuaki},
+  url={https://catalog.ldc.upenn.edu/LDC2003T05},
+  journal={Linguistic Data Consortium, Philadelphia},
+  year={2003}
+}
+
+@article{hernault10,
+  title={{HILDA}: A Discourse Parser Using Support Vector Machine Classification},
+  author={Hernault, H. and Prendinger, H. and duVerle, D. and Ishizuka, M.},
+  journal={Dialogue and Discourse},
+  volume={1},
+  number={3},
+  pages={1--33},
+  year={2010}
+}
+
+@inproceedings{soricut2003,
+   author = {R. Soricut and D. Marcu},
+   title = {Sentence Level Discourse Parsing using Syntactic and Lexical Information},
+   booktitle = {Proceedings of the Human Language Technology and North American Association for Computational Linguistics Conference},
+   year = {2003},
+}
+
+@inproceedings{liang2006end,
+  title={An end-to-end discriminative approach to machine translation},
+  author={Liang, Percy and Bouchard-C{\^o}t{\'e}, Alexandre and Klein, Dan and Taskar, Ben},
+  booktitle={Proceedings of the 21st International Conference on Computational Linguistics and the 44th annual meeting of the Association for Computational Linguistics},
+  pages={761--768},
+  year={2006},
+  organization={Association for Computational Linguistics}
+}
+
+@inproceedings{zettlemoyer2007online,
+  title={Online Learning of Relaxed CCG Grammars for Parsing to Logical Form},
+  author={Zettlemoyer, Luke S and Collins, Michael},
+  booktitle={Proceedings of the Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning (EMNLP-CoNLL)},
+  pages={678--687},
+  year={2007}
+}
+
+@inproceedings{hoffmann2011knowledge,
+  title={Knowledge-based weak supervision for information extraction of overlapping relations},
+  author={Hoffmann, Raphael and Zhang, Congle and Ling, Xiao and Zettlemoyer, Luke and Weld, Daniel S},
+  booktitle={Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies-Volume 1},
+  pages={541--550},
+  year={2011},
+  organization={Association for Computational Linguistics}
+}
+
+@inproceedings{sun2009latent,
+  title={Latent Variable Perceptron Algorithm for Structured Classification.},
+  author={Sun, Xu and Matsuzaki, Takuya and Okanohara, Daisuke and Jun'ichi Tsujii},
+  booktitle={IJCAI},
+  volume={9},
+  pages={1236--1242},
+  year={2009}
+}
+
+@inproceedings{fernandes2012latent,
+  title={Latent structure perceptron with feature induction for unrestricted coreference resolution},
+  author={Fernandes, Eraldo Rezende and Dos Santos, C{\'\i}cero Nogueira and Milidi{\'u}, Ruy Luiz},
+  booktitle={Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning (EMNLP-CoNLL) -Shared Task},
+  pages={41--48},
+  year={2012},
+  organization={Association for Computational Linguistics}
+}
+
+@inproceedings{bjorkelund2014learning,
+  title={Learning structured perceptrons for coreference resolution with latent antecedents and non-local features},
+  author={Bj{\"o}rkelund, Anders and Kuhn, Jonas},
+  booktitle={Proceedings of the Association for Computational Linguistics},
+  year={2014}
+}
+
+@inproceedings{moldovan2003cogex,
+  title={Cogex: A logic prover for question answering},
+  author={Moldovan, Dan and Clark, Christine and Harabagiu, Sanda and Maiorano, Steve},
+  booktitle={Proceedings of the 2003 Conference of the North American Chapter of the Association for Computational Linguistics on Human Language Technology-Volume 1},
+  pages={87--93},
+  year={2003},
+  organization={Association for Computational Linguistics}
+}
+
+@article{moldovan2007cogex,
+  title={Cogex: A semantically and contextually enriched logic prover for question answering},
+  author={Moldovan, Dan and Clark, Christine and Harabagiu, Sanda and Hodges, Daniel},
+  journal={Journal of Applied Logic},
+  volume={5},
+  number={1},
+  pages={49--69},
+  year={2007},
+  publisher={Elsevier}
+}
+
+
+@article{liang2013learning,
+  title={Learning dependency-based compositional semantics},
+  author={Liang, Percy and Jordan, Michael I and Klein, Dan},
+  journal={Computational Linguistics},
+  volume={39},
+  number={2},
+  pages={389--446},
+  year={2013},
+  publisher={MIT Press}
+}
+
+@inproceedings{sharmatowards,
+  title={Towards Addressing the Winograd Schema Challenge-Building and Using a Semantic Parser and a Knowledge Hunting Module},
+  author={Sharma, Arpit and Vo, Nguyen H and Aditya, Somak and Baral, Chitta},
+  booktitle={Proceedings of the International Joint Conferences on Artificial Intelligence (IJCAI)},
+  year={2015}
+}
+
+@inproceedings{baral2012answering,
+  title={Answering Why and How questions with respect to a frame-based knowledge base: a preliminary report.},
+  author={Baral, Chitta and Vo, Nguyen Ha and Liang, Shanshan},
+  booktitle={ICLP (Technical Communications)},
+  pages={26--36},
+  year={2012},
+  organization={Citeseer}
+}
+
+@inproceedings{baral2012knowledge,
+  title={From Knowledge Represented in Frame-Based Languages to Declarative Representation and Reasoning via ASP.},
+  author={Baral, Chitta and Liang, Shanshan},
+  booktitle={KR},
+  year={2012}
+}
+
+@inproceedings{baral2011towards,
+  title={Towards deep reasoning with respect to natural language text in scientific domains},
+  author={Baral, Chitta and Liang, Shanshan and Nguyen, Vo},
+  booktitle={DeepKR Workshop},
+  year={2011},
+  organization={Citeseer}
+}
+
+@article{balduccini2008knowledge,
+  title={Knowledge representation and question answering},
+  author={Balduccini, Marcello and Baral, Chitta and Lierler, Yuliya},
+  journal={Foundations of Artificial Intelligence},
+  volume={3},
+  pages={779--819},
+  year={2008},
+  publisher={Elsevier}
+}
+
+@inproceedings{baral2006using,
+  title={Using AnsProlog with Link Grammar and WordNet for QA with deep reasoning},
+  author={Tari, Luis and Baral, Chitta},
+  booktitle={Information Technology, 2006. ICIT'06. 9th International Conference on},
+  pages={125--128},
+  year={2006},
+  organization={IEEE}
+}
+
+@InProceedings{sharp-EtAl:2015:NAACL-HLT,
+  author    = {Sharp, Rebecca  and  Jansen, Peter  and  Surdeanu, Mihai  and  Clark, Peter},
+  title     = {Spinning Straw into Gold: Using Free Text to Train Monolingual Alignment Models for Non-factoid Question Answering},
+  booktitle = {Proceedings of the 2015 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
+  month     = {May--June},
+  year      = {2015},
+  address   = {Denver, Colorado},
+  publisher = {Association for Computational Linguistics},
+  pages     = {231--237},
+  url       = {http://www.aclweb.org/anthology/N15-1025}
+}
+
+@article{Moldovan:2003:PIE:763693.763694,
+ author = {Moldovan, Dan and Pa\c{s}ca, Marius and Harabagiu, Sanda and Surdeanu, Mihai},
+ title = {Performance Issues and Error Analysis in an Open-domain Question Answering System},
+ journal = {ACM Trans. Inf. Syst.},
+ issue_date = {April 2003},
+ volume = {21},
+ number = {2},
+ month = apr,
+ year = {2003},
+ issn = {1046-8188},
+ pages = {133--154},
+ numpages = {22},
+ url = {http://doi.acm.org/10.1145/763693.763694},
+ doi = {10.1145/763693.763694},
+ acmid = {763694},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Question answering, natural language applications, performance analysis, text retrieval},
+} 
+
+@article{blair2003hybrid,
+  title={A hybrid approach for answering definitional questions},
+  author={Blair-Goldensohn, Sasha and McKeown, Kathleen and Schlaikjer, Andrew Hazen},
+  journal={Technical Report CUCS-006-03, Columbia University},
+  year={2003}
+}
+
+@inproceedings{pradhan2002building,
+  title={Building a Foundation System for Producing Short Answers to Factual Questions.},
+  author={Pradhan, Sameer S and Krugler, Valerie and Bethard, Steven and Ward, Wayne and Jurafsky, Daniel and Martin, James H and Blair-Goldensohn, Sasha and Schlaikjer, Andrew Hazen and Filatova, Elena and Dubou{\'e}, Pablo Ariel and others},
+  booktitle={TREC},
+  year={2002}
+}
+
+@inproceedings{barzilay1999information,
+  title={Information fusion in the context of multi-document summarization},
+  author={Barzilay, Regina and McKeown, Kathleen R and Elhadad, Michael},
+  booktitle={Proceedings of the 37th annual meeting of the Association for Computational Linguistics on Computational Linguistics},
+  pages={550--557},
+  year={1999},
+  organization={Association for Computational Linguistics}
+}
+
+@article{barzilay2008modeling,
+  title={Modeling local coherence: An entity-based approach},
+  author={Barzilay, Regina and Lapata, Mirella},
+  journal={Computational Linguistics},
+  volume={34},
+  number={1},
+  pages={1--34},
+  year={2008},
+  publisher={MIT Press}
+}
+
+@article{barzilay2005sentence,
+  title={Sentence fusion for multidocument news summarization},
+  author={Barzilay, Regina and McKeown, Kathleen R},
+  journal={Computational Linguistics},
+  volume={31},
+  number={3},
+  pages={297--328},
+  year={2005},
+  publisher={MIT Press}
+}
+
+@phdthesis{maccartney2009natural,
+  title={Natural language inference},
+  author={MacCartney, Bill},
+  year={2009},
+  school={Citeseer}
+}
+
+@inproceedings{banarescu2012amr,
+  title={Abstract Meaning Representation for Sembanking},
+  author={Banarescu, Laura and Bonial, Claire and Cai, Shu and Georgescu, Madalina and Griffitt, Kira and Hermjakob, Ulf and Knight, Kevin and Koehn, Philipp and Palmer, Martha and Schneider, Nathan},
+  booktitle={Proceedings of the 7th Linguistic Annotation Workshop and Interoperability with Discourse},
+  pages={178–-186},
+  year={2013},
+  organization={Association for Computational Linguistics}
+}
+
+@article{lewis2013combining,
+  title={Combining Distributional and Logical Semantics},
+  author={Lewis, Mike and Steedman, Mark},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={1},
+  pages={179--192},
+  year={2013}
+}
+
+@inproceedings{Collins:2002:DTM,
+ author = {Collins, Michael},
+ title = {Discriminative Training Methods for Hidden Markov Models: Theory and Experiments with Perceptron Algorithms},
+ booktitle = {Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+ series = {EMNLP '02},
+ year = {2002},
+ pages = {1--8},
+ numpages = {8},
+ url = {http://dx.doi.org/10.3115/1118693.1118694},
+ doi = {10.3115/1118693.1118694},
+ acmid = {1118694},
+ publisher = {Association for Computational Linguistics},
+ address = {Stroudsburg, PA, USA},
+} 
+
+@Inproceedings {mcsherry2008,
+author       = {Frank McSherry and Marc Najork},
+booktitle    = {30th European Conference on IR Research (ECIR)},
+month        = {April},
+publisher    = {Springer-Verlag},
+title        = {Computing Information Retrieval Performance Measures Efficiently in the Presence
+                of Tied Scores},
+url          = {http://research.microsoft.com/apps/pubs/default.aspx?id=57213},
+year         = {2008},
+}
+
+@inproceedings{daume2007,
+  added-at = {2009-01-22T03:11:16.000+0100},
+  address = {Prague, Czech Republic},
+  author = {Daum{\'e} III, Hal},
+  biburl = {http://www.bibsonomy.org/bibtex/28d93ac1c9b2335828df9735978980f9d/jamesh},
+  booktitle = {Proceedings of the 45th Annual Meeting of the Association of Computational Linguistics},
+  interhash = {b6e4516e8966730952b50e05b50dafc7},
+  intrahash = {8d93ac1c9b2335828df9735978980f9d},
+  keywords = {domainadaptation},
+  month = {June},
+  pages = {256--263},
+  publisher = {Association for Computational Linguistics},
+  timestamp = {2009-01-22T03:11:16.000+0100},
+  title = {Frustratingly Easy Domain Adaptation},
+  url = {http://www.aclweb.org/anthology/P/P07/P07-1033},
+  year = 2007
+}
+
+@inproceedings{clark:2015,
+  author    = {Peter Clark},
+  title     = {Elementary School Science and Math Tests as a Driver for {AI:} Take
+               the Aristo Challenge!},
+  booktitle = {Proceedings of the Twenty-Ninth {AAAI} Conference on Artificial Intelligence,
+               January 25-30, 2015, Austin, Texas, {USA.}},
+  pages     = {4019--4021},
+  year      = {2015},
+  crossref  = {DBLP:conf/aaai/2015},
+  url       = {http://www.aaai.org/ocs/index.php/IAAI/IAAI15/paper/view/10003},
+  timestamp = {Sun, 12 Apr 2015 15:18:08 +0200},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/conf/aaai/Clark15},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+@proceedings{DBLP:conf/aaai/2015,
+  editor    = {Blai Bonet and
+               Sven Koenig},
+  title     = {Proceedings of the Twenty-Ninth {AAAI} Conference on Artificial Intelligence,
+               January 25-30, 2015, Austin, Texas, {USA}},
+  publisher = {{AAAI} Press},
+  year      = {2015},
+  url       = {http://www.aaai.org/Library/AAAI/aaai15contents.php},
+  isbn      = {978-1-57735-698-1},
+  timestamp = {Sun, 12 Apr 2015 12:16:43 +0200},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/conf/aaai/2015},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+@article{brysbaert:2014,
+  year={2014},
+  journal={Behavior Research Methods},
+  volume={46},
+  number={3},
+  doi={10.3758/s13428-013-0403-5},
+  title={Concreteness ratings for 40 thousand generally known English word lemmas},
+  url={http://dx.doi.org/10.3758/s13428-013-0403-5},
+  publisher={Springer US},
+  keywords={Concreteness; Ratings; Crowdsourcing; Word recognition},
+  author={Brysbaert, Marc and Warriner, AmyBeth and Kuperman, Victor},
+  pages={904-911},
+  language={English}
+}
+
+@book{Piaget1954, 
+  author = {Piaget, Jean}, 
+  title = {The Construction of Reality in the Child}, 
+  publisher = {Basic Books}, 
+  year = {1954},
+} 
+
+@inproceedings{Park:2015,
+ author = {Park, Jae Hyun and Croft, W. Bruce},
+ title = {Using Key Concepts in a Translation Model for Retrieval},
+ booktitle = {Proceedings of the 38th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+ series = {SIGIR '15},
+ year = {2015},
+ isbn = {978-1-4503-3621-5},
+ location = {Santiago, Chile},
+ pages = {927--930},
+ numpages = {4},
+ url = {http://doi.acm.org/10.1145/2766462.2767768},
+ doi = {10.1145/2766462.2767768},
+ acmid = {2767768},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {answer passage retrieval, query expansion, query term classification, translation model},
+} 
+
+@inproceedings{Voorhees:2003,
+ author = {Voorhees, Ellen M.},
+ title = {Evaluating Answers to Definition Questions},
+ booktitle = {Proceedings of the 2003 Conference of the North American Chapter of the Association for Computational Linguistics on Human Language Technology: Companion Volume of the Proceedings of HLT-NAACL 2003--short Papers - Volume 2},
+ series = {NAACL-Short '03},
+ year = {2003},
+ location = {Edmonton, Canada},
+ pages = {109--111},
+ numpages = {3},
+ url = {http://dx.doi.org/10.3115/1073483.1073520},
+ doi = {10.3115/1073483.1073520},
+ acmid = {1073520},
+ publisher = {Association for Computational Linguistics},
+ address = {Stroudsburg, PA, USA},
+} 
+
+@inproceedings{clark:2013,
+ author = {Clark, Peter and Harrison, Philip and Balasubramanian, Niranjan},
+ title = {A study of the knowledge base requirements for passing an elementary science test},
+ booktitle = {Proceedings of the 2013 Workshop on Automated Knowledge Base Construction},
+ series = {AKBC'13},
+ year = {2013}, 
+ pages = {37--42},
+} 
+
+@techreport{de2008stanford,
+  title={Stanford typed dependencies manual},
+  author={De Marneffe, Marie-Catherine and Manning, Christopher D},
+  year={2008},
+  institution={Technical report, Stanford University}
+}
+
+@inproceedings{manning2014stanford,
+  title={The Stanford CoreNLP natural language processing toolkit},
+  author={Manning, Christopher D and Surdeanu, Mihai and Bauer, John and Finkel, Jenny and Bethard, Steven J and McClosky, David},
+  booktitle={Proceedings of 52nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations},
+  pages={55--60},
+  year={2014}
+}
+
+@inproceedings{Iyyer2014,
+  Title = {A Neural Network for Factoid Question Answering over Paragraphs},
+  Booktitle = {Empirical Methods in Natural Language Processing},
+  Author = {Mohit Iyyer and Jordan Boyd-Graber and Leonardo Claudino and Richard Socher and Hal {Daum\'{e} III}},
+  Year = {2014},
+  Location = {Doha, Qatar},
+}
+
+@inproceedings{yao2014information,
+  title={Information extraction over structured data: Question answering with freebase},
+  author={Yao, Xuchen and Van Durme, Benjamin},
+  booktitle={Proceedings of ACL},
+  year={2014}
+}
+
+@inproceedings{nips15_hermann,
+author = {Karl Moritz Hermann and Tom\'a\v{s} Ko\v{c}isk\'y and Edward Grefenstette and Lasse Espeholt and Will Kay and Mustafa Suleyman and Phil Blunsom},
+title = {Teaching Machines to Read and Comprehend},
+url = {http://arxiv.org/abs/1506.03340},
+booktitle = "Advances in Neural Information Processing Systems (NIPS)",
+year = "2015",
+}
+
+@article{russell1995artificial,
+  title={Artificial intelligence: a modern approach},
+  author={Russell, Stuart and Norvig, Peter},
+  year={1995}
+}
+
+@inproceedings{Iyyer2015,
+  Title = {Deep Unordered Composition Rivals Syntactic Methods for Text Classification},
+  Booktitle = {Association for Computational Linguistics},
+  Author = {Mohit Iyyer and Varun Manjunatha and Jordan Boyd-Graber and Hal {Daum\'{e} III}},
+  Year = {2015},
+  Location = {Beijing, China}
+}
+
+@inproceedings{Tymoshenko:15,
+  Title = {Assessing the Impact of Syntactic and Semantic Structures for Answer Passages Reranking},
+  Booktitle = {Proceedings of The 24th ACM International Conference on Information and Knowledge Management (CIKM)},
+  Author = {Kateryna Tymoshenko and Alessandro Moschitti},
+  Year = {2015}
+}
+
+@inproceedings{Severyn:13a,
+  Title = {Automatic Feature Engineering for Answer Selection and Extraction},
+  Booktitle = {Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  Author = {Aliaksei Severyn and Alessandro Moschitti},
+  Year = {2013}
+}
+
+@inproceedings{Severyn:13b,
+  Title = {Learning Adaptable Patterns for Passage Reranking},
+  Booktitle = {Proceedings of the Seventeenth Conference on Computational Natural Language Learning (CoNLL)},
+  Author = {Aliaksei Severyn and Massimo Nicosia and Alessandro Moschitti},
+  Year = {2013}
+}
+
+@inproceedings{Severyn:12,
+  Title = {Structural relationships for large-scale learning of answer re-ranking},
+  Booktitle = {SIGIR},
+  Author = {Aliaksei Severyn and Alessandro Moschitti},
+  Year = {2012}
+}
+
+@article{Moschitti:11,
+  Title = {Linguistic Kernels for Answer Re-ranking in Question Answering Systems},
+  journal = {Information and Processing Management: an International journal},
+  Author = {Alessandro Moschitti and Silvia Quarteroni},
+  publisher={Elsevier},
+  Year = {2011}
+}
+
+@article{Ferucci:12,
+  title={Introduction to ``This is Watson''},
+  author={Ferrucci, David A},
+  journal={IBM Journal of Research and Development},
+  volume={56},
+  number={3.4},
+  year={2012},
+  publisher={IBM}
+}
+
+@article{murdock2012textual,
+  title={Textual evidence gathering and analysis},
+  author={Murdock, J William and Fan, James and Lally, Adam and Shima, Hideki and Boguraev, BK},
+  journal={IBM Journal of Research and Development},
+  volume={56},
+  number={3.4},
+  year={2012},
+  publisher={IBM}
+}
+
+@article{gondek2012framework,
+  title={A framework for merging and ranking of answers in DeepQA},
+  author={Gondek, DC and Lally, Adam and Kalyanpur, Aditya and Murdock, J William and Dubou{\'e}, Pablo Ariel and Zhang, Lei and Pan, Yue and Qiu, ZM and Welty, Chris},
+  journal={IBM Journal of Research and Development},
+  volume={56},
+  number={3.4},
+  year={2012},
+  publisher={IBM}
+}
+
+@inproceedings{bordes2014question,
+  title={Question Answering with Subgraph Embeddings},
+  author={Bordes, Antoine and Chopra, Sumit and Weston, Jason},
+  booktitle={Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP) 2014},
+  year={2014}
+}
+
+@article{bordes2015large,
+title={Large-scale simple question answering with memory networks},
+author={Bordes, Antoine and Usunier, Nicolas and Chopra, Sumit and Weston, Jason},
+journal={arXiv preprint arXiv:1506.02075},
+year={2015}
+}
+
+@inproceedings{he2016pairwise,
+  title={Pairwise word interaction modeling with deep neural networks for semantic similarity measurement},
+  author={He, Hua and Lin, Jimmy},
+  booktitle={Proceedings of NAACL-HLT},
+  pages={937--948},
+  year={2016}
+}
+
+
+@article{wang2015long,
+  title={A long short-term memory model for answer sentence selection in question answering},
+  author={Wang, Di and Nyberg, Eric},
+  journal={ACL, July},
+  year={2015}
+}
+
+@article{collobert2011natural,
+  title={Natural language processing (almost) from scratch},
+  author={Collobert, Ronan and Weston, Jason and Bottou, L{\'e}on and Karlen, Michael and Kavukcuoglu, Koray and Kuksa, Pavel},
+  journal={Journal of Machine Learning Research},
+  volume={12},
+  number={Aug},
+  pages={2493--2537},
+  year={2011}
+}
+
+@inproceedings{chen2014fast,
+  title={A Fast and Accurate Dependency Parser using Neural Networks.},
+  author={Chen, Danqi and Manning, Christopher D},
+  booktitle={Empirical MNLP},
+  pages={740--750},
+  year={2014}
+}
+
+@article{Khashabi2016QuestionAV,
+  title={Question Answering via Integer Programming over Semi-Structured Knowledge},
+  author={Daniel Khashabi and Tushar Khot and Ashish Sabharwal and Peter Clark and Oren Etzioni and Dan Roth},
+  journal={CoRR},
+  year={2016},
+  volume={abs/1604.06076}
+}
+
+@article{suggu2016deep,
+  title={Deep Feature Fusion Network for Answer Quality Prediction in Community Question Answering},
+  author={Suggu, Sai Praneeth and Goutham, Kushwanth N and Chinnakotla, Manoj K and Shrivastava, Manish},
+  journal={arXiv preprint arXiv:1606.07103},
+  year={2016}
+}
+
+@inproceedings{dong2015question,
+  title={Question answering over freebase with multi-column convolutional neural networks},
+  author={Dong, Li and Wei, Furu and Zhou, Ming and Xu, Ke},
+  booktitle={Proceedings of Association for Computational Linguistics},
+  pages={260--269},
+  year={2015}
+}
+
+
+@inproceedings{yih2015semantic,
+  title={Semantic parsing via staged query graph generation: Question answering with knowledge base},
+  author={Yih, Wen-tau and Chang, Ming-Wei and He, Xiaodong and Gao, Jianfeng},
+  booktitle={Proceedings of Association for Computational Linguistics (ACL)},
+  year={2015}
+}
+
+@inproceedings{chen2016acl,
+  title={A Thorough Examination of the CNN / Daily Mail Reading Comprehension Task},
+  author={Danqi Chen and Jason Bolton and Christopher D. Manning},
+  booktitle={Proceedings of Association for Computational Linguistics (ACL)},
+  year={2016}
+}
+
