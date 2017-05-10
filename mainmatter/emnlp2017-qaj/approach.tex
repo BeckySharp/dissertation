@@ -1,7 +1,7 @@
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=0.3\textwidth]{arch_overall.png}
+\includegraphics[width=0.5\textwidth]{mainmatter/emnlp2017-qaj/arch_overall.png}
 \caption{ Architecture of our question answering approach.  
 Given a question, candidate answer, and a free-text knowledge base as inputs, we generate a pool of candidate justifications, from which we extract feature vectors.  We use a neural network to score each and then use max-pooling to select the current best justification. This serves as the score for the candidate answer itself.  The red border indicates the components that are trained online. }
 \label{fig:arch_overall}
@@ -17,8 +17,8 @@ Here we tackle this challenge by using the QA task performance as supervision fo
 %jointly 
 learn to choose both the correct answer and a compelling, human-readable justification for that answer.
 
-Additionally, similar to the strategy Chen and Manning~\shortcite{chen2014fast} applied to parsing, we combine representation-based features with explicit features that capture additional information that is difficult to model through embeddings, especially with limited training data.
-%second contribution is that, similar to the strategy Chen and Manning~\shortcite{chen2014fast} applied to parsing, we combine representation-based features with explicit features that capture additional information that is difficult to model through embeddings.
+Additionally, similar to the strategy Chen and Manning~\citeyear{chen2014fast} applied to parsing, we combine representation-based features with explicit features that capture additional information that is difficult to model through embeddings, especially with limited training data.
+%second contribution is that, similar to the strategy Chen and Manning~\citeyear{chen2014fast} applied to parsing, we combine representation-based features with explicit features that capture additional information that is difficult to model through embeddings.
 
 
 

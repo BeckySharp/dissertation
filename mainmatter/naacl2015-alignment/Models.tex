@@ -17,11 +17,11 @@
         {\rotatebox[origin=c]{90}{~~~~~~~~~Alignment Models}}
         & { Global Alignment Probability } & p(Q$|$A) according to IBM Model 1 \cite{Brown:93}\\ 
         & {} & {}\\
-        & { Jenson-Shannon Distance (JSD) } & {Pairwise JSDs were found between the probability distribution of each content word in the question and those in the answer.  The \textbf{mean, minimum, and maximum JSD values} were used as features. Additionally, composite vectors were formed which represented the entire question and the entire answer and the \textbf{overall JSD} between these two vectors was also included as a feature. See Fried et. al \shortcite{fried15} for additional details.} \\
+        & { Jenson-Shannon Distance (JSD) } & {Pairwise JSDs were found between the probability distribution of each content word in the question and those in the answer.  The \textbf{mean, minimum, and maximum JSD values} were used as features. Additionally, composite vectors were formed which represented the entire question and the entire answer and the \textbf{overall JSD} between these two vectors was also included as a feature. See Fried et. al \citeyear{fried15} for additional details.} \\
         \midrule
         \multirow{10}{*}
         {\rotatebox[origin=c]{90}{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RNNLM}}
-        & { Cosine Similarity } & {Similar to Jansen et al.~\shortcite{jansen14}, we include as features the {\bf maximum and average pairwise cosine similarity} between question and answer words, as well as the {\bf overall similarity} between the composite question and answer vectors.} \\
+        & { Cosine Similarity } & {Similar to Jansen et al.~\citeyear{jansen14}, we include as features the {\bf maximum and average pairwise cosine similarity} between question and answer words, as well as the {\bf overall similarity} between the composite question and answer vectors.} \\
         \bottomrule
         \end{tabular}
         }
@@ -42,23 +42,23 @@
 \label{sec:models}
 
 We evaluate the contribution of these alignment models using a standard reranking architecture~\cite{jansen14}.
-The initial ranking of candidate answers is done using a shallow candidate retrieval (CR) component.\footnote{We use the same cosine similarity between question and answer lemmas as Jansen et al.~\shortcite{jansen14}, weighted using {\em tf.idf}.} % (see Ch. 6, \cite{manning08}).}  
+The initial ranking of candidate answers is done using a shallow candidate retrieval (CR) component.\footnote{We use the same cosine similarity between question and answer lemmas as Jansen et al.~\citeyear{jansen14}, weighted using {\em tf.idf}.} % (see Ch. 6, \cite{manning08}).}  
 Then, these answers are reranked using a more expressive model that incorporates alignment features alongside the CR score.  As a learning framework we use \svmr , a Support Vector Machine tailored for ranking.\footnote{ \url{http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html}}
 We compare this alignment-based reranking model against one that uses a state-of-the-art recurrent neural network language model (RNNLM)~\cite{mikolov10,mikolov13}, which has been successfully applied to QA previously~\cite{yih13}.
 
 
 %IBM Model 1 \cite{Brown:93} \todo{GIZA++?} was used to generate the discourse pair matrices described in section \ref{sec:approach} for the alignment models.  Each of these models, along with a Recurrent Neural Network Language Model (RNNLM), was used to rerank candidate answers in a shallow retrieval model which used \svmr , a Support vector Machine tailored for ranking.\footnote{ \url{http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html}}  
-%(See Jansen~\shortcite{jansen14} for detailed architecture.\footnote{We also use his \svmr c of 0.1.}) 
+%(See Jansen~\citeyear{jansen14} for detailed architecture.\footnote{We also use his \svmr c of 0.1.}) 
 
-{\flushleft {\bf Alignment Model:}}  The alignment matrices were generated with IBM Model 1 \cite{Brown:93} using GIZA++~\cite{och03}, and the corresponding models were implemented as per Surdeanu et al.~\shortcite{Surdeanu:11} with a global alignment probability. 
+{\flushleft {\bf Alignment Model:}}  The alignment matrices were generated with IBM Model 1 \cite{Brown:93} using GIZA++~\cite{och03}, and the corresponding models were implemented as per Surdeanu et al.~\citeyear{Surdeanu:11} with a global alignment probability. 
 %, computing a {\bf global alignment probability}, which is the conditional probability of observing a question given an answer.
 % ms: the global prob. operates for the whole Q and A!
 %question word given an answer word.
-%~\footnote{Within Surdeanu et al.'s~\shortcite{Surdeanu:11} framework, we lightly tuned the smoothing parameter, $\lambda$, to 0.4 and we redistributed the probability mass for each word such that the probability of a word translating to itself was 0.5.}  
-We extend this alignment model with features from Fried et al.~\shortcite{fried15} that treat each (source) word's probability distribution (over destination words) in the alignment matrix as a distributed semantic representation, and make use the Jensen-Shannon distance (JSD)\footnote{Jensen-Shannon distance is based on Kullback-Liebler divergence but is a distance metric (finite and symmetric).} between these conditional distributions.  A summary of all these features is shown in Table \ref{tab:Features}.% to derive features representing the {\bf minimum, maximum, and average JSDs} between question and answer words, as well as the {\bf overall JSD} between the composite question and answer distributions. 
+%~\footnote{Within Surdeanu et al.'s~\citeyear{Surdeanu:11} framework, we lightly tuned the smoothing parameter, $\lambda$, to 0.4 and we redistributed the probability mass for each word such that the probability of a word translating to itself was 0.5.}  
+We extend this alignment model with features from Fried et al.~\citeyear{fried15} that treat each (source) word's probability distribution (over destination words) in the alignment matrix as a distributed semantic representation, and make use the Jensen-Shannon distance (JSD)\footnote{Jensen-Shannon distance is based on Kullback-Liebler divergence but is a distance metric (finite and symmetric).} between these conditional distributions.  A summary of all these features is shown in Table \ref{tab:Features}.% to derive features representing the {\bf minimum, maximum, and average JSDs} between question and answer words, as well as the {\bf overall JSD} between the composite question and answer distributions. 
 %Using the Jensen-Shannon distance (JSD) between conditional distributions, content words in each question were compared with the content words in its answers.  Features were made from the maximum, minimum, and average JSDs.  Composite distributions were also created for the entire question and for each entire candidate answer, and the JSD between these composite distributions was used as a feature. 
 
 
-{\flushleft {\bf RNNLM:}} We learned word embeddings using the \texttt{word2vec} RNNLM of Mikolov et al. \shortcite{mikolov13}, and include the cosine similarity-based features described in Table \ref{tab:Features}. %Similar to Jansen et al.~\shortcite{jansen14}, we include as features the {\bf maximum and average pairwise cosine similarity} between question and answer words, as well as the {\bf overall similarity} between the composite question and answer vectors. 
+{\flushleft {\bf RNNLM:}} We learned word embeddings using the \texttt{word2vec} RNNLM of Mikolov et al. \citeyear{mikolov13}, and include the cosine similarity-based features described in Table \ref{tab:Features}. %Similar to Jansen et al.~\citeyear{jansen14}, we include as features the {\bf maximum and average pairwise cosine similarity} between question and answer words, as well as the {\bf overall similarity} between the composite question and answer vectors. 
 
 %{\flushleft {\bf Hyperparameters}}We used the following very lightly tuned hyperparameters: for \svmr, we used c = 0.1 and for IBM model 1, lambda = 0.4 and self-association of 0.5. \todo{re-write this!! or spread to appropriate places} 

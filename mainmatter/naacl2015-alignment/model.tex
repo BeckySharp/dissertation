@@ -13,7 +13,7 @@ We propose two separate discourse representation schemes -- one shallow, centere
 
 The discourse marker model (DMM) extracts cross-sentence discourse structures centered around a discourse marker. 
 This extraction process is illustrated in the top part of Figure~\ref{fig:featgen}. 
-These structures are represented using three components: (1) A {\bf discourse marker} from Daniel Marcu's list (see Appendix B in Marcu \shortcite{marcu97}), that serves as a divisive boundary between sentences. Examples of these markers include {\em and, in, that, for, if, as, not, by,} and {\em but}; (2) {\bf two marker arguments}, i.e., text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) {\bf a sentence range} around the marker, which defines the length of these segments (e.g., $\pm$2 sentences).  
+These structures are represented using three components: (1) A {\bf discourse marker} from Daniel Marcu's list (see Appendix B in Marcu \citeyear{marcu97}), that serves as a divisive boundary between sentences. Examples of these markers include {\em and, in, that, for, if, as, not, by,} and {\em but}; (2) {\bf two marker arguments}, i.e., text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) {\bf a sentence range} around the marker, which defines the length of these segments (e.g., $\pm$2 sentences).  
 %
 For example, a marker feature may take the form of: 
 \code{QSEG BY OTHER SR2}, 
@@ -61,9 +61,9 @@ It is important to note that these discourse features are more expressive than f
 
 The discourse parser model (DPM) is based on the RST discourse framework~\cite{mann88}. 
 In RST, the text is segmented into a sequence of non-overlapping fragments called elementary discourse units (EDUs), and binary discourse relations recursively connect neighboring units. Most relations are {\em hypotactic}, where one of the units in the relation (the {\em nucleus}) is considered more important than the other (the {\em satellite}). A few relations are {\em paratactic}, where both participants have equal importance. In the bottom part of Figure~\ref{fig:featgen}, we show hypotactic relations as directed arrows, from the nucleus to the satellite. 
-In this work, we construct the RST discourse trees using the parser of Feng and Hirst~\shortcite{feng12}. 
+In this work, we construct the RST discourse trees using the parser of Feng and Hirst~\citeyear{feng12}. 
 
-Relying on a proper discourse framework facilitates the modeling of the numerous implicit relations that are not driven by discourse markers (see Ch. 21 in Jurafsky and Martin~\shortcite{jurafsky09}). However, this also introduces noise because discourse analysis is a complex task and discourse parsers are not perfect. 
+Relying on a proper discourse framework facilitates the modeling of the numerous implicit relations that are not driven by discourse markers (see Ch. 21 in Jurafsky and Martin~\citeyear{jurafsky09}). However, this also introduces noise because discourse analysis is a complex task and discourse parsers are not perfect. 
 To mitigate this, we used a simple feature generation strategy, which creates one feature for each individual discourse relation by concatenating the relation type with the labels of the discourse units participating in it. 
 To this end, for every relation, we extract the entire text dominated by each of its arguments, and we generate labels for the two participants in the relation using the same strategy as the DMM (based on the similarity with the question content). 
 %Note that, because of the cosine similarity normalization, the label of a discourse unit may be different from the labels of the EDUs that it dominates. This is illustrated in Figure~\ref{fig:featgen}, where the larger discourse unit ({\em ``There are ... of String.''}) is labeled \code{OTHER}, while one of the EDUs that it dominates is labeled \code{QSEG}. 
@@ -73,9 +73,9 @@ Other common relations include \code{Attribution}, \code{Contrast}, \code{Backgr
 \subsection{Lexical Semantics Model}
 \label{sec:lexicalsemantics}
 
-Inspired by the work of Yih et al.~\shortcite{yih13}, we include lexical semantics in our reranking model. 
+Inspired by the work of Yih et al.~\citeyear{yih13}, we include lexical semantics in our reranking model. 
 Several of their proposed models rely on proprietary data; here we focus on LS models that rely on open-source data and frameworks. 
-In particular, we use the recurrent neural network language model (RNNLM) of Mikolov et al.~\shortcite{mikolov13,mikolov10}.
+In particular, we use the recurrent neural network language model (RNNLM) of Mikolov et al.~\citeyear{mikolov13,mikolov10}.
 Like any language model, a RNNLM estimates the probability of observing a word given the preceding context, but, in this process, it learns word embeddings into a latent, conceptual space with a fixed number of dimensions. 
 Consequently, related words tend to have vectors that are close to each other in this space.
 

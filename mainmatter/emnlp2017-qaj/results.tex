@@ -145,7 +145,7 @@ Each of our ablated models performed significantly better than the IR baseline o
 
 \subsection{Justification Performance}
 \label{sec:justification_results}
-One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, we assessed the quality of each of the top five justifications.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  Following the methodology of Jansen et al. \shortcite{jansen2017framing}, each justification received a rating of either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
+One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, we assessed the quality of each of the top five justifications.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  Following the methodology of Jansen et al. \citeyear{jansen2017framing}, each justification received a rating of either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
 
 \begin{table}[t]
 \begin{center}
@@ -227,7 +227,7 @@ We also evaluated the justification ratings using normalized discounted cumulati
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=0.3\textwidth]{justificationChanges.png}
+\includegraphics[width=0.8\textwidth]{mainmatter/emnlp2017-qaj/justificationChanges.png}
 \caption{Number of questions for which % the IR$^{++}$ + EF + lexDisc + Emb 
 our complete model chooses a new justification at each epoch during training.  While this is for a single random seed, we see essentially identical graphs for each random initialization.}
 \label{fig:changes}

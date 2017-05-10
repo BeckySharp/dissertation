@@ -35,7 +35,7 @@
 
 Semantic drift, or the tendency for a graph traversal to drift to unrelated topics,
 constitutes a major hurdle for lexical semantic QA models.  
-This was noted recently by Fried et al.~\shortcite{fried2015higher}, who proposed an approximation of inference for QA as the traversal of a graph that connected concepts (words or lexicalized syntactic dependencies) along lexical semantic associations. While this method is robust and performs better than approaches relying on alignment or embedding models alone, it does not have a good way of keeping an inference on-context when traversing the concept association graph.
+This was noted recently by Fried et al.~\citeyear{fried2015higher}, who proposed an approximation of inference for QA as the traversal of a graph that connected concepts (words or lexicalized syntactic dependencies) along lexical semantic associations. While this method is robust and performs better than approaches relying on alignment or embedding models alone, it does not have a good way of keeping an inference on-context when traversing the concept association graph.
 Moreover, even when a correct answer is selected, these methods operate on sets of probabilities over word distributions, and are unable to provide a compelling human-readable explanation to the user as to why a given answer is correct. 
 
 To address these issues, we propose to construct multi-sentence answer justifications using a  sentence aggregation method that combines the robustness of word-level connections with sentence-level context.  

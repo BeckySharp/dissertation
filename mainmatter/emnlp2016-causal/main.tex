@@ -1,90 +1,3 @@
-%
-% File emnlp2016.tex
-%
-
-\documentclass[11pt,letterpaper]{article}
-\usepackage{emnlp2016}		
-\usepackage{times}
-\usepackage{latexsym}
-
-\usepackage{amsmath}
-\usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
-\usepackage{multirow}
-\usepackage{url}
-\usepackage{bm}
-\usepackage{amssymb}
-
-\usepackage{fixltx2e}
-\usepackage{tabularx}
-\usepackage{hyperref}
-\usepackage{graphicx}
-
-%\usepackage{algorithm}% http://ctan.org/pkg/algorithms
-%\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
-
-%\usepackage[algo2e,lined]{algorithm2e}
-%\usepackage{algorithm}
-%\usepackage{algorithmic}
-
-\usepackage{color}
-\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
-\newcommand{\note}[1]{\textcolor{red}{#1}}
-\newcommand{\svmr}{{SVM$^{rank}$}}
-\newcommand{\code}[1]{{\tt {\small #1}}}
-\newcommand{\qn}{{{\bf Q}$^\textbf{{\small N}}$}}
-\newcommand{\ssa}{{{\scriptsize $^{*}$}}}
-
-
-\DeclareMathOperator*{\argmax}{arg\,max}
-%\setlength\titlebox{6.5cm}    % Expanding the titlebox
-
-
-% Uncomment this line for the final submission:
-\emnlpfinalcopy
-
-%  Enter the EMNLP Paper ID here:
-\def\emnlppaperid{392}
-
-% To expand the titlebox for more authors, uncomment
-% below and set accordingly.
-% \addtolength\titlebox{.5in}    
-
-\newcommand\BibTeX{B{\sc ib}\TeX}
-
-
-\title{Creating Causal Embeddings for Question Answering \\with Minimal Supervision
-%\Thanks{Thanks.....}
-}
-
-% authors: Becky, Mihai, Peter, Mike, Peter C.
-
-% Author information can be set in various styles:
-% For several authors from the same institution:
-\author{Rebecca Sharp, Mihai Surdeanu, Peter Jansen, Peter Clark, \and Michael Hammond \\ University of Arizona, Allen Institute for Artificial Intelligence \\ \{bsharp, msurdeanu, pajansen, hammond\}@email.arizona.edu, PeterC@allenai.org}
-% if the names do not fit well on one line use
-%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
-% For authors from different institutions:
-% \author{Author 1 \\ Address line \\  ... \\ Address line
-%         \And  ... \And
-%         Author n \\ Address line \\ ... \\ Address line}
-% To start a seperate ``row'' of authors use \AND, as in
-% \author{Author 1 \\ Address line \\  ... \\ Address line
-%%         \AND
-%         Author 2 \\ Address line \\ ... \\ Address line \And
-%         Author 3 \\ Address line \\ ... \\ Address line}
-% If the title and author information does not fit in the area allocated,
-% place \setlength\titlebox{<new height>} right after
-% at the top, where <new height> can be something larger than 2.25in
-
-%\author{authors\\
-%  {\tt publication@emnlp2016.net}}
-%\date{}
-
-
-
-\begin{document}
-\vspace{-5mm}
-\maketitle
 
 %\twocolumn[\centering \Large \bf Creating Causal Embeddings for Question Answering \\with Minimal Supervision \par
 %~\\
@@ -94,37 +7,40 @@
 %~\\
 %]
 
-\begin{abstract}
-A common model for question answering (QA) is that a good answer is one that is closely related to the question, where relatedness is often determined using general-purpose lexical models such as word embeddings. 
-We argue that a better approach is to look for answers that are related to the question in a {\em relevant way}, according to the information need of the question,
-%We argue that a better approach is to look for answers that are related to the question in {\em the right way} \todo{"the right way" doesn't say much... Can we say something like "in a way relevant to the type of information need, or something like that?}, 
-which may be determined through task-specific embeddings. 
-With causality as a use case, we implement this insight in three steps. First, we generate causal embeddings cost-effectively by bootstrapping cause-effect pairs extracted from free text using a small set of seed patterns. Second, we train dedicated embeddings over this data, by using task-specific contexts, i.e., the context of a cause is its effect. Finally, we extend a state-of-the-art reranking approach for QA to incorporate these causal embeddings. We evaluate the causal embedding models both \emph{directly} with a casual implication task,
-% \todo{"Word similarity" makes it sound like we do lexical similarity... Can you say something causal implication?}, 
- and \emph{indirectly}, in a downstream causal QA task using data from Yahoo! Answers. We show that explicitly modeling causality improves performance in both tasks. In the QA task our best model achieves 37.3\% P@1, significantly outperforming a strong baseline by 7.7\% (relative). 
-% ms: not sure if we should discuss the differences between the 2 tasks here; we might not have space; it might dilute the message.
-
+%\begin{abstract}
+%A common model for question answering (QA) is that a good answer is one that is closely related to the question, where relatedness is often determined using general-purpose lexical models such as word embeddings. 
+%We argue that a better approach is to look for answers that are related to the question in a {\em relevant way}, according to the information need of the question,
+%%We argue that a better approach is to look for answers that are related to the question in {\em the right way} \todo{"the right way" doesn't say much... Can we say something like "in a way relevant to the type of information need, or something like that?}, 
+%which may be determined through task-specific embeddings. 
+%With causality as a use case, we implement this insight in three steps. First, we generate causal embeddings cost-effectively by bootstrapping cause-effect pairs extracted from free text using a small set of seed patterns. Second, we train dedicated embeddings over this data, by using task-specific contexts, i.e., the context of a cause is its effect. Finally, we extend a state-of-the-art reranking approach for QA to incorporate these causal embeddings. We evaluate the causal embedding models both \emph{directly} with a casual implication task,
+%% \todo{"Word similarity" makes it sound like we do lexical similarity... Can you say something causal implication?}, 
+% and \emph{indirectly}, in a downstream causal QA task using data from Yahoo! Answers. We show that explicitly modeling causality improves performance in both tasks. In the QA task our best model achieves 37.3\% P@1, significantly outperforming a strong baseline by 7.7\% (relative). 
+%% ms: not sure if we should discuss the differences between the 2 tasks here; we might not have space; it might dilute the message.
 %
-%Question answering (QA) is a difficult task, complicated by the variety of question types represented in any given question set.  In this work we propose addressing question types individually through the use of dedicated relation embeddings, and here focus on causal relations. 
-%We train causal embeddings (as well as two other popular distributional similarity models) on causal tuples extracted from free text resources with minimal supervision, using a small set of high-precision patterns.   
-%We evaluate these causal models both \emph{directly} in terms of their ability to detect causality, and \emph{indirectly}, in terms of their utility on a causal subset of Yahoo! Answers.
-%In both tasks, we show that explicitly modeling causality significantly improves performance, and in the QA task our best model achieves 37.3\% precision at one, outperforming a strong information retrieval and lexical semantic baseline by 7.7\% (relative). 
-%Importantly, we also show that the results of these two evaluations are \emph{not} identical: a given model's performance on the direct evaluation does not necessarily transfer to the more complex, real-world QA task.  
-\end{abstract}
+%%
+%%Question answering (QA) is a difficult task, complicated by the variety of question types represented in any given question set.  In this work we propose addressing question types individually through the use of dedicated relation embeddings, and here focus on causal relations. 
+%%We train causal embeddings (as well as two other popular distributional similarity models) on causal tuples extracted from free text resources with minimal supervision, using a small set of high-precision patterns.   
+%%We evaluate these causal models both \emph{directly} in terms of their ability to detect causality, and \emph{indirectly}, in terms of their utility on a causal subset of Yahoo! Answers.
+%%In both tasks, we show that explicitly modeling causality significantly improves performance, and in the QA task our best model achieves 37.3\% precision at one, outperforming a strong information retrieval and lexical semantic baseline by 7.7\% (relative). 
+%%Importantly, we also show that the results of these two evaluations are \emph{not} identical: a given model's performance on the direct evaluation does not necessarily transfer to the more complex, real-world QA task.  
+%\end{abstract}
+
+\chapter{EMNLP2016 - CAUSAL EMBEDDINGS\label{chapter:emnlp2016}}
 
 
-\input{introduction}
-\input{relatedwork}
-\input{approach}
-\input{causalextraction}
-\input{models}
-\input{directeval}
-\input{qamodel}
-\input{qa}
 
-\vspace{-1mm}
+\input{mainmatter/emnlp2016-causal/introduction}
+\input{mainmatter/emnlp2016-causal/relatedwork}
+\input{mainmatter/emnlp2016-causal/approach}
+\input{mainmatter/emnlp2016-causal/causalextraction}
+\input{mainmatter/emnlp2016-causal/models}
+\input{mainmatter/emnlp2016-causal/directeval}
+\input{mainmatter/emnlp2016-causal/qamodel}
+\input{mainmatter/emnlp2016-causal/qa}
+
+%\vspace{-1mm}
 \section{Conclusion}
-\vspace{-1mm}
+%\vspace{-1mm}
 We presented a framework for creating customized embeddings tailored to the information need of causal questions.  We trained three popular models (embedding, alignment, and CNN) using causal tuples extracted with minimal supervision by bootstrapping cause-effect pairs from free text, and evaluated their performance both directly (i.e., the degree to which they capture causality), and indirectly (i.e., their real-world utility on a high-level question answering task). 
 
 
@@ -153,7 +69,7 @@ program under ARO contract W911NF-14-1-0395.
 
 
 \newpage
-\bibliography{emnlp2016}
-\bibliographystyle{emnlp2016}
+%\bibliography{emnlp2016}
+%\bibliographystyle{emnlp2016}
 
-\end{document}
+%\end{document}

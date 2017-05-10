@@ -1,7 +1,7 @@
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{ArchDiagram.png}
+\includegraphics[width=0.8\textwidth]{mainmatter/emnlp2017-qaj/ArchDiagram.png}
 \caption{ Detailed architecture of the model's scoring component.  
 The question, candidate answer, and justification %\edit{(previously obtained through max-pooling)}
 % bs: no - the max pooling happens at the end, after the scoring. 
@@ -130,13 +130,11 @@ $s(d_i)$ for $d_i \in D$, we rank the answer candidates using two methods:
 \begin{itemize}
 \item by the maximum retrieved document score for each candidate, and  
 \item by the weighted sum of all retrieved document scores\footnote{Weighted sum was based on the IR scores used in the winning Kaggle system from user Cardal (\scriptsize{ \url{https://github.com/Cardal/Kaggle_AllenAIscience}})}:
-\begin{footnotesize}
-\vspace{-5mm}
+
 \begin{equation}
 \sum_{d_i \in D} \dfrac{1}{i} s(d_i) 
 \end{equation}
-\vspace{-7mm}
-\end{footnotesize} 
+
 \end{itemize}
 We repeat this process using an unboosted query as well, for a total of four rankings of the answer candidates.  
 We then use these rankings to make a set of four reciprocal rank features,  IR$^{++}_0$, ..., IR$^{++}_3$, for each answer candidate (i.e., IR$^{++}_0 = 1.0$ for the top-ranked candidate in the first ranking,  IR$^{++}_0 = 0.5$ for the next candidate, etc.)
@@ -149,14 +147,12 @@ We then use these rankings to make a set of four reciprocal rank features,  IR$^
 \label{sec:nn_model}
 
 As shown in Figure \ref{fig:arch}, the extracted features for each candidate justification are concatenated and passed into a fully-connected feed-forward neural network (NN).  The output layer is a single node representing the justification score.  We then use max-pooling over these scores to select the current best justification for the answer candidate, and use its score as the score for the answer candidate itself.  For training, the correct answer for a given question is paired with each of the incorrect answers, and each are scored as above.  We compute the pair-wise margin ranking loss for each training pair:
-\vspace{-2mm}
 
-\begin{footnotesize}
 \begin{equation}
 L = \max(0, m - F(a^{+}) + F(a^{-}))
 \end{equation}
-%\vspace{-2mm} 
-\end{footnotesize}where $F(a^+)$ and $F(a^-)$ are the model scores for a correct and incorrect answer candidate and $m$ is the margin, and backpropagate the gradients.
+
+where $F(a^+)$ and $F(a^-)$ are the model scores for a correct and incorrect answer candidate and $m$ is the margin, and backpropagate the gradients.
 At testing time, we use the trained model to score each answer choice (again using the maximum justification score) and select the highest-scoring.
 
 As we are interested in not only correctly answering questions, but also selecting valid justification for those answers, we keep track of the scores of \emph{all} justifications and use this information to return the top $k$ justifications for each answer choice.  These are evaluated along with the answer selection performance in Section \ref{sec:results}.

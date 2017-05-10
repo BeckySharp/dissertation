@@ -67,33 +67,33 @@ by \namecite{dewey2}.
 \verb|\namecite[page 15]{dewey4}| & \namecite[page 15]{dewey4}
 \end{tabular}\end{verse}
 
-The \verb|\shortcite| macro does not place the authors' names at all.
+The \verb|\citeyear| macro does not place the authors' names at all.
 This is useful if the authors' names occur in the sentence, but not
 next to where the citation itself should be.  Dewey and Cheatham first
-used this method \shortcite{dewey2}.  Here are examples of the use of 
-\verb|\shortcite| in its various forms.
+used this method \citeyear{dewey2}.  Here are examples of the use of 
+\verb|\citeyear| in its various forms.
 
 \begin{verse}\begin{tabular}{ll}
-\verb|\shortcite{dewey1}| & \shortcite{dewey1}\\
-\verb|\shortcite{dewey2}| & \shortcite{dewey2}\\
-\verb|\shortcite{dewey3}| & \shortcite{dewey3}\\
-\verb|\shortcite{dewey4}| & \shortcite{dewey4}\\
-\verb|\shortcite[page 15]{dewey1}| & \shortcite[page 15]{dewey1}\\
-\verb|\shortcite[page 15]{dewey2}| & \shortcite[page 15]{dewey2}\\
-\verb|\shortcite[page 15]{dewey3}| & \shortcite[page 15]{dewey3}\\
-\verb|\shortcite[page 15]{dewey4}| & \shortcite[page 15]{dewey4}
+\verb|\citeyear{dewey1}| & \citeyear{dewey1}\\
+\verb|\citeyear{dewey2}| & \citeyear{dewey2}\\
+\verb|\citeyear{dewey3}| & \citeyear{dewey3}\\
+\verb|\citeyear{dewey4}| & \citeyear{dewey4}\\
+\verb|\citeyear[page 15]{dewey1}| & \citeyear[page 15]{dewey1}\\
+\verb|\citeyear[page 15]{dewey2}| & \citeyear[page 15]{dewey2}\\
+\verb|\citeyear[page 15]{dewey3}| & \citeyear[page 15]{dewey3}\\
+\verb|\citeyear[page 15]{dewey4}| & \citeyear[page 15]{dewey4}
 \end{tabular}\end{verse}
 
 
-It doesn't make sense to use \verb|\namecite| or \verb|\shortcite|
+It doesn't make sense to use \verb|\namecite| or \verb|\citeyear|
 with multiple citations.  The output would look like this:
 
 \begin{verse}
 \begin{tabular}{ll}
 \verb|\namecite{dewey2,cheatham,howe}| \\
   \qquad  \namecite{dewey2,cheatham,howe}\\
-\verb|\shortcite{dewey2,cheatham,howe}| \\
-  \qquad  \shortcite{dewey2,cheatham,howe}
+\verb|\citeyear{dewey2,cheatham,howe}| \\
+  \qquad  \citeyear{dewey2,cheatham,howe}
 \end{tabular}
 \end{verse}
 

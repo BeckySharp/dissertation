@@ -39,6 +39,17 @@
 					% and the \bibliographystyle command below.  Be warned
 					% that you may need to do a little hacking to get
 					% the REFERENCES item to show up in your TOC.
+\usepackage{latexsym}
+
+\usepackage{amsmath}
+\usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{fixltx2e}
+\usepackage{tabularx}
+%\usepackage{hyperref}
 
 % Compatibility with the AASTEX package 
 % of the American Astronomical Society.
@@ -51,7 +62,7 @@
 % The following is a nice font set:
 %\usepackage{mathtime}			% Times for letters; Belleek math.
 %
-%\usepackage{amsmath}			% AMS Math (advanced math typesetti`ng)
+%\usepackage{amsmath}			% AMS Math (advanced math typesetting)
 %\usepackage{lscape}			% Used for making fitting large tables in by putting them landscape
 %\usepackage{refs}			
 %
@@ -61,6 +72,16 @@
 % cross-referenced.
 \usepackage[bookmarks,colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
 
+
+\usepackage{color}
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\note}[1]{\textcolor{red}{#1}}
+\newcommand{\svmr}{{SVM$^{rank}$}}
+\newcommand{\code}[1]{{\tt {\small #1}}}
+\newcommand{\qn}{{{\bf Q}$^\textbf{{\small N}}$}}
+\newcommand{\ssa}{{{\scriptsize $^{*}$}}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 % Set up some values.
 \completetitle{My Lovely Dissertation}
@@ -117,6 +138,8 @@
 
 % Include the various chapters
 \include{mainmatter/introduction}
+\input{mainmatter/emnlp2016-causal/main}
+\input{mainmatter/emnlp2017-qaj/main}
 
 % Include the various appendices
 \appendix

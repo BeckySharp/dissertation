@@ -6,7 +6,7 @@
 %\vspace{-2mm}
 
 
-We tested our approach in two different domains, open-domain and cellular biology. For consistency we use the same corpora as Jansen et al.~\shortcite{jansen14}, which are described briefly here. 
+We tested our approach in two different domains, open-domain and cellular biology. For consistency we use the same corpora as Jansen et al.~\citeyear{jansen14}, which are described briefly here. 
 
 {\flushleft {\bf Yahoo! Answers (YA):}}  Ten thousand open-domain \emph{how} questions were randomly chosen from the Yahoo! Answers\footnote{\url{http://answers.yahoo.com}} community question answering corpus and divided: 50\% for training, 25\% for development, and 25\% for test.  Candidate answers for a given question are selected from the corresponding answers proposed by the community (each question has an average of 9 answers).
 
@@ -17,7 +17,7 @@ We tested our approach in two different domains, open-domain and cellular biolog
 %\label{sources}
 
 {\flushleft {\bf Alignment Corpora}}: To train the alignment models we generated alignment pairs from two different resources: Annotated Gigaword \cite{Napoles2012} for YA, and the textbook for Bio.  Each was discourse parsed with the RST discourse parser described in Section~\ref{sec:approach}, which is implemented in the FastNLPProcessor toolkit\footnote{\url{http://github.com/sistanlp/processors}}, using the MaltParser\footnote{\url{http://www.maltparser.org/}} for syntactic analysis.
-% and reimplements the discourse model of Feng and Hirst~\shortcite{feng12}, using solely features extracted from dependency syntax.
+% and reimplements the discourse model of Feng and Hirst~\citeyear{feng12}, using solely features extracted from dependency syntax.
 
 
 %To explore the relationship between amount of available training data and performance, after each resource was discourse parsed it was divided into samples of exponentially increasing size.  For AGiga, there were 12 sizes ranging from one document to 10,000 and for the textbook, there were 10 sizes ranging from one subsection up to the entire book (2686 subsections).  Additionally, there were 10 samples for each size to reduce the margin of error. 
@@ -74,7 +74,7 @@ CR + RNNLM  		& 28.92		& +2.39\% 			\\
 \end{center}
 \end{table}
 \end{comment}
-Figure \ref{fig:performance} shows the performance of the discourse models against the number of documents used to train the alignment model.\footnote{For space reasons the graph for Bio \emph{how} is not shown, but the pattern is essentially identical to Bio \emph{why}.}   We used the standard implementation for P@1 ~\cite{manning08} with the adaptations for Bio described in Jansen et al.~\shortcite{jansen14}. We address the following questions.
+Figure \ref{fig:performance} shows the performance of the discourse models against the number of documents used to train the alignment model.\footnote{For space reasons the graph for Bio \emph{how} is not shown, but the pattern is essentially identical to Bio \emph{why}.}   We used the standard implementation for P@1 ~\cite{manning08} with the adaptations for Bio described in Jansen et al.~\citeyear{jansen14}. We address the following questions.
 %, and compare against the CR baseline and RNNLM-based reranker.
 
 \paragraph{How does the performance of the RST and SEQ models compare?}
@@ -83,12 +83,12 @@ Comparing the two principal alignment models, the RST-based model significantly 
 
 \paragraph{How does the performance of the RST model compare to a model trained on in-domain pairs?}
 
-Both the RST and SEQ results for YA are {\em higher} than that of an alignment model trained on explicit in-domain question-answer pairs. Fried et. al \shortcite{fried15} trained an identical alignment model using approximately 65k QA pairs from the YA corpus, and report a performance of 27.24\% P@1, or nearly 2 points lower than our model trained using 10,000 Gigaword documents. This is an encouraging result, which further demonstrates that: (a) discourse analysis can be exploited to generate artificial semi-structured data for alignment, and (b) the sequential model, which also outperforms Fried et. al, can be used as a reasonable proxy for discourse when a parser is not available. 
+Both the RST and SEQ results for YA are {\em higher} than that of an alignment model trained on explicit in-domain question-answer pairs. Fried et. al \citeyear{fried15} trained an identical alignment model using approximately 65k QA pairs from the YA corpus, and report a performance of 27.24\% P@1, or nearly 2 points lower than our model trained using 10,000 Gigaword documents. This is an encouraging result, which further demonstrates that: (a) discourse analysis can be exploited to generate artificial semi-structured data for alignment, and (b) the sequential model, which also outperforms Fried et. al, can be used as a reasonable proxy for discourse when a parser is not available. 
 
 
 \paragraph{How does the performance of the RST model compare to previous work?}
 
-Comparing our work to Jansen et al. \shortcite{jansen14}, the most relevant prior work, we notice two trends.
+Comparing our work to Jansen et al. \citeyear{jansen14}, the most relevant prior work, we notice two trends.
 First, our discourse-based alignment models outperform their CR + RNNLM model, which peaks at 26.6\% P@1 for YA and 31.7\% for Bio \emph{why}. While some of this difference can be assigned to implementation differences (e.g., we consider only content words for both alignment and RNNLM, where they used all words), this result again emphasizes the value of our approach.
 % Second, while our content-filtered RNNLM outperforms their unfiltered model\footnote{RNNLM performance is slightly less in Bio as we use only the textbook for training.}, when using equal amounts of training data, our alignment model trained using discourse still outperforms the RNNLM until the performance of all models ultimately plateaus in knowledge-rich environments.  
 Second, the partially lexicalized discourse structures used by Jansen et. al to identify explanatory text in candidate answers perform better than our approach, which relies solely on lexicalized alignment. However, we expect that our two approaches are complementary, because they address different aspects of the QA task (structure vs. similarity).
@@ -150,7 +150,7 @@ In open domains, alignments such as {\em apple -- \mbox{orchard}} may interfere 
 %Not demonstrated with our experimental design, in (hidden for review) the performance of the RNNLM is also shown to plateau around 30\% P@1, even when all of gigaword is used to train the vectors.  
 %In the highly technical Bio domain, both the RST and SEQ alignment models far outperform the RNNLM across all sample sizes (20.38\%, 18.53\% and 2.39\% P@1 relative over the CR baseline, respectively).  In both domains, the deep RST model using both intersentence and intrasentence associations outperforms the shallow SEQ model using only intersentence associations.
 
-%In comparison to previous work in Jansen et al \shortcite{jansen14}, for YA our final RNNLM performance is higher due to implementational differences (29.11\% P@1 from 10,000 documents compared to their 26.57\% using all of gigaword).  In Bio, our final RNNLM performance is lower (28.92\% P@1 compared to their 31.73\%) because we trained our RNNLM only on the in-domain textbook, as opposed to the expanded corpus they used.  Both the RST and SEQ models, however, performed better than their RNNLM (34.00\% and 33.47\% P@1 respectively), demonstrating that by using our approach to impose structure for alignment we can attain better results with less data.  Additionally, as we don't explicitly use discourse features, we expect that the performance demonstrated here would be orthogonal to that of their deep and shallow discourse models.
+%In comparison to previous work in Jansen et al \citeyear{jansen14}, for YA our final RNNLM performance is higher due to implementational differences (29.11\% P@1 from 10,000 documents compared to their 26.57\% using all of gigaword).  In Bio, our final RNNLM performance is lower (28.92\% P@1 compared to their 31.73\%) because we trained our RNNLM only on the in-domain textbook, as opposed to the expanded corpus they used.  Both the RST and SEQ models, however, performed better than their RNNLM (34.00\% and 33.47\% P@1 respectively), demonstrating that by using our approach to impose structure for alignment we can attain better results with less data.  Additionally, as we don't explicitly use discourse features, we expect that the performance demonstrated here would be orthogonal to that of their deep and shallow discourse models.
 
 %While performance steadily increases with the size of training data, for both alignment and RNNLM models we asymptote at approximately 30\% P@1 and 10,000 training documents for YA (while we are limited by the available training data for Bio). 
 

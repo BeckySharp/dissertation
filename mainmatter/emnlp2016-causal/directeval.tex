@@ -3,7 +3,7 @@
 
 \begin{figure*}[th!]
 \begin{center}
-\includegraphics[width=0.50\textwidth]{direct2.pdf} % {rpcurves_all.png}
+\includegraphics[width=\textwidth]{mainmatter/emnlp2016-causal/direct2.pdf} % {rpcurves_all.png}
 \vspace{-3mm}
 \caption{{\footnotesize Precision-recall curve showing the ability of each model to rank causal pairs above non-causal pairs. For clarity, we do not plot cEmbedNoise, which performs worse than cEmbedBiNoise. The Look-up model has no data points beyond the 35\% recall point.}}
 \vspace{-4mm}
@@ -17,7 +17,7 @@
 
 %Before we discuss the utility of these models for causal QA, we implement a {\em direct} evaluation
 We begin the assessment of our models with a {\em direct} evaluation to determine whether or not the proposed approaches capture causality better than general-purpose word embeddings and whether their robustness improves upon a simple database look-up.
-For this evaluation, we follow the protocol of Levy and Goldberg~\shortcite{levy2014dependency}.  
+For this evaluation, we follow the protocol of Levy and Goldberg~\citeyear{levy2014dependency}.  
 In particular, we create a collection of word pairs, half of which are causally related, with the other half consisting of other relations. 
 These pairs are then ranked by our models and several baselines, with the goal of ranking the causal pairs above the others. 
 The embedding models rank the pairs using the cosine similarity between the target vector for the causal word and the context vector of the effect word.  The alignment model ranks pairs using the probability $P(\text{Effect}|\text{Cause})$ given by IBM Model 1, and the CNN ranks pairs by the value of the output returned by the network.
