@@ -1,8 +1,8 @@
 \section{Experiments}
-\label{sec:experiments}
+\label{sec-naacl2015:experiments}
 
 %\subsection{Data}
-%\label{sec:data}
+%\label{sec-naacl2015:data}
 %\vspace{-2mm}
 
 
@@ -12,11 +12,11 @@ We tested our approach in two different domains, open-domain and cellular biolog
 
 {\flushleft {\bf Biology QA (Bio):}} 183 \emph{how} and 193 \emph{why}  questions in the cellular biology domain were hand-crafted by a domain expert, and paired with gold answers in the Campbell's Biology textbook~\cite{Reece:2011}.  Each paragraph in the textbook was considered as a candidate answer.  As there were few questions, five fold cross-validation was used with three folds for training, one for development, and one for test.
 
-%In both set-ups, candidate answers were assigned a candidate retrieval (CR) score based on the lexical similarity of the question to the candidate answer.~\footnote{In the Bio task, the CR also incorporated a similarity between the question and the section containing the candidate answer paragraph.}  That CR score served as both a strong baseline for the models (when used alone) as well as an additional feature to be used alongside the model features described in section \ref{sec:models}.
+%In both set-ups, candidate answers were assigned a candidate retrieval (CR) score based on the lexical similarity of the question to the candidate answer.~\footnote{In the Bio task, the CR also incorporated a similarity between the question and the section containing the candidate answer paragraph.}  That CR score served as both a strong baseline for the models (when used alone) as well as an additional feature to be used alongside the model features described in section \ref{sec-naacl2015:models}.
 %\subsection{Sources for Alignment}
 %\label{sources}
 
-{\flushleft {\bf Alignment Corpora}}: To train the alignment models we generated alignment pairs from two different resources: Annotated Gigaword \cite{Napoles2012} for YA, and the textbook for Bio.  Each was discourse parsed with the RST discourse parser described in Section~\ref{sec:approach}, which is implemented in the FastNLPProcessor toolkit\footnote{\url{http://github.com/sistanlp/processors}}, using the MaltParser\footnote{\url{http://www.maltparser.org/}} for syntactic analysis.
+{\flushleft {\bf Alignment Corpora}}: To train the alignment models we generated alignment pairs from two different resources: Annotated Gigaword \cite{Napoles2012} for YA, and the textbook for Bio.  Each was discourse parsed with the RST discourse parser described in Section~\ref{sec-naacl2015:approach}, which is implemented in the FastNLPProcessor toolkit\footnote{\url{http://github.com/sistanlp/processors}}, using the MaltParser\footnote{\url{http://www.maltparser.org/}} for syntactic analysis.
 % and reimplements the discourse model of Feng and Hirst~\citeyear{feng12}, using solely features extracted from dependency syntax.
 
 
@@ -27,7 +27,7 @@ We tested our approach in two different domains, open-domain and cellular biolog
 %{\flushleft {\bf Campbells}}:For Bio, Campbell's textbook was divided at the subsection level, discarding any subsection consisting of only a single sentence, for a total of 2686 subsections.  These subsections were shuffled to generate 10 random permutations and 10 samples exponentially increasing in number of subsections were made from each.  
 
 \subsection{Results and Discussion}
-\label{sec:results}
+\label{sec-naacl2015:results}
 
 \begin{figure}[t!]
 \begin{center}
@@ -164,7 +164,7 @@ In open domains, alignments such as {\em apple -- \mbox{orchard}} may interfere 
 
 %space{-1mm}
 \section{Conclusion}
-\label{sec:conclusion}
+\label{sec-naacl2015:conclusion}
 %space{-2mm}
 
 We propose two inexpensive methods for training alignment models using solely free text, by generating artificial question-answer pairs from discourse structures. 

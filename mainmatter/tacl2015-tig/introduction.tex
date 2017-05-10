@@ -1,5 +1,5 @@
 \section{Introduction}
-\label{sec:introduction}
+\label{sec-cl2017:introduction}
 
 
 To encourage a emphasis on the task of explainable inference for question answering (QA), Clark~\citeyear{clark:2015} introduced the Aristo challenge, a QA task focused on developing methods of automated inference capable of passing standardized elementary school science exams, while also providing human-readable explanations (or justifications) for those answers.  Science exams are an important proving ground for QA because inference is often required to arrive at a correct answer, and, commonly, incorrect answers that are high semantic associates of either the question or correct answer are included to ``lure'' students (or automated methods) away from the correct response.
@@ -18,7 +18,7 @@ In an analysis of three years of standardized science exams, Clark et al.~\citey
 % Justification example (IR)
 %
 \begin{table*}[t]
-\caption{ \label{font-table} 
+\caption{ 
 %Kinds of inference identified by Clark et al.~\citeyear{clark:2013}. Retrieval-based questions (including \emph{is-a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies, dictionaries, and property knowledge databases. 
 Categories of questions and their relative frequencies as identified by Clark et al.\protect \citeyear{clark:2013}. Retrieval-based questions (including \emph{is--a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies and dictionaries. 
 More complex general inference questions make use of either simple inference rules that apply to a particular situation, a knowledge of causality, or a knowlege of simple processes (such as \emph{solids melt when heated}).
@@ -110,9 +110,9 @@ We evaluate our system on a large corpus of 1,000 elementary science exam questi
 
 \end{enumerate}
 
-The paper is structured as follows. We review related work in Section~\ref{sec:relatedwork}. 
-We introduce the overall architecture of our QA system in Section~\ref{sec:approach}. We describe our approach of identifying which words in the question are relevant for inference in Section~\ref{sec:focuswords}. Building upon this knowledge, in Section~\ref{sec:tag} we introduce text aggregation graphs (TAGs) as the underlying representation for multisentence justifications, and characterize the types of connections captured by TAGs in Section~\ref{sec:scoring}. 
- In Section~\ref{sec:perceptron} we introduce our latent-variable ranking perceptron, which jointly learns to identify good justifications and correct answers. Sections~\ref{sec:experiments},~\ref{sec:discussion}, and~\ref{sec:erroranalysis} empirically demonstrate performance, discuss the results, and analyze the error classes observed, respectively. We conclude in Section~\ref{sec:conclusion}. 
+The paper is structured as follows. We review related work in Section~\ref{sec-cl2017:relatedwork}. 
+We introduce the overall architecture of our QA system in Section~\ref{sec-cl2017:approach}. We describe our approach of identifying which words in the question are relevant for inference in Section~\ref{sec-cl2017:focuswords}. Building upon this knowledge, in Section~\ref{sec-cl2017:tag} we introduce text aggregation graphs (TAGs) as the underlying representation for multisentence justifications, and characterize the types of connections captured by TAGs in Section~\ref{sec-cl2017:scoring}. 
+ In Section~\ref{sec-cl2017:perceptron} we introduce our latent-variable ranking perceptron, which jointly learns to identify good justifications and correct answers. Sections~\ref{sec-cl2017:experiments},~\ref{sec-cl2017:discussion}, and~\ref{sec-cl2017:erroranalysis} empirically demonstrate performance, discuss the results, and analyze the error classes observed, respectively. We conclude in Section~\ref{sec-cl2017:conclusion}. 
 
 
 %-- Other

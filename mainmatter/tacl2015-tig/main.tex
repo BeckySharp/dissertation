@@ -1,103 +1,64 @@
+%\usepackage{placeins}
+%\usepackage{times}
+%\usepackage{latexsym}
+%\usepackage{amsmath}
+%\usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
+%\usepackage{multirow}
+%\usepackage{url}
+%\usepackage{bm}
+%\usepackage{amssymb}
 %
-% File acl2012.tex
+%\usepackage{fixltx2e}
+%\usepackage{tabularx}
+%\usepackage{hyperref}
+%\usepackage{graphicx}
 %
-% Contact: Maggie Li (cswjli@comp.polyu.edu.hk), Michael White (mwhite@ling.osu.edu)
-%%
-%% Based on the style files for ACL2008 by Joakim Nivre and Noah Smith
-%% and that of ACL2010 by Jing-Shin Chang and Philipp Koehn
+%%\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+%%\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+%
+%%\usepackage[algo2e,lined]{algorithm2e}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%
+%\usepackage{color}
+%\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+%\newcommand{\note}[1]{\textcolor{red}{#1}}
+%\newcommand{\svmr}{{SVM$^{rank}$}}
+%\newcommand{\code}[1]{{\tt {\small #1}}}
+%\newcommand{\qn}{{{\bf Q}$^\textbf{{\small N}}$}}
+%\newcommand{\ssa}{{{\scriptsize $^{*}$}}}
 
 
-%\documentclass[11pt]{article}
-\documentclass[fullname]{clv2}
-%\usepackage{acl2012}
+%\runningtitle{Framing QA as Creating and Ranking Intersentence Answer Justifications}
 
-
-\usepackage{placeins}
-\usepackage{times}
-\usepackage{latexsym}
-\usepackage{amsmath}
-\usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
-\usepackage{multirow}
-\usepackage{url}
-\usepackage{bm}
-\usepackage{amssymb}
-
-\usepackage{fixltx2e}
-\usepackage{tabularx}
-\usepackage{hyperref}
-\usepackage{graphicx}
-
-%\usepackage{algorithm}% http://ctan.org/pkg/algorithms
-%\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
-
-%\usepackage[algo2e,lined]{algorithm2e}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-
-\usepackage{color}
-\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
-\newcommand{\note}[1]{\textcolor{red}{#1}}
-\newcommand{\svmr}{{SVM$^{rank}$}}
-\newcommand{\code}[1]{{\tt {\small #1}}}
-\newcommand{\qn}{{{\bf Q}$^\textbf{{\small N}}$}}
-\newcommand{\ssa}{{{\scriptsize $^{*}$}}}
-
-
-\DeclareMathOperator*{\argmax}{arg\,max}
-%\setlength\titlebox{6.5cm}    % Expanding the titlebox
-
-\historydates{Submission received: 24th November, 2015; Revised version received: 22nd August, 2016; Accepted for publication: 28th November, 2016}
-
-\issue{vv}{nn}{yyyy}
-
-%\dochead{Document Head}
-
-\runningtitle{Framing QA as Creating and Ranking Intersentence Answer Justifications}
-
-\runningauthor{Jansen et al.}
+%\runningauthor{Jansen et al.}
 %Kinds of inference identified by Clark et al.~\citeyear{clark:2013}. Retrieval-based questions (including \emph{is-a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies, dictionaries, and property knowledge databases. 
 
-\begin{document}
 
-\title{Framing QA as Building and Ranking Intersentence Answer Justifications}
+%\title{Framing QA as Building and Ranking Intersentence Answer Justifications}
 
 %\author{Another Author\thanks{thanks}}
-\author{Peter Jansen\thanks{School of Information, University of Arizona, Tucson, AZ, 85721. E-mail: pajansen@email.arizona.edu}}
-\affil{University of Arizona}
-%
-\author{Rebecca Sharp\thanks{Department of Linguistics, University of Arizona, Tucson, AZ, 85721.}}
-\affil{University of Arizona}
-%
-\author{Mihai Surdeanu\thanks{Department of Computer Science, University of Arizona, Tucson, AZ, 85721.}}
-\affil{University of Arizona}
-%
-\author{Peter Clark\thanks{Allen Institute for Artificial Intelligence, 2157 N Northlake Way Suite 110, Seattle, WA 98103}}
-\affil{Allen Institute for Artificial Intelligence}
 
-\maketitle
+%\begin{abstract}
+%We propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces compelling human-readable justifications for why those answers are correct. 
+%Our method first identifies the actual information need in a question using psycholinguistic concreteness norms, then uses this information need to construct answer justifications by aggregating multiple sentences from different knowledge bases using syntactic and lexical information.  We then jointly rank answers and their justifications using a reranking perceptron that treats justification quality as a latent variable.  We evaluate our method on 1,000 multiple-choice questions from elementary school science exams, and empirically demonstrate that it performs better than several strong baselines, including neural network approaches. Our best configuration answers 44\% of the questions correctly, where the top justifications for 57\% of these correct answers contain a compelling human-readable justification that explains the inference required to arrive at the correct answer.  We include a detailed characterization of the justification quality for both our method and a strong baseline, and show that information aggregation is key to addressing the information need in complex questions. 
+%\end{abstract}
 
-\begin{abstract}
-We propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces compelling human-readable justifications for why those answers are correct. 
-Our method first identifies the actual information need in a question using psycholinguistic concreteness norms, then uses this information need to construct answer justifications by aggregating multiple sentences from different knowledge bases using syntactic and lexical information.  We then jointly rank answers and their justifications using a reranking perceptron that treats justification quality as a latent variable.  We evaluate our method on 1,000 multiple-choice questions from elementary school science exams, and empirically demonstrate that it performs better than several strong baselines, including neural network approaches. Our best configuration answers 44\% of the questions correctly, where the top justifications for 57\% of these correct answers contain a compelling human-readable justification that explains the inference required to arrive at the correct answer.  We include a detailed characterization of the justification quality for both our method and a strong baseline, and show that information aggregation is key to addressing the information need in complex questions. 
-\end{abstract}
+\chapter{CL2017 - TAG\label{chapter:cl2017}}
 
+\input{mainmatter/tacl2015-tig/introduction}
+\input{mainmatter/tacl2015-tig/relatedwork}
+\input{mainmatter/tacl2015-tig/approach}
+\input{mainmatter/tacl2015-tig/focuswords}
+\input{mainmatter/tacl2015-tig/tig}
+\input{mainmatter/tacl2015-tig/perceptron}
+\input{mainmatter/tacl2015-tig/results}
+\input{mainmatter/tacl2015-tig/discussion}
+\input{mainmatter/tacl2015-tig/erroranalysis}
+\input{mainmatter/tacl2015-tig/conclusion}
 
+%\newpage
+%\starttwocolumn
+%\bibliographystyle{fullname}
+%\bibliography{refs}
 
-\input{introduction}
-\input{relatedwork}
-\input{approach}
-\input{focuswords}
-\input{tig}
-\input{perceptron}
-\input{results}
-\input{discussion}
-\input{erroranalysis}
-\input{conclusion}
-
-\newpage
-\starttwocolumn
-\bibliographystyle{fullname}
-\bibliography{refs}
-
-
-\end{document}

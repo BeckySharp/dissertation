@@ -1,5 +1,5 @@
 \section{Focus Word Extraction}
-\label{sec:focuswords}
+\label{sec-cl2017:focuswords}
 
 
 %
@@ -93,7 +93,7 @@ To create an artificial separation between focus words and the less relevant wor
 Finally, list words, the most important category, receive a uniform score one higher than focus words.  The scores of all words are converted into weights by normalizing the scores to sum to one. 
 An example of the scoring process is shown in Table~\ref{tab:focusexample}. 
 
-It is important to note that the proposed focus word extraction algorithm is simple and leaves considerable room for improvement. We hypothesize that better algorithms could be implemented by switching to a learning-based approach. However, the simple unsupervised algorithm proposed requires no data annotations, and it captures the crucial intuition that some words in the question  contribute more towards the overall information need than others.  We demonstrate that this has a considerable impact on the performance of our overall QA system in the ablation studies discussed in Section~\ref{sec:controls}.
+It is important to note that the proposed focus word extraction algorithm is simple and leaves considerable room for improvement. We hypothesize that better algorithms could be implemented by switching to a learning-based approach. However, the simple unsupervised algorithm proposed requires no data annotations, and it captures the crucial intuition that some words in the question  contribute more towards the overall information need than others.  We demonstrate that this has a considerable impact on the performance of our overall QA system in the ablation studies discussed in Section~\ref{sec-cl2017:controls}.
 
 
 

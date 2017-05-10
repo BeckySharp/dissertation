@@ -1,5 +1,5 @@
 \section{Learning Model}
-\label{sec:perceptron}
+\label{sec-cl2017:perceptron}
 
 We perform answer selection by focusing on ranking answer {\em justifications} rather then actual answers. 
 Our algorithm (detailed in Algorithm \ref{alg:perceptron}) determines the best answer to a given question by first finding the highest-scoring TAG (i.e., justification) out of all the TAGs for each of its candidate answers, and then selecting the corresponding answer candidate.  
@@ -9,7 +9,7 @@ We address this issue with a reranking perceptron~\cite{Shen:Joshi:2005,Surdeanu
 During training, we take advantage of the assumption that, with enough knowledge coverage, the best TAG for a correct answer will be better than the best TAG for an incorrect one.  As a result, our algorithm optimizes two goals jointly: choosing a good answer for a given question, and justifying it with a human-readable TAG that connects sentences from our knowledge bases.
 
 \subsection {Learning Algorithm}
-\label{sec:model}
+\label{sec-cl2017:model}
 
 The input to the reranking algorithm consists of a corpus of $n$ training questions, $\boldsymbol{\mathcal{Q}}$, where each $q_i \in \boldsymbol{\mathcal{Q}}$ has a set of $m$ candidate answers, $\boldsymbol{A}$ (in the particular case of the multiple choice test, these are the four multiple choice answers).  Each $a_j \in \boldsymbol{A}$ for a given $q_i$ has a set of TAGs, $\boldsymbol{X_{i,j}}$, which connect $q_i$ to $a_j$.  
 Crucially, for a correct answer, we assume that there is {\em at least one} valid TAG $x_c \in \boldsymbol{X_{i,j}}$, which justifies the correctness of the chosen answer. This assumption is similar to the one made by Hoffmann et al.~\citeyear{hoffmann2011knowledge}, who assumed that, for a binary relation extraction task, for each training relation between two entities, $e_1$ and $e_2$, there exists at least one correct sentence that supports the extraction of the given relation among the sentences that contain both $e_1$ and $e_2$.
@@ -32,7 +32,7 @@ Given the functions $P$ and $F$ that control the latent operation of choosing va
 
 The fundamental operation here is thus the implementation of $P$. For their classification task, Hoffman et al. implement this function as an edge-cover problem, which guarantees that the overall score for the correct label (similar to our $F$ function) is maximized and at least one sentence supports the correct classification.  
 For our reranking task, we found that a conservative interpretation of this {\em at least one} idea, where {\em exactly} one justification is chosen, performed the best.\footnote{In fact, we found that performance consistently dropped as the number of justifications chosen by $P$ increased.} That is, $P$ returns only the top TAG with the highest score according to the dot product with the current $\boldsymbol{\Theta}$. 
-We discuss the other extreme, i.e., using all TAGs, in Section \ref{sec:controls} (when taken to this level, the latent layer is essentially disregarded entirely, assuming that each TAG for a correct answer is correct, and that each TAG for an incorrect answer is incorrect).  As discussed there, this performed far worse.
+We discuss the other extreme, i.e., using all TAGs, in Section \ref{sec-cl2017:controls} (when taken to this level, the latent layer is essentially disregarded entirely, assuming that each TAG for a correct answer is correct, and that each TAG for an incorrect answer is incorrect).  As discussed there, this performed far worse.
 
 
 %\begin{algorithm}[t]

@@ -1,11 +1,11 @@
 \section{Error Analysis}
-\label{sec:erroranalysis}
+\label{sec-cl2017:erroranalysis}
 
 %
 % Connection Types in Correct vs Incorrect Answers
 %
 \begin{table}[t]
-\caption{{ \label{font-table} Proportion of good justifications with a given number of connecting word categories (Q, A, X) for both correct and incorrect answers. (Top 6) }}
+\caption{{ Proportion of good justifications with a given number of connecting word categories (Q, A, X) for both correct and incorrect answers. (Top 6) }}
 \small
 \label{tab:errorconnectiontypes}
 \begin{center}
@@ -28,10 +28,10 @@
 \end{center}
 \end{table}
 
-At a high-level, our sentence aggregation model can be thought of as a system for building and evaluating answer justifications.  When questions are answered incorrectly, it is unclear whether the system was unable to \emph{build} a good justification for the correct answer, or unable to \emph{detect} a good justification that was successfully built.  To examine this, in addition to evaluating justification quality for correct answers, we also evaluated the top six justifications for 100 questions that the TAG system answered incorrectly.  We investigated the type of TAG patterns in the correct justifications  (from Section \ref{sec:characterizing}), as well as the kinds of inference required for questions that were answered incorrectly.  In addition, we conducted a large open-ended error analysis and identified several broad classes of issues that contribute to poor system performance.\footnote{Our current focus word extractor is not yet well suited to complex multisentence questions. While the question corpus as a whole consists of 62\% single-sentence questions, 25\% two-sentence questions, and 14\% questions which are three sentences or longer, we elected to focus on shorter single-sentence questions for this error analysis whenever possible.  As a result, 96\% of the questions analyzed were single-sentence and 4\% were two-sentence.}
+At a high-level, our sentence aggregation model can be thought of as a system for building and evaluating answer justifications.  When questions are answered incorrectly, it is unclear whether the system was unable to \emph{build} a good justification for the correct answer, or unable to \emph{detect} a good justification that was successfully built.  To examine this, in addition to evaluating justification quality for correct answers, we also evaluated the top six justifications for 100 questions that the TAG system answered incorrectly.  We investigated the type of TAG patterns in the correct justifications  (from Section \ref{sec-cl2017:characterizing}), as well as the kinds of inference required for questions that were answered incorrectly.  In addition, we conducted a large open-ended error analysis and identified several broad classes of issues that contribute to poor system performance.\footnote{Our current focus word extractor is not yet well suited to complex multisentence questions. While the question corpus as a whole consists of 62\% single-sentence questions, 25\% two-sentence questions, and 14\% questions which are three sentences or longer, we elected to focus on shorter single-sentence questions for this error analysis whenever possible.  As a result, 96\% of the questions analyzed were single-sentence and 4\% were two-sentence.}
 
 {\flushleft {\bf What patterns of lexical overlap do we observe in justification sentences?}}
-We begin with an encouraging result. For questions that were answered incorrectly, nearly half (45.1\%) contain at least one \emph{good} justification within the top 6 for the correct answer.  This suggests that the current model is much better at generating and broadly ranking justifications than it is at the final step -- pushing the correct justification from the top 6 to the top position.  This result suggests that the TAG model may benefit from an improved ranking model. For example, while we currently use lexicalization to model TAG structures and quantify the overlap between candidate TAGs and the question, none of the features used by the ranking perceptron are explicitly lexicalized. We explored some neural network variants of our models in Section \ref{sec:nn}, which were better able to incorporate lexicalization, but did not see a performance gain.  These models can be extended in future work, however, to see if it is ultimately possible to make use of this lexicalization.
+We begin with an encouraging result. For questions that were answered incorrectly, nearly half (45.1\%) contain at least one \emph{good} justification within the top 6 for the correct answer.  This suggests that the current model is much better at generating and broadly ranking justifications than it is at the final step -- pushing the correct justification from the top 6 to the top position.  This result suggests that the TAG model may benefit from an improved ranking model. For example, while we currently use lexicalization to model TAG structures and quantify the overlap between candidate TAGs and the question, none of the features used by the ranking perceptron are explicitly lexicalized. We explored some neural network variants of our models in Section \ref{sec-cl2017:nn}, which were better able to incorporate lexicalization, but did not see a performance gain.  These models can be extended in future work, however, to see if it is ultimately possible to make use of this lexicalization.
 
 
 Further, for questions answered correctly, the \emph{good} justifications in the top 6 tend to connect on several of the three lexical overlap categories (i.e., question focus words, answer focus words, other shared non-focus words).  Table \ref{tab:errorconnectiontypes} shows that for questions answered correctly, in 69\% of cases good justifications are connected on 2 or 3 lexical overlap categories.  
@@ -622,7 +622,7 @@ To surpass the ceiling we observe in our error analysis, one would likely also h
 %\end{table}
 
 
-\FloatBarrier		% Prevent the References from getting interspersed with the Tables
+%\FloatBarrier		% Prevent the References from getting interspersed with the Tables
 
 
 

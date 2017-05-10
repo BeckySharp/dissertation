@@ -1,8 +1,8 @@
 \section{Experiments}
-\label{sec:experiments}
+\label{sec-cl2017:experiments}
 
 \subsection{Data}
-\label{sec:data}
+\label{sec-cl2017:data}
 
 
 {\flushleft {\bf Questions:}} We assembled a corpus of 1,000 third to fifth grade standardized elementary school science exam questions, consisting of 346 publicly available questions gathered from standardized exams in 12 states, as well as 654 closed questions from an exam generating service. 
@@ -13,7 +13,7 @@ Because of the small size of this corpus, our models were evaluated using 5-fold
 The Simple Wiktionary\footnote{\url{http://simple.wiktionary.org}} was included as a large open-domain dictionary resource written at knowledge level similar to that of the exam questions.  Starting with over 24,000 definitions, we filtered these to include only definitions for nouns, verbs, and adjectives, for a total of 17,473 sentences after filtering.
 
 \subsection{Tuning}
-\label{sec:tuning}
+\label{sec-cl2017:tuning}
 We tuned the following hyperparameters once on the development data to optimize both performance and stability.
 
 {\flushleft \textbf{Number of candidate justifications:}} 
@@ -28,7 +28,7 @@ Note that during testing it is possible to see feature values outside of their k
 
 
 \subsection{Baselines}
-\label{sec:baselines}
+\label{sec-cl2017:baselines}
 
 We include the following baselines: 
 
@@ -46,7 +46,7 @@ Because our six corpora are of different genres (study guide, teachers guide, di
 
 
 \subsection{Results}
-\label{sec:results}
+\label{sec-cl2017:results}
 
 Here we first investigate the performance of two variants of the TAG model with respect to justification length.  We then compare the best-performing model with the baselines, and show that the TAG and CR models can be combined to increase performance. We use the standard implementation for precision at 1 (P@1) ~\cite{manning08} and a tie-aware implementation of mean reciprocal rank (MRR) \cite{mcsherry2008}.
 
@@ -89,7 +89,7 @@ Performance as a function of justification length in sentences (or, the number o
 
 
 \subsubsection{Justification Length}
-\label{sec:pathlength}
+\label{sec-cl2017:pathlength}
 Table~\ref{tab:pathlength} shows the performance of the TAG model as a function of increasing justification length.
 Here, the $k$G models contain exclusively justifications of length $k$ (we explore TAGs of varying length later in this section).
 Short two-sentence (or two-graphlet) TAGs significantly outperform single sentence TAGs, with single sentence (1G) TAGs starting at 35.3\% P@1, increasing to 38.2\% for two-sentence (2G) TAGs, hen decreasing slightly to 37.8\% for three-sentence (3G) TAGs. 
@@ -99,14 +99,14 @@ traversal process
 
 Though our sentence aggregation model contains far more structure than the higher-order lexical semantic graphs of Fried et al. ~\citeyear{fried2015higher}, and is represented at the level of the sentence or graphlet rather than individual lemmas, we hypothesize based on this previous work that we may be observing the beginning of same characteristic peak in performance reported there.  Because runtime increases exponentially with the number of sentences included in a TAG, it quickly becomes intractable to test this with TAGs containing more than 3 graphlets. 
 
-Extending the model to include a knowledge of the connection type (or the type of lexical overlap, see Section~{\ref{sec:characterizing}) between sentences in a given TAG using Daum{\'e}'s method~\cite{daume2007} increases performance, suggesting that different kinds of connections are best identified through different feature patterns.  Here, the connection-type aware 2G\textsubscript{CT} model outperforms the regular 2G model by nearly 2\% P@1 (absolute), increasing performance to 39.9\% -- an increase of +14.7\% (relative) over using only single-sentence TAGs.\footnote{Each of the 50 models in the ensemble reranker is initialized with random weights, causing the small performance difference between 1G and 1G\textsubscript{CT}}
+Extending the model to include a knowledge of the connection type (or the type of lexical overlap, see Section~{\ref{sec-cl2017:characterizing}) between sentences in a given TAG using Daum{\'e}'s method~\cite{daume2007} increases performance, suggesting that different kinds of connections are best identified through different feature patterns.  Here, the connection-type aware 2G\textsubscript{CT} model outperforms the regular 2G model by nearly 2\% P@1 (absolute), increasing performance to 39.9\% -- an increase of +14.7\% (relative) over using only single-sentence TAGs.\footnote{Each of the 50 models in the ensemble reranker is initialized with random weights, causing the small performance difference between 1G and 1G\textsubscript{CT}}
 
 
 
 
 
 \subsubsection{Combined Models}
-\label{sec:combinedmodels}
+\label{sec-cl2017:combinedmodels}
 %
 % Combined model performance
 %
@@ -166,7 +166,7 @@ This set of experiments demonstrates that our approach of jointly ranking answer
 % Justification example (IR)
 %
 \begin{table*}[t]
-\caption{{ \label{font-table} Example justifications from the CR baseline and their associated ratings. }} %  (N=20, c=0.1)
+\caption{{ Example justifications from the CR baseline and their associated ratings. }} %  (N=20, c=0.1)
 \begin{center}
 \begin{footnotesize}
 %\begin{tabular}{lcc}
@@ -237,7 +237,7 @@ Answers & (A) frog  (B) mushroom   (C) grass    (D) lizard \\
 % Correct Answer Info
 Correct Answer &  grass \\
 Focus Word(s) &   (NN\_grass, 1.00) \\
-\multicolumn{2}{c}{\includegraphics[width=115mm]{tag_good_justification.pdf}}
+\multicolumn{2}{c}{\includegraphics[width=115mm]{mainmatter/tacl2015-tig/tag_good_justification.pdf}}
 \\
 \hline
 \end{tabularx}
@@ -381,7 +381,7 @@ Answer justifications were rated on a four-point scale, based on their ability t
 %
 \begin{table}[t]
 \small
-\caption{{ \label{font-table} \emph{At least one} justification performance for both CR and TAG models, reflecting the highest rating attained by at least one of the top six justifications for a given question. }}%  Precision@6 performance reflects the overall proportion of each rating across all of the top six justifications. }} % 
+\caption{{ \emph{At least one} justification performance for both CR and TAG models, reflecting the highest rating attained by at least one of the top six justifications for a given question. }}%  Precision@6 performance reflects the overall proportion of each rating across all of the top six justifications. }} % 
 \begin{center}
 \begin{tabular}{p{20mm}cc}
 \hline
@@ -409,7 +409,7 @@ This experiment supports our original intuition that justifications must be aggr
 
 
 \subsubsection{Ablation Studies}
-\label{sec:controls}
+\label{sec-cl2017:controls}
 To verify the contribution of the components of our system, we include the following ablation studies:
 %\paragraph{How does the latent layer in the Ranking Perceptron affect performance?}
 {\flushleft {\bf Latent Perceptron:}} The complete removal of the latent layer (i.e., using the average of all TAG scores to score the candidate answer, and performing perceptron updates with all TAGs) decreases the performance of the best performing TAG model (1G\textsubscript{CT} + 2G\textsubscript{CT}) from 42.88 to 35.43 P@1.  Alternatively, we experimented with using the sum of the TAG scores and the maximum TAG score as the candidate score, while still doing updates with all TAGs.  These configurations decreased performance to 34.46 and 38.09 P@1, respectively. This demonstrates the importance of modeling justification quality as a latent variable.
@@ -425,13 +425,13 @@ substantially reduces the performance of the 1G + 2G model from 38.69 to 28.90 P
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{tagNNArch2scores.pdf}
+\includegraphics[width=0.8\textwidth]{mainmatter/tacl2015-tig/tagNNArch2scores.pdf}
 \caption{The architecture for the neural network variation of our TAG system. We use a fully-connected feed-forward network which takes as input the content words (i.e., nouns, verbs, and adjectives) from the question, candidate answer, and corresponding justification.  For each of these, we create a composite vector by averaging the embeddings of the individual words.  We then concatenate these three composite vectors, as well as the TAG features and the CR scores, to form the input layer to the network. The output of the network is a single, real-valued score for the candidate answer justification.}
 \label{fig:nn_arch}
 \end{figure}
 
 \subsection{From Latent Perceptron to Latent Neural Networks}
-\label{sec:nn}
+\label{sec-cl2017:nn}
 
 Neural networks (NNs) have recently received much attention in many NLP tasks and have been shown to be quite effective in certain question answering tasks~\cite{Iyyer2014,bordes2014question,bordes2015large,Iyyer2015,wang2015long,dong2015question,yih2015semantic,he2016pairwise,suggu2016deep}.  To determine if a deep learning approach would benefit our system, we explored providing our text aggregation graph features and the candidate retrieval scores to a neural ranking architecture.  Under this framework we were also able to straightforwardly experiment with including vectorized representations (i.e., embeddings) of the question, candidate answer, and corresponding justification, in hopes of accommodating some of the lexical variation in natural language.
 
@@ -486,7 +486,7 @@ We used 50 epochs for training with early stopping if the validation performance
 \end{table*}
 
 \paragraph{Neural Network Results}
-\label{sec:nnresults}
+\label{sec-cl2017:nnresults}
 
 
 The final performance for the neural network variants of our proposed system as well as the CR baseline are shown in Table \ref{tab:nnresults}.  Once again, we observe that the performance of the combined model (CR + TAG + embeddings, line 4) is better than the performance of the CR model by itself (line 1) or CR + embeddings (line 3). However, here this difference is not significant.  This suggests that representing the justification as a simple bag of words with latent feature representations is not as effective as representing them with features derived from the structure of the text aggregation graph, even with the non-linear capabilities of the neural network.
