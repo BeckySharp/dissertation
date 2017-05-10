@@ -1,6 +1,6 @@
 
 \section{Models and Features}
-\label{sec:model}
+\label{sec-naacl2015:model}
 
 
 We propose two separate discourse representation schemes -- one shallow, centered around discourse markers, and one deep, based on RST. 
@@ -8,7 +8,7 @@ We propose two separate discourse representation schemes -- one shallow, centere
 
 
 \subsection{Discourse Marker Model}
-\label{sec:features_marker}
+\label{sec-naacl2015:features_marker}
 
 
 The discourse marker model (DMM) extracts cross-sentence discourse structures centered around a discourse marker. 
@@ -24,14 +24,13 @@ which means that the the marker {\em by} has been detected in an answer candidat
 Note that our marker arguments are akin to EDUs in RST, but, in this shallow representation, they are simply constructed around discourse markers and bound by an arbitrary sentence range.  
 
 
-\vspace{-1mm}
 {\flushleft {\bf Argument Labels:}} 
 We label marker arguments based on their similarity to question content.
 %We have only begun to explore the space of possible question segmentation schemes, and one can imagine a variety of methods that vary from fine-grained segmentation (e.g., based on semantic roles) to coarser-grained methods with few segments.  To facilitate robust feature generation, the current model uses a simple feature generation mechanism where the entire question (excluding the "{\em how VBZ"} prefix) is grouped into a single segment, and feature arguments are labeled using this segment.  
 %We currently use a simple algorithm, where a content segment is extracted from the question by excluding the {\em ``how"} prefix, and marker arguments are labeled using this segment.  
 %With this scheme, if pre or post arguments out to a given sentence range match this question segment (with a cosine similarity score larger than a threshold), they take on the label \code{QSEG}, or \code{OTHER} otherwise.  
 If text before or after a marker out to a given sentence range matches the entire text of the question (with a cosine similarity score larger than a threshold), that argument takes on the label \code{QSEG}, or \code{OTHER} otherwise.  
-In this way the features are only partially lexicalized with the discourse markers. Argument labels indicate only if lemmas from the question were found in a discourse structure present in an answer candidate, and do not speak to the specific lemmas that were found. We show in \S\ref{sec:experiments} that these lightly lexicalized features perform well in domain and transfer between domains. We explore other argument labeling strategies in \S\ref{sec:alternativeqseg}.
+In this way the features are only partially lexicalized with the discourse markers. Argument labels indicate only if lemmas from the question were found in a discourse structure present in an answer candidate, and do not speak to the specific lemmas that were found. We show in \S\ref{sec-naacl2015:experiments} that these lightly lexicalized features perform well in domain and transfer between domains. We explore other argument labeling strategies in \S\ref{sec-naacl2015:alternativeqseg}.
 
 %This segmentation scheme allows for features that contain one or two QSEG segments.
 % (e.g., QSEG BY OTHER SR1) or two (e.g., QSEG BY QSEG SR1).  
@@ -57,7 +56,7 @@ The values of the discourse features are the mean of the similarity scores (e.g.
 It is important to note that these discourse features are more expressive than features based on discourse markers alone~\cite{Higashinaka:08,Verberne:10}. First, the argument sequences used here capture cross-sentence discourse structures.  Second, these features model the intensity of the match between the text surrounding the discourse structure and the question text using both the assigned argument labels and the  feature values.
 
 \subsection{Discourse Parser Model}
-\label{sec:features_parser}
+\label{sec-naacl2015:features_parser}
 
 The discourse parser model (DPM) is based on the RST discourse framework~\cite{mann88}. 
 In RST, the text is segmented into a sequence of non-overlapping fragments called elementary discourse units (EDUs), and binary discourse relations recursively connect neighboring units. Most relations are {\em hypotactic}, where one of the units in the relation (the {\em nucleus}) is considered more important than the other (the {\em satellite}). A few relations are {\em paratactic}, where both participants have equal importance. In the bottom part of Figure~\ref{fig:featgen}, we show hypotactic relations as directed arrows, from the nucleus to the satellite. 
@@ -71,7 +70,7 @@ Similar to the DMM, these features take real values obtained by averaging the co
 Other common relations include \code{Attribution}, \code{Contrast}, \code{Background}, and \code{Evaluation}.
 
 \subsection{Lexical Semantics Model}
-\label{sec:lexicalsemantics}
+\label{sec-naacl2015:lexicalsemantics}
 
 Inspired by the work of Yih et al.~\citeyear{yih13}, we include lexical semantics in our reranking model. 
 Several of their proposed models rely on proprietary data; here we focus on LS models that rely on open-source data and frameworks. 
@@ -83,7 +82,7 @@ We derive two LS measures from these vectors, which are then are included as fea
 
 
 %\subsection{Meta Reranker}
-%\label{sec:metareranker}
+%\label{sec-naacl2015:metareranker}
 %
 %Both the discourse marker and discourse parser features exist in separate rerankers, and produce separate lists of reranked answer candidates.  These lists are combined into a single output using a meta reranking model based on a weighted voting algorithm.  
 %We first normalize the \svmr~scores using a softmax function. Then, 

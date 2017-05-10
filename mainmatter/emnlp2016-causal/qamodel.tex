@@ -1,8 +1,8 @@
-\vspace{-1mm}
+%space{-1mm}
 \section{Indirect Evaluation: QA Task}
-\vspace{-1mm}
-%\label{sec:qa}
-\label{sec:indirecteval}
+%space{-1mm}
+%\label{sec-emnlp2016:qa}
+\label{sec-emnlp2016:indirecteval}
 
 %\todo{Describe the QA system and its features shortly, in 1 paragraph.}
 The main objective of our work is to investigate the impact of a customized causal embedding model for QA. Following our direct evaluation, which solely evaluated the degree to which our models directly encode causality, here we evaluate each of our proposed causal models in terms of their contribution to a downstream real-world QA task.
@@ -11,7 +11,7 @@ Our QA system uses a standard reranking approach~\cite{jansen14}.
 %To evaluate the contribution of each of our causal models for QA, we use a standard reranking approach~\cite{jansen14}.
 In this architecture, the candidate answers are initially extracted and ranked using a shallow candidate retrieval (CR) component that uses solely information retrieval techniques, then they are re-ranked using a ``learning to rank'' approach.
 In particular, we used SVM rank\footnote{ \url{http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html}}, a Support Vector Machines classifier adapted for ranking, and re-ranked the candidate answers with a set of features derived from both the initial CR score and the models we have introduced. For our model combinations (see Table \ref{tab:QA}), the feature set includes the CR score and the features from each of the models in the combination.
-%We compare the performance of our causal models against the same vanilla embeddings model (vEmbed) used in Section \ref{sec:directeval}, the vanilla alignment model (vAlign) of Fried et al.~\citeyear{fried2015higher} trained over the same corpus as the questions,  as well as the look-up baseline.
+%We compare the performance of our causal models against the same vanilla embeddings model (vEmbed) used in Section \ref{sec-emnlp2016:directeval}, the vanilla alignment model (vAlign) of Fried et al.~\citeyear{fried2015higher} trained over the same corpus as the questions,  as well as the look-up baseline.
 %
 
 \subsection{Data}

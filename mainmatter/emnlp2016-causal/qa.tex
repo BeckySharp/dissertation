@@ -1,9 +1,9 @@
 %\section{Downstream QA Evaluation}
-%\label{sec:indirecteval}
+%\label{sec-emnlp2016:indirecteval}
 
 %The main objective of our work is to investigate the impact of problem-specific solving components for QA. 
 %Here we focus on causal QA.
-% develop dedicated question-answering (QA) system components for specific question types.  We therefore evaluate our causal models, which we previously determined to encode causality (Section \ref{sec:indirecteval}), in a down-stream (QA) task with causal questions. 
+% develop dedicated question-answering (QA) system components for specific question types.  We therefore evaluate our causal models, which we previously determined to encode causality (Section \ref{sec-emnlp2016:indirecteval}), in a down-stream (QA) task with causal questions. 
 
 
 \begin{table}[t!]
@@ -44,11 +44,11 @@
 
 \end{tabular}
 \end{footnotesize}
-\vspace{-1mm}
+%space{-1mm}
 \caption{{\footnotesize Performance in the QA evaluation, measured by precision-at-one (P@1).  The ``Bi'' suffix indicates a bidirectional model; the ``Noise'' suffix indicates a model that is noise aware. $^*$  indicates that the difference between the corresponding model and the CR + vEmbed baseline is statistically significant ($p < 0.05$), %. Statistical significance was 
 determined through a one-tailed bootstrap resampling test with 10,000 iterations. }} 
 \label{tab:QA}
-\vspace{-8mm}
+%space{-8mm}
 \end{center}
 \end{table}
 
@@ -125,13 +125,13 @@ Other 											&	10\% \\
 
 \caption{{\footnotesize Results of an error analysis performed on a random sample of 20 incorrectly answered questions showing the source of the error and the percentage of questions that were affected. Note that questions can belong to multiple categories. }} 
 \label{tab:ea}
-\vspace{-8mm}
+%space{-8mm}
 \end{center}
 \end{table}
 
 
 \subsection{Error Analysis}
-\label{sec:erroranalysis}
+\label{sec-emnlp2016:erroranalysis}
 
 We performed an error analysis to gain more insight into our model as well as the source of the remaining errors.  For simplicity, we used the combination model CR + vEmbed + cEmbedBi. Examining the model's learned feature weights, we found that the vanilla overall similarity feature had the highest weight, followed by the causal overall similarity and causal maximum similarity features.  This indicates that even in causal question answering, the overall \emph{topical} similarity between question and answer is still useful and complementary to the causal similarity features.
 

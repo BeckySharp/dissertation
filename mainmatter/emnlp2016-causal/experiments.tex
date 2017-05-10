@@ -1,12 +1,12 @@
 
 %\section{Experiments and Evaluation}
-%\label{sec:experiments}
+%\label{sec-emnlp2016:experiments}
 %%\vspace{-2mm}
 %
 %We evaluate our approach at two levels.  First, we directly evaluate the quality of the embedding space in regards to the desired semantic relation.  Then, we evaluate the utility of the approach in an open-domain QA task.
 
 \section{Direct Evaluation}
-\label{sec:directeval}
+\label{sec-emnlp2016:directeval}
 
 To determine whether or not the proposed approach is able to capture the semantic relation of interest, causality, we replicate the quantitative evaluation of Levy and Goldberg~\citeyear{levy2014dependency}.  To demonstrate that their embeddings encoded functional similarity as opposed to topical similarity, they used their embeddings to rank a set of word pairs (each of which reflected one of the two types of similarity) using cosine similarity and showed that the word pairs which were functionally similar tended to be ranked higher than those with topical similarity.  Here, we do the same.
 
@@ -56,7 +56,7 @@ Casual  			& 68.2*	\\
 %\includegraphics[width=75mm]{rpcurves_all.png}
 %\vspace{-4mm}
 \caption{{\small Recall-precision curve showing the ability of each model to rank causal pairs above non-causal pairs. }}
-\vspace{-6mm}
+%space{-6mm}
 \label{fig:rpcurve_all}
 \end{center}
 \end{figure}
@@ -78,7 +78,7 @@ As this effect is entirely directional, we trained a set of vectors by reversing
 %we had several extracted causal events whose cause contained the word \emph{platform} and whose effect contained the words \emph{}
 
 \section{Indirect Evaluation}
-\label{sec:indirecteval}
+\label{sec-emnlp2016:indirecteval}
 
 After having determined that the learned embeddings encoded causality, we designed an experiment to evaluate their utility in a down-stream task.  We chose question-answering (QA) as it has been shown that many questions require complex inference, including causality, in order to be explanably solved \todo{cite}.  
 
@@ -92,6 +92,6 @@ We evaluate the contribution of the causal embeddings model using the standard r
 %In pilot experiments, we found that aligning only nouns, verbs, adjectives, and adverbs yielded higher performance. TALK ABOUT?
 In this architecture, the candidate answers are initially ranked using a shallow candidate retrieval (CR) component, then they are re-ranked using the model features along with the CR score. 
 We used SVM rank\todo{cite/link}, a Support Vector Machine adapted for ranking, for our learning framework.
-We compare the performance of the causal embeddings model against the same standard skipgram model used in Section \ref{sec:directeval}.
+We compare the performance of the causal embeddings model against the same standard skipgram model used in Section \ref{sec-emnlp2016:directeval}.
 As features, we use the same set as \todo{cite naacl and acl}: the maximum and average pairwise cosine similarity between question and answer words, as well as the overall similarity between the composite question and answer vectors.  When using the causal embeddings however, we first determine (through lexical pattern matching) whether the question text is the cause or the effect, thus determining which embeddings to use for the question and candidate answer texts.  For example, in a question such as "Q: What causes X? A: Y", the cosine similarities would be found using the effect vectors for the question words and the cause vectors for the answer candidate words. \todo{good grief, redo this}   
 

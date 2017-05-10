@@ -23,7 +23,7 @@
 7	&	Our approach  &	{\bf 54.0}$^{**\dagger\dagger}$		& {\bf 53.3}$^{**\dagger}$ 	\\
 \end{tabular}
 \end{footnotesize}
-\vspace{-1mm}
+%space{-1mm}
 \caption{{\footnotesize Performance on the AI2 Kaggle questions, measured by precision-at-one (P@1).  $^*$s  indicate that the difference between the corresponding model and the IR baseline is statistically significant ($^*$ indicates $p < 0.05$ and $^{**}$ indicates $p < 0.001$) and $^{\dagger}$s  indicate significance compared to IR$^{++}$,
 %that the difference between the corresponding model and the IR$^{++}$ baseline is statistically significant. %($^\dagger$ corresponds to $p < 0.05$ and $^{\dagger\dagger}$ corresponds to $p < 0.001$).  
 All significance values were determined through a one-tailed bootstrap resampling test with 100,000 iterations. }} 
@@ -45,22 +45,22 @@ All significance values were determined through a one-tailed bootstrap resamplin
     Full Model (IR$^{++}$ + LO + lexDisc + Emb)  &	{\bf 54.0}$^{**\dagger\dagger}$	\\
 \end{tabular}
 \end{footnotesize}
-\vspace{-1mm}
+%space{-1mm}
 \caption{{\footnotesize Ablation of feature groups results, measured by precision-at-one (P@1) on validation data.  Significance is indicated as in Table \ref{tab:p@1}.}} 
 \label{tab:ablation}
-\vspace{-5mm}
+%space{-5mm}
 \end{center}
 \end{table}
 
 \section{Results}
-\label{sec:results}
+\label{sec-emnlp2017:results}
 
-Rather than seeking to outperform all other systems at selecting the correct answer to a question, here we aimed to construct a system system that can produce substantially better justifications for why the answer choice is correct to a human user, without unduly sacrificing accuracy on the answer selection task.  Accordingly, we evaluate our system both in terms of it's ability to correctly answer questions (Section \ref{sec:accuracy}), as well as provide high-quality justifications for those answers (\ref{sec:justification_results}).  Additionally, we perform an error analysis (Section \ref{sec:erroranalysis}), taking advantage of the insight the reranked justifications provide into what the model is learning.
+Rather than seeking to outperform all other systems at selecting the correct answer to a question, here we aimed to construct a system system that can produce substantially better justifications for why the answer choice is correct to a human user, without unduly sacrificing accuracy on the answer selection task.  Accordingly, we evaluate our system both in terms of it's ability to correctly answer questions (Section \ref{sec-emnlp2017:accuracy}), as well as provide high-quality justifications for those answers (\ref{sec-emnlp2017:justification_results}).  Additionally, we perform an error analysis (Section \ref{sec-emnlp2017:erroranalysis}), taking advantage of the insight the reranked justifications provide into what the model is learning.
 % \todo{not sure what this sentence means?}.
 % bs: is this clearer?
 
 \subsection{QA Performance}
-\label{sec:accuracy}
+\label{sec-emnlp2017:accuracy}
 We evaluated the accuracy of our system as well as the baselines on the held-out 800 set of test questions.  Performance, measured in precision at 1 (P@1)\cite{manning08}, is shown in Table \ref{tab:p@1} for both the validation (i.e., cross validation on training) and test partitions.  Because NNs are sensitive to initialization, each experimental result shown is the average performance across five runs, each using different random seeds.   
 
 The best performing baseline on the validation data was a model using only IR$^{++}$ features (line 3), but its performance dropped substantially when evaluated on test due to the failure of several random seed initializations to learn.  For this reason, we assessed significance of our model combinations with respect to both the IR baseline as well as the IR$^{++}$ (indicated by $^*$ and $^{\dagger}$s, respectively).
@@ -72,7 +72,7 @@ Our full model that combines IR$^{++}$, lexical overlap, discourse, and embeddin
 %\subsubsection{Comparison to Previous Work}
 %\begin{flushleft}
 %{\bf Comparison to Previous Work}
-\vspace{-1mm}
+%space{-1mm}
 %\end{flushleft}
 \paragraph{Comparison to Previous Work:}
 We compared our performance against another model that achieves state of the art performance on a different set of 8th grade science questions, \textsc{TupleInf}(T+T') \citep{khot2017tupleinf}.  \textsc{TupleInf}(T+T') uses Integer Linear Programming to find support for questions via tuple representations of KB sentences\footnote{Notably, one portion of the tuple KB used was constructed based on a different 8th grade question set than the one we use here.}.
@@ -101,7 +101,7 @@ In comparison to other systems that competed in the Kaggle challenge, our system
 %\subsection{Feature Ablation}
 %\begin{flushleft}
 %{\bf Feature Ablation }
-\vspace{-2mm}
+%space{-2mm}
 %\end{flushleft}
 
 \paragraph{Feature Ablation:} To evaluate the contribution of the individual feature groups, we additionally performed an ablation experiment (see Table \ref{tab:ablation}).
@@ -139,12 +139,12 @@ Each of our ablated models performed significantly better than the IR baseline o
 \end{footnotesize}
 \caption{{  Example justifications from the our model and their associated ratings. }} 
 \label{tab:justification_examples}
-\vspace{-5mm}
+%space{-5mm}
 \end{center}
 \end{table}
 
 \subsection{Justification Performance}
-\label{sec:justification_results}
+\label{sec-emnlp2017:justification_results}
 One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, we assessed the quality of each of the top five justifications.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  Following the methodology of Jansen et al. \citeyear{jansen2017framing}, each justification received a rating of either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
 
 \begin{table}[t]
@@ -167,7 +167,7 @@ as well as the normalized discounted cumulative gain at 5 (NDCG@5) of the ranked
 %, as determined through a 1-tailed bootstrap resampling test with 100,000 iterations.
 }} 
 \label{tab:justification_ndcg}
-\vspace{-5mm}
+%space{-5mm}
 \end{center}
 \end{table}
 
@@ -231,7 +231,7 @@ We also evaluated the justification ratings using normalized discounted cumulati
 \caption{Number of questions for which % the IR$^{++}$ + EF + lexDisc + Emb 
 our complete model chooses a new justification at each epoch during training.  While this is for a single random seed, we see essentially identical graphs for each random initialization.}
 \label{fig:changes}
-\vspace{-5mm}
+%space{-5mm}
 \end{center}
 \end{figure}
 
@@ -239,9 +239,9 @@ our complete model chooses a new justification at each epoch during training.  W
 %\begin{flushleft}
 %{\bf Contribution of Learning to Rerank Justifications}
 %\end{flushleft}
-\vspace{-2mm}
+%space{-2mm}
 \paragraph{Contribution of Learning to Rerank Justifications:}
-The main assertion of this work is that through learning to rank answers and justifications for those answer candidates in an end-to-end manner, we both answer questions correctly and provide compelling justifications as to why the answer is correct.  To confirm that this is the case, we also ran a version of our system that does not re-rank justifications, but uses the top-ranked justification retrieved by IR.  This configuration dropped our performance on test to 48.7\% P@1, a decrease of 4.6\%, and we additionally lose all justification improvements from our system (see Section \ref{sec:justification_results}), demonstrating that learning this reranking is key to our approach.
+The main assertion of this work is that through learning to rank answers and justifications for those answer candidates in an end-to-end manner, we both answer questions correctly and provide compelling justifications as to why the answer is correct.  To confirm that this is the case, we also ran a version of our system that does not re-rank justifications, but uses the top-ranked justification retrieved by IR.  This configuration dropped our performance on test to 48.7\% P@1, a decrease of 4.6\%, and we additionally lose all justification improvements from our system (see Section \ref{sec-emnlp2017:justification_results}), demonstrating that learning this reranking is key to our approach.
 
 Additionally, we tracked the number of times a new justification was chosen by the model as it trained. We found that our system converges to a stable set of justifications during training, shown in Figure \ref{fig:changes}.
 
@@ -374,7 +374,7 @@ Additionally, we tracked the number of times a new justification was chosen by t
 %\end{table}
 %
 %\subsection{Error Analysis}
-%\label{sec:erroranalysis}
+%\label{sec-emnlp2017:erroranalysis}
 %
 %%\todo{provide examples for all without other -- make full width}
 %

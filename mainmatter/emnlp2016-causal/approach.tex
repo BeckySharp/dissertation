@@ -10,7 +10,7 @@
 %\end{figure}
 %
 \section{Approach}
-\label{sec:approach}
+\label{sec-emnlp2016:approach}
 %\vspace{-2mm}
 
 Our focus is on reranking answers to causal questions using using task-specific distributional similarity methods.
@@ -20,11 +20,11 @@ Our focus is on reranking answers to causal questions using using task-specific 
 %
 Our approach operates in three steps:
 
-{\flushleft (1)} We start by bootstrapping a large number of cause-effect pairs from free text using a small number of syntactic and surface patterns (Section \ref{sec:causalextraction}).
+{\flushleft (1)} We start by bootstrapping a large number of cause-effect pairs from free text using a small number of syntactic and surface patterns (Section \ref{sec-emnlp2016:causalextraction}).
 
-{\flushleft (2)} We then use these bootstrapped pairs to build several task-specific embedding (and other distributional similarity) models (Section \ref{sec:models}). We evaluate these models directly on a causal-relation identification task (Section \ref{sec:directeval}).  
+{\flushleft (2)} We then use these bootstrapped pairs to build several task-specific embedding (and other distributional similarity) models (Section \ref{sec-emnlp2016:models}). We evaluate these models directly on a causal-relation identification task (Section \ref{sec-emnlp2016:directeval}).  
 
-{\flushleft (3)} Finally, we incorporate these models into a reranking framework for causal QA and demonstrate that the resulting approach performs better than the reranker without these task-specific models, even if trained on the same data (Section ~\ref{sec:indirecteval}).  
+{\flushleft (3)} Finally, we incorporate these models into a reranking framework for causal QA and demonstrate that the resulting approach performs better than the reranker without these task-specific models, even if trained on the same data (Section ~\ref{sec-emnlp2016:indirecteval}).  
 
 
 %We approach the task of creating and evaluating a task-specific relational vector space by considering one relation in particular -- causality.  The architecture of our system is shown in Figure \ref{fig:arch}. \todo{do I really need an architecture here?}

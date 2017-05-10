@@ -5,19 +5,19 @@
 \caption{ Detailed architecture of the model's scoring component.  
 The question, candidate answer, and justification %\edit{(previously obtained through max-pooling)}
 % bs: no - the max pooling happens at the end, after the scoring. 
- are encoded (by summing their word embeddings) to create vector representations of each. These representations are combined in several ways to create a set of representation-based similarity features that are concatenated to additional explicit features capturing lexical overlap, discourse and IR information and fed into a feed-forward neural network.  The output layer of the network is a single node that represents the score of the justification candidate.}  %\todo{Take out? As described in Section \ref{sec:approach}, we then use max-pooling over these justification scores to assign a score to the answer candidate itself.} }
+ are encoded (by summing their word embeddings) to create vector representations of each. These representations are combined in several ways to create a set of representation-based similarity features that are concatenated to additional explicit features capturing lexical overlap, discourse and IR information and fed into a feed-forward neural network.  The output layer of the network is a single node that represents the score of the justification candidate.}  %\todo{Take out? As described in Section \ref{sec-emnlp2017:approach}, we then use max-pooling over these justification scores to assign a score to the answer candidate itself.} }
  %bs: sure -- it's shown in the arch right next door :)
 \label{fig:arch}
-\vspace{-5mm}
+%space{-5mm}
 \end{center}
 \end{figure}
 
 
 \section{Model and Features}
-\label{sec:pipeline}
+\label{sec-emnlp2017:pipeline}
 %\bs{we're low on space and I'm not sure we really need all the features in table 2... in fact, do we need the table at all? \\similarity features are described in prose, as are discourse features (and example is in sep figure), and IR++ features.  Should we remove the table and move the description of LO features to prose? we could recapture half a column...}.  
 % removed table per mihai email
-Our approach consists of three main components: (a) the retrieval of a pool of candidate answer justifications (Section \ref{sec:justretrieval}); (b) the extraction of features for each (Section \ref{sec:features}); and (c) the scoring of the answer candidate itself based on this pool of justifications (Section \ref{sec:nn_model}).  The architecture of this latter scoring component is shown in Figure \ref{fig:arch}. 
+Our approach consists of three main components: (a) the retrieval of a pool of candidate answer justifications (Section \ref{sec-emnlp2017:justretrieval}); (b) the extraction of features for each (Section \ref{sec-emnlp2017:features}); and (c) the scoring of the answer candidate itself based on this pool of justifications (Section \ref{sec-emnlp2017:nn_model}).  The architecture of this latter scoring component is shown in Figure \ref{fig:arch}. 
 
 
 %\begin{table}[t]
@@ -34,7 +34,7 @@ Our approach consists of three main components: (a) the retrieval of a pool of c
 %\multicolumn{2}{l}{$sim(Q, uniqueJ)$ and $sim(A, uniqueJ)$} \\
 %& The cosine similarities between each of the question and answer representations and the representation for the terms in the justification which don't overlap with either. \\
 %\multicolumn{2}{l}{$dist(Q + J, A)$} \\
-% & The euclidean distance between the sum of the question and justification representations and that of the answer (see Section \ref{sec:features} for motivation and details).\\
+% & The euclidean distance between the sum of the question and justification representations and that of the answer (see Section \ref{sec-emnlp2017:features} for motivation and details).\\
 %\hline
 %\multicolumn{2}{l}{Lexical Overlap Features (LO)} \\
 %\hline
@@ -51,7 +51,7 @@ Our approach consists of three main components: (a) the retrieval of a pool of c
 %\multicolumn{2}{l}{Semi-Lexicalized Discourse Features (lexDisc)} \\
 %\hline
 %\multicolumn{2}{l}{\emph{lexDisc$_0$, ..., lexDisc$_n$}} \\
-% & A set of indicator-like features that capture the presence of semi-lexicalized discourse relations (see Section \ref{sec:features} for details and example). \\
+% & A set of indicator-like features that capture the presence of semi-lexicalized discourse relations (see Section \ref{sec-emnlp2017:features} for details and example). \\
 % \hline
 %\multicolumn{2}{l}{IR-Based Features (IR$^{++}$)} \\
 %\hline
@@ -73,12 +73,12 @@ Our approach consists of three main components: (a) the retrieval of a pool of c
 %\end{table}
 
 \subsection{Candidate Justification Retrieval}
-\label{sec:justretrieval}
+\label{sec-emnlp2017:justretrieval}
 The first step in our process is to use standard information retrieval (IR) methods to retrieve a set of candidate justifications for each candidate answer to a given question.  To do this, we build a bag-of-words (BOW) query using the content lemmas for the question and answer candidate, boosting the answer lemmas to have four times more weight\footnote{We empirically found this answer term boosting to ensure retrieval of documents which were relevant to the particular answer candidate.}.  We used Lucene\footnote{\url{https://lucene.apache.org}} with a \emph{tf-idf} based scoring function to return the top-scoring documents from the KB.  Each of these indexed documents consists of a single sentence from our corpora, and serves as one potential justification.  
 %\todo{Say here that each Lucene document indexes one potential justification, i.e., one sentence from X, or one paragraph from Y?}
 
 \subsection{Feature Extraction}
-\label{sec:features}
+\label{sec-emnlp2017:features}
 For each retrieved candidate justification, we extract a set of features based on (a) distributed representations of the question, candidate answer, and justification terms; (b) strict lexical overlap; (c) discourse relations present in the justification; and (d) the IR scores for the justification.
 
 { \flushleft{\bf Representation-based features (Emb):}} To model the similarity between the text of each question ($Q$), candidate answer ($A$), and candidate justification ($J$), we include a set of features that utilize distributed representations of the words found in each.
@@ -124,7 +124,7 @@ Since there are 18 possible discourse relation labels, and the prefix and suffix
 %\todo{rework in consideration of query details above}
 Finally, we also use a set of four IR-based features which are assigned at the level of the answer candidate (i.e., these features are identical for each of the candidate justifications for that answer choice).   
 %Given a question and answer candidate, we query the IR system with the content lemmas from both.  
-Using the same query method as described in Section \ref{sec:justretrieval}, for each question and answer candidate we retrieve a set of indexed documents.
+Using the same query method as described in Section \ref{sec-emnlp2017:justretrieval}, for each question and answer candidate we retrieve a set of indexed documents.
 Using the \emph{tf-idf} based retrieval scores of these returned documents, 
 $s(d_i)$ for $d_i \in D$, we rank the answer candidates using two methods: 
 \begin{itemize}
@@ -144,7 +144,7 @@ We then use these rankings to make a set of four reciprocal rank features,  IR$^
 
 
 \subsection{Neural Network}
-\label{sec:nn_model}
+\label{sec-emnlp2017:nn_model}
 
 As shown in Figure \ref{fig:arch}, the extracted features for each candidate justification are concatenated and passed into a fully-connected feed-forward neural network (NN).  The output layer is a single node representing the justification score.  We then use max-pooling over these scores to select the current best justification for the answer candidate, and use its score as the score for the answer candidate itself.  For training, the correct answer for a given question is paired with each of the incorrect answers, and each are scored as above.  We compute the pair-wise margin ranking loss for each training pair:
 
@@ -155,4 +155,4 @@ L = \max(0, m - F(a^{+}) + F(a^{-}))
 where $F(a^+)$ and $F(a^-)$ are the model scores for a correct and incorrect answer candidate and $m$ is the margin, and backpropagate the gradients.
 At testing time, we use the trained model to score each answer choice (again using the maximum justification score) and select the highest-scoring.
 
-As we are interested in not only correctly answering questions, but also selecting valid justification for those answers, we keep track of the scores of \emph{all} justifications and use this information to return the top $k$ justifications for each answer choice.  These are evaluated along with the answer selection performance in Section \ref{sec:results}.
+As we are interested in not only correctly answering questions, but also selecting valid justification for those answers, we keep track of the scores of \emph{all} justifications and use this information to return the top $k$ justifications for each answer choice.  These are evaluated along with the answer selection performance in Section \ref{sec-emnlp2017:results}.

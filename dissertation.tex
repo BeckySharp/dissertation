@@ -41,15 +41,25 @@
 					% the REFERENCES item to show up in your TOC.
 \usepackage{latexsym}
 
-\usepackage{amsmath}
 \usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
 \usepackage{multirow}
 \usepackage{url}
 \usepackage{bm}
-\usepackage{amssymb}
 \usepackage{fixltx2e}
 \usepackage{tabularx}
-%\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{amsmath,amssymb}
+%\usepackage{verbatim}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{fixltx2e}
+%\usepackage{float}
+\usepackage{supertabular,booktabs}
+%\usepackage{enumerate}
+%\usepackage{afterpage}
+%\usepackage{array}
+%%\usepackage{setspace}
+
 
 % Compatibility with the AASTEX package 
 % of the American Astronomical Society.
@@ -72,8 +82,6 @@
 % cross-referenced.
 \usepackage[bookmarks,colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
 
-
-\usepackage{color}
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
 \newcommand{\note}[1]{\textcolor{red}{#1}}
 \newcommand{\svmr}{{SVM$^{rank}$}}
@@ -140,6 +148,7 @@
 \include{mainmatter/introduction}
 \input{mainmatter/emnlp2016-causal/main}
 \input{mainmatter/emnlp2017-qaj/main}
+\input{mainmatter/naacl2015-alignment/naacl2015}
 
 % Include the various appendices
 \appendix
@@ -151,6 +160,6 @@
 
 % Create the References list
 \bibliographystyle{uabibnat}
-\bibliography{bibliography}
+\bibliography{mainmatter/refs}
 
 \end{document}

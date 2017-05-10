@@ -1,6 +1,6 @@
 
 \section{Introduction}
-\vspace{-2mm}
+%space{-2mm}
 
  Question Answering (QA) is a challenging task that draws upon many aspects of NLP.  Unlike search or information retrieval, answers infrequently contain lexical overlap with the question (e.g. {\em What should we eat for breakfast? -- Zoe's Diner has good pancakes}), and require QA models to draw upon more complex methods to bridge this "lexical chasm" \cite{Berger:00}.  These methods range from robust shallow models based on lexical semantics, to deeper, explainably-correct, but much more brittle inference methods based on first order logic.  
 
@@ -19,13 +19,13 @@ We evaluate our methods on two corpora, generating alignment models for an open-
 
 The contributions of this work are:
 \begin{enumerate}
-\vspace{-3mm}
+%space{-3mm}
 \item We demonstrate that by exploiting the discourse structure of free text, monolingual alignment models can be trained to surpass the performance of models built from expensive in-domain question-answer pairs. 
-\vspace{-3mm}
+%space{-3mm}
 \item We compare two methods of discourse parsing: a simple sequential model, and a deep model based on Rhetorical Structure Theory (RST)~\cite{mann88}.  We show that the RST-based method captures within and across-sentence alignments and performs better than the sequential model, but the sequential model is an acceptable approximation when a discourse parser is not available.  
-\vspace{-3mm}
+%space{-3mm}
 \item We evaluate the proposed methods on two corpora, including a low-resource domain where training data is expensive (biology).
-\vspace{-3mm}
+%space{-3mm}
 \item We experimentally demonstrate that monolingual alignment models trained using our method considerably outperform state-of-the-art neural network language models in low resource domains.
 \end{enumerate}
 

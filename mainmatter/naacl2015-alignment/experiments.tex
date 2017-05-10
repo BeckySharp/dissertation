@@ -31,14 +31,14 @@ We tested our approach in two different domains, open-domain and cellular biolog
 
 \begin{figure}[t!]
 \begin{center}
-\includegraphics[width=75mm]{graphs_test2a.pdf}
+\includegraphics[width=90mm]{mainmatter/naacl2015-alignment/graphs_test2a.pdf}
 %\vspace{-4mm}
 \caption{{\small Overall performance for the two discourse-based alignment models,
 compared against the CR baseline, random baselines, and a RNNLM-based reranker.
 %, sequential, and lexical semantic models versus the number of training documents used to construct the models.  
 The $x$ axis indicates the number of training documents used to construct all models. 
 Each point represents the average of 10 samples of training documents.  }}
-\vspace{-6mm}
+%space{-6mm}
 \label{fig:performance}
 \end{center}
 \end{figure}
@@ -83,7 +83,7 @@ Comparing the two principal alignment models, the RST-based model significantly 
 
 \paragraph{How does the performance of the RST model compare to a model trained on in-domain pairs?}
 
-Both the RST and SEQ results for YA are {\em higher} than that of an alignment model trained on explicit in-domain question-answer pairs. Fried et. al \citeyear{fried15} trained an identical alignment model using approximately 65k QA pairs from the YA corpus, and report a performance of 27.24\% P@1, or nearly 2 points lower than our model trained using 10,000 Gigaword documents. This is an encouraging result, which further demonstrates that: (a) discourse analysis can be exploited to generate artificial semi-structured data for alignment, and (b) the sequential model, which also outperforms Fried et. al, can be used as a reasonable proxy for discourse when a parser is not available. 
+Both the RST and SEQ results for YA are {\em higher} than that of an alignment model trained on explicit in-domain question-answer pairs. Fried et. al \citeyear{fried2015higher} trained an identical alignment model using approximately 65k QA pairs from the YA corpus, and report a performance of 27.24\% P@1, or nearly 2 points lower than our model trained using 10,000 Gigaword documents. This is an encouraging result, which further demonstrates that: (a) discourse analysis can be exploited to generate artificial semi-structured data for alignment, and (b) the sequential model, which also outperforms Fried et. al, can be used as a reasonable proxy for discourse when a parser is not available. 
 
 
 \paragraph{How does the performance of the RST model compare to previous work?}
@@ -162,10 +162,10 @@ In open domains, alignments such as {\em apple -- \mbox{orchard}} may interfere 
 
 %This is likely due to general alignment model limitations coupled with domain differences between gigaword (a news-domain) and CQA.  As more and more documents are included in training, perhaps the model becomes too far biased towards news to continue to increase performance.  In pilot experiments, we found that using as many as 20 files did not improve performance and in (hidden for review) when all of gigaword is used to train the vectors, the performance of the RNNLM plateaus around the same 30\% P@1. As the data used here is a small fraction of the data available, there is potential for performance increases if more sophisticated techniques, such as topic filtering, are implemented.  
 
-\vspace{-1mm}
+%space{-1mm}
 \section{Conclusion}
 \label{sec:conclusion}
-\vspace{-2mm}
+%space{-2mm}
 
 We propose two inexpensive methods for training alignment models using solely free text, by generating artificial question-answer pairs from discourse structures. 
 %Using a RST discourse parser, one method generates both intrasentence and intersentence alignments that can be combined to reach peak performance. For domains where a discourse parser is not available, the second aligns sequential sentences provides a close approximation.  

@@ -1,6 +1,6 @@
 
 \section{Extracting Cause-Effect Tuples}
-\label{sec:causalextraction}
+\label{sec-emnlp2016:causalextraction}
 %\vspace{-2mm}
 
 %Information extraction (IE) systems which are designed to extract events typically make use of either machine learning (ML) or hand-built rules or patterns.  %IE classifiers which use ML are generally considered to be either fully supervised (trained only on annotated data), semi-supervised (trained on a combination of labelled data and the data which is bootstrapped from it or by using a large database of pre-known event tuples), or unsupervised (when no labelled data is available for training).
@@ -86,7 +86,7 @@ Total		& 815,233 	\\
 \end{footnotesize}
 \caption{{\footnotesize Number of causal tuples extracted from each corpus.}} 
 \label{tab:causalstats}
-\vspace{-4mm}
+%space{-4mm}
 \end{center}
 \end{table}
 
@@ -103,8 +103,8 @@ Total		& 815,233 	\\
 Applying this causal grammar over Gigaword and Simple English Wikipedia produced %774,368 casual tuples, after stop-word and part-of-speech filtering.
 815,233 causal tuples, as summarized in Table~\ref{tab:causalstats}. As bootstrapping methods are typically noisy, we manually evaluated the quality of approximately 250 of these pairs selected at random.  Of the tuples evaluated, approximately 44\% contained some amount of noise. For example, from the sentence \emph{Except for Springer's show, which still relies heavily on confrontational topics that lead to fistfights virtually every day...}, while ideally we would only extract (\emph{confrontational topics $\rightarrow$ fistfights}), instead we extract the tuple (\emph{show which still relies heavily on confrontational topics} $\rightarrow$ \emph{fistfights virtually every day}), which contains a large amount of noise: \emph{show, relies, heavily}, etc.
 %\todo{Add one example here that is approximately wrong, that is, has some causality but is not ideal. This is to emphasize that, minimally, our tuples capture dist. sim.} 
-This finding prompted our noise-aware model described at the end of Section~\ref{sec:models}.
+This finding prompted our noise-aware model described at the end of Section~\ref{sec-emnlp2016:models}.
 
-%While this limiting of the rules greatly improved the quality of the extracted causal events, there is still a considerable amount of noise in the data -- a problem we discuss and address in Section \ref{sec:noise} \todo{noise section}. 
+%While this limiting of the rules greatly improved the quality of the extracted causal events, there is still a considerable amount of noise in the data -- a problem we discuss and address in Section \ref{sec-emnlp2016:noise} \todo{noise section}. 
 
 

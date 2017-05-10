@@ -5,12 +5,12 @@
 \caption{ Architecture of our question answering approach.  
 Given a question, candidate answer, and a free-text knowledge base as inputs, we generate a pool of candidate justifications, from which we extract feature vectors.  We use a neural network to score each and then use max-pooling to select the current best justification. This serves as the score for the candidate answer itself.  The red border indicates the components that are trained online. }
 \label{fig:arch_overall}
-\vspace{-5mm}
+%space{-5mm}
 \end{center}
 \end{figure}
 
 \section{Approach}
-\label{sec:approach}
+\label{sec-emnlp2017:approach}
 One of the primary difficulties with the explainable QA task addressed here is that, while we have supervision for the correct answer, we do not have annotated answer justifications.  
 Here we tackle this challenge by using the QA task performance as supervision for the justification reranking, allowing us to 
 %extending a neural QA model to jointly learn both how to 
@@ -25,13 +25,13 @@ Additionally, similar to the strategy Chen and Manning~\citeyear{chen2014fast} a
 % ms: avoid "system" too engineering-y
 The architecture of our approach is summarized in Figure \ref{fig:arch_overall}.  
 Given a question and a candidate answer, we first query an textual knowledge base (KB) to retrieve a pool of potential justifications for that answer candidate.  
-For each justification, we extract a set of features designed to model the relations between questions, answers, and answer justifications based on word embeddings, lexical overlap with the question and answer candidate, discourse, and information retrieval (IR) (Section \ref{sec:features}).
+For each justification, we extract a set of features designed to model the relations between questions, answers, and answer justifications based on word embeddings, lexical overlap with the question and answer candidate, discourse, and information retrieval (IR) (Section \ref{sec-emnlp2017:features}).
 These features are passed into a simple neural network to generate a score for each justification, given the current state of the model.  A final max-pooling layer selects the top-scoring justification for the candidate answer and this max score is used also as the score for the answer candidate.  
 The system is trained using correct-incorrect answer pairs with a pairwise margin ranking loss objective function to enforce that the correct answer be ranked higher than any of the incorrect answers. 
 
 %The key here is that we use the current state of the model to select the best justification for a given answer candidate from a pool of many candidate justifications.  To do this, we modify the training procedure such that at the start of each epoch \todo{minibatch instead of epoch?}, we first compute a forward pass with each candidate justification to find the top-scoring justification for each candidate answer.
 %For a given question, answer candidate, and justification, we combine features based on word embeddings, lexical overlap, discourse, and information retrieval (IR) together in a simple neural architecture to generate a score for the answer candidate.    We then use this selected justification to calculate our gradients for updating the model parameters.  
 
-With this end-to-end approach, the model learns to select justifications that allow it to correctly answer questions.  We hypothesize that this approach enables the model to indirectly learn to choose justifications that provide good explanations as to why the answer is correct. We empirically test this hypothesis in Section \ref{sec:results}, where we show that indeed the model learns to correctly answer questions, as well as to select high-quality justifications for those answers. 
+With this end-to-end approach, the model learns to select justifications that allow it to correctly answer questions.  We hypothesize that this approach enables the model to indirectly learn to choose justifications that provide good explanations as to why the answer is correct. We empirically test this hypothesis in Section \ref{sec-emnlp2017:results}, where we show that indeed the model learns to correctly answer questions, as well as to select high-quality justifications for those answers. 
 % ms: misleading; it reads as if answer selection is better than IR
 % better than a strong IR baseline. 
