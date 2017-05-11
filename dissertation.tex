@@ -44,6 +44,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
+\definecolor{common}{rgb}{0.13, 0.67, 0.8}
+\definecolor{omit}{rgb}{1.0, 0.25, 0.25}
+
 \usepackage{multirow}
 \usepackage{url}
 \usepackage{bm}
@@ -85,6 +88,7 @@
 \usepackage[bookmarks,colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
 
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\remove}[1]{\textcolor{omit}{OMIT?: #1}}
 \newcommand{\note}[1]{\textcolor{red}{#1}}
 \newcommand{\svmr}{{SVM$^{rank}$}}
 \newcommand{\code}[1]{{\tt {\small #1}}}
