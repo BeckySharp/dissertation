@@ -1,0 +1,48 @@
+\chapter{RELATED WORK\label{chapter:related_work}}
+
+
+\section{NAACL 2015 Related Work}
+\label{sec-naacl2015:related work}
+%\vspace{-2mm}
+
+
+Lexical semantic models have shown promise in bridging \citet{Berger:00}'s "lexical chasm."  In general, these models can be classified into alignment models \citep{echihabi2003noisy,Soricut:06,Riezler:etal:2007,Surdeanu:11,yao2013} which require structured training data, and language models ~\citep{jansen14,sultan-etal:2014:TACL,yih13}, which operate over free text.  Here, we close this gap in resource availability by developing a method to train an alignment model over free text by making use of discourse structures. 
+
+  
+  
+%  are focusing here on alignment models, which have shown great promise but also have previously been limited by availability of training data.  We address the need for larger amounts of high quality aligned pairs by investigating methods of imposing structure over free text.... Rhetorical Structure Theory (RST) discourse framework ~\cite{mann88}.
+
+Discourse has been previously applied to QA to help identify answer candidates that contain explanatory text (e.g. \citet{Verberne:2007}).
+%conducted an initial analysis of using discourse features derived from Rhetorical Structure Theory (RST)~\cite{mann88} for answer candidate selection, and concluded that while discourse features appeared useful, automated discourse parsing tools were required to test the idea on a larger scale.  
+Jansen et al. \citeyear{jansen14} proposed a reranking model that used both shallow and deep discourse features to identify answer structures in large answer collections across different tasks and genres.  Here we use discourse to impose structure on free text to create inexpensive knowledge resources for monolingual alignment. Our work is conceptually complementary to that of Jansen et al. -- where they explored largely unlexicalized discourse structures to identify explanatory text, we use discourse to learn lexicalized models for semantic similarity.
+
+Our work is conceptually closest to that of Hickl et al. \citeyear{hickl2006recognizing}, who created artificially aligned pairs for textual entailment.  Taking advantage of the structure of news articles, wherein the first sentence tends to provide a broad summary of the article's contents, Hickl et al. aligned the first sentence of each article with its headline.  By making use of automated discourse parsing, here we go further and impose alignment structure over an entire text.
+
+
+%Here, by imposing alignment structure using RST we are able to make use of an entire text instead of being limited to a single sentence.
+
+% --- EMNLP 2016
+%QA with dedicated component
+Addressing the need for %In the pursuit of %quest for building 
+specialized solving methods in QA, 
+Oh et. al~\citeyear{oh2013question} incorporate a dedicated causal component into their system, and note that it improves the overall performance.  However, their model is limited by the need for lexical overlap between a causal construction found in their knowledge base and the question itself.  Here, we develop a causal QA component that exploits specialized word embeddings to gain robustness to lexical variation.  
+%which can model the likelihood of a causal link between two texts even when the exact lexical items were never observed together in the knowledge base.
+
+% Embeddings in QA
+There has been a vast body of work which demonstrates that word embeddings derived from distributional similarity are useful in many tasks, including question answering -- see \emph{inter alia}~\mbox{\cite{fried2015higher,yih13}}.  However, Levy and Goldberg~\citeyear{levy2015supervised} note that there are limitations on the type of semantic knowledge which is encoded in these general-purpose similarity embeddings. 
+Therefore, here we build customized task-specific embeddings for causal QA.
+
+%% Customized embeddings
+Customized embeddings have been created for a variety of tasks, including semantic role labeling~\cite{fitzgerald2015semantic,woodsenddistributed}, and binary relation extraction ~\mbox{\cite{riedel2013relation}.}
+%% For example, with semantic role labelling, custom embeddings have been learned for semantic frames, their arguments, and the roles of the arguments (e.g. \cite{fitzgerald2015semantic,woodsenddistributed}).  Riedel et al.~\citeyear{riedel2013relation} used distant supervision to learn embeddings for binary relations and argument pairs to perform automated database completion.  
+%Like Riedel et al., we are interested in binary relations, but we train a dedicated embedding space for a single such relation, while they represent all relations in a single embeddding space.
+Similar to Riedel et al., we train embeddings customized for specific relations, but we bootstrap training data using minimal supervision (i.e., a small set of patterns) rather than relying on distant supervision and large existing knowledge bases.  Additionally, while Riedel et al. represent all relations in a general embedding space, here we train a dedicated embedding space for just the causal relations. 
+%\todo{remove: this is just text so that my citation doesn't fall across page boundaries, which makes latex cry}
+
+In QA, embeddings have been customized to have question words that are close to either their answer words~\cite{bordes2014question}, or to structured knowledge base entries~\cite{yang2014joint}.  While these methods are useful for QA, they do not distinguish between different types of questions, and as such their embeddings are not specific to a given question type.
+
+Additionally, embeddings have been customized to distinguish functional similarity from relatedness ~\cite{levy2014dependency,kielaspecializing}.
+In particular, Levy and Goldberg train their embeddings by replacing the standard linear context of the target word with context derived from the syntactic dependency graph of the sentence.  For example, when given the word \emph{turing}, wheras a traditional embeddings model returns top associates containing topically related words such as \emph{non-deterministic} and \emph{finite-state}, the dependency-based model returns other tests (i.e., \emph{pauling, hotelling,} and \emph{hamming}).
+In this work, we make use of this extension to arbitrary context in order to train our embeddings with contexts derived from binary causal relations.  We extract cause-effect text pairs such that the cause text becomes the \emph{target} text and the effect text serves as the \emph{context}. 
+
+Recently, Faruqui et al.\citeyear{faruqui2016problems} discussed issues surrounding the evaluation of similarity word embeddings, including the lack of correlation between their performance on word-similarity tasks and ``downstream'' or real-world tasks like QA, text classification, etc.  As they advocate, in addition to a direct evaluation of our causal embeddings, we also evaluate them independently in a downstream QA task.  We provide the same comparison for two alternative approaches (an alignment model and a convolutional neural network model), confirming that the direct evaluation performance can be misleading without the task-specific, downstream evaluation. 

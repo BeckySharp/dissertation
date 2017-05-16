@@ -2,7 +2,7 @@
 \label{sec-cl2017:introduction}
 
 
-To encourage a emphasis on the task of explainable inference for question answering (QA), Clark~\citeyear{clark:2015} introduced the Aristo challenge, a QA task focused on developing methods of automated inference capable of passing standardized elementary school science exams, while also providing human-readable explanations (or justifications) for those answers.  Science exams are an important proving ground for QA because inference is often required to arrive at a correct answer, and, commonly, incorrect answers that are high semantic associates of either the question or correct answer are included to ``lure'' students (or automated methods) away from the correct response.
+To encourage a emphasis on the task of explainable inference for question answering (QA), \citet{clark:2015} introduced the Aristo challenge, a QA task focused on developing methods of automated inference capable of passing standardized elementary school science exams, while also providing human-readable explanations (or justifications) for those answers.  Science exams are an important proving ground for QA because inference is often required to arrive at a correct answer, and, commonly, incorrect answers that are high semantic associates of either the question or correct answer are included to ``lure'' students (or automated methods) away from the correct response.
 %
 %  In spite of being multiple choice, these questions tend to be  more challenging than factoid QA, which is highly amenable to retrieval-based models that operate over large structured knowledge bases such as Freebase (e.g. \note{Liang?, etc}). \todo{The previous sentence must be defended.} Multiple choice exams also commonly contain "lure" answers -- incorrect answers that are high semantic associates of either the question or correct answer -- which further reduce the efficacy of retrieval or lexical semantic/associative methods. 
 %- Semantic Parsing for QA / Freebase (Percy Liang), much easier problem
@@ -12,7 +12,7 @@ To encourage a emphasis on the task of explainable inference for question answer
 %- Interesting proving ground for QA -- questions are challenging, and well-constructed multiple-choice questions typically have lure answers that are incorrect but are highly associated with either the question or correct answer, making shallow methods difficult (REF). 
 %
 Adding to the challenge, not only is inference required for science exams, but several kinds of inference are present.
-In an analysis of three years of standardized science exams, Clark et al.~\citeyear{clark:2013} identified three main categories of questions based on the methods likely required to answer them correctly. Examples of these questions can be seen in Table~\ref{tab:inferenceexamples}, highlighting that 65\% of questions require some form of inference to be answered.
+In an analysis of three years of standardized science exams, \citet{clark:2013} identified three main categories of questions based on the methods likely required to answer them correctly. Examples of these questions can be seen in Table~\ref{tab:inferenceexamples}, highlighting that 65\% of questions require some form of inference to be answered.
 
 %
 % Justification example (IR)
@@ -20,7 +20,7 @@ In an analysis of three years of standardized science exams, Clark et al.~\citey
 \begin{table*}[t]
 \caption{ 
 %Kinds of inference identified by Clark et al.~\citeyear{clark:2013}. Retrieval-based questions (including \emph{is-a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies, dictionaries, and property knowledge databases. 
-Categories of questions and their relative frequencies as identified by Clark et al.\protect \citeyear{clark:2013}. Retrieval-based questions (including \emph{is--a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies and dictionaries. 
+Categories of questions and their relative frequencies as identified by \citet{clark:2013}. Retrieval-based questions (including \emph{is--a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies and dictionaries. 
 More complex general inference questions make use of either simple inference rules that apply to a particular situation, a knowledge of causality, or a knowlege of simple processes (such as \emph{solids melt when heated}).
 Difficult model-based reasoning questions require a domain-specific model of how a process works, like how gravity causes planets to orbit stars, in order to be correctly answered.
 Note here that we do not include diagram questions, as they require specialized spatial reasoning that is beyond the scope of this work. 

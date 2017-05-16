@@ -23,7 +23,7 @@ Similar to Riedel et al., we train embeddings customized for specific relations,
 In QA, embeddings have been customized to have question words that are close to either their answer words~\cite{bordes2014question}, or to structured knowledge base entries~\cite{yang2014joint}.  While these methods are useful for QA, they do not distinguish between different types of questions, and as such their embeddings are not specific to a given question type.
 
 Additionally, embeddings have been customized to distinguish functional similarity from relatedness ~\cite{levy2014dependency,kielaspecializing}.
-In particular, Levy and Goldberg train their embeddings by replacing the standard linear context of the target word with context derived from the syntactic dependency graph of the sentence.  
+In particular, Levy and Goldberg train their embeddings by replacing the standard linear context of the target word with context derived from the syntactic dependency graph of the sentence.  For example, when given the word \emph{turing}, wheras a traditional embeddings model returns top associates containing topically related words such as \emph{non-deterministic} and \emph{finite-state}, the dependency-based model returns other tests (i.e., \emph{pauling, hotelling,} and \emph{hamming}).
 In this work, we make use of this extension to arbitrary context in order to train our embeddings with contexts derived from binary causal relations.  We extract cause-effect text pairs such that the cause text becomes the \emph{target} text and the effect text serves as the \emph{context}. 
 
 Recently, Faruqui et al.\citeyear{faruqui2016problems} discussed issues surrounding the evaluation of similarity word embeddings, including the lack of correlation between their performance on word-similarity tasks and ``downstream'' or real-world tasks like QA, text classification, etc.  As they advocate, in addition to a direct evaluation of our causal embeddings, we also evaluate them independently in a downstream QA task.  We provide the same comparison for two alternative approaches (an alignment model and a convolutional neural network model), confirming that the direct evaluation performance can be misleading without the task-specific, downstream evaluation. 
@@ -41,12 +41,9 @@ Recently, Faruqui et al.\citeyear{faruqui2016problems} discussed issues surround
 
 
 
-%--Causal Patterns?
-%Check http://www.aaai.org/Papers/FLAIRS/2002/FLAIRS02-071.pdf -- 
+%--Causal Patterns
 With respect to extracting causal relations from text, Girju et al.~\citeyear{girju2002text} use modified Hearst patterns~\cite{hearst1992automatic} to extract a large number of potential cause-effect tuples, where both causes and effects must be nouns.
-However, Cole et al.~\citeyear{cole2005lightweight} show that these nominal-based causal relations account for a relatively small percentage of all causal relations, 
-%demonstrating the need for more complex structures, %patterns which allow nesting -- where entire events can serve as the cause and/or effect arguments of the causal event.  
-and for this reason, \cite{yang2014multi} allow for more elaborate argument structures in their causal extraction by identifying verbs, and then following the syntactic subtree of the verbal arguments to construct their candidate causes and effects. %, then they are classifying them as causal or not. Evaluated on small set of sentences (300) with 227 of them containing some sort of a causal relation.
+However, Cole et al.~\citeyear{cole2005lightweight} show that these nominal-based causal relations account for a relatively small percentage of all causal relations, and for this reason, \cite{yang2014multi} allow for more elaborate argument structures in their causal extraction by identifying verbs, and then following the syntactic subtree of the verbal arguments to construct their candidate causes and effects. 
 Additionally, Do et al.~\citeyear{do2011minimally} observe that nouns as well as verbs can signal causality.  
 We follow these intuitions in developing our causal patterns by using both nouns and verbs to signal potential participants in causal relations, and then allowing for the entire dominated structures to serve as the cause and/or effect arguments.
 
@@ -58,15 +55,3 @@ We follow these intuitions in developing our causal patterns by using both nouns
 %Further, inspired by bootstrapping literature~\cite{riloff1996automatically}, we rank the extracted tuples by their likelihood of being noisy using a formula driven by mutual information, and %adjust the training process of the embedding models to use this information.
 %}
 
-%We also use a small number of patterns to bootstrap cause-effect tuples, -- doing SVO only though.  They describe verb triggers in terms of ambiguity and frequency.  
-
-%Empirically, as the main source text (news articles) was not explicitly causal in nature, we found that restricting our set of trigger verbs dramatically decreased the noise in the data, though it was still prevalent.
-
-
-%http://ac.els-cdn.com/S0957417414003303/1-s2.0-S0957417414003303-main.pdf?_tid=7d2c9902-1de7-11e6-855b-00000aab0f27&acdnat=1463679258_2172b77d0c8253d3ead913161fb4e208
-
-%http://llc.oxfordjournals.org/content/13/4/177.full.pdf+html
-
-
-% ms: no space for an extended discussion...
-% \todo{noise -- if it works}
