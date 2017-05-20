@@ -111,9 +111,97 @@ Crucially, these reranked texts serve as our human-readable answer justification
 
 \address{Lure answers}
 
+To encourage a emphasis on the task of explainable inference for question answering (QA), \citet{clark:2015} introduced the Aristo challenge, a QA task focused on developing methods of automated inference capable of passing standardized elementary school science exams, while also providing human-readable explanations (or justifications) for those answers.  Science exams are an important proving ground for QA because inference is often required to arrive at a correct answer, and, commonly, incorrect answers that are high semantic associates of either the question or correct answer are included to ``lure'' students (or automated methods) away from the correct response.
+%
+%  In spite of being multiple choice, these questions tend to be  more challenging than factoid QA, which is highly amenable to retrieval-based models that operate over large structured knowledge bases such as Freebase (e.g. \note{Liang?, etc}). \todo{The previous sentence must be defended.} Multiple choice exams also commonly contain "lure" answers -- incorrect answers that are high semantic associates of either the question or correct answer -- which further reduce the efficacy of retrieval or lexical semantic/associative methods. 
+%- Semantic Parsing for QA / Freebase (Percy Liang), much easier problem
+%
+%-- Science exams as a challenging QA problem
+%- More than just factoid lookup, despite being multiple choice
+%- Interesting proving ground for QA -- questions are challenging, and well-constructed multiple-choice questions typically have lure answers that are incorrect but are highly associated with either the question or correct answer, making shallow methods difficult (REF). 
+%
+Adding to the challenge, not only is inference required for science exams, but several kinds of inference are present.
+In an analysis of three years of standardized science exams, \citet{clark:2013} identified three main categories of questions based on the methods likely required to answer them correctly. Examples of these questions can be seen in Table~\ref{tab:inferenceexamples}, highlighting that 65\% of questions require some form of inference to be answered.
+
+%
+% Justification example (IR)
+%
+\begin{table*}[t]
+\caption{ 
+Categories of questions and their relative frequencies as identified by \citet{clark:2013}. Retrieval-based questions (including \emph{is--a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies and dictionaries. 
+More complex general inference questions make use of either simple inference rules that apply to a particular situation, a knowledge of causality, or a knowledge of simple processes (such as \emph{solids melt when heated}).
+Difficult model-based reasoning questions require a domain-specific model of how a process works, like how gravity causes planets to orbit stars, in order to be correctly answered.
+Note here that we do not include diagram questions, as they require specialized spatial reasoning that is beyond the scope of this work. 
+}
+\begin{center}
+
+\small
+
+\begin{tabularx}{\textwidth}{p{2cm}p{5cm}p{5.9cm}}
+\hline
+Category &	\multicolumn{2}{l}{Example} \\
+\hline
+Retrieval	&	\multicolumn{2}{l}{Q: The movement of soil by wind or water is called:} \\
+(35\%)		&   (A) condensation   	&	(B) evaporation   \\
+			&	(C) erosion   		&	(D) friction \\
+\\
+General 	&	\multicolumn{2}{l}{Q: Which example describes an organism taking in nutrients?} \\
+Inference	&   (A) A dog burying a bone			&   (B) A girl eating an apple	\\
+(39\%)		&	(C) An insect crawling on a leaf	&  (D) A boy planting tomatoes in the garden  \\
+\\
+Model-based & 	\multicolumn{2}{l}{Q: When a baby shakes a rattle, it makes a noise. Which form of energy was} \\
+Inference	& 	\multicolumn{2}{l}{changed to sound energy?} \\
+(26\%)		&	(A) electrical	&   (B) light   \\
+			&	(C) mechanical	&   (D) heat  \\
+			
+\end{tabularx}
+
+
+
+\label{tab:inferenceexamples}
+%space{-5mm}
+\end{center}
+\end{table*}
+
+
+%-- Approximate Inference/Continuum
+%- benefits/drawbacks
+%- Alignment/Lexical semantic end: Robust but lacks justifications
+%- First-order Logic end: Brittle, but provably correct justifications
+%- Meeting in the middle (relax FOL, or impose more structure into LS)
+
+
+%-- Justifications as central to question answering
+%- In many applications, answering without justifications is pointless
+%- Example (medical -- you need surgery, but not explain why)
+%- Model QA as generating and evaluating explanations/justifications for why a particular answer candidate is correct
+
+We propose a QA approach that jointly addresses answer extraction and justification.
+We believe that justifying why the QA algorithm believes an answer is correct is, in many cases, a critical part of the QA process.
+% -- in some cases perhaps more important than the answer itself.  
+For example, in the medical domain, a user would not trust a system that recommends invasive procedures without giving a justification as to why (e.g., ``Smith (2005) found procedure \emph{X} healed 90\% of patients with heart disease who also had secondary pulmonary complications'').  A QA tool is clearly more useful when its human user can identify both when it functions correctly, and when it delivers an incorrect or misleading result -- especially in situations where incorrect results carry a high cost.  
+
+
+%-- Reframing QA as a generating and evaluating explanations/justifications for why a particular answer candidate is correct
+
+To address these issues, here we reframe QA from the task of scoring (or reranking) answers to 
+a process of \emph{generating and evaluating justifications} for why a particular answer candidate is correct. 
+We focus on answering science exam questions, where many questions require complex inference, and building and evaluating answer justifications is challenging. 
+
 \address{To get a complete and valid explanation for selection of answer choice, may need to aggregate info from multiple distinct resources}
 
 \address{For aggregation, to prevent semantic drift, use structured representations (parts of CL2017)}
+In particular, we construct justifications by {\em aggregating} multiple sentences from a number of textual knowledge bases (e.g., study guides, science dictionaries), which, in combination, aim to explain the answer.
+We then rank these candidate justifications based on a number of measures designed to assess how well integrated, relevant, and on-topic a given justification is, and select the answer that corresponds to the highest-ranked justification.
+
+
+
+
+
+
+
+
+
 
 \address{Robustness - shallower, no structure, learned representations (EMNLP2017-hopeful)}
 
@@ -171,7 +259,29 @@ With supervision only for the correct answers, we learn this re-ranking through 
 \end{enumerate}
 % end paste from emnlp2017 -------------------------
 
+% end paste from cl2017 --------------------------
+The specific contributions of this work are: 
 
+\begin{enumerate}
+\item We propose a method to construct answer justifications through information aggregation (or fusion). 
+In particular, we aggregate multiple sentences into hierarchical graph structures (called text aggregation graphs) that capture both intrasentence syntactic structures and intersentence lexical overlaps. 
+Further, we model whether the intersentence lexical overlap is between contextually relevant keywords critical to the justification, or other words which may or may not be relevant. 
+Our empirical analysis demonstrates that modeling the contextual relevance of intersentence connections is crucial for good performance.  These requirements highlight the fundamental differences between selecting a single answer sentence or short passage in an answer sentence selection task~\cite[inter alia]{Severyn:12,Severyn:13a,Severyn:13b}, and the task of generating complete answer justifications through information aggregation. 
+
+
+\item 
+We introduce a latent-variable ranking perceptron algorithm that learns to jointly rank answers and justifications, where the quality of justifications is modeled as the latent variable. 
+%Manually annotating the quality of thousands of candidate answer justifications (per question) is an intractable task.  We demonstrate that it is possible to model answer justification quality as a latent variable, and extend a ranking perceptron to incorporate this latent information and learn to preferentially rerank high-quality answer justifications automatically. 
+
+\item 
+We evaluate our system on a large corpus of 1,000 elementary science exam questions from third to fifth grade, and demonstrate that our system significantly outperforms several strong learning-to-rank baselines at the task of choosing the correct answer.  Further, we manually annotate answer justifications provided by the best baseline model and our intersentence aggregation method, and show that the intersentence aggregation method produces good justifications for 57\% of questions answered correctly, significantly outperforming the best baseline method. 
+
+\item Through an in-depth error analysis we show that most of the issues encountered by the intersentence aggregation method center on solvable surface issues rather than complex inference issues.  To our knowledge, this is the largest evaluation and most in-depth error analysis for explainable inference in the context of elementary science exams. 
+
+
+\end{enumerate}
+
+% end paste from cl2017 --------------------------
 
 \section{Overview\label{sec:overview}}
 
