@@ -1,0 +1,64 @@
+%\usepackage{placeins}
+%\usepackage{times}
+%\usepackage{latexsym}
+%\usepackage{amsmath}
+%\usepackage{fancyvrb, fancyhdr, theorem, latexsym, color, longtable}
+%\usepackage{multirow}
+%\usepackage{url}
+%\usepackage{bm}
+%\usepackage{amssymb}
+%
+%\usepackage{fixltx2e}
+%\usepackage{tabularx}
+%\usepackage{hyperref}
+%\usepackage{graphicx}
+%
+%%\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+%%\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+%
+%%\usepackage[algo2e,lined]{algorithm2e}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%
+%\usepackage{color}
+%\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+%\newcommand{\note}[1]{\textcolor{red}{#1}}
+%\newcommand{\svmr}{{SVM$^{rank}$}}
+%\newcommand{\code}[1]{{\tt {\small #1}}}
+%\newcommand{\qn}{{{\bf Q}$^\textbf{{\small N}}$}}
+%\newcommand{\ssa}{{{\scriptsize $^{*}$}}}
+
+
+%\runningtitle{Framing QA as Creating and Ranking Intersentence Answer Justifications}
+
+%\runningauthor{Jansen et al.}
+%Kinds of inference identified by Clark et al.~\citeyear{clark:2013}. Retrieval-based questions (including \emph{is-a}, dictionary definition, and property identification questions) tend to be answerable using information retrieval methods over structured knowledge bases, including taxonomies, dictionaries, and property knowledge databases. 
+
+
+%\title{Framing QA as Building and Ranking Intersentence Answer Justifications}
+
+%\author{Another Author\thanks{thanks}}
+
+%\begin{abstract}
+%We propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces compelling human-readable justifications for why those answers are correct. 
+%Our method first identifies the actual information need in a question using psycholinguistic concreteness norms, then uses this information need to construct answer justifications by aggregating multiple sentences from different knowledge bases using syntactic and lexical information.  We then jointly rank answers and their justifications using a reranking perceptron that treats justification quality as a latent variable.  We evaluate our method on 1,000 multiple-choice questions from elementary school science exams, and empirically demonstrate that it performs better than several strong baselines, including neural network approaches. Our best configuration answers 44\% of the questions correctly, where the top justifications for 57\% of these correct answers contain a compelling human-readable justification that explains the inference required to arrive at the correct answer.  We include a detailed characterization of the justification quality for both our method and a strong baseline, and show that information aggregation is key to addressing the information need in complex questions. 
+%\end{abstract}
+
+\chapter{CL2017 - TAG\label{chapter:cl2017}}
+
+\input{mainmatter/tacl2015-tig/cl2017_introduction}
+\input{mainmatter/tacl2015-tig/cl2017_relatedwork}
+\input{mainmatter/tacl2015-tig/cl2017_approach}
+\input{mainmatter/tacl2015-tig/cl2017_focuswords}
+\input{mainmatter/tacl2015-tig/cl2017_tig}
+\input{mainmatter/tacl2015-tig/cl2017_perceptron}
+\input{mainmatter/tacl2015-tig/cl2017_results}
+\input{mainmatter/tacl2015-tig/cl2017_discussion}
+\input{mainmatter/tacl2015-tig/cl2017_erroranalysis}
+\input{mainmatter/tacl2015-tig/cl2017_conclusion}
+
+%\newpage
+%\starttwocolumn
+%\bibliographystyle{fullname}
+%\bibliography{refs}
+
