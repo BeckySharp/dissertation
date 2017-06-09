@@ -1,3 +1,29 @@
+%Monolingual alignment models have been shown to boost the performance of question answering systems by "bridging the lexical chasm" between questions and answers.
+
+
+\section{Alignment for question answering}
+\label{sec-naacl2015:intro}
+%\section{NAACL 2015 Related Work}
+%\label{sec:related_work_naacl2015}
+%\vspace{-2mm}
+
+
+For the task of question answering (QA), lexical semantic models have shown promise in bridging \citet{Berger:00}'s "lexical chasm," or the lack of lexical overlap between questions and their answers.  In general, these models can be classified into alignment models \citep{echihabi2003noisy,Soricut:06,Riezler:etal:2007,Surdeanu:11,yao2013}, which are based on the repurposing of machine translation models to operate over aligned question-answer pairs within a single language (and hence require structured training data), and language models ~\citep{jansen14,sultan-etal:2014:TACL,yih13}, which operate over free text.  
+This training data requirement of alignment models is their main limitation, as it is difficult to obtain in specialized domains or low-resource languages.
+In this Chapter, we focus on closing this gap in resource availability by proposing two inexpensive methods for training alignment models solely using free text by generating artificial question-answer pairs from discourse structures. 
+%Our approach is driven by two representations of discourse: a shallow sequential representation, and a deep one based on Rhetorical Structure Theory. 
+%Here, we focus on closing this gap in resource availability by developing a method to train an alignment model over free text by making use of discourse structures. 
+
+Discourse has been previously applied to QA to help identify answer candidates that contain explanatory text (e.g. \citet{Verberne:2007} \todo{check ref} conducted an initial analysis of using discourse features derived from Rhetorical Structure Theory (RST)~\cite{mann88} for answer candidate selection, and concluded that while discourse features appeared useful, automated discourse parsing tools were required to test the idea on a larger scale.  
+Jansen et al. \citeyear{jansen14} proposed a reranking model that used both shallow and deep discourse features to identify answer structures in large answer collections across different tasks and genres.  Here we use discourse to impose structure on free text to create inexpensive knowledge resources for monolingual alignment. Our work is conceptually complementary to that of Jansen et al. -- where they explored largely unlexicalized discourse structures to identify explanatory text, we use discourse to learn lexicalized models for semantic similarity.
+
+Our work is conceptually closest to that of Hickl et al. \citeyear{hickl2006recognizing}, who created artificially aligned pairs for textual entailment.  Taking advantage of the structure of news articles, wherein the first sentence tends to provide a broad summary of the article's contents, Hickl et al. aligned the first sentence of each article with its headline.  By making use of automated discourse parsing, here we go further and impose alignment structure over an entire text.
+
+\subsection{Chapter overview}
+
+The remainder of this Chapter is organized as follows.  In Section \ref{sec-naacl2015:approach} we describe our two approaches to generating artificially aligned text pairs at a high level.  Then, in Section \ref{sec-naacl2015:models} we describe our models and model features in more detail.  In Section \ref{sec-naacl2015:experiments} we detail the experimental setup used to evaluate the proposed models on two corpora from different genres and domains: one from Yahoo! Answers and one from the biology domain, and two types of non-factoid questions: manner and reason. In Section \ref{sec-naacl2015:results} we provide the results, showing that these alignment models trained directly from discourse structures imposed on free text
+improve performance considerably over an information retrieval baseline and a neural network language model trained on the same data.  Finally, in Section \ref{sec-naacl2015:conclusion} we draw conclusions about our approach.
+
 %
 % Example of alignment models
 %

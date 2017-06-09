@@ -25,7 +25,7 @@
 %%Importantly, we also show that the results of these two evaluations are \emph{not} identical: a given model's performance on the direct evaluation does not necessarily transfer to the more complex, real-world QA task.  
 %\end{abstract}
 
-\chapter{EMNLP2016 - CAUSAL EMBEDDINGS\label{chapter:emnlp2016}}
+\chapter{Creating Causal Embeddings for Question Answering \\with Minimal Supervision \label{chapter:emnlp2016}}
 
 
 
@@ -39,7 +39,8 @@
 \input{mainmatter/emnlp2016-causal/emnlp2016_qa}
 
 %\vspace{-1mm}
-\section{Conclusion}
+\section{Conclusions}
+\label{sec-emnlp2016:conclusion}
 %\vspace{-1mm}
 We presented a framework for creating customized embeddings tailored to the information need of causal questions.  We trained three popular models (embedding, alignment, and CNN) using causal tuples extracted with minimal supervision by bootstrapping cause-effect pairs from free text, and evaluated their performance both directly (i.e., the degree to which they capture causality), and indirectly (i.e., their real-world utility on a high-level question answering task). 
 
@@ -50,6 +51,8 @@ Our analysis suggests that the models that perform best in the real-world QA tas
 In QA, where the vocabulary is much larger, precision must be balanced with high-recall, and this is best achieved by our causal embedding model.  Additionally, we showed that vanilla and causal embedding models address different information needs of questions, and can be combined to improve performance. 
 
 Extending this work beyond causality, we hypothesize that additional embedding spaces customized to the different information needs of questions would allow for robust performance over a larger variety of questions, and that these customized embedding models should be evaluated both directly and indirectly to accurately characterize their performance. 
+
+\todo{tie into next chapter -- need for interpretability}
 
 %We introduced a methodology for producing causal embedding models cost-effectively by bootstrapping cause-effect pairs extracted from free text using a small set of seed patterns, and then training dedicated embedding models over this data using task-specific contexts, i.e., where the context of a cause is its effect. We then used these causal embedding models to implement a dedicated reranking model for causal QA. 
 

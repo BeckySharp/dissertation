@@ -26,7 +26,7 @@ We tested our approach in two different domains, open-domain and cellular biolog
 %{\flushleft {\bf Annotated gigaword \todo{CITE}(AGiga)}}: After discourse parsing AGiga in its entirety, we randomly selected 10 files.  From each we made 12 samples that exponentially increased in size, from 1 document up to 10,000.~\footnote{The larger samples contained the same documents as the smaller samples from the same file so as to represent consistently growing knowledge.}  
 %{\flushleft {\bf Campbells}}:For Bio, Campbell's textbook was divided at the subsection level, discarding any subsection consisting of only a single sentence, for a total of 2686 subsections.  These subsections were shuffled to generate 10 random permutations and 10 samples exponentially increasing in number of subsections were made from each.  
 
-\subsection{Results and Discussion}
+\section{Results and Discussion}
 \label{sec-naacl2015:results}
 
 \begin{figure}[t!]
@@ -171,10 +171,9 @@ We propose two inexpensive methods for training alignment models using solely fr
 %Using a RST discourse parser, one method generates both intrasentence and intersentence alignments that can be combined to reach peak performance. For domains where a discourse parser is not available, the second aligns sequential sentences provides a close approximation.  
 %Both of these models offer methods for low-resource domains where training data is expensive and/or limited. 
 Our experiments indicate that these methods are a viable solution for constructing state-of-the-art QA systems for low-resource domains, or languages where training data is expensive and/or limited.  Since alignment models have shown utility in other tasks (e.g. textual entailment), we hypothesize that these methods for creating inexpensive and highly specialized training data could be useful for tasks other than QA.  
+Our generation tool, {\tt Straw2Gold}, is available at: {\small \url{http://nlp.sista.arizona.edu/releases/straw2gold}}.
 
-%% Cut for space
-%Our generation tool, {\tt Straw2Gold}, is available at: {\small \url{http://nlp.sista.arizona.edu/releases/straw2gold}}.
-
+A limitation of this approach, like most lexical semantic approaches, is its application of the same set of alignments to all questions.  As summarized in Table \ref{tab:inferenceexamples}, however, question sets are not uniform, but rather contain a variety of question types which require different types of inference to answer.  In Chapter \ref{chapter:emnlp2016} we propose a framework for addressing this limitation within the lexical semantic framework, by training a lexical semantic model for a specific relation. 
 %Future work should be done to determine the extent of immediate application as well as ways to refine the methods for these other uses.
 
 
@@ -187,9 +186,3 @@ Our experiments indicate that these methods are a viable solution for constructi
 
 %After a rapid increase, the performance in YA quickly levels off relative to the amount of input for training.~\footnote{Only a fraction of 1 file is used to achieve the maximal performance for the alignment models.  In pilot experiments, including as many as 20 files did not improve performance. }  This may be a result of a decrease in the signal to noise ratio.  Unlike YA, gigaword is within the news domain.  As more and mode documents are added to training, perhaps the model becomes too far biased towards news to continue to increase performance.  If more sophisticated techniques are implemented, such as topic filtering, potentially the performance in this domain could be even higher.  We don't see the same plateau effect with Bio that we do with YA.  Likely this is due to the fact that the in-domain texbook for Bio was much smaller than gigaword.  
 
-%\todo{strong close}
-%---------------------------------------OLD
-%when all 10,000 documents are used for training, the models have similar performance.  The asymptotic behavior of the RST and SEQ models is rendered in Figure \ref{fig:performance} and in (hidden for review) the RNNLM is also shown to plateau around 30\% P@1 even when all of gigaword is used to train the vectors.~\footnote{Only a fraction of one file is used to achieve this performance plateau for the alignment models.  In pilot experiments we found that including up to 20 files does not improve performance though it does drastically affect runtime.}.  When fewer documents are used, however, the gap in performance is substantial.  
-%Additionally, though not demonstrated with our experimental design, rather than surpass the alignment model performance the RNNLM has been shown to plateau around 30\% P@1 even when all of gigaword is used to train the vectors (hidden for review).    
-
-%In the YA task, with all 10,000 documents the average performance for the RST model was 28.98\% , for the SEQ model it was 28.53(48.75\% and 46.45\% relative over the CR baseline respectively~\footnote{Only a fraction of 1 file is used to achieve this performance plateau for the alignment models and including up to 20 \emph{files} does not improve performance though it does drastically affect runtime. }.  While the RNNLM reaches the peak results of the alignment models when all 10,000 documents are used (49.44\% relative over CR baseline), when fewer are available the gap in performance is substantial.  \todo{p-values for everything}.  Additionally, though not demonstrated with our experimental design, rather than surpass the alignment model performance the RNNLM has been shown to plateau around 30\% P@1 even when all of gigaword is used to train the vectors (hidden for review).  
