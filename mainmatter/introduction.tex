@@ -48,12 +48,14 @@ For low-resource languages or specialized domains like science or biology, often
 
 %\address{We propose a method for generating artificial training data (can be thought of as a form of distant supervision?? If you squint?) (NAACL2015)}
 % naacl2015 intro
-Making use of recent advancements in discourse parsing \citep{feng12}, in Chapter \ref{chapter:naacl2015} we address this issue, and investigate whether alignment models for QA can be trained from \emph{artificial} question-answer pairs generated from discourse structures imposed on free text. This method can be thought of as a form of distant supervision, as we don't have true labels for which free-text pairs are truly high-quality proxies for question-answer pairs.
+Making use of recent advancements in discourse parsing \citep{feng12}\footnote{Discourse parsing involves the segmentation of text into adjacent spans which are then recursively joined and assigned both a direction (which span is the head, and which is the dependent) and a label (e.g., \emph{elaboration}, \emph{contrast}, \emph{attribution}, etc).}  
+in Chapter \ref{chapter:naacl2015} we address this issue, and investigate whether alignment models for QA can be trained from \emph{artificial} question-answer pairs generated from discourse structures  imposed on free text.  Specifically we align the head and the dependent of each discourse relation in lieu of a question and answer. 
+This method can be thought of as a form of distant supervision, as we don't have true labels for which free-text pairs are truly high-quality proxies for question-answer pairs.
 % by imposing structure on inexpensive free text resources instead of using QA pairs.  
 We evaluate our methods on two corpora, generating alignment models for an open-domain community QA task using Gigaword\footnote{LDC catalog number LDC2012T21}, and for a biology-domain QA task using a biology textbook. 
 
 
-\subsection{Customizing approaches to the question type}
+\subsection{Customizing approaches to a specific question type}
 \label{sec:intro_emnlp2016}
 %\address{Diff info needs and so the “manner” by which the lexical chasm is bridged should hopefully be robust to that}
 
@@ -62,9 +64,9 @@ While appealing for its robustness to natural language variation, this one-size-
 
 %These don’t address diff types of inference/info needs:
 %\address{We propose a framework for learning customized alignments/associations for a specific info need using semi-supervised methods (EMNLP2016)}
-Given the variety of question types, we suggest that a better approach is to look for answers that are related to the question \emph{through the appropriate relation}, e.g., a causal question should have a cause-effect relation with its answer.
+Given the variety of question types, we suggest that a better approach is to look for answers that are related to the question \emph{through the appropriate relation}, e.g., a causal question, should have a cause-effect relation with its answer.  For example, to score a candidate answer for a question such as \emph{What do hurricanes cause?}, while general purpose word associations would give a high score to a sentences containing near associates such as \emph{tornadoes} and \emph{tropical storms}, we suggest that a better approach would be using a set of relation-specific word associations that would provide high scores for words that are in a cause-effect relation with \emph{hurricane}, such as \emph{flooding} or \emph{damage}.
 Adopting this view, and working with embeddings as a mechanism for assessing relationship, in Chapter \ref{chapter:emnlp2016} we address a key question: how do we train and use task-specific embeddings cost-effectively? 
-Using causality as a use case, we answer this question with a framework for producing causal word embeddings with minimal supervision, and a demonstration that such task-specific embeddings significantly benefit causal QA. 
+Using causality as a use case, we answer this question with a framework for producing causal word embeddings, i.e., a set of word embeddings which encode causality rather than similarity, with minimal supervision, and a demonstration that such task-specific embeddings significantly benefit causal QA. 
 
 \section{Interpretability}
 \label{sec:interpretability}
@@ -86,7 +88,8 @@ For many applications of question answering (QA), simply providing an answer (or
 For example, in the medical domain, a user would not trust a system that recommends invasive procedures without giving a justification as to why (e.g., ``Smith (2005) found procedure \emph{X} healed 90\% of patients with heart disease who also had secondary pulmonary complications'').  A QA tool is clearly more useful when its human user can identify both when it functions correctly, and when it delivers an incorrect or misleading result -- especially in situations where incorrect results carry a high cost.  
 %For example, in the medical domain, a QA approach that answers treatment questions would not be trusted if the treatment recommendation is not explained in terms that can be understood by the human user. 
 
-One approach to interpreting complex models is to make use of human-interpretable information generated by the model to gain insight into what the model is learning.  This can be an intermediate representation used by the model, as with the model-generated text spans of \citet{Lei2016RationalizingNP}, that serve as input to another classification network.  
+One approach to interpreting complex models is to make use of human-interpretable information generated by the model to gain insight into what the model is learning.  
+We follow the intuition of \citet{Lei2016RationalizingNP}, whose two-component network first generates text spans from an input document, and then uses these text spans to make predictions.   \citeauthor{Lei2016RationalizingNP} utilize these intermediate text spans to infer the model's preferences.
 By learning these intermediate representations end-to-end with a downstream task (i.e., question answering or another task that the user is interested in), they are optimized to correlate with what the model learns is discriminatory for the task, and they can be evaluated against what a human would consider to be important.  
 
 \subsection{Multiple choice science questions as a proving ground}
@@ -149,11 +152,20 @@ In addition to the general difficulties of QA previously described, this particu
 \subsection{Reranking justifications with weak supervision}
 \label{sec:reranking_justifications}
 
-Within the domain of multiple-choice science QA, we propose two approaches that reframe QA from the task of scoring (or reranking) answers to a process of \emph{generating and evaluating justifications} for why a particular answer candidate is correct.  The first approach (Chapter \ref{chapter:cl2017}) uses aggregation of information from several sources along with structured representations of the text to create justifications of the answer choices.  The second (Chapter \ref{chapter:emnlp2017}) uses a shallower approach without aggregation or structured representations, allowing it to operate over larger text resources.  Each of these approaches learn to both select and explain answers, when the only supervision available is for which answer is correct (but not how to explain it).
-Intuitively, our approaches choose the justifications that provide the most help towards ranking the correct answers higher than incorrect ones.
+Within the domain of multiple-choice science QA, we propose two approaches that reframe QA from the task of scoring (or reranking) answers to a process of \emph{generating and evaluating justifications} for why a particular answer candidate is correct.  
+Each of these approaches learn to both select and explain answers, when the only supervision available is for which answer is correct (but not how to explain it).
+Intuitively, our approaches choose the justifications that provide the most help towards ranking the correct answers higher than incorrect ones.  
 More formally, our approaches alternate between using the current model to choose the highest scoring justifications for answers, and optimizing the answer ranking model given these justifications. 
-Crucially, these reranked texts serve as our human-readable answer justifications, and by examining them, we gain insight into what the model learned was useful for the QA task. 
+Thus, for both of these approaches, for each question and candidate answer we gather (or create) a pool of potential justifications.  Then we allow the model to learn how to rerank these justifications such that the highest-scoring justification for the correct answer is better than the highest-scoring justification for any of the incorrect answers.   
+Crucially, for both approaches, these reranked texts serve as our human-readable answer justifications, and by examining them, we gain insight into what the model learned was useful for the QA task. 
 
+The first approach (Chapter \ref{chapter:cl2017}) uses aggregation of information from several sources along with structured representations of the text to create justifications of the answer choices.  
+In particular, we aggregate multiple sentences into hierarchical graph structures (called text aggregation graphs, Section \ref{sec-cl2017:tag}) that capture both intrasentence syntactic structures and intersentence lexical overlaps. 
+Further, we model whether the intersentence lexical overlap is between contextually relevant keywords critical to the justification, or other words which may or may not be relevant. 
+
+The second (Chapter \ref{chapter:emnlp2017}) uses a shallower approach without aggregation or structured representations.  In this shallow approach, we consider only justifications which are single sentences from a corpus and we replace the graph representation of sentences with embeddings and a small set of explicit features (that model lexical overlap, length, etc).  These changes allow us to operate over larger text resources.  
+
+Despite the differences between these two approaches, however, each allows us to address the challenge of question answering while prioritizing interpretability of the model.
 
 %------end paste from emnlp 2017--------------------------
 
@@ -242,7 +254,7 @@ Crucially, these reranked texts serve as our human-readable answer justification
 \section{Contributions}
 \label{sec:Contributions}
 
-The specific contributions of this work are:
+With this work we tackle the challenging task of question answering, seeking methods which balance the (sometimes conflicting) demands of robustness and interpretability.  We  address these challenges with four approaches.  In particular, the specific contributions of this work are:
 
 
 % naacl 2015
@@ -250,8 +262,8 @@ The specific contributions of this work are:
 We demonstrate that by exploiting the discourse structure of free text, monolingual alignment models can be trained to surpass the performance of models built from expensive in-domain question-answer pairs.  To this end, we compare two methods of discourse parsing: a simple sequential model, and a deep model based on Rhetorical Structure Theory (RST)~\citep{mann88} and show that the RST-based method captures within and across-sentence alignments and performs better than the sequential model, but the sequential model is an acceptable approximation when a discourse parser is not available.  The proposed methods are evaluated on two corpora, including a low-resource domain where training data is expensive (biology). We experimentally demonstrate that monolingual alignment models trained using our method considerably outperform state-of-the-art neural network language models in low resource domains.
 
 % emnlp 2016
-\subsection{Contribution 2: Generating customized, task-specific word embeddings based on the question type} We propose a methodology for generating causal word-embeddings cost-effectively by bootstrapping cause-effect pairs extracted from free text using a small set of seed patterns, e.g., {\em X causes Y}. 
-We then train dedicated word embedding (as well as two other distributional similarity) models over this data. \citet{levy2014dependency} have modified the algorithm of\citet{mikolov2013distributed} to use an arbitrary, rather than linear, context. Here we make this context \emph{task-specific}, i.e., the context of a cause is its effect.
+\subsection{Contribution 2: Generating customized, task-specific word embeddings based on the question type} We propose a methodology for generating causal word-embeddings (encoding causality rather than similarity) cost-effectively by bootstrapping cause-effect pairs extracted from free text using a small set of seed patterns, e.g., {\em X causes Y}. 
+We then train dedicated causal word embedding (as well as two other distributional similarity) models over this data. \citet{levy2014dependency} have modified the algorithm of\citet{mikolov2013distributed} to use an arbitrary, rather than linear, context. Here we make this context \emph{task-specific}, i.e., the context of a cause is its effect.  That is, for a word like \emph{hurricane} in the sentence \emph{The hurricane caused extensive flooding and damage}, we replace the standard sliding window context (\emph{the, caused}, and \emph{extensive}) with the words which are the effects: \emph{flooding} and \emph{damage}. 
 Further, to mitigate sparsity and noise, our models are bidirectional, and noise-aware (by incorporating the likelihood of noise in the training process). 
 We implement a QA system that uses these causal embeddings to answer questions and demonstrate that they significantly improve performance over a strong baseline. Further, we show that causal embeddings encode complementary information to the standard (or \emph{vanilla}) word-embeddings, even when trained from the same knowledge resources. 
 We also analyze direct vs. indirect evaluations for task-specific word embeddings -- evaluating our causal models both  {\em directly}, in terms of measuring their capacity to rank causally-related word pairs over word pairs of other relations, as well as {\em indirectly} in the downstream causal QA task. 
@@ -259,17 +271,15 @@ In both tasks, our analysis indicates that including causal models significantly
 However, from the direct evaluation, it is difficult to estimate which models will perform best in real-world tasks. Our analysis re-enforces recent observations about the limitations of word similarity evaluations~\citep{faruqui2016problems}: we show that they have limited coverage and may align poorly with real-world tasks.
 
 % cl2017
-\subsection{Contribution 3: Creating and ranking justifications for interpretable question answering} We propose a method to construct answer justifications through information aggregation. 
-In particular, we aggregate multiple sentences into hierarchical graph structures (called text aggregation graphs) that capture both intrasentence syntactic structures and intersentence lexical overlaps. 
-Further, we model whether the intersentence lexical overlap is between contextually relevant keywords critical to the justification, or other words which may or may not be relevant. 
+\subsection{Contribution 3: Creating and ranking justifications for interpretable question answering} We propose a method to construct graph-structured answer justifications (text aggregation graphs) through aggregating relevant information from multiple sources.  Our graph structures model both intrasentence structures (i.e., syntax) and intersentence lexical overlap.
 Our empirical analysis demonstrates that modeling the contextual relevance of intersentence connections is crucial for good performance.  %These requirements highlight the fundamental differences between selecting a single answer sentence or short passage in an answer sentence selection task~\cite[inter alia]{Severyn:12,Severyn:13a,Severyn:13b}, and the task of generating complete answer justifications through information aggregation. 
-This approach uses a latent-variable ranking perceptron algorithm that learns to jointly rank answers and justifications, where the quality of justifications is modeled as the latent variable. 
+This approach uses a latent-variable ranking perceptron algorithm that learns to jointly rank answers and justifications.  In this extension of a traditional ranking perceptron, since we do not have labels for the  \emph{quality} of the justification, we model this as a latent variable to be learned. 
 We evaluate our system on a large corpus of 1,000 elementary science exam questions from third to fifth grade, and demonstrate that our system significantly outperforms several strong learning-to-rank baselines at the task of choosing the correct answer.  Further, we manually annotate answer justifications provided by the best baseline model and our intersentence aggregation method, and show that the intersentence aggregation method produces good justifications for 57\% of questions answered correctly, significantly outperforming the best baseline method. 
 Through an in-depth error analysis, we show that most of the issues encountered by the intersentence aggregation method center on solvable surface issues rather than complex inference issues.  To our knowledge, this is the largest evaluation and most in-depth error analysis for explainable inference in the context of elementary science exams. 
 
 
 % conll 2017
-\subsection{Contribution 5: Using neural networks to rank justifications for interpretable question answering} We propose an end-to-end neural method for learning to answer questions and select a high-quality justification for those answers. 
+\subsection{Contribution 4: Using neural networks to rank justifications for interpretable question answering} We propose an end-to-end neural method for learning to answer questions and select a high-quality justification for those answers. 
 This approach re-ranks free-text answer justifications \emph{without} the need for structured knowledge bases. 
 With supervision only for the correct answers, we learn this re-ranking through a form of distant supervision -- i.e., the answer ranking supervises the justification re-ranking. In this approach, we investigate two distinct categories of features in this ``little data'' domain: explicit features, and learned representations. We show that, with limited training, explicit features perform far better despite their simplicity.  We also demonstrate a large (+9\%) improvement in generating high-quality justifications over a strong information retrieval baseline, while maintaining near state-of-the-art performance on the multiple-choice science-exam QA task, demonstrating the success of the end-to-end strategy.
 
@@ -279,5 +289,5 @@ With supervision only for the correct answers, we learn this re-ranking through 
 
 \section{Overview\label{sec:overview}}
 
-The rest of this work is organized as follows.  In Chapter \ref{chapter:related_work} we outline the previous work relevant to our task, as well as how it relates to each of our approaches.  
+The rest of this work is organized as follows.  In Chapter \ref{chapter:related_work} we outline the previous work relevant to our task.
 We then detail our word-association approaches to question answering that emphasize robustness: in Chapter \ref{chapter:naacl2015} we present our alignment approach whereby we generate artifically aligned texts to serve as a proxy for aligned question-answer pairs; then in Chapter \ref{chapter:emnlp2016} we present our method for tailoring word-associations (here, in the form of word-embeddings) to a specific question-type.  The next two chapters contain our methods which focus more on model-interpretability, providing a human-readable justification for each answer selected by the model.  In Chapter \ref{chapter:cl2017} we detail an approach that uses aggregation to generate justifications for answers, extracts features based on a structured representation of the aggregated justiifcation, and then uses these features in a latent-variable reranking perceptron.  The perceptron learns to simultaneously rank these justifications and answer candidates, thus providing the answer as well as the human-readable justification.  In Chapter \ref{chapter:emnlp2017} we modify this approach to operate over much larger resources by removing the aggregation component as well as the structured representations, meanwhile extending the learning framework to a non-linear neural network.  Finally, in Chapter \ref{chapter:conclusion} we discuss the work as a whole as well as future directions.
