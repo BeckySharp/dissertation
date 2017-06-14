@@ -33,8 +33,8 @@ In both set-ups, candidate answers were assigned a information retrieval (IR) sc
 \begin{center}
 \includegraphics[width=90mm]{mainmatter/naacl2015-alignment/graphs_new2.pdf}
 %\vspace{-4mm}
-\caption{{\small Overall performance for the two discourse-based alignment models,
-compared against the IR baseline, random baselines, and an embeddings-based reranker.
+\caption{{\small Overall performance for the two discourse-based alignment models (the Rhetorical Structure Theory based model and the sequential model),
+compared against the IR baseline, random baseline, and an embedding-based reranker.
 %, sequential, and lexical semantic models versus the number of training documents used to construct the models.  
 The $x$ axis indicates the number of training documents used to construct all models. 
 Each point represents the average of 10 samples of training documents.  }}
@@ -44,37 +44,48 @@ Each point represents the average of 10 samples of training documents.  }}
 \end{figure}
 
 
-\begin{table}[t!]
-\begin{center}
-%\begin{scriptsize}
-\begin{footnotesize}
-\begin{tabular}{llc}
-\multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{P@1} \\
-\multicolumn{1}{l}{ Model/Features } & \multicolumn{1}{l}{P@1} & \multicolumn{1}{l}{Impr.} \\
-\cline{2-3}
+%\begin{table}[t!]
+%\begin{center}
+%%\begin{scriptsize}
+%\begin{footnotesize}
+%\begin{tabular}{llc}
+%\multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{P@1} \\
+%\multicolumn{1}{l}{ Model/Features } & \multicolumn{1}{l}{P@1} & \multicolumn{1}{l}{Impr.} \\
+%\cline{2-3}
+%
+%\hline
+%\multicolumn{3}{l}{\textit{Yahoo! Answers}} \\ % 185q (sent) ret=1p c=0.1 
+%\hline
+%IR Baseline 	& 19.48 	&	  				\\
+%IR + RST  		& 28.98		& +48.75\% 			\\
+%IR + SEQ  		& 28.53		& +46.45\% 			\\
+%IR + Embed  		& 29.11		& +49.44\% 			\\
+%\hline
+%\multicolumn{3}{l}{\textit{Bio WHY}} \\ % 185q (sent) ret=1p c=0.1 
+%\hline
+%IR Baseline 	& 28.24 	&	  				\\
+%IR + RST  		& 34.00		& +20.38\% 			\\
+%IR + SEQ  		& 33.47		& +18.53\% 			\\
+%IR + Embed  		& 28.92		& +2.39\% 			\\
+%\hline
+%\multicolumn{3}{l}{\textit{Bio HOW}} \\ % 185q (sent) ret=1p c=0.1 
+%\hline
+%IR Baseline 	& 24.12 	&	  				\\
+%IR + RST  		& 30.69		& +20.38\% 			\\
+%IR + SEQ  		& 29.46		& +18.53\% 			\\
+%IR + Embed  		& 23.93		& +2.39\% 			\\
+%
+%\end{tabular}
+%\end{footnotesize}
+%\caption{{\small Final performance (when using all the training data) for the discourse, sequential, and embedding models as compared to the information retrieval baseline. For space reasons data for Bio WHY are shown but the pattern is essentially identical for Bio HOW.}}
+%\label{tab:overall}
+%\end{center}
+%\end{table}
 
-\hline
-\multicolumn{3}{l}{\textit{Yahoo! Answers}} \\ % 185q (sent) ret=1p c=0.1 
-\hline
-IR Baseline 	& 19.48 	&	  				\\
-IR + RST  		& 28.98		& +48.75\% 			\\
-IR + SEQ  		& 28.53		& +46.45\% 			\\
-IR + Embed  		& 29.11		& +49.44\% 			\\
-\hline
-\multicolumn{3}{l}{\textit{Bio WHY}} \\ % 185q (sent) ret=1p c=0.1 
-\hline
-IR Baseline 	& 28.24 	&	  				\\
-IR + RST  		& 34.00		& +20.38\% 			\\
-IR + SEQ  		& 33.47		& +18.53\% 			\\
-IR + Embed  		& 28.92		& +2.39\% 			\\
-\end{tabular}
-\end{footnotesize}
-\caption{{\small Final performance (when using all the training data) for the discourse, sequential, and embedding models as compared to the information retrieval baseline. For space reasons data for Bio WHY are shown but the pattern is essentially identical for Bio HOW.}}
-\label{tab:overall}
-\end{center}
-\end{table}
-
-Figure \ref{fig:performance} shows the performance of the discourse models against the number of documents used to train the alignment model\footnote{For space reasons the graph for Bio \emph{how} is not shown, but the pattern is essentially identical to Bio \emph{why}.} and the final performance values (when all training data is used) are shown in Table \ref{tab:overall}.   We used the standard implementation for precision at 1 (P@1)~\citep{manning08} with the adaptations for Bio described in \citet{jansen14}. We address the following questions.
+Figure \ref{fig:performance} shows the performance of the discourse models against the number of documents used to train the alignment model
+%\footnote{Here we show the graph for Bio \emph{how} is not shown, but the pattern is essentially identical to Bio \emph{why}.} 
+%and the final performance values (when all training data is used) are shown in Table \ref{tab:overall}.   
+We used the standard implementation for precision at 1 (P@1)~\citep{manning08} with the adaptations for Bio described in \citet{jansen14}. We address the following questions.
 
 \paragraph{How does the performance of the RST and SEQ models compare?}
 
@@ -87,7 +98,7 @@ Both the RST and SEQ results for YA are {\em higher} than that of an alignment m
 \paragraph{How does the performance of the RST model compare to previous work?}
 
 Comparing our work to \citet{jansen14}, the most relevant prior work, we notice two trends.
-First, our discourse-based alignment models outperform their CR + Embed model, which peaks at 26.6\% P@1 for YA and 31.7\% for Bio \emph{why}. While some of this difference can be assigned to implementation differences (e.g., we consider only content words for both alignment and Embed, where they used all words), this result again emphasizes the value of our approach.
+First, our discourse-based alignment models outperform their IR + Embed model, which peaks at 26.6\% P@1 for YA and 31.7\% for Bio \emph{why}. While some of this difference can be assigned to implementation differences (e.g., we consider only content words for both alignment and Embed, where they used all words), this result again emphasizes the value of our approach.
 % Second, while our content-filtered RNNLM outperforms their unfiltered model\footnote{RNNLM performance is slightly less in Bio as we use only the textbook for training.}, when using equal amounts of training data, our alignment model trained using discourse still outperforms the RNNLM until the performance of all models ultimately plateaus in knowledge-rich environments.  
 Second, the partially lexicalized discourse structures used by Jansen et. al to identify explanatory text in candidate answers perform better than our approach, which relies solely on lexicalized alignment. However, we expect that our two approaches are complementary, because they address different aspects of the QA task (structure vs. similarity).
 %the performance of our alignment models be orthogonal to their discourse models, 
@@ -133,7 +144,9 @@ Top 6 (92\% of data)  	& 28.98		& 34.00 	\\
 \end{center}
 \end{table}
 
-As shown in Table \ref{tab:ablation}, the bulk of the performance comes from using the six most frequent discourse relations (of 18 possible discourse relations).  This is likely due to the fact that these top six relations make up 92\% of all relations in both domains. 
+The RST parser itself performs better on relations which occur more frequently.  For our experiments, we use only the relations that comprised at least 1\% of the found discourse relations.  This amounted to six (of 18 possible) relations: \emph{elaboration}, \emph{attribution}, \emph{background}, \emph{contrast}, \emph{same-unit}, and \emph{joint}.
+These six relation accounted for 92\% of all relations in both domains. 
+As shown in Table \ref{tab:ablation}, the bulk of the performance comes from using these six most frequent discourse relations, and using all relations only slightly improves performance by 0.3\% P@1.
 
 
 \paragraph{Why does performance plateau in YA and not in Bio?}
