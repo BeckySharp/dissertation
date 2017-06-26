@@ -1,15 +1,16 @@
 \chapter{INTRODUCTION\label{chapter:introduction}}
 
 %\address{Start by explaining why NLI and QA are fundamental NLP tasks. Give examples to search, and personal assistants.}
-\todo{Stroner opening - perhaps based on information overload and QA helping with that?} One of the primary goals for natural language processing is the development of tools that are useful for humans both at work and at home.  The classic example of one of these tools would be a search engine able to take a query and return a relevant and informative result.  In order for this application to be truly useful, though, it needs to operate over natural language queries and natural language results.  While certain queries and results can be anticipated using statistics, in order to handle a new query, the system must be able to \emph{infer} what the desired result is from the query.  This natural language inference is critical to search as well as many other types of natural language processing tasks including question answering.  
+%\todo{Stroner opening - perhaps based on information overload and QA helping with that?} 
+One of the primary goals for natural language processing is the development of tools that are useful for humans both at work and at home.  The classic example of one of these tools would be a search engine able to take a query and return a relevant and informative result.  In order for this application to be truly useful, though, it needs to operate over natural language queries and natural language results.  While certain queries and results can be anticipated using statistics, in order to handle a new query, the system must be able to \emph{infer} what the desired result is from the query.  This natural language inference is critical to search as well as many other types of natural language processing tasks including question answering.  
 
 Question answering (QA), i.e., finding short answers to natural language questions, is one of the most important but challenging 
 tasks on the road towards natural language understanding~\cite{Etzioni:11}. 
 %\address{Require bridging lexical chasm}
 As mentioned above, a QA system first faces the challenge that both the question and any potential answer sources are in the form of natural language, which inherently contains a large degree of lexical, syntactic, and even dialectal variation.
-Additionally, unlike search or information retrieval, answers infrequently contain lexical overlap with the question (e.g. {\em What should we eat for breakfast? -- Zoe's Diner has good pancakes}).  This requires QA models to draw upon more complex methods to bridge this "lexical chasm" \cite{Berger:00}, i.e., to infer what the answer should be.  These methods range from robust shallow models based on lexical semantics, to deeper, explainably-correct, but much more brittle inference methods based on first order logic.  \todo{add examples of each}
+Additionally, unlike search or information retrieval, answers infrequently contain lexical overlap with the question (e.g. {\em What should we eat for breakfast? -- Zoe's Diner has good pancakes}).  This requires QA models to draw upon more complex methods to bridge this "lexical chasm" \cite{Berger:00}, i.e., to infer what the answer should be.  These methods range from robust shallow models based on lexical semantics, to deeper, explainably-correct, but much more brittle inference methods based on first order logic.  %\todo{add examples of each}
 
-\todo{high-level figure showing where my approaches fit??}
+%\todo{high-level figure showing where my approaches fit??}
 %, and is a challenging problem due to the potential complexity of the query, need to aggregate information from a variety of sources to fully answer.
 
 %\address{Natural language inference (NLI)}
