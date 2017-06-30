@@ -1,33 +1,36 @@
-\section{Specialized approaches to question answering}
+\section{Specialized question answering}
 %\label{sec:related_work_emnlp2016}
 
 A common model for question answering (QA) is that a good answer is one that is closely related to the question, where relatedness is often determined using general-purpose lexical models such as word embeddings. 
 Here argue that a better approach is to look for answers that are related to the question in a {\em relevant way}, according to the information need of the question (that is, the question type).
+In this way, a QA system might consist of many distinct solvers, each specialized to the inference needs of a particular question type, such as causal causal inference or reasoning over a process.  Here we explore one framework these solver, which we use to answer causal questions.  We argue that this general framework can be extended easily to handle other question types.
 
-Addressing the need for specialized solving methods in QA, Oh et. al~\citeyear{oh2013question} incorporate a dedicated causal component into their system, and note that it improves the overall performance.  However, their model is limited by the need for lexical overlap between a causal construction found in their knowledge base and the question itself.  Here, we develop a causal QA component that exploits task-specific, specialized word embeddings to gain robustness to lexical variation.  
+We are not the first to assert the need for specialized solving methods in QA.  For example, \citet{oh2013question} incorporate a dedicated causal component into their system, and note that it improves the overall performance.  However, their model is limited by the need for explicit lexical overlap between a causal construction found in their knowledge base and the question itself.  Here, we develop a causal QA component that exploits specialized word embeddings that are task-specific (i.e., specifically learned to model the desired semantic relation, here \textit{causality}), to gain robustness to lexical variation.  
 By using word embeddings, we can model the likelihood of a causal link between two texts even when the exact lexical items were never observed together in the knowledge base.
 
 \subsection{Embeddings for question answering}
 % Embeddings in QA
-There has been a vast body of work which demonstrates that word embeddings derived from distributional similarity are useful in many tasks, including question answering -- see \emph{inter alia}~\mbox{\cite{fried2015higher,yih13}}.  However, Levy and Goldberg~\citeyear{levy2015supervised} note that there are limitations on the type of semantic knowledge which is encoded in these general-purpose similarity embeddings.  Therefore, here we build customized task-specific embeddings for causal QA.
+There has been a vast body of work which demonstrates that word embeddings derived from distributional similarity are useful in many tasks, including question answering~\mbox{\citep[see \emph{inter alia}][]{fried2015higher,yih13}}.  However, \citet{levy2015supervised} note that there are limitations on the type of semantic knowledge which is encoded in these general-purpose similarity embeddings.  Therefore, rather than limit ourselves to the general purpose embeddings, here we build task-specific embeddings that are customized for answering causal questions.
 
 \subsection{Customizing embeddings}
 %% Customized embeddings
-Customized embeddings have been created for a variety of tasks, including semantic role labeling~\cite{fitzgerald2015semantic,woodsenddistributed}, and binary relation extraction ~\mbox{\cite{riedel2013relation}.}
-%% For example, with semantic role labelling, custom embeddings have been learned for semantic frames, their arguments, and the roles of the arguments (e.g. \cite{fitzgerald2015semantic,woodsenddistributed}).  Riedel et al.~\citeyear{riedel2013relation} used distant supervision to learn embeddings for binary relations and argument pairs to perform automated database completion.  
-Similar to Riedel et al., we train embeddings customized for specific relations, but we bootstrap training data using minimal supervision (i.e., a small set of patterns) rather than relying on distant supervision and large existing knowledge bases.  Additionally, while Riedel et al. represent all relations in a general embedding space, here we train a dedicated embedding space for just the causal relations. 
+Customized embeddings have been created for a variety of tasks. %including semantic role labeling~\citep{fitzgerald2015semantic,woodsenddistributed}, and binary relation extraction ~\mbox{\citep{riedel2013relation}.}
+For example, with semantic role labelling, custom embeddings have been learned for semantic frames, their arguments, and the roles of the arguments~\citep[e.g.,][]{fitzgerald2015semantic,woodsenddistributed}.  \citet{riedel2013relation} used distant supervision to learn embeddings for binary relations (such as \textit{employed\_by}) and argument pairs (such as $<$\textit{Jane Smith, Harvard}$>$) in order to perform automated database completion.  
+Similar to \citeauthor{riedel2013relation}, we train embeddings customized for specific relations, but we bootstrap training data using minimal supervision (i.e., a small set of patterns) rather than relying on distant supervision and large existing knowledge bases.  Additionally, while Riedel et al. represent \textit{all} relations in a general embedding space, here we train a dedicated embedding space for just the causal relations. 
 
-In QA, embeddings have been customized to have question words that are close to either their answer words~\cite{bordes2014question}, or to structured knowledge base entries~\cite{yang2014joint}.  While these methods are useful for QA, they do not distinguish between different types of questions, and as such their embeddings are not specific to a given question type.
+For use in question answering, embeddings have been customized to have question words that are close to either their answer words~\citep{bordes2014question}, or to structured knowledge base entries~\citep{yang2014joint}.  While these methods are useful for QA, they do not distinguish between different types of questions, and as such their embeddings are not specific to a given question type.
 
-Additionally, embeddings have been customized to distinguish functional similarity from relatedness ~\cite{levy2014dependency,kielaspecializing}.
-In particular, Levy and Goldberg train their embeddings by replacing the standard linear context of the target word with context derived from the syntactic dependency graph of the sentence.  For example, when given the word \emph{turing}, wheras a traditional embeddings model returns top associates containing topically related words such as \emph{non-deterministic} and \emph{finite-state}, the dependency-based model returns other tests (i.e., \emph{pauling, hotelling,} and \emph{hamming}).
+Additionally, embeddings have been customized to distinguish functional similarity from relatedness ~\citep{levy2014dependency,kielaspecializing}.
+In particular, Levy and Goldberg train their embeddings by replacing the standard linear context of the target word with context derived from the syntactic dependency graph of the sentence.  The resulting embeddings, they argue, model functional similarity rather than topical similarity.  For example, when given the word \emph{turing}, wheras a traditional embeddings model returns top associates containing topically related words such as \emph{non-deterministic} and \emph{finite-state}, the dependency-based model returns other tests (i.e., \emph{pauling, hotelling,} and \emph{hamming}).
 In this work, we make use of this extension to arbitrary context in order to train our embeddings with contexts derived from binary causal relations.  We extract cause-effect text pairs such that the cause text becomes the \emph{target} text and the effect text serves as the \emph{context}. 
 
-Recently, Faruqui et al.\citeyear{faruqui2016problems} discussed issues surrounding the evaluation of similarity word embeddings, including the lack of correlation between their performance on word-similarity tasks and ``downstream'' or real-world tasks like QA, text classification, etc.  As they advocate, in addition to a direct evaluation of our causal embeddings, we also evaluate them independently in a downstream QA task.  We provide the same comparison for two alternative approaches (an alignment model and a convolutional neural network model), confirming that the direct evaluation performance can be misleading without the task-specific, downstream evaluation.
+Recently, \citet{faruqui2016problems} discussed issues surrounding the evaluation of similarity word embeddings, including the lack of correlation between their performance on word-similarity tasks and ``downstream'' or real-world tasks like QA, text classification, etc.  As they advocate, in addition to a direct evaluation of our causal embeddings (see Section \ref{sec-emnlp2016:directeval}), we also evaluate them independently in a downstream QA task (Section \ref{sec-emnlp2016:indirecteval}).  We provide the same comparison for two alternative approaches (an alignment model and a convolutional neural network model), confirming that the direct evaluation performance can be misleading without the task-specific, downstream evaluation.
 
 \subsection{Chapter overview}
 
-The rest of the Chapter is organized as follows.  In Section \ref{sec-emnlp2016:approach} we outline our approach to generating and using causal embeddings for question answering.  Then, in Section \ref{sec-emnlp2016:causalextraction} we provide details concerning our methods for using semi-supervision to bootstrap a large number of cause-effect text pairs for training our models.  In Section \ref{sec-emnlp2016:models} we describe our primary causal embedding models as well as several other variants.  In Section \ref{sec-emnlp2016:directeval} we provide the setup and results of the direct (or intrinsic) evaluation.  Then, in Section \ref{sec-emnlp2016:indirecteval} we detail the experimental setup for our indirect evaluation: causal QA over a subset of Yahoo! Answers.  We show that explicitly modeling causality improves performance in both the direct and the indirect tasks. In the QA task our best model achieves 37.3\% P@1, significantly outperforming a strong baseline by 7.7\% (relative). 
+The rest of the Chapter is organized as follows.  
+%In Section \ref{sec-emnlp2016:approach} we outline our approach to generating and using causal embeddings for question answering.  
+In Section \ref{sec-emnlp2016:causalextraction} we provide details concerning our semi-supervised methods for gathering a large number of cause-effect text pairs that we use for training our models.  In Section \ref{sec-emnlp2016:models} we describe our primary causal embedding models as well as several other variants.  In Section \ref{sec-emnlp2016:directeval} we evaulate these models directly on a causal-relation identification task.  Then, in Section \ref{sec-emnlp2016:indirecteval} we detail the experimental setup for our indirect evaluation: causal QA over a subset of Yahoo! Answers.  We show that explicitly modeling causality improves performance in both the direct and the indirect tasks. In the QA task our best model achieves 37.3\% P@1, significantly outperforming a strong baseline by 7.7\% (relative).
 Importantly, we also show that the results of these two evaluations are \emph{not} identical: a given model's performance on the direct evaluation does not necessarily transfer to the more complex, real-world QA task, as discussed in our conclusions in Section \ref{sec-emnlp2016:conclusion}.
 
 
@@ -41,22 +44,22 @@ Importantly, we also show that the results of these two evaluations are \emph{no
 %\end{center}
 %\end{figure}
 %
-\section{Approach}
-\label{sec-emnlp2016:approach}
-%\vspace{-2mm}
-
-Our focus is on reranking answers to causal questions using using task-specific distributional similarity methods.
-%on the the task of question answering, which is complicated by the variety of question types (e.g., definitional, causal),  each having different information needs that potentially require dedicated solving methods~\cite{clark2013study}.  
-%Longer term, we propose a QA approach which uses dedicated, task-specific word embeddings for each question type, aimed at maintaining the robustness of word embeddings while gaining the specificity of dedicated solving methods. 
-%Here, we address one particular information need: causality.
+%\section{Approach}
+%\label{sec-emnlp2016:approach}
+%%\vspace{-2mm}
 %
-Our approach operates in three steps:
-
-{\flushleft (1)} We start by bootstrapping a large number of cause-effect pairs from free text using a small number of syntactic and surface patterns (Section \ref{sec-emnlp2016:causalextraction}).
-
-{\flushleft (2)} We then use these bootstrapped pairs to build several task-specific embedding (and other distributional similarity) models (Section \ref{sec-emnlp2016:models}). We evaluate these models directly on a causal-relation identification task (Section \ref{sec-emnlp2016:directeval}).  
-
-{\flushleft (3)} Finally, we incorporate these models into a reranking framework for causal QA and demonstrate that the resulting approach performs better than the reranker without these task-specific models, even if trained on the same data (Section ~\ref{sec-emnlp2016:indirecteval}).  
+%Our focus is on reranking answers to causal questions using using task-specific distributional similarity methods.
+%%on the the task of question answering, which is complicated by the variety of question types (e.g., definitional, causal),  each having different information needs that potentially require dedicated solving methods~\cite{clark2013study}.  
+%%Longer term, we propose a QA approach which uses dedicated, task-specific word embeddings for each question type, aimed at maintaining the robustness of word embeddings while gaining the specificity of dedicated solving methods. 
+%%Here, we address one particular information need: causality.
+%%
+%Our approach operates in three steps:
+%
+%{\flushleft (1)} We start by bootstrapping a large number of cause-effect pairs from free text using a small number of syntactic and surface patterns (Section \ref{sec-emnlp2016:causalextraction}).
+%
+%{\flushleft (2)} We then use these bootstrapped pairs to build several task-specific embedding (and other distributional similarity) models (Section \ref{sec-emnlp2016:models}). We evaluate these models directly on a causal-relation identification task (Section \ref{sec-emnlp2016:directeval}).  
+%
+%{\flushleft (3)} Finally, we incorporate these models into a reranking framework for causal QA and demonstrate that the resulting approach performs better than the reranker without these task-specific models, even if trained on the same data (Section ~\ref{sec-emnlp2016:indirecteval}).  
 
 
 %We approach the task of creating and evaluating a task-specific relational vector space by considering one relation in particular -- causality.  The architecture of our system is shown in Figure \ref{fig:arch}. \todo{do I really need an architecture here?}

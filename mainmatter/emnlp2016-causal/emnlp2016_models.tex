@@ -4,21 +4,20 @@
 We use the extracted causal tuples to train three distinct distributional similarity models that explicitly capture causality. 
 
 {\flushleft \textbf{Causal Embedding Model (cEmbed):}}
-The first distributional similarity model we use is based on the skip-gram word-embedding algorithm of Mikolov et al.~\citeyear{mikolov2013distributed}, which has been shown to improve a variety of language processing tasks % \footnote{Chris Manning recently called embedding models the Sriracha sauce of NLP.} 
-including QA~\cite{yih13,fried2015higher}.  In particular, we use the variant implemented by Levy and Goldberg~\citeyear{levy2014dependency} which modifies the original algorithm to use an arbitrary, rather than linear, context. 
-Our novel contribution is to make this context task-specific: intuitively, the context of a cause is its effect. Further, these contexts are generated from tuples that are themselves bootstrapped, which minimizes the amount of supervision necessary.
+The first distributional similarity model we use is based on the skip-gram word-embedding algorithm of \citet{mikolov2013distributed}, which has been shown to improve a variety of language processing tasks\footnote{Chris Manning recently called embedding models the Sriracha sauce of NLP.} 
+including QA~\citep{yih13,fried2015higher}.  In particular, we use the variant implemented by \citet{levy2014dependency} which modifies the original algorithm to use an arbitrary, rather than linear, context. 
+Our novel contribution is to make this context task-specific: intuitively, the context of a cause is its effect.  Further, these contexts are generated from tuples that are themselves bootstrapped, which minimizes the amount of supervision necessary.
 
-The Levy and Goldberg model trains using single-word pairs, while our CMs could be composed of multiple words.  
+The Levy and Goldberg model trains using single-word pairs, while our causal mentions (CM) could be composed of multiple words.  
 For this reason, we decompose each cause--effect tuple, $(CM_c,CM_e)$, such that each word $w_c \in CM_c$ is paired with each word $w_e \in CM_e$. 
 
-%so we decompose each cause--effect tuple, $(CM_c,CM_e)$, where each CM could be multi-word, into the Cartesian product of the words in CMs. such that each $w_c \in CM_c$ has as its context all $w_e \in CM_e$. 
 After filtering the extracted cause-effect tuples for stop words and retaining only nouns, verbs, and adjectives, we generated over 3.6M $(w_c, w_e)$ word-pairs\footnote{For all models proposed in this section we used lemmas rather than words.} from the approximately 800K causal tuples.
 
-The model learns two embedding vectors for each word, one for when the word serves as a target word and another for when the word serves as a context word.  Here, since the relation of interest is inherently directional, both sets of embeddings are meaningful, and so we make use of both -- the target vectors encode the effects of given causes, whereas the context vectors capture the causes of the corresponding effects. 
-
+The model learns two embedding vectors for each word, one for when the word serves as a target word and another for when the word serves as a context word.  Here, since the relation of interest is inherently directional, \textit{both} sets of embeddings are meaningful, and so we make use of both -- the target vectors encode the effects of given causes, whereas the context vectors capture the causes of the corresponding effects.  
+As an example, consider the causal relation between the words \textit{wind} and \textit{damage} and the lack of a causal relation between \textit{wind} and \textit{popcorn}.  Given the previously described embeddings, after training we expect that the target (cause) vector for \textit{wind} will be closer to the context (effect) vector for \textit{damage} than to context vector for \textit{popcorn}, indicating a more likely causal relation.
 
 {\flushleft \textbf{Causal Alignment Model (cAlign):}}
-Monolingual alignment (or translation) models have been shown to be successful in QA \cite{Berger:00,Echihabi:03,Soricut:06,Riezler:etal:2007,Surdeanu:11,yao2013}, and recent work has shown that they can be successfully trained with less data than embedding models~\cite{sharp2015spinning}. 
+Monolingual alignment (or translation) models have been shown to be successful in QA \citep{Berger:00,Echihabi:03,Soricut:06,Riezler:etal:2007,Surdeanu:11,yao2013}, and recent work has shown that they can be successfully trained with less data than embedding models~\citep[][see Chapter \ref{chapter:naacl2015}]{sharp-EtAl:2015:NAACL-HLT}. 
 % Further, Fried et al.~\citeyear{fried2015higher} demonstrated that \todo{dest. distribution as semantic model of the source concept, which is important for our task as well.} % ms: nice, but no space
 
 To verify these observations in our context, we train an alignment model that ``translates'' causes (i.e., the ``source language'') into effects (i.e., the ``destination language''), using our cause--effect tuples. 
