@@ -17,13 +17,11 @@ The model learns two embedding vectors for each word, one for when the word serv
 As an example, consider the causal relation between the words \textit{wind} and \textit{damage} and the lack of a causal relation between \textit{wind} and \textit{popcorn}.  Given the previously described embeddings, after training we expect that the target (cause) vector for \textit{wind} will be closer to the context (effect) vector for \textit{damage} than to context vector for \textit{popcorn}, indicating a more likely causal relation.
 
 {\flushleft \textbf{Causal Alignment Model (cAlign):}}
-Monolingual alignment (or translation) models have been shown to be successful in QA \citep{Berger:00,Echihabi:03,Soricut:06,Riezler:etal:2007,Surdeanu:11,yao2013}, and recent work has shown that they can be successfully trained with less data than embedding models~\citep[][see Chapter \ref{chapter:naacl2015}]{sharp-EtAl:2015:NAACL-HLT}. 
+Monolingual alignment (or translation) models have been shown to be successful in QA \citep{Berger:00,Echihabi:03,Soricut:06,Riezler:etal:2007,Surdeanu:11,yao2013}, and in Chapter \ref{chapter:naacl2015} we showed that they can be successfully trained with less data than embedding models~\citep[see also][]{sharp-EtAl:2015:NAACL-HLT}. 
 % Further, Fried et al.~\citeyear{fried2015higher} demonstrated that \todo{dest. distribution as semantic model of the source concept, which is important for our task as well.} % ms: nice, but no space
 
-To verify these observations in our context, we train an alignment model that ``translates'' causes (i.e., the ``source language'') into effects (i.e., the ``destination language''), using our cause--effect tuples. 
-This is done using IBM Model 1~\cite{Brown:93} and GIZA++~\cite{och03}. 
-%We train an alignment model from our cause--effect tuples using  IBM Model 1~\cite{Brown:93} and GIZA++~\cite{och03}.
-
+To evaluate these observations in this context, we train an alignment model that ``translates'' causes (i.e., the ``source language'') into effects (i.e., the ``destination language''), using our cause--effect tuples. 
+This is done using IBM Model 1~\citep{Brown:93} and GIZA++~\citep{och03}. 
 
 \begin{figure}[t!]
 \begin{center}
@@ -36,31 +34,25 @@ This is done using IBM Model 1~\cite{Brown:93} and GIZA++~\cite{och03}.
 \end{figure}
 
 {\flushleft \textbf{Causal Convolutional Neural Network Model (cCNN):}}
-Each of the previous models have at their root a bag-of-words representation, which is a simplification of the causality task. To address this potential limitation, we additionally trained a convolutional neural network (CNN) which operates over variable-length texts, and maintains distinct embeddings for causes and effects.  The architecture of this approach is shown in Figure~\ref{fig:cnn}, and consists of two sub-networks (one for cause text and one for effect text), each of which begins by converting the corresponding text 
-% (which has been padded to be of equal  length)  % ms: skip for now, until we understand it better
-into 50-dimensional embeddings.  These are then fed to a convolutional layer,\footnote{The convolutional layer contained 100 filters, had a filter length of 2 (i.e., capturing bigram information), and an inner ReLU activation.} which is followed by a max-pooling layer of equal length.
+Each of the previous models have at their root a bag-of-words representation, which is a simplification of the causality task. To address this potential limitation, we additionally trained a convolutional neural network (CNN) which operates over variable-length texts, and maintains distinct embeddings for causes and effects.  The architecture of this approach is shown in Figure~\ref{fig:cnn}, and consists of two sub-networks (one for cause text and one for effect text), each of which begins by converting the corresponding text into 50-dimensional embeddings.  These are then fed to a convolutional layer,\footnote{The convolutional layer was lightly tuned to contain 100 filters, had a filter length of 2 (i.e., capturing bigram information), and an inner ReLU activation.} which is followed by a max-pooling layer of equal length.
 Then, these top sub-network layers, which can be thought of as a type of phrasal embedding, are merged by taking their cosine similarity.  Finally, this cosine similarity is normalized by feeding it into a dense layer with a single node which has a softplus activation.  
-In designing our CNN, we attempted to minimize architectural and hyperparameter tuning by taking inspiration from Iyyer et al.~\citeyear{iyyer2015deep}, preferring simpler architectures.
-We train the network using a binary cross entropy objective function and the Adam optimizer~\cite{kingma2014adam}, using the Keras library~\cite{chollet2015keras} operating over Theano~\cite{2016arXiv160502688short}, a popular deep-learning framework.\footnote{We also experimented with an equivalent architecture where the sub-networks are implemented using long short-term memory (LSTM) networks~\cite{hochreiter1997long}, and found that they consistently under-perform this CNN architecture. Our conjecture is that CNNs perform better because LSTMs are more sensitive to overall word order than CNNs, which capture only local contexts, and we have relatively little training data, which prevents the LSTMs from generalizing well.}
+In designing our CNN, we attempted to minimize architectural and hyperparameter tuning by taking inspiration from \citet{iyyer2015deep}, preferring simpler architectures.
+We train the network using a binary cross entropy objective function and the Adam optimizer~\citep{kingma2014adam}, using the Keras library~\citep{chollet2015keras} operating over Theano~\citep{2016arXiv160502688short}, a popular deep-learning framework.\footnote{We also experimented with an equivalent architecture where the sub-networks are implemented using long short-term memory (LSTM) networks~\citep{hochreiter1997long}, and found that they consistently under-perform this CNN architecture. Our conjecture is that CNNs perform better because LSTMs are more sensitive to overall word order than CNNs, which capture only local contexts, and we have relatively little training data, which prevents the LSTMs from generalizing well.}
 
 {\flushleft \textbf{Noise-aware Causal Embedding Model (cEmbedNoise):}} 
-We designed a variant of our cEmbed approach to address the potential impact of the noise introduced by our bootstrapping method.
+We designed a variant of our cEmbed approach to address the potential impact of the noise introduced by our bootstrapping method (see discussion in Section \ref{sec-emnlp2016:causalextraction}).
 While training, we weigh the causal tuples by the likelihood that they are truly causal, which we approximate with pointwise mutual information (PMI).
-For this, we first score the tuples by their causal PMI and then scale these scores by the overall frequency of the tuple~\cite{riloff1996automatically}, to account for the PMI bias toward low-frequency items.  That is, the score $S$ of a tuple, $t$, is computed as: 
+For this, we first score the tuples by their causal PMI and then scale these scores by the overall frequency of the tuple~\citep{riloff1996automatically}, to account for the PMI bias toward low-frequency items.  That is, the score $S$ of a tuple, $t$, is computed as: 
 
 %space{-2mm}
 %\scalebox{1.0}{
-\begin{small}
+%\begin{small}
 \begin{equation}
 S(t) = \log \frac{p(tuple|causal)}{p(tuple)} * \log (freq(tuple))
 \end{equation} 
-\end{small}
+%\end{small}
 %}
 %space{-2mm}
 
-%Riloff~\citeyear{riloff1996automatically} propose a method for ranking their extracted patterns using $relevance\_rate * \log_2 (frequency)$.  As our relevance rate we use the pointwise mutual information of the extracted tuples, or $\log \frac{p(tuple|causal)}{p(tuple)}$, where $p(tuple| causal)$ is the ratio of the number of times that a given tuple is found in a causal construction versus any construction, and $p(tuple)$ is the frequency of the given tuple divided by the frequency of all the tuples. 
-%Scaling the PMI by the frequency of the tuple mitigates its bias towards low-frequency items.
-%we combine PMI with frequency information, so that we consider the likelihood of a pair to be causal to be:
-%$p(causal|pair)$ \cite{riloff1996automatically}.
 We then discretize these scores into five quantiles, ascribing a linearly decreasing weight during training to datums in lower scoring quantiles.%\footnote{\textcolor{blue}{We implemented this weighing process by repeating higher weight training examples more times.}}
 
