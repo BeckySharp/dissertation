@@ -41,7 +41,7 @@ Here we provide the description and formal algorithm for our focus word extracti
 
 We approach the task of selecting \textbf{focus words} by borrowing from cognitive psychology, which suggests that elementary school children reason using concrete concepts (i.e., \textit{turtles} rather than \textit{object}), rather than with the more abstract thinking that develops later \citep{Piaget1954}.  We use this distinction between \textit{concrete} and \textit{abstract} terms to guide our focus word extraction.  Intuitively, we focus on words which are not too concrete (as they are likely to be example words, like \textit{turtles}) and which are not too abstract (as they are likely to be too abstract for the focus of elementary-level questions).  
 
-To determine how concrete or abstract a given question word is, we make use of a large database of psycholinguistic concreteness norms \citep{brysbaert:2014}, which consists of 40 thousand common English lemmas rated on a numerical scale from 1 (highly abstract) to 5 (highly concrete).  As described in \citet{jansen2017framing}, we empirically observed that words that are approximately 50\% to 80\% concrete {\em (e.g., energy:3.1, measure:3.6, electricity:3.9, habitat:3.9)} tend to be at the right level of abstraction for isolating the key concepts of our elementary science exam questions.
+To determine how concrete or abstract a given question word is, we make use of a large database of psycholinguistic concreteness norms \citep{brysbaert:2014}, which consists of 40 thousand common English lemmas rated on a numerical scale from 1 (highly abstract) to 5 (highly concrete).  As described in \citet{jansen2017framing}, we empirically observed that words that are approximately 50\% to 80\% concrete (e.g., \emph{energy:3.1, measure:3.6, electricity:3.9, habitat:3.9}) tend to be at the right level of abstraction for isolating the key concepts of our elementary science exam questions.
 %\footnote{
 %While the above concreteness thresholds may be particular to elementary science exams, we hypothesize that the information need of a question tends to be more abstract than the examples grounding that question.  We believe this intuition may be general and applicable to other domains.
 %}.  
@@ -62,56 +62,89 @@ To determine how concrete or abstract a given question word is, we make use of a
 %While the above concreteness thresholds may be particular to elementary science exams, we hypothesize that the information need of a question tends to be more abstract than the examples grounding that question.  We believe this intuition may be general and applicable to other domains.
 %}
 
-Formally, we utilize this observation within our focus word extractor using the following five steps (designed as a sequence of sieves of decreasing precision ~\citep{Lee:13}), each aimed at classifying question and answer words into a particular category.   
+Formally, we incorporate this observation into our focus word extractor that consists of the following five steps, %(designed as a sequence of sieves of decreasing precision ~\citep{Lee:13}), 
+each aimed at classifying question and answer words into a particular category.   
 %Making use of this observation, we identify these focus words with the algorithm below. The algorithm is implemented as a sequence of ordered sieves applied in decreasing order of precision~\cite{Lee:13}. Each of the five sieves attempts to assign question words into one of the following categories\footnote{This same process is used to extract focus words for each of the multiple choice answer candidates, though it is generally much simpler given that the answers tend to be short.}: 
 
 \begin{enumerate}
 
-\item {\bf Identify Lists and sequences:} Lists in questions generally contain highly important terms.  We identify comma delimited lists of the form {\small {\tt X, Y, ..., <and/or> Z}} (e.g., {\em sleet, rain, and hail}). Given the prevalence of questions that involve causal or process knowledge, we also identify from/to sequences (e.g., {\em from a solid to a liquid}) using paired {\tt prep\_from} and {\tt prep\_to} Stanford dependencies~\cite{de2008stanford}. 
+\item {\bf Identify lists and sequences:} We found that lists that occur in questions are often very important terms, and for conjunctive questions, matching all the list words can be critical.  Therefore, we identify comma delimited lists (e.g., {\em sleet, rain, and hail}). Similarly, we identify from/to sequences (e.g., {\em from a solid to a liquid}, often found in causal or process questions) using paired {\tt prep\_from} and {\tt prep\_to} Stanford dependencies~\citep{de2008stanford}. 
 
-\item {\bf Focus words:} Content lemmas (nouns, verbs, adjectives, and adverbs) with concreteness scores between 3.0 and 4.2 in the concreteness norm database of Brysbaert et al. ~\citeyear{brysbaert:2014} are flagged as focus words. 
+\item {\bf Identify focus words:} Content lemmas (nouns, verbs, adjectives, and adverbs) with concreteness scores between 3.0 and 4.2 in the concreteness norm database of \citet{brysbaert:2014} are flagged as focus words. 
 
-\item {\bf Abstract, concrete, and example words:} Content lemmas with concreteness scores between 1.0 and 3.0 are flagged as highly abstract, while those with concreteness scores between 4.2 and 5.0 are flagged as highly concrete.  Named entities recognized as either durations or locations (e.g., {\em In New York State}) are flagged as belonging to examples.  
+\item {\bf Identify abstract, concrete, and example words:} We then flag (a) highly abstract words (content lemmas with concreteness scores between 1.0 and 3.0), (b) highly concrete words (concreteness scores between 4.2 and 5.0), and (c) example words (named entities that are durations or locations, e.g., {\em In New York State}).  
 
-\item {\bf Answer type words:} Answer type words are flagged using both four common syntactic patterns shown in Table~\ref{tab:answertypewords}, as well as a short list of transparent nouns (e.g., {\em kind, type, form}). 
+\item {\bf Identify answer type words:} Answer type words (i.e.  \textit{city} in the question \textit{What city hosted the 2000 Olympics?}) are commonly considered to be the focus words in factoid QA as they highly constrain the search space.  Here, however, since each of the multiple choice answers is of the same type, they do not help differentiate between correct and incorrect answers so we down-weigh them.  We flag them using syntactic patterns along with a short list of transparent nouns (e.g., {\em kind, type, form}).
+%shown in Table~\ref{tab:answertypewords}, as well as a short list of transparent nouns (e.g., {\em kind, type, form}).  
 
-\item {\bf Stop words: } A list of general and QA-specific stop words and phrases, as well as any remaining words not captured by earlier sieves, are flagged as stop words.
+\item {\bf Identify stop words: } A list of general and QA-specific stop words and phrases, as well as any remaining words not captured by earlier steps, are flagged as stop words.
 
 \end{enumerate}
 
-\begin{table*}[t]
-\caption{{Syntactic patterns used to detect answer type words.  Square brackets represent optional elements. }}
-\begin{center}
-\begin{footnotesize}
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{l}{Pattern} & \multicolumn{1}{l}{Example} 	\\
-\hline
-(SBARQ (WHNP (WHNP (WDT) {\bf (NN)) [(PP)]}...						& What {\em kind of energy} ...    	\\
-(SBARQ (WHNP (WP)) (SQ (VBZ is) {\bf (NP)}...	 					& What is {\em one method} that ... 	\\
-(S (NP (NP (DT A) {\bf (NN)}) (SBAR (WHNP (WDT that)) ...			& A {\em tool} that ..					\\
-(S (NP {\bf (NP)} (PP)) (VP (VBZ is) ...    						& The {\em main function} of ... is to ...	\\
 
-\end{tabular}
-\end{footnotesize}
+%
+%\begin{enumerate}
+%
+%\item {\bf Identify Lists and sequences:} Lists in questions generally contain highly important terms.  We identify comma delimited lists of the form {\small {\tt X, Y, ..., <and/or> Z}} (e.g., {\em sleet, rain, and hail}). Given the prevalence of questions that involve causal or process knowledge, we also identify from/to sequences (e.g., {\em from a solid to a liquid}) using paired {\tt prep\_from} and {\tt prep\_to} Stanford dependencies~\citep{de2008stanford}. 
+%
+%\item {\bf Focus words:} Content lemmas (nouns, verbs, adjectives, and adverbs) with concreteness scores between 3.0 and 4.2 in the concreteness norm database of \citet{brysbaert:2014} are flagged as focus words. 
+%
+%\item {\bf Abstract, concrete, and example words:} Content lemmas with concreteness scores between 1.0 and 3.0 are flagged as highly abstract, while those with concreteness scores between 4.2 and 5.0 are flagged as highly concrete.  Named entities recognized as either durations or locations (e.g., {\em In New York State}) are flagged as belonging to examples.  
+%
+%\item {\bf Answer type words:} Answer type words are flagged using both four common syntactic patterns shown in Table~\ref{tab:answertypewords}, as well as a short list of transparent nouns (e.g., {\em kind, type, form}). 
+%
+%\item {\bf Stop words: } A list of general and QA-specific stop words and phrases, as well as any remaining words not captured by earlier sieves, are flagged as stop words.
+%
+%\end{enumerate}
 
-\label{tab:answertypewords}
-\end{center}
-\end{table*}
+%\begin{table*}[t]
+%\caption{{Syntactic patterns used to detect answer type words.  Square brackets represent optional elements. }}
+%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{ll}
+%\hline
+%\multicolumn{1}{l}{Pattern} & \multicolumn{1}{l}{Example} 	\\
+%\hline
+%(SBARQ (WHNP (WHNP (WDT) {\bf (NN)) [(PP)]}...						& What {\em kind of energy} ...    	\\
+%(SBARQ (WHNP (WP)) (SQ (VBZ is) {\bf (NP)}...	 					& What is {\em one method} that ... 	\\
+%(S (NP (NP (DT A) {\bf (NN)}) (SBAR (WHNP (WDT that)) ...			& A {\em tool} that ..					\\
+%(S (NP {\bf (NP)} (PP)) (VP (VBZ is) ...    						& The {\em main function} of ... is to ...	\\
+%
+%\end{tabular}
+%\end{footnotesize}
+%
+%\label{tab:answertypewords}
+%\end{center}
+%\end{table*}
 
+\subsection{Scores and weights}
 
+After classifying each question and answer word, we assign each a score that denotes its importance with respect to the inference required to answer the question.  
+\begin{itemize}
 
+\item \textbf{Stop words} are given a score of 0 and are excluded from future processing.
 
+\item \textbf{Answer type words} are given a score of 1. 
 
-{\flushleft {\bf Scoring and weights:}} We then assign a score to each question word based on its perceived relevance to the question as follows. 
-Stop words are not assigned a score, and are not included in further processing.
-All answer type words are given a score of 1.  Words flagged as abstract, concrete, or example words are sorted based on their distance from the concreteness boundaries of 3.0 (for abstract words) or 4.2 (for concrete words), where words closer to the concreteness boundary tend to be more relevant to the question, and should receive higher scores.
-These words are then given incrementally increasing scores starting at 2 for the most distant word, and increasing by one until all words in this category have been assigned a score.
-To create an artificial separation between focus words and the less relevant words, and to encourage our intersentence aggregation method to preferentially make use of focus words, we assign all focus words a uniform score 10 points higher than the highest-scoring abstract, concrete, or example word.  
-Finally, list words, the most important category, receive a uniform score one higher than focus words.  The scores of all words are converted into weights by normalizing the scores to sum to one. 
-An example of the scoring process is shown in Table~\ref{tab:focusexample}. 
+\item \textbf{Abstract, concrete, or example words} are sorted by how close they were to one of the concreteness boundaries (3.0 and 4.2).  These words are then assigned incrementally increasing scores (starting at 2 for the farthest away word and continuing for all words).  In this way, words which were closer to the boundary have higher scores.
 
-It is important to note that the proposed focus word extraction algorithm is simple and leaves considerable room for improvement. We hypothesize that better algorithms could be implemented by switching to a learning-based approach. However, the simple unsupervised algorithm proposed requires no data annotations, and it captures the crucial intuition that some words in the question  contribute more towards the overall information need than others.  We demonstrate that this has a considerable impact on the performance of our overall QA system in the ablation studies discussed in Section~\ref{sec-cl2017:controls}.
+\item \textbf{Focus words} are all uniformly assigned a score that is 10 higher than the highest-scoring abstract, concrete, or example word.  
+
+\item \textbf{List words} are uniformly given a score 1 higher than the focus words.
+  
+\end{itemize}
+
+After all words are scored, the scores are normalized into weights so that they sum to one.  An example of this scoring is shown in Table \ref{tab:focusexample}.  While we do not claim that this algorithm is the best method for capturing focus words, we do demonstrate that this has a considerable impact on the performance of our overall QA system in the ablation studies discussed in Section~\ref{sec-cl2017:controls}.
+
+%{\flushleft {\bf Scoring and weights:}} We then assign a score to each question word based on its perceived relevance to the question as follows. 
+%Stop words are not assigned a score, and are not included in further processing.
+%All answer type words are given a score of 1.  Words flagged as abstract, concrete, or example words are sorted based on their distance from the concreteness boundaries of 3.0 (for abstract words) or 4.2 (for concrete words), where words closer to the concreteness boundary tend to be more relevant to the question, and should receive higher scores.
+%These words are then given incrementally increasing scores starting at 2 for the most distant word, and increasing by one until all words in this category have been assigned a score.
+%To create an artificial separation between focus words and the less relevant words, and to encourage our intersentence aggregation method to preferentially make use of focus words, we assign all focus words a uniform score 10 points higher than the highest-scoring abstract, concrete, or example word.  
+%Finally, list words, the most important category, receive a uniform score one higher than focus words.  The scores of all words are converted into weights by normalizing the scores to sum to one. 
+%An example of the scoring process is shown in Table~\ref{tab:focusexample}. 
+
+%It is important to note that the proposed focus word extraction algorithm is simple and leaves considerable room for improvement. We hypothesize that better algorithms could be implemented by switching to a learning-based approach. However, the simple unsupervised algorithm proposed requires no data annotations, and it captures the crucial intuition that some words in the question  contribute more towards the overall information need than others.  We demonstrate that this has a considerable impact on the performance of our overall QA system in the ablation studies discussed in Section~\ref{sec-cl2017:controls}.
 
 
 
