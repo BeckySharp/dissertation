@@ -42,7 +42,7 @@
 \section{Conclusions}
 \label{sec-emnlp2016:conclusion}
 %\vspace{-1mm}
-We presented a framework for creating customized embeddings tailored to the information need of causal questions.  We trained three popular models (embedding, alignment, and CNN) using causal tuples extracted with minimal supervision by bootstrapping cause-effect pairs from free text, and evaluated their performance both directly (i.e., the degree to which they capture causality), and indirectly (i.e., their real-world utility on a high-level question answering task). 
+We presented a framework for creating customized embeddings tailored to the information need of causal questions.  We trained three popular models (embedding, alignment, and CNN) using causal tuples extracted with minimal supervision by bootstrapping cause-effect pairs from free text, and evaluated their performance both directly (i.e., the degree to which they capture causality), and indirectly (i.e., their real-world utility on a high-level question answering task).\footnote{All code and resources needed to reproduce this work are  available at \url{http://clulab.cs.arizona.edu/data/emnlp2016-causal/}.} 
 
 
 %We note that the results of these two evaluations are not identical; higher performance on the direct evaluation does \emph{not} necessarily correlate with higher performance in the QA task.
@@ -52,7 +52,7 @@ In QA, where the vocabulary is much larger, precision must be balanced with high
 
 Extending this work beyond causality, we hypothesize that additional embedding spaces customized to the different information needs of questions would allow for robust performance over a larger variety of questions, and that these customized embedding models should be evaluated both directly and indirectly to accurately characterize their performance. 
 
-\todo{tie into next chapter -- need for interpretability}
+Despite the robustness of this model, and the extensibility to other question types, this model does not particularly provide interpretability.  This is demonstrated in the error analysis of Section \ref{sec-emnlp2016:erroranalysis} -- as the only outputs of the model are feature values and learned feature weights, it's difficult to explain to a human user (particularly a user who isn't well-versed in machine learning) why the system is choosing the answers it is.  This is addressed in Chapters \ref{chapter:cl2017} and \ref{chapter:emnlp2017} which follow, as each of these systems return a human-readable justification alongside the chosen answer to provide insight into what the model deems useful in determining a correct answer.
 
 %We introduced a methodology for producing causal embedding models cost-effectively by bootstrapping cause-effect pairs extracted from free text using a small set of seed patterns, and then training dedicated embedding models over this data using task-specific contexts, i.e., where the context of a cause is its effect. We then used these causal embedding models to implement a dedicated reranking model for causal QA. 
 
@@ -60,15 +60,13 @@ Extending this work beyond causality, we hypothesize that additional embedding s
 
 %We hypothesize that additional embedding spaces customized to the different information needs of questions would allow for robust performance over a larger variety of questions, and that these customized embedding models should be evaluated both directly and indirectly to accurately characterize their performance. 
 
-\section*{Resources}
-All code and resources needed to reproduce this work are  available at \url{http://clulab.cs.arizona.edu/data/emnlp2016-causal/}.
 
 % ms: removed for anonymous submission
-\section*{Acknowledgments}
-We thank the Allen Institute for Artificial Intelligence for funding this work.
-Additionally, this work was partially funded by the Defense Advanced
-Research Projects Agency (DARPA) Big Mechanism
-program under ARO contract W911NF-14-1-0395.
+%\section*{Acknowledgments}
+%We thank the Allen Institute for Artificial Intelligence for funding this work.
+%Additionally, this work was partially funded by the Defense Advanced
+%Research Projects Agency (DARPA) Big Mechanism
+%program under ARO contract W911NF-14-1-0395.
 
 
 \newpage

@@ -15,7 +15,8 @@ For a given word:
 }}
 \begin{center}
 \begin{footnotesize}
-\addtolength{\tabcolsep}{-1.7pt}  
+\addtolength{\tabcolsep}{-1.7pt} 
+\makebox[\linewidth]{ 
 \begin{tabular}{r|cccccccccccc}
 Words & What	& tools	& could & determine & the  & {\bf speed} & of   & turtles & {\bf walking} & along & a    & path ? 		\\
 Conc  & 2.0A    & 4.6C  & 1.3A  & 2.1A      & 1.4A & {\bf 3.6}   & 1.7A & 5.0C    & {\bf 4.1}     & 2.1A  & 1.5A & 4.4C 		\\
@@ -23,6 +24,7 @@ Tag	  & ST      & ATYPE & ST    & ST        & ST   & {\bf FOCUS} & ST   & EX    
 Score & --      & 1     & --    & --        & --   & {\bf 14}    & --   & 2       & {\bf 14}      & --    & --   & 3			\\
 Weight& --      & 0.03  & --    & --        & --   & {\bf 0.41}  & --   & 0.06    & {\bf 0.41}    & --    & --   & 0.09		\\
 \end{tabular}
+}
 \addtolength{\tabcolsep}{1.7pt}  
 \end{footnotesize}
 
@@ -30,26 +32,42 @@ Weight& --      & 0.03  & --    & --        & --   & {\bf 0.41}  & --   & 0.06  
 \end{center}
 \end{table*}
 
+In the domain of multiple choice elementary science exams, determining the portion of the question that is relevant to the inference required to answer it (i.e. the \textbf{focus words}) is not trivial.  Often, extra information is included to distract readers and questions are grounded in an example as shown in Table \ref{tab:focusexample}, where a question about measuring speed is framed in terms of turtles walking along a path.  Identifying these focus words, however, is critical for our approach for creating answer justifications through information aggregation -- given the previsouly mentioned example, we would want to aggregate information about \textit{measuring}, not information about \textit{turtles}.  Identifying, or extracting, focus words allows us to constrain our aggregation to greatly reduce the degree of justification noise, or semantic drift. 
+Here we provide the description and formal algorithm for our focus word extraction, but for a more detailed discussion, please see \citet{jansen2017framing}.
 
-Questions often contain text that is not strictly required to arrive at an answer, and that can introduce noise into the answering process. 
-This is particularly relevant for science exams, where questions tend to include a narrative or example for the benefit of the reader, and this extra text can make determining a question's \emph{information need} more challenging. 
+% Mine:
+%While focus words have long been used in factoid QA \citep[e.g.,][]{Harabagiu:00,Moldovan:2003:PIE:763693.763694} to describe the \textit{answer-type} word (i.e., the word that identifies the type of the correct answer, such as \textit{city} in the question \textit{What city was the site of the 2000 Olympics?}), here these words are not particularly helpful.  Consider again the example in Table \ref{sec-cl2017:focuswords}.  Here the answer-type word is  
+%\textit{tools}, but as each of the multiple choice answers will be a type of tool, focusing on this word does not provide any information that can be used to differentiate between the correct answer and the other incorrect ones.  Thus, while we use the term \textit{focus words}, in our context we refer to the words in the question that convey the inference or information need of the question.
+
+We approach the task of selecting \textbf{focus words} by borrowing from cognitive psychology, which suggests that elementary school children reason using concrete concepts (i.e., \textit{turtles} rather than \textit{object}), rather than with the more abstract thinking that develops later \citep{Piaget1954}.  We use this distinction between \textit{concrete} and \textit{abstract} terms to guide our focus word extraction.  Intuitively, we focus on words which are not too concrete (as they are likely to be example words, like \textit{turtles}) and which are not too abstract (as they are likely to be too abstract for the focus of elementary-level questions).  
+
+To determine how concrete or abstract a given question word is, we make use of a large database of psycholinguistic concreteness norms \citep{brysbaert:2014}, which consists of 40 thousand common English lemmas rated on a numerical scale from 1 (highly abstract) to 5 (highly concrete).  As described in \citet{jansen2017framing}, we empirically observed that words that are approximately 50\% to 80\% concrete {\em (e.g., energy:3.1, measure:3.6, electricity:3.9, habitat:3.9)} tend to be at the right level of abstraction for isolating the key concepts of our elementary science exam questions.
+%\footnote{
+%While the above concreteness thresholds may be particular to elementary science exams, we hypothesize that the information need of a question tends to be more abstract than the examples grounding that question.  We believe this intuition may be general and applicable to other domains.
+%}.  
+
+
+
+%Questions often contain text that is not strictly required to arrive at an answer, and that can introduce noise into the answering process. 
+%This is particularly relevant for science exams, where questions tend to include a narrative or example for the benefit of the reader, and this extra text can make determining a question's \emph{information need} more challenging. 
+%%
+%%Elementary science exam questions are often crafted to test a student's knowledge of a single concept, process, or model.
+%%While some exam questions are short and direct {\em (e.g. What does a thermometer measure?)}, others embed the question in a narrative or example, and we first have to distill what the question is about before we're able to answer.  
+%For example, the question in Table~\ref{tab:focusexample} could be simplified to {\em What tools can be used to measure speed?}, but instead grounds the question in an example about turtles walking along a path.  As a first step in answering, we need to identify whether the focus of the question is about {\em speed}, {\em turtles}, {\em walking}, or {\em paths}, so that we can appropriately constrain our intersentence aggregation, and decrease the chance of generating noisy or unrelated justifications. 
 %
-%Elementary science exam questions are often crafted to test a student's knowledge of a single concept, process, or model.
-%While some exam questions are short and direct {\em (e.g. What does a thermometer measure?)}, others embed the question in a narrative or example, and we first have to distill what the question is about before we're able to answer.  
-For example, the question in Table~\ref{tab:focusexample} could be simplified to {\em What tools can be used to measure speed?}, but instead grounds the question in an example about turtles walking along a path.  As a first step in answering, we need to identify whether the focus of the question is about {\em speed}, {\em turtles}, {\em walking}, or {\em paths}, so that we can appropriately constrain our intersentence aggregation, and decrease the chance of generating noisy or unrelated justifications. 
+%Note that the {\em focus word} terminology was first introduced in the context of factoid QA, where it represents the question word or phrase that is indicative of the expected answer type, which is then used to constrain the search for candidate answers~\cite{Harabagiu:00,Moldovan:2003:PIE:763693.763694}. For example, {\em capital} is the focus word in the question {\em What is the capital of France?}. This information is used to constrain the search for answers to  entities that are of names of cities. 
+%In contrast, such words (e.g., {\em tools} for the previous exam question) are often of low importance for multiple choice science exams, as this information is already implicitly provided in the multiple choice answers.  Instead, our task is to identify the central concept the question is testing (e.g., {\em  measuring speed}), and to eliminate words that are part of an example or narrative (e.g., {\em  turtle, path}) that are unlikely to contribute much utility (or, may introduce noise) to the QA process. However, because at a high level focus words identify the information need of a question, which is what we aim to do as well, we continue to use the same terminology in this work.
+%
+%Our approach borrows from cognitive psychology, which suggests that elementary school students tend to reason largely with concrete concepts (i.e., those that are easy to mentally picture), because their capacity for abstract thinking develops much more slowly into adulthood (e.g., Piaget ~\citeyear{Piaget1954}).  Recently Brysbaert et al. ~\citeyear{brysbaert:2014} collected a large set of psycholinguistic concreteness norms, rating 40 thousand generally known English lemmas on a numerical scale from 1 (highly abstract) to 5 (highly concrete).  We have observed that highly abstract words (e.g., {\em expertise:1.6, compatible:2.3, occurrence:2.6)} tend to be part of a question's narrative or too abstract to form the basis for an elementary science question, while highly concrete words (e.g., {\em  car:4.9, rock:4.9, turtle:5.0)} are often part of examples.  Words that are approximately 50\% to 80\% concrete {\em (e.g., energy:3.1, measure:3.6, electricity:3.9, habitat:3.9)} tend to be at an appropriate level of abstraction for the cognitive abilities of elementary science students, and are often the central concept that a question is testing.\footnote{
+%While the above concreteness thresholds may be particular to elementary science exams, we hypothesize that the information need of a question tends to be more abstract than the examples grounding that question.  We believe this intuition may be general and applicable to other domains.
+%}
 
-Note that the {\em focus word} terminology was first introduced in the context of factoid QA, where it represents the question word or phrase that is indicative of the expected answer type, which is then used to constrain the search for candidate answers~\cite{Harabagiu:00,Moldovan:2003:PIE:763693.763694}. For example, {\em capital} is the focus word in the question {\em What is the capital of France?}. This information is used to constrain the search for answers to  entities that are of names of cities. 
-In contrast, such words (e.g., {\em tools} for the previous exam question) are often of low importance for multiple choice science exams, as this information is already implicitly provided in the multiple choice answers.  Instead, our task is to identify the central concept the question is testing (e.g., {\em  measuring speed}), and to eliminate words that are part of an example or narrative (e.g., {\em  turtle, path}) that are unlikely to contribute much utility (or, may introduce noise) to the QA process. However, because at a high level focus words identify the information need of a question, which is what we aim to do as well, we continue to use the same terminology in this work.
-
-Our approach borrows from cognitive psychology, which suggests that elementary school students tend to reason largely with concrete concepts (i.e., those that are easy to mentally picture), because their capacity for abstract thinking develops much more slowly into adulthood (e.g., Piaget ~\citeyear{Piaget1954}).  Recently Brysbaert et al. ~\citeyear{brysbaert:2014} collected a large set of psycholinguistic concreteness norms, rating 40 thousand generally known English lemmas on a numerical scale from 1 (highly abstract) to 5 (highly concrete).  We have observed that highly abstract words (e.g., {\em expertise:1.6, compatible:2.3, occurrence:2.6)} tend to be part of a question's narrative or too abstract to form the basis for an elementary science question, while highly concrete words (e.g., {\em  car:4.9, rock:4.9, turtle:5.0)} are often part of examples.  Words that are approximately 50\% to 80\% concrete {\em (e.g., energy:3.1, measure:3.6, electricity:3.9, habitat:3.9)} tend to be at an appropriate level of abstraction for the cognitive abilities of elementary science students, and are often the central concept that a question is testing.\footnote{
-While the above concreteness thresholds may be particular to elementary science exams, we hypothesize that the information need of a question tends to be more abstract than the examples grounding that question.  We believe this intuition may be general and applicable to other domains.
-}
-
-Making use of this observation, we identify these focus words with the algorithm below. The algorithm is implemented as a sequence of ordered sieves applied in decreasing order of precision~\cite{Lee:13}. Each of the five sieves attempts to assign question words into one of the following categories\footnote{This same process is used to extract focus words for each of the multiple choice answer candidates, though it is generally much simpler given that the answers tend to be short.}: 
+Formally, we utilize this observation within our focus word extractor using the following five steps (designed as a sequence of sieves of decreasing precision ~\citep{Lee:13}), each aimed at classifying question and answer words into a particular category.   
+%Making use of this observation, we identify these focus words with the algorithm below. The algorithm is implemented as a sequence of ordered sieves applied in decreasing order of precision~\cite{Lee:13}. Each of the five sieves attempts to assign question words into one of the following categories\footnote{This same process is used to extract focus words for each of the multiple choice answer candidates, though it is generally much simpler given that the answers tend to be short.}: 
 
 \begin{enumerate}
 
-\item {\bf Lists and sequences:} Lists in questions generally contain highly important terms.  We identify comma delimited lists of the form {\small {\tt X, Y, ..., <and/or> Z}} (e.g., {\em sleet, rain, and hail}). Given the prevalence of questions that involve causal or process knowledge, we also identify from/to sequences (e.g., {\em from a solid to a liquid}) using paired {\tt prep\_from} and {\tt prep\_to} Stanford dependencies~\cite{de2008stanford}. 
+\item {\bf Identify Lists and sequences:} Lists in questions generally contain highly important terms.  We identify comma delimited lists of the form {\small {\tt X, Y, ..., <and/or> Z}} (e.g., {\em sleet, rain, and hail}). Given the prevalence of questions that involve causal or process knowledge, we also identify from/to sequences (e.g., {\em from a solid to a liquid}) using paired {\tt prep\_from} and {\tt prep\_to} Stanford dependencies~\cite{de2008stanford}. 
 
 \item {\bf Focus words:} Content lemmas (nouns, verbs, adjectives, and adverbs) with concreteness scores between 3.0 and 4.2 in the concreteness norm database of Brysbaert et al. ~\citeyear{brysbaert:2014} are flagged as focus words. 
 
@@ -57,7 +75,7 @@ Making use of this observation, we identify these focus words with the algorithm
 
 \item {\bf Answer type words:} Answer type words are flagged using both four common syntactic patterns shown in Table~\ref{tab:answertypewords}, as well as a short list of transparent nouns (e.g., {\em kind, type, form}). 
 
-\item {\bf Stop words: } A list of general and QA-specific stop words and phrases, as well as any remaining words not captured by earlier seives, are flagged as stop words.
+\item {\bf Stop words: } A list of general and QA-specific stop words and phrases, as well as any remaining words not captured by earlier sieves, are flagged as stop words.
 
 \end{enumerate}
 
