@@ -33,22 +33,22 @@ Note that during testing it is possible to see feature values outside of their k
 We include the following baselines: 
 
 {\flushleft {\bf Random:}} selects an answer randomly.
-{\flushleft {\bf Candidate retrieval (CR):}} ranks answers using an approach similar to the baseline model in Jansen et al.~\citeyear{jansen14}, which uses features that measure cosine similarity over {\em tf-idf} vectors (\citet[e.g., Ch. 6,][]{manning08}) to rank answer candidates in a ``learning to rank'' (L2R) framework.  
+{\flushleft {\bf Information retrieval (IR):}} ranks answers using an approach similar to the baseline model in \citet{jansen14}, which uses features that measure cosine similarity over {\em tf-idf} vectors \citep[][Ch. 6]{manning08} to rank answer candidates in a ``learning to rank'' (L2R) framework (see also Section \ref{sec-naacl2015:models}).  
 Traditionally, with retrieval systems, short answers to questions are dynamically constructed from larger parent documents, and the top-scoring answer (defined as the answer with the highest {\em tf-idf} score between that answer candidate and a query vector made from the question) is taken to be the winner.  Here we adapt this setup to multiple choice exams by: (a) using query vectors that contain words from both the question and multiple choice answer candidate, and (b) generating features from the top {\em tf-idf} score for each answer candidate in a given question, which are then combined in the learning-to-rank framework.  We then take the short passage retrieved by the system as a justification for why that answer candidate is correct. 
 
 Documents are constructed across the six knowledge bases by dividing each corpus by subsection (for texts), by definition (for dictionaries), or by flashcard.  We implemented the document indexing and retrieval system using Lucene\footnote{\url{http://lucene.apache.org}}.  Each sliding window of $N$ sentences in a given document served as a potential answer justification. Using the development questions, we empirically determined that a two-sentence window performed best, though performance did not significantly differ for window sizes between one and five sentences.  This  model generates two features: a cosine similarity score between the query vector and the best-scoring candidate answer justification in a given corpus, and a linear model that combines this cosine similarity with the cosine similarity between the query vector and the entire document, blending both local (answer justification) and global (document) context. 
 
-Because our six corpora are of different genres (study guide, teachers guide, dictionary, flashcards), domains (science-domain vs. open-domain), and lengths (300 to 17,000 sentences), we implement six separate {\em tf-idf} models, each containing documents only from a single corpus. We then combine the two retrieval features from each model (12 features total) into a ranking perceptron \cite{Shen:Joshi:2005,Surdeanu:11} to learn which knowledge bases are most useful for this task.  This ensemble retrieval model produces a single score for each multiple choice answer candidate, where the top-scoring answer candidate is selected as the winner.  The top-scoring answer justifications from each of the six retrieval models then serve as justifications. 
+Because our six corpora are of different genres (study guide, teachers guide, dictionary, flashcards), domains (science-domain vs. open-domain), and lengths (300 to 17,000 sentences), we implement six separate {\em tf-idf} models, each containing documents only from a single corpus. We then combine the two retrieval features from each model (12 features total) into a ranking perceptron \citep{Shen:Joshi:2005,Surdeanu:11} to learn which knowledge bases are most useful for this task.  This ensemble retrieval model produces a single score for each multiple choice answer candidate, where the top-scoring answer candidate is selected as the winner.  The top-scoring answer justifications from each of the six retrieval models then serve as justifications. 
 
 
  
-{\flushleft {\bf Jansen et al. (2014):}} the best-performing combined lexical semantic (LS) and CR model of Jansen et. al~\citeyear{jansen14}, which was shown to perform well for open domain questions.  Similar to the CR model, we adapted this model to our task by including six separate recurrent neural network language models (RNNLM) of Mikolov et al.\citeyear{mikolov13,mikolov10}, each trained on one of the six knowledge bases.  Two features that measure the overall and pairwise cosine similarity between a question vector and multiple choice answer candidate vector are included.  The overall similarity is taken to be the cosine similarity of the composite vectors of both the question and answer candidate, obtained by summing the vectors for the individual words within either the question or answer candidate vectors, then renormalizing these composite vectors to unit length.  The pairwise similarity is computed as the average pairwise cosine similarity between each word in the question and answer candidate.  Two features from each of the six LS models are then combined with the two features from each of the CR models (24 features total) as above using a ranking perceptron, with the top-scoring answer candidate taken as correct.  Because the LS features do not easily lend themselves to constructing answer justifications, no additional human-readable justifications were provided by this model. 
+{\flushleft {\bf Jansen et al. (2014):}} the best-performing combined lexical semantic and IR model of \citet{jansen14}, which was shown to perform well for open domain questions.  Similar to the IR model, we adapted this model to our task by including six separate lexical semantics (i.e. word embedding) language models \citep{mikolov13,mikolov10}, each trained on one of the six knowledge bases.  Two features that measure the overall and pairwise cosine similarity between a question vector and multiple choice answer candidate vector are included.  The overall similarity is taken to be the cosine similarity of the composite vectors of both the question and answer candidate, obtained by summing the vectors for the individual words within either the question or answer candidate vectors, then renormalizing these composite vectors to unit length.  The pairwise similarity is computed as the average pairwise cosine similarity between each word in the question and answer candidate.  Two features from each of the six lexical semantics models are then combined with the two features from each of the IR models (24 features total) as above using a ranking perceptron, with the top-scoring answer candidate taken as correct.  Because the lexical semantics features do not easily lend themselves to constructing answer justifications, no additional human-readable justifications were provided by this model. 
 
 
 \subsection{Results}
 \label{sec-cl2017:results}
 
-Here we first investigate the performance of two variants of the TAG model with respect to justification length.  We then compare the best-performing model with the baselines, and show that the TAG and CR models can be combined to increase performance. We use the standard implementation for precision at 1 (P@1) ~\cite{manning08} and a tie-aware implementation of mean reciprocal rank (MRR) \cite{mcsherry2008}.
+Here we first investigate the performance of two variants of the TAG model with respect to justification length.  We then compare the best-performing model with the baselines, and show that the TAG and IR models can be combined to increase performance. We use the standard implementation for precision at 1 (P@1) ~\citep{manning08} and a tie-aware implementation of mean reciprocal rank (MRR) \citep{mcsherry2008}.  All statistical significance tests were performed using one-tailed bootstrap resampling with 10,000 iterations.
 
 
 
@@ -56,9 +56,6 @@ Here we first investigate the performance of two variants of the TAG model with 
 % Performance versus path length
 %
 \begin{table}[t]
-\caption{{
-Performance as a function of justification length in sentences (or, the number of graphlets in a TAG) for two models: one aware of connection-type, and one that is not. Bold font indicates the best score in a given column for each model group. 
-}}
 \small
 \begin{center}
 %\begin{tabular}{p{0.3mm}p{55mm}llll}
@@ -81,8 +78,9 @@ Performance as a function of justification length in sentences (or, the number o
 
 \hline
 \end{tabular}
-
-%space{-6mm}
+\caption{{
+Performance as a function of justification length in sentences (or, the number of graphlets in a TAG) for two models: one aware of connection-type, and one that is not. Bold font indicates the best score in a given column for each model group. 
+}}
 \label{tab:pathlength}
 \end{center}
 \end{table}
@@ -95,11 +93,11 @@ Here, the $k$G models contain exclusively justifications of length $k$ (we explo
 Short two-sentence (or two-graphlet) TAGs significantly outperform single sentence TAGs, with single sentence (1G) TAGs starting at 35.3\% P@1, increasing to 38.2\% for two-sentence (2G) TAGs, hen decreasing slightly to 37.8\% for three-sentence (3G) TAGs. 
 In previous work, we observed that for a variety of word-level graphs and traversal algorithms, QA performance tends to rapidly peak when aggregating two or three words, then slowly decreases as more words are aggregated due to ``inference drift'' in the graph 
 traversal process
-(i.e., following the connections from \emph{breakfast} $\rightarrow$ \emph{hashbrowns} $\rightarrow$ \emph{potato} $\rightarrow$ \emph{field} would potentially connect questions about breakfast to information about potato or even soccer fields)   \cite{fried2015higher}.  
+(i.e., following the connections from \emph{breakfast} $\rightarrow$ \emph{hashbrowns} $\rightarrow$ \emph{potato} $\rightarrow$ \emph{field} would potentially connect questions about breakfast to information about potato or even soccer fields)   \citep{fried2015higher}.  
 
-Though our sentence aggregation model contains far more structure than the higher-order lexical semantic graphs of Fried et al. ~\citeyear{fried2015higher}, and is represented at the level of the sentence or graphlet rather than individual lemmas, we hypothesize based on this previous work that we may be observing the beginning of same characteristic peak in performance reported there.  Because runtime increases exponentially with the number of sentences included in a TAG, it quickly becomes intractable to test this with TAGs containing more than 3 graphlets. 
+Though our sentence aggregation model contains far more structure than the higher-order lexical semantic graphs of \citet{fried2015higher}, and is represented at the level of the sentence or graphlet rather than individual lemmas, we hypothesize based on this previous work that we may be observing the beginning of same characteristic peak in performance reported there.  Because runtime increases exponentially with the number of sentences included in a TAG, it quickly becomes intractable to test this with TAGs containing more than 3 graphlets. 
 
-Extending the model to include a knowledge of the connection type (or the type of lexical overlap, see Section~{\ref{sec-cl2017:characterizing}) between sentences in a given TAG using Daum{\'e}'s method~\cite{daume2007} increases performance, suggesting that different kinds of connections are best identified through different feature patterns.  Here, the connection-type aware 2G\textsubscript{CT} model outperforms the regular 2G model by nearly 2\% P@1 (absolute), increasing performance to 39.9\% -- an increase of +14.7\% (relative) over using only single-sentence TAGs.\footnote{Each of the 50 models in the ensemble reranker is initialized with random weights, causing the small performance difference between 1G and 1G\textsubscript{CT}}
+Extending the model to include a knowledge of the connection type (or the type of lexical overlap, see Section~{\ref{sec-cl2017:characterizing}) between sentences in a given TAG using Daum{\'e}'s method~\citep{daume2007} increases performance, suggesting that different kinds of connections are best identified through different feature patterns.  Here, the connection-type aware 2G\textsubscript{CT} model outperforms the regular 2G model by nearly 2\% P@1 (absolute), increasing performance to 39.9\% -- an increase of +14.7\% (relative) over using only single-sentence TAGs.\footnote{Each of the 50 models in the ensemble reranker is initialized with random weights, causing the small performance difference between 1G and 1G\textsubscript{CT}}
 
 
 
@@ -112,8 +110,6 @@ Extending the model to include a knowledge of the connection type (or the type o
 %
 \begin{table*}[t]
     \small
-    \caption{{
-Performance of the baseline and best-performing TAG models, both separately and in combination. TAG justifications of different short lengths were found to best combine in single classifiers (denoted with a $+$), where models that combine the CR baseline or long (3G) TAG justifications best combined using voting ensembles (denoted with a $\cup$). Bold font indicates the best score in a given column for each model group. Asterisks indicate that a score is significantly better than the highest-performing baseline model (* signifies $p < 0.05$, ** signifies $p < 0.01$).  The dagger indicates that a score is significantly higher than the score in the line number indicated in superscript ($p < 0.01$). All significance tests were implemented using one-tailed non-parametric bootstrap resampling using 10,000 iterations. }}
 \begin{center}
 \begin{tabular}{p{0.3mm}p{55mm}llll}
 \multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{P@1} & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{MRR} \\
@@ -123,7 +119,7 @@ Performance of the baseline and best-performing TAG models, both separately and 
 & \multicolumn{5}{l}{Baselines }\\
 \hline
 1 & Random					& 25.00 			& --		& 52.08  		& --	  \\
-2 & CR 						& {\bf 40.20} 	& -- 	& {\bf 62.49}	&	--  \\
+2 & IR 						& {\bf 40.20} 	& -- 	& {\bf 62.49}	&	--  \\
 3 & Jansen et al. (2014)		& 37.30 			& --		& 60.95 			& 	--	 \\
 
 \\
@@ -135,27 +131,28 @@ Performance of the baseline and best-performing TAG models, both separately and 
 
 \\
 \hline
-& \multicolumn{5}{l}{Combined models that include the CR baseline (Voting)}\\
+& \multicolumn{5}{l}{Combined models that include the IR baseline (Voting)}\\
 \hline
-6 & CR $\cup$ 1G\textsubscript{CT} $\cup$ 2G\textsubscript{CT} $\cup$ 3G\textsubscript{CT} 			& 43.15*			& +7.3\%			& 64.51*		& +3.2\%	  \\
-7 & CR $\cup$ (1G\textsubscript{CT} + 2G\textsubscript{CT}) $\cup$ 3G\textsubscript{CT} 			& {\bf 44.46**}		& {\bf +10.6\%}		& {\bf 65.53**} 		& {\bf +4.9\%}	  \\
+6 & IR $\cup$ 1G\textsubscript{CT} $\cup$ 2G\textsubscript{CT} $\cup$ 3G\textsubscript{CT} 			& 43.15*			& +7.3\%			& 64.51*		& +3.2\%	  \\
+7 & IR $\cup$ (1G\textsubscript{CT} + 2G\textsubscript{CT}) $\cup$ 3G\textsubscript{CT} 			& {\bf 44.46**}		& {\bf +10.6\%}		& {\bf 65.53**} 		& {\bf +4.9\%}	  \\
 
 \hline
 \end{tabular}
-%space{-6mm}
+    \caption{{
+Performance of the baseline and best-performing TAG models, both separately and in combination. TAG justifications of different short lengths were found to best combine in single classifiers (denoted with a $+$), where models that combine the IR baseline or long (3G) TAG justifications best combined using voting ensembles (denoted with a $\cup$). Bold font indicates the best score in a given column for each model group. Asterisks indicate that a score is significantly better than the highest-performing baseline model (* signifies $p < 0.05$, ** signifies $p < 0.01$).  The dagger indicates that a score is significantly higher than the score in the line number indicated in superscript ($p < 0.01$). All significance tests were implemented using one-tailed non-parametric bootstrap resampling using 10,000 iterations. }}
 \label{tab:combinedmodels}
 \end{center}
 \end{table*}
 
-Where Table~\ref{tab:pathlength} lists models that contain justifications of static length, Fried et al.~\citeyear{fried2015higher} showed that combining paths of different lengths into a single classifier can increase performance.  The performance of TAG models that combine justifications of different lengths, as well as the baseline models, is shown in Table~\ref{tab:combinedmodels}.
+Where Table~\ref{tab:pathlength} lists models that contain justifications of static length, \citet{fried2015higher} showed that combining paths of different lengths into a single classifier can increase performance.  The performance of TAG models that combine justifications of different lengths, as well as the baseline models, is shown in Table~\ref{tab:combinedmodels}.
 
-{\flushleft {\bf Baselines:}} Where the lexical semantics model of Jansen et al. ~\citeyear{jansen14} outperformed their CR baseline by +36\% (relative) on a large corpus of open-domain questions from Yahoo Answers, here on elementary science exams, the lexical semantic features decrease performance.  Our conjecture is that the performance difference is due to the difference in the size of the corpora used to train the lexical semantic model -- where Jansen et al. trained their lexical semantic model using Gigaword, here we are limited by the relatively small size of our text resources.  Jansen et al. ~\citeyear{jansen14} reported that a domain-specific version of their lexical semantic model performed poorly when trained on a biology textbook and subset of Wikipedia, and others have since shown that lexical semantic models perform poorly with small amounts of training data \cite{sharp-EtAl:2015:NAACL-HLT}. 
+{\flushleft {\bf Baselines:}} Where the lexical semantics model of \citet{jansen14} outperformed their IR baseline by +36\% (relative) on a large corpus of open-domain questions from Yahoo Answers, here on elementary science exams, the lexical semantic features decrease performance.  Our conjecture is that the performance difference is due to the difference in the size of the corpora used to train the lexical semantic model -- where Jansen et al. trained their lexical semantic model using Gigaword, here we are limited by the relatively small size of our text resources.  \citet{jansen14} reported that a domain-specific version of their lexical semantic model performed poorly when trained on a biology textbook and subset of Wikipedia, and others have since shown that lexical semantic models perform poorly with small amounts of training data \citep[][see also Chapter \ref{chapter:naacl2015}]{sharp-EtAl:2015:NAACL-HLT}. 
 
 {\flushleft {\bf Combined Models:}} Single-classifier models containing both 1G and 2G TAGs were generated for both the normal and connection-type-aware models.  The 1G + 2G model performs only slightly better than 2G alone, but when the models are connection-type aware, there is greater benefit to combining the different path lengths -- the connection-type-aware 1G\textsubscript{CT} + 2G\textsubscript{CT} model (line 5) increases performance to 42.9\% P@1 (compare to the static-length 2G\textsubscript{CT} performance of 39.9\%).
 
 
-As the CR baseline and the TAG models are performing inherently different tasks (information \emph{retrieval} and information \emph{aggregation} respectively), we are able to combine them together in a voting model in order to create a full system that contains the benefits of each.
-The voting models that incorporate both the CR baseline and TAG models across all justification lengths are included on lines 6 and 7.  Both models significantly increase performance over the CR baseline, with the voting model that couples 1G\textsubscript{CT} + 2G\textsubscript{CT} as a single classifier (and single vote) performing better than when 1G\textsubscript{CT} and 2G\textsubscript{CT} vote separately.  This best-performing model reaches 44.5\% P@1, increasing performance over the CR baseline by +10.6\% (relative). %All in all
+As the IR baseline and the TAG models are performing inherently different tasks (information \emph{retrieval} and information \emph{aggregation} respectively), we are able to combine them together in a voting model in order to create a full system that contains the benefits of each.
+The voting models that incorporate both the IR baseline and TAG models across all justification lengths are included on lines 6 and 7.  Both models significantly increase performance over the IR baseline, with the voting model that couples 1G\textsubscript{CT} + 2G\textsubscript{CT} as a single classifier (and single vote) performing better than when 1G\textsubscript{CT} and 2G\textsubscript{CT} vote separately.  This best-performing model reaches 44.5\% P@1, increasing performance over the IR baseline by +10.6\% (relative). %All in all
 This set of experiments demonstrates that our approach of jointly ranking answers and justifications is complementary to a strong information retrieval baseline, and significantly improves performance at the task of selecting the correct answer.  
 
 
@@ -166,7 +163,6 @@ This set of experiments demonstrates that our approach of jointly ranking answer
 % Justification example (IR)
 %
 \begin{table*}[t]
-\caption{{ Example justifications from the CR baseline and their associated ratings. }} %  (N=20, c=0.1)
 \begin{center}
 \begin{footnotesize}
 %\begin{tabular}{lcc}
@@ -197,6 +193,8 @@ This set of experiments demonstrates that our approach of jointly ranking answer
 %\end{tabular}
 \end{tabularx}
 \end{footnotesize}
+\caption{{ Example justifications from the IR baseline and their associated ratings. }} %  (N=20, c=0.1)
+
 \label{tab:justificationsIRexamples}
 
 \end{center}
@@ -224,7 +222,6 @@ This set of experiments demonstrates that our approach of jointly ranking answer
 
 \begin{table}[]
 \small
-\caption{{An example TAG and justification rated as {\em good}.  The two sentences connect on non-focus "other" shared words (e.g., \emph{green, plant}) which are not found in the question or answer, but which are highly related to the focus words. }} 
 \begin{tabularx}{\textwidth}{p{2.5cm}p{11cm}}
 %\hline
 %\multicolumn{2}{l}{EXAMPLE: Other} \\
@@ -241,6 +238,8 @@ Focus Word(s) &   (NN\_grass, 1.00) \\
 \\
 \hline
 \end{tabularx}
+\caption{{An example TAG and justification rated as {\em good}.  The two sentences connect on non-focus "other" shared words (e.g., \emph{green, plant}) which are not found in the question or answer, but which are highly related to the focus words. }} 
+
 \label{ex:tagQsXs}
 \end{table}
 
@@ -370,22 +369,21 @@ Focus Word(s) &   (NN\_grass, 1.00) \\
 %\end{table}
 
 The previous experiments demonstrate that our method performs well at identifying correct answers. But how well does it perform at the task of {\em justifying} those answers?
-We evaluated justification performance for both the best baseline (CR) and the best performing TAG model that is independent of CR (i.e., 1G\textsubscript{CT} + 2G\textsubscript{CT}) .  Where TAG justifications took the form of the sentences being aggregated, justifications for the CR model were taken to be the highest-scoring short passages from each of the six knowledge bases.  As the CR model was tuned to a retrieval size of two sentences to maximize P@1 performance, each CR justification was two sentences in length.\footnote{Documents for the dictionary and flashcard corpora typically contained only a single sentence, and so answer justifications from these corpora are often shorter than two sentences.} To facilitate easy comparison, since the CR model provides six justifications (one from each knowledge base), we evaluate the top six scoring TAG justifications.  
+We evaluated justification performance for both the best baseline (IR) and the best performing TAG model that is independent of IR (i.e., 1G\textsubscript{CT} + 2G\textsubscript{CT}) .  Where TAG justifications took the form of the sentences being aggregated, justifications for the IR model were taken to be the highest-scoring short passages from each of the six knowledge bases.  As the IR model was tuned to a retrieval size of two sentences to maximize P@1 performance, each IR justification was two sentences in length.\footnote{Documents for the dictionary and flashcard corpora typically contained only a single sentence, and so answer justifications from these corpora are often shorter than two sentences.} To facilitate easy comparison, since the IR model provides six justifications (one from each knowledge base), we evaluate the top six scoring TAG justifications.  
 
 The correctness of justifications was independently annotated by two of the authors. Any detected conflicts were resolved post hoc by the two annotators working together.
 %
-Answer justifications were rated on a four-point scale, based on their ability to provide a convincing justification to the user as to why a given answer choice was correct (see  Table~\ref{tab:justificationsIRexamples} for CR examples, and Figure~\ref{ex:tagQsXs} for a TAG example).   Justifications rated as {\em\bf good} describe the inference required to arrive at the correct answer.  Those rated as {\em\bf half} contained at least a portion of an explanation of the inference, but missed some critical aspect required to answer the question, like discussing producers but not consumers in Table~\ref{tab:justificationsIRexamples}. The two final ratings are for justifications that did not address the inference -- {\em\bf topical} justifications do not address the question but discuss a similar topic, where {\em\bf offtopic} justifications are unrelated to the question. 
+Answer justifications were rated on a four-point scale, based on their ability to provide a convincing justification to the user as to why a given answer choice was correct (see  Table~\ref{tab:justificationsIRexamples} for IR examples, and Figure~\ref{ex:tagQsXs} for a TAG example).   Justifications rated as {\em\bf good} describe the inference required to arrive at the correct answer.  Those rated as {\em\bf half} contained at least a portion of an explanation of the inference, but missed some critical aspect required to answer the question, like discussing producers but not consumers in Table~\ref{tab:justificationsIRexamples}. The two final ratings are for justifications that did not address the inference -- {\em\bf topical} justifications do not address the question but discuss a similar topic, where {\em\bf offtopic} justifications are unrelated to the question. 
 
 %
 % Justification performance
 %
 \begin{table}[t]
 \small
-\caption{{ \emph{At least one} justification performance for both CR and TAG models, reflecting the highest rating attained by at least one of the top six justifications for a given question. }}%  Precision@6 performance reflects the overall proportion of each rating across all of the top six justifications. }} % 
 \begin{center}
 \begin{tabular}{p{20mm}cc}
 \hline
-\multicolumn{1}{l}{Rating} & \multicolumn{1}{c}{CR} & \multicolumn{1}{c}{TAG} \\%  & CR & TAG \\
+\multicolumn{1}{l}{Rating} & \multicolumn{1}{c}{IR} & \multicolumn{1}{c}{TAG} \\%  & IR & TAG \\
 \cline{2-3}
 \hline
 Good				&	45.3\%		& 56.7\%	 \\%	& 12.6\%		& 45.1\%	 \\
@@ -394,18 +392,16 @@ Topical			&	11.9\%		& 14.4\%	 \\%	& 17.2\%		& 18.4\% \\
 Offtopic			&	7.9\%		& 8.2\%	 \\%	& 52.9\%		& 18.5\% \\
 
 \end{tabular}
-%\end{footnotesize}
-
- 
+\caption{{ \emph{At least one} justification performance for both IR and TAG models, reflecting the highest rating attained by at least one of the top six justifications for a given question. }}%  Precision@6 performance reflects the overall proportion of each rating across all of the top six justifications. }} %  
 \label{tab:justifications}
 
 \end{center}
 \end{table}
 
-We evaluated the top-rated answer justifications using an {\bf at least one} method.  With this method, performance reflects the highest rating attained by \emph{at least one} of the six justifications for a given question. For example, for a question to be classed as {\em good}, at least one of the six answer justifications must be rated as {\em good}.  \emph{At least one} answer justification performance is listed in Table~\ref{tab:justifications}. For the TAG model, 56.7\% of the questions had at least one justification rated as {\em good}, outperforming CR justifications by 11.4\% (absolute).  
+We evaluated the top-rated answer justifications using an {\bf at least one} method.  With this method, performance reflects the highest rating attained by \emph{at least one} of the six justifications for a given question. For example, for a question to be classed as {\em good}, at least one of the six answer justifications must be rated as {\em good}.  \emph{At least one} answer justification performance is listed in Table~\ref{tab:justifications}. For the TAG model, 56.7\% of the questions had at least one justification rated as {\em good}, outperforming IR justifications by 11.4\% (absolute).  
 
 
-This experiment supports our original intuition that justifications must be aggregated from multiple resources. While the small window of sentences from the CR model is sufficient to justifiably answer many questions, a large number of questions require knowledge to be aggregated from {\em non-adjacent} sentences within a given corpus, or from sentences in different corpora altogether, to compose convincing answer justifications.  While the CR model leaves many of these questions with only partial justifications (34.9\% of justifications are rated as {\em half}), the TAG model  is able to aggregate sentences from multiple sources, and finds complete {\em good} justifications for many of the questions only partially answered by the CR model.
+This experiment supports our original intuition that justifications must be aggregated from multiple resources. While the small window of sentences from the IR model is sufficient to justifiably answer many questions, a large number of questions require knowledge to be aggregated from {\em non-adjacent} sentences within a given corpus, or from sentences in different corpora altogether, to compose convincing answer justifications.  While the IR model leaves many of these questions with only partial justifications (34.9\% of justifications are rated as {\em half}), the TAG model  is able to aggregate sentences from multiple sources, and finds complete {\em good} justifications for many of the questions only partially answered by the IR model.
 
 
 \subsubsection{Ablation Studies}
@@ -423,23 +419,26 @@ In other words, graphlets are the key structure in our representation of answer 
 Eliminating this structure (i.e., considering each sentence as a bag of words, which is equivalent to a graphlet with a single nugget)
 substantially reduces the performance of the 1G + 2G model from 38.69 to 28.90 P@1 and the performance of the 1G\textsubscript{CT} + 2G\textsubscript{CT} model from 42.88 to 28.08 P@1. 
 
+\begin{comment}
+
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{mainmatter/tacl2015-tig/tagNNArch2scores.pdf}
-\caption{The architecture for the neural network variation of our TAG system. We use a fully-connected feed-forward network which takes as input the content words (i.e., nouns, verbs, and adjectives) from the question, candidate answer, and corresponding justification.  For each of these, we create a composite vector by averaging the embeddings of the individual words.  We then concatenate these three composite vectors, as well as the TAG features and the CR scores, to form the input layer to the network. The output of the network is a single, real-valued score for the candidate answer justification.}
+\caption{The architecture for the neural network variation of our TAG system. We use a fully-connected feed-forward network which takes as input the content words (i.e., nouns, verbs, and adjectives) from the question, candidate answer, and corresponding justification.  For each of these, we create a composite vector by averaging the embeddings of the individual words.  We then concatenate these three composite vectors, as well as the TAG features and the IR scores, to form the input layer to the network. The output of the network is a single, real-valued score for the candidate answer justification.}
 \label{fig:nn_arch}
 \end{figure}
+
 
 \subsection{From Latent Perceptron to Latent Neural Networks}
 \label{sec-cl2017:nn}
 
-Neural networks (NNs) have recently received much attention in many NLP tasks and have been shown to be quite effective in certain question answering tasks~\cite{Iyyer2014,bordes2014question,bordes2015large,Iyyer2015,wang2015long,dong2015question,yih2015semantic,he2016pairwise,suggu2016deep}.  To determine if a deep learning approach would benefit our system, we explored providing our text aggregation graph features and the candidate retrieval scores to a neural ranking architecture.  Under this framework we were also able to straightforwardly experiment with including vectorized representations (i.e., embeddings) of the question, candidate answer, and corresponding justification, in hopes of accommodating some of the lexical variation in natural language.
+Neural networks (NNs) have recently received much attention in many NLP tasks and have been shown to be quite effective in certain question answering tasks~\citep{Iyyer2014,bordes2014question,bordes2015large,Iyyer2015,wang2015long,dong2015question,yih2015semantic,he2016pairwise,suggu2016deep}.  To determine if a deep learning approach would benefit our system, we explored providing our text aggregation graph features and the information retrieval scores to a neural ranking architecture.  Under this framework we were also able to straightforwardly experiment with including vectorized representations (i.e., embeddings) of the question, candidate answer, and corresponding justification, in hopes of accommodating some of the lexical variation in natural language.
 
-Neural network systems have varied dramatically in terms of their primary architecture (i.e., feed-forward, convolutional, recurrent, etc.) as well as their shape (number of hidden layers, number of nodes in a given layer, etc.).  Recently, however, Iyyer et al.~\citeyear{Iyyer2015} found that in their QA task, a simple network which \emph{averaged} the word embeddings of the questions and the answer candidates outperformed a much more complex tree recurrent NN.  
-Chen and Manning \citeyear{chen2016acl} have recently validated this observation in a different QA task.
-We based our NN on this simpler system, adapting it to our task by including not only an averaged vector for the question and answer, but also an averaged vector for the answer justification.  Additionally, we include our connection-type aware structural TAG features (cf., Table \ref{tab:features}) and the candidate retrieval (CR) features in the network input.  The network architecture is shown in Figure \ref{fig:nn_arch}.
+Neural network systems have varied dramatically in terms of their primary architecture (i.e., feed-forward, convolutional, recurrent, etc.) as well as their shape (number of hidden layers, number of nodes in a given layer, etc.).  Recently, however, \citet{Iyyer2015} found that in their QA task, a simple network which \emph{averaged} the word embeddings of the questions and the answer candidates outperformed a much more complex tree recurrent NN.  
+\citet{chen2016acl} have recently validated this observation in a different QA task.
+We based our NN on this simpler system, adapting it to our task by including not only an averaged vector for the question and answer, but also an averaged vector for the answer justification.  Additionally, we include our connection-type aware structural TAG features (cf., Table \ref{tab:features}) and the information retrieval (IR) features in the network input.  The network architecture is shown in Figure \ref{fig:nn_arch}.
 
-For learning, we use the hinge ranking loss function \cite{collobert2011natural} and update using stochastic gradient descent (SGD).  During training, for each question we pair the correct answer candidate with each of the incorrect candidates, creating three pairs.  For each of these pairs, we score both the correct answer candidate and the incorrect answer candidate and then compute the loss:
+For learning, we use the hinge ranking loss function \citep{collobert2011natural} and update using stochastic gradient descent (SGD).  During training, for each question we pair the correct answer candidate with each of the incorrect candidates, creating three pairs.  For each of these pairs, we score both the correct answer candidate and the incorrect answer candidate and then compute the loss:
 \begin{equation}
 L = \max (0, m - F(q,a_{correct}) + F(q,a_{incorrect}))
 \end{equation}
@@ -449,11 +448,11 @@ where $F(q,a_{correct})$ is the score of the correct answer candidate, $F(q,a_{i
 There are two important aspects of the proposed architecture:
 \begin{enumerate}
 \item[a)] The latent layer, i.e., identifying good justifications to use for a given answer, which we implement by modifying SGD to keep track of the latent aspect.  Specifically, to maintain the latent variable aspect of our ranking perceptron in our ranking neural network, we adapt Equation \ref{eq:F} to use a feed-forward pass through the network to determine the score of a given TAG (rather than the inner product of the features and the parameter vector), and continue to use the implementation of $P$ that uses only the TAG with highest score.  In this way, for each pair of candidate answers we have two justifications (one for the correct answer and one for the incorrect), and so perform a model update (i.e., backpropagation) for each.
-\item[b)] The combination of embeddings with explicit features that come from the CR system and the TAG features.  This strategy of mixing latent and explicit features has been demonstrated to be successful in other NLP tasks \cite{chen2014fast,suggu2016deep}.
+\item[b)] The combination of embeddings with explicit features that come from the IR system and the TAG features.  This strategy of mixing latent and explicit features has been demonstrated to be successful in other NLP tasks \citep{chen2014fast,suggu2016deep}.
 \end{enumerate} 
 
-Despite their advantages, neural networks have many hyperparameters which need to be tuned.  Continuing the inspiration of Iyyer et al.~\citeyear{Iyyer2015}, we lightly turned the network on development, both in terms of network shape as well as additional parameters.  Doing so, we arrived at a network which has a single dense layer with length 100 followed by the output layer of length one.\footnote{We experimented with some deeper networks and several hidden layer sizes (both larger and smaller).} 
-For our word embeddings, we used a recurrent neural network language model (RNNLM) \cite{mikolov10,mikolov13} trained over a concatenation of all of our in-domain elementary science resources (i.e., the study guides, flashcards, and dictionaries) to generate embeddings with 200 dimensions.\footnote{We also experimented with using embeddings trained over English Gigaword \cite{graff2003english} since the resource is much larger and would potentially yield more robust word representations.  However, we found that the performance was consistently worse, which we suspect is due to the difference in the domains.}  
+Despite their advantages, neural networks have many hyperparameters which need to be tuned.  Continuing the inspiration of \citet{Iyyer2015}, we lightly turned the network on development, both in terms of network shape as well as additional parameters.  Doing so, we arrived at a network which has a single dense layer with length 100 followed by the output layer of length one.\footnote{We experimented with some deeper networks and several hidden layer sizes (both larger and smaller).} 
+For our word embeddings, we used a recurrent neural network language model (RNNLM) \citep{mikolov10,mikolov13} trained over a concatenation of all of our in-domain elementary science resources (i.e., the study guides, flashcards, and dictionaries) to generate embeddings with 200 dimensions.\footnote{We also experimented with using embeddings trained over English Gigaword \citep{graff2003english} since the resource is much larger and would potentially yield more robust word representations.  However, we found that the performance was consistently worse, which we suspect is due to the difference in the domains.}  
 
 
 All network nodes use the sigmoid activation function, which performed better and was more stable to variations in the hyperparameters than the rectified linear unit activation.  Additionally, we used an L2 regularization of 1.0 and a dynamic learning rate which began at 1.0 and decayed by half each time the performance on validation decreased.  Though we experimented with dropout, there did not not seem to be a consistent improvement, so our final models do not include it.    
@@ -463,7 +462,6 @@ We used 50 epochs for training with early stopping if the validation performance
 \begin{table*}
 \small
 \begin{center}
-\caption{Performance of the Latent Ranking Neural Network models.  Models with \emph{CR} include the candidate retrieval scores as input, models with \emph{TAG} use the features from the best performing TAG model (1G\textsubscript{CT}+2G\textsubscript{CT}), and models with \emph{embeddings} include an average embedding for each of the question, the answer, and the text from which the justification graphlet was derived.  Significance tests were performed using bootstrap resampling with 10,000 iterations, but none of the differences between the neural network models and the CR baseline were significant.}
 \begin{tabular}{p{0.3mm}p{45mm}ll}
 %\multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{ } & \multicolumn{1}{l}{P@1}  & \multicolumn{1}{l}{MRR} \\
 
@@ -475,12 +473,12 @@ We used 50 epochs for training with early stopping if the validation performance
 % CL - 39.72
 
 \hline
-1 & CR				&  40.74\%  & 62.56\%  \\
-2 & CR + TAG 		&  40.52\%  & 62.48\% 	\\
-3 & CR + embeddings		&  38.74\%  & 61.61\%  	\\
-4 & CR + TAG + embeddings	&  41.82\%  & 63.11\%	\\
+1 & IR				&  40.74\%  & 62.56\%  \\
+2 & IR + TAG 		&  40.52\%  & 62.48\% 	\\
+3 & IR + embeddings		&  38.74\%  & 61.61\%  	\\
+4 & IR + TAG + embeddings	&  41.82\%  & 63.11\%	\\
 \end{tabular}
-%space{-6mm}
+\caption{Performance of the Latent Ranking Neural Network models.  Models with \emph{IR} include the information retrieval scores as input, models with \emph{TAG} use the features from the best performing TAG model (1G\textsubscript{CT}+2G\textsubscript{CT}), and models with \emph{embeddings} include an average embedding for each of the question, the answer, and the text from which the justification graphlet was derived.  Significance tests were performed using bootstrap resampling with 10,000 iterations, but none of the differences between the neural network models and the IR baseline were significant.}
 \label{tab:nnresults}
 \end{center}
 \end{table*}
@@ -489,10 +487,12 @@ We used 50 epochs for training with early stopping if the validation performance
 \label{sec-cl2017:nnresults}
 
 
-The final performance for the neural network variants of our proposed system as well as the CR baseline are shown in Table \ref{tab:nnresults}.  Once again, we observe that the performance of the combined model (CR + TAG + embeddings, line 4) is better than the performance of the CR model by itself (line 1) or CR + embeddings (line 3). However, here this difference is not significant.  This suggests that representing the justification as a simple bag of words with latent feature representations is not as effective as representing them with features derived from the structure of the text aggregation graph, even with the non-linear capabilities of the neural network.
+The final performance for the neural network variants of our proposed system as well as the IR baseline are shown in Table \ref{tab:nnresults}.  Once again, we observe that the performance of the combined model (IR + TAG + embeddings, line 4) is better than the performance of the IR model by itself (line 1) or IR + embeddings (line 3). However, here this difference is not significant.  This suggests that representing the justification as a simple bag of words with latent feature representations is not as effective as representing them with features derived from the structure of the text aggregation graph, even with the non-linear capabilities of the neural network.
 
-Additionally, we find that the neural network variants perform worse overall than the latent ranking perceptron models and the voting ensemble (cf., Table \ref{tab:combinedmodels}).  This could be due to the fact that the TAG and CR features we are supplying to the neural network are already abstracted many levels from raw text inputs, and so the NN approach benefits less from the non-linearity of the NN.  Another likely reason for the NN performing worse than the perceptron is that neural architectures need larger quantities of training data in order to properly generalize.  Notably, in the recent Allen Institute for Artificial Intelligence Kaggle challenge\footnote{\url{https://www.kaggle.com/c/the-allen-ai-science-challenge}}, a large contest with 170 participating teams, which also required answering multiple choice elementary and middle school science questions, none of the top-performing participants obtained better results with neural networks. The participants' analyses suggested that this is largely due to a lack of training data.  Finally, the space of possible neural network architectures is large, and the network we report here is fairly simple.  While it could be the case that given a more complex architecture (i.e., with a recurrent or convolutional network, optimizers, and learned rather than pre-trained embeddings) we could obtain even higher numbers than those reported here, with complex architectures, issues resulting from the limited training data would likely be worsened. We leave that exploration to future work.
+Additionally, we find that the neural network variants perform worse overall than the latent ranking perceptron models and the voting ensemble (cf., Table \ref{tab:combinedmodels}).  This could be due to the fact that the TAG and IR features we are supplying to the neural network are already abstracted many levels from raw text inputs, and so the NN approach benefits less from the non-linearity of the NN.  Another likely reason for the NN performing worse than the perceptron is that neural architectures need larger quantities of training data in order to properly generalize.  Notably, in the recent Allen Institute for Artificial Intelligence Kaggle challenge\footnote{\url{https://www.kaggle.com/c/the-allen-ai-science-challenge}}, a large contest with 170 participating teams, which also required answering multiple choice elementary and middle school science questions, none of the top-performing participants obtained better results with neural networks. The participants' analyses suggested that this is largely due to a lack of training data.  Finally, the space of possible neural network architectures is large, and the network we report here is fairly simple.  While it could be the case that given a more complex architecture (i.e., with a recurrent or convolutional network, optimizers, and learned rather than pre-trained embeddings) we could obtain even higher numbers than those reported here, with complex architectures, issues resulting from the limited training data would likely be worsened. We leave that exploration to future work.
 
 \paragraph{Incorporating Embeddings into the Perceptron}
 Though the embedding-based neural architecture (as implemented) was not successful, following a reviewer suggestion we also experimented with adding the precomputed text embeddings as additional features for the latent ranking perceptron.  In this way, the feature vector for each TAG, $\Phi(x)$, contains the original features as well as an averaged embedding for each of the question, answer, and justification texts.  This provides an additional 600 features, as we are using 200-dimensional embedding vectors.  We included these extra features in our best performing single TAG model, the connection-type aware 1G+2G model shown in Table \ref{tab:combinedmodels}, line 5.  The resulting model performed worse (39.36\% P@1 compared to 42.88\% P@1 without the embeddings). 
 This shows that, while distributed representations of words have many benefits (including robustness to lexical variation), their incorporation into a learning model is not necessarily trivial, and we leave that study to future work.
+
+\end{comment}

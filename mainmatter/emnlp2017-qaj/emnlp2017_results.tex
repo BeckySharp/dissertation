@@ -24,7 +24,7 @@
 \end{tabular}
 \end{footnotesize}
 %space{-1mm}
-\caption{{\footnotesize Performance on the AI2 Kaggle questions, measured by precision-at-one (P@1).  $^*$s  indicate that the difference between the corresponding model and the IR baseline is statistically significant ($^*$ indicates $p < 0.05$ and $^{**}$ indicates $p < 0.001$) and $^{\dagger}$s  indicate significance compared to IR$^{++}$,
+\caption{{ Performance on the AI2 Kaggle questions, measured by precision-at-one (P@1).  $^*$s  indicate that the difference between the corresponding model and the IR baseline is statistically significant ($^*$ indicates $p < 0.05$ and $^{**}$ indicates $p < 0.001$) and $^{\dagger}$s  indicate significance compared to IR$^{++}$,
 %that the difference between the corresponding model and the IR$^{++}$ baseline is statistically significant. %($^\dagger$ corresponds to $p < 0.05$ and $^{\dagger\dagger}$ corresponds to $p < 0.001$).  
 All significance values were determined through a one-tailed bootstrap resampling test with 100,000 iterations. }} 
 \label{tab:p@1}
@@ -46,7 +46,7 @@ All significance values were determined through a one-tailed bootstrap resamplin
 \end{tabular}
 \end{footnotesize}
 %space{-1mm}
-\caption{{\footnotesize Ablation of feature groups results, measured by precision-at-one (P@1) on validation data.  Significance is indicated as in Table \ref{tab:p@1}.}} 
+\caption{{ Ablation of feature groups results, measured by precision-at-one (P@1) on validation data.  Emb indicates our embedding-based features, LO indicates our lexical overlap features, lexDisc signifies our semi-lexicalized discourse features, and IR$^{++}$ indicates our information retrieval based features.  Significance is indicated as in Table \ref{tab:p@1}.}} 
 \label{tab:ablation}
 %space{-5mm}
 \end{center}
@@ -55,15 +55,15 @@ All significance values were determined through a one-tailed bootstrap resamplin
 \section{Results}
 \label{sec-emnlp2017:results}
 
-Rather than seeking to outperform all other systems at selecting the correct answer to a question, here we aimed to construct a system system that can produce substantially better justifications for why the answer choice is correct to a human user, without unduly sacrificing accuracy on the answer selection task.  Accordingly, we evaluate our system both in terms of it's ability to correctly answer questions (Section \ref{sec-emnlp2017:accuracy}), as well as provide high-quality justifications for those answers (\ref{sec-emnlp2017:justification_results}).  Additionally, we perform an error analysis (Section \ref{sec-emnlp2017:erroranalysis}), taking advantage of the insight the reranked justifications provide into what the model is learning.
+Rather than seeking to outperform all other systems at selecting the correct answer to a question, here we aimed to construct a system  that can produce substantially better justifications for why the answer choice is correct to a human user (i.e., that is interpretable), without unduly sacrificing accuracy on the answer selection task (i.e., that maintains robustness).  Accordingly, we evaluate our system both in terms of it's ability to correctly answer questions (Section \ref{sec-emnlp2017:accuracy}), as well as provide high-quality justifications for those answers (\ref{sec-emnlp2017:justification_results}).  Additionally, we perform an error analysis (Section \ref{sec-emnlp2017:erroranalysis}), taking advantage of the insight the reranked justifications provide into what the model is learning.
 % \todo{not sure what this sentence means?}.
 % bs: is this clearer?
 
 \subsection{QA Performance}
 \label{sec-emnlp2017:accuracy}
-We evaluated the accuracy of our system as well as the baselines on the held-out 800 set of test questions.  Performance, measured in precision at 1 (P@1)\cite{manning08}, is shown in Table \ref{tab:p@1} for both the validation (i.e., cross validation on training) and test partitions.  Because NNs are sensitive to initialization, each experimental result shown is the average performance across five runs, each using different random seeds.   
+We evaluated the accuracy of our system as well as the baselines on the held-out 800 set of test questions.  Performance, measured in precision at 1 (P@1)\citep{manning08}, is shown in Table \ref{tab:p@1} for both the validation (i.e., cross validation on training) and test partitions.  Because NNs are sensitive to initialization, each experimental result shown is the average performance across five runs, each using different random seeds.   
 
-The best performing baseline on the validation data was a model using only IR$^{++}$ features (line 3), but its performance dropped substantially when evaluated on test due to the failure of several random seed initializations to learn.  For this reason, we assessed significance of our model combinations with respect to both the IR baseline as well as the IR$^{++}$ (indicated by $^*$ and $^{\dagger}$s, respectively).
+The best performing baseline on the validation data was a model using only IR$^{++}$ features (line 3), but its performance dropped substantially when evaluated on test due to the failure of several random seed initializations to learn.  For this reason, we assessed significance of our model combinations with respect to both the IR baseline as well as the IR$^{++}$ (indicated by $^*$ and $^{\dagger}$s, respectively). All significance values were determined through a one-tailed bootstrap resampling test with 100,000 iterations.
 %For this reason, we assessed significance of our model combinations with respect to both the IR baseline (indicated by $^*$) as well as the IR$^{++}$ system (indicated by $^{\dagger}$s).
 
 Our full model that combines IR$^{++}$, lexical overlap, discourse, and embeddings-based features, has a P@1 of 53.3\% (line 7), an absolute gain of 6.3\% over the strong IR baseline despite using the same background knowledge.  
@@ -105,8 +105,7 @@ In comparison to other systems that competed in the Kaggle challenge, our system
 %\end{flushleft}
 
 \paragraph{Feature Ablation:} To evaluate the contribution of the individual feature groups, we additionally performed an ablation experiment (see Table \ref{tab:ablation}).
-Each of our ablated models performed significantly better than the IR baseline on the validation set, including our simplest model, IR$^{++}$+LO.
-%\footnote{As we consider the fully ablated IR$^{++}$ to be a baseline, we do not include it here.}.
+Each of our ablated models performed significantly better than the IR baseline on the validation set, including our simplest model that includes only the lexical overlap and IR-based feature, IR$^{++}$+LO\footnote{As we consider the fully ablated IR$^{++}$ to be a baseline, we do not include it here.}.
 %, and the version which has the IR-based features removed, LO+lexDisc+Emb.  
    
 %The addition of the semi-lexicalized discourse features (lexDisc) did not significantly improve performance over IR$^{++}$+EF, but it did add the stability needed to show significant gains over IR$^{++}$ (compare lines 3 and 5).  
@@ -118,14 +117,14 @@ Each of our ablated models performed significantly better than the IR baseline o
 %
 \begin{table}[t]
 \begin{center}
-\begin{footnotesize}
+%\begin{footnotesize}
 %\begin{tabular}{p{1cm}p(6cm}}
-\begin{tabularx}{\linewidth}{p{0.7cm}p{6cm}}
+\begin{tabularx}{\linewidth}{p{2cm}p{12cm}}
 \hline
 \multicolumn{2}{c}{Question} \\
 \hline			
-\multicolumn{2}{p{7cm}}{\textbf{Q:} Scientists use ice cores to help predict the impact of future atmospheric changes on climate. Which property of ice cores do these scientists use? } \\
-\multicolumn{2}{p{7cm}}{\textbf{A:} The composition of ancient materials trapped in air bubbles} \\
+\multicolumn{2}{p{14cm}}{\textbf{Q:} Scientists use ice cores to help predict the impact of future atmospheric changes on climate. Which property of ice cores do these scientists use? } \\
+\multicolumn{2}{p{15cm}}{\textbf{A:} The composition of ancient materials trapped in air bubbles} \\
 \multicolumn{1}{c}{} & \multicolumn{1}{c}{} \\				
 \hline
 \multicolumn{1}{l}{Rating} & \multicolumn{1}{c}{Example Justification} \\
@@ -136,7 +135,7 @@ Each of our ablated models performed significantly better than the IR baseline o
 {\em Off-topic }	&	Physical change: change during which some properties of material change but ... \\
 %\end{tabular}
 \end{tabularx}
-\end{footnotesize}
+%\end{footnotesize}
 \caption{{  Example justifications from the our model and their associated ratings. }} 
 \label{tab:justification_examples}
 %space{-5mm}
@@ -145,11 +144,14 @@ Each of our ablated models performed significantly better than the IR baseline o
 
 \subsection{Justification Performance}
 \label{sec-emnlp2017:justification_results}
-One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, we assessed the quality of each of the top five justifications.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  Following the methodology of Jansen et al. \citeyear{jansen2017framing}, each justification received a rating of either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
+One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, we assessed the quality of each of the top five justifications.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  
+Each of these justifications was composed of a single sentence from our corpus, though a future version could use multi-sentence passages, or aggregate several sentences together, as in Chapter \ref{chapter:cl2017} \citep{jansen2017framing}.
+
+As in the justification evaluation in Chapter \ref{chapter:cl2017}, each justification received a rating of either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
 
 \begin{table}[t]
 \begin{center}
-\begin{footnotesize}
+%\begin{footnotesize}
 \begin{tabular}{llll}
 \hline
  Model 			& Good@1 	& Good@5 	& NDCG@5 \\ 
@@ -157,8 +159,8 @@ One of our key claims is that our approach addresses the related, but more chall
 IR Baseline 	&	0.52 		&	0.64 		& 0.55 \\
 Our Approach & 	{\bf 0.61}	 	&	{\bf 0.74}			& {\bf 0.62}$^{**}$ \\
 \end{tabular}
-\end{footnotesize}
-\caption{{\footnotesize Percentage of questions that have at least one \emph{good} justification within the top 1 (Good@1) and the top 5 (Good@5) justifications, 
+%\end{footnotesize}
+\caption{{Percentage of questions that have at least one \emph{good} justification within the top 1 (Good@1) and the top 5 (Good@5) justifications, 
 %. returned by both the IR baseline and our full model 
 as well as the normalized discounted cumulative gain at 5 (NDCG@5) of the ranked justifications.
  Significance indicated as in Table \ref{tab:p@1}.
@@ -223,11 +225,17 @@ Results of this analysis are shown using three evaluation metrics in Table \ref{
 Note that 61\% of the top-ranked justifications from our system were rated as \emph{Good} as compared to 52\% from the IR baseline (a gain of 9\%), despite the systems using identical corpora.  
 %In second position, our system had 12\% more \emph{Good} justifications.  
 
-We also evaluated the justification ratings using normalized discounted cumulative gain at 5 (NDCG@5) (as formulated in \citet{manning08}, p.163), where we assigned \emph{Good} justifications a gain of 3.0, \emph{Half} a gain of 2.0, \emph{Topical} a gain of 1.0, and \emph{Off-Topic} a gain of 0.0.  With this formulation, our system had a NDCG@5 of 0.62 while the IR baseline had a significantly lower NDCG@5 of 0.55 ($p < 0.001$), shown in the third column of Table \ref{tab:justification_ndcg}. 
+We also evaluated the justification ratings using normalized discounted cumulative gain at 5 (NDCG@5) as formulated in \citet{manning08}, p.163.  In our context, let $Q$ be our set of questions and $R(q,j)$ be the relevance score (gain) given to justification $j$ for question $q$, then the normalized discounted cumulative gain at $k$ is:
+\begin{equation}
+NDCG(Q, k) = \dfrac{1}{|Q|} \sum_{q=1}^{|Q|} Z_{kq} \sum_{m=1}^k \dfrac{2^{R_{(q,m)}} - 1}{\log_2(1+m)}
+\end{equation}
+where $Z_{kq}$ is the normalization factor, calculated so that a perfect justification ranking (for us, this would be all \textit{Good} justifications) for question $q$ would have an NDCG@$k$ of 1.  $k$ is the number of results to consider (here we use the top 5).  
+
+In terms of gains, we assigned \emph{Good} justifications a gain of 3.0, \emph{Half} a gain of 2.0, \emph{Topical} a gain of 1.0, and \emph{Off-Topic} a gain of 0.0.  With this formulation, our system had a NDCG@5 of 0.62 while the IR baseline had a significantly lower NDCG@5 of 0.55 ($p < 0.001$), shown in the third column of Table \ref{tab:justification_ndcg}. 
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{mainmatter/emnlp2017-qaj/justificationChanges.png}
+\includegraphics[width=0.7\textwidth]{mainmatter/emnlp2017-qaj/justificationChanges.png}
 \caption{Number of questions for which % the IR$^{++}$ + EF + lexDisc + Emb 
 our complete model chooses a new justification at each epoch during training.  While this is for a single random seed, we see essentially identical graphs for each random initialization.}
 \label{fig:changes}
@@ -245,155 +253,149 @@ The main assertion of this work is that through learning to rank answers and jus
 
 Additionally, we tracked the number of times a new justification was chosen by the model as it trained. We found that our system converges to a stable set of justifications during training, shown in Figure \ref{fig:changes}.
 
-%- Demonstrate the need for the latent layer (justifications from IR).
 
 
-%bs - no room: Greedy is useful: top 1 just vs. top 10 vs. top 100 (OPTIONAL) But we want top 1 anyway.
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Error Type & Percent \\ 
+\hline
+Short justification/High lexical overlap  & 53.3\%\\
+Complex inference required   & 43.3\% \\
+Knowledge Base Noise  & 6.7\% \\
+Word order necessary	 & 6.7\% \\
+Coverage & 6.7\% \\
+Negation	& 3.3\% \\
+Other & 6.7\% \\
+\end{tabular}
 
+\caption{{ Summary of the findings of the 30 question error analysis.  
+Examples of several categories are provided in separate tables. 
+Note that a given question may fall into more than one category.}} 
+\label{tab:erroranalysis}
+\vspace{-5mm}
+\end{center}
+\end{table}
 
-%\todo{Examples of good/bad questions!?}
-%bs: removed todo -- there won't be any room, I promise!
-
-%\todo{Error analysis where it’s doing worse (>= 20+ qs, where our got it wrong) -- 20 questions we got wrong, find top 2 places we went wrong (half a column}
-
-%
 %\begin{table}[!th]
 %\begin{center}
 %\begin{footnotesize}
 %\hfill
-%\begin{tabular}{ll}
+%\begin{tabular}{p{0.8cm}p{6.5cm}p{1cm}}
 %\hline
-%Error Type & Percent \\ 
+%\multicolumn{2}{l}{Error Type} & Percent \\ 
 %\hline
-%Short justification/High lexical overlap  & 53.3\%\\
-%Complex inference required   & 43.3\% \\
-%Knowledge Base Noise  & 6.7\% \\
-%Word order necessary	 & 6.7\% \\
-%Coverage & 6.7\% \\
-%Negation	& 3.3\% \\
-%Other & 6.7\% \\
-%\end{tabular}
-%\end{footnotesize}
-%\caption{{\footnotesize Summary of the findings of the 30 question error analysis.  
-%%Examples of several categories provided in separate tables. 
-%Note that a given question may fall into more than one category.}} 
-%\label{tab:erroranalysis}
-%\vspace{-5mm}
-%\end{center}
-%\end{table}
+%\multicolumn{2}{l}{\textbf{Shorter justification with lots of lexical overlap}} & 53.3\%\\
+%\multicolumn{2}{l}{\textbf{Complex inference required}}  & 43.3\% \\
+%\hline
 %
-%%\begin{table}[!th]
-%%\begin{center}
-%%\begin{footnotesize}
-%%\hfill
-%%\begin{tabular}{p{0.8cm}p{6.5cm}p{1cm}}
+%\\
+%\hline
+%\multicolumn{2}{l}{\textbf{KB Noise}}  & 6.7\% \\
+%\hline
+%Question: & \multicolumn{2}{p{7.5cm}}{ If an object traveling to the right is acted upon by an unbalanced force from behind it  the object will}	\\
+%Correct: & \multicolumn{2}{p{7.5cm}}{speed up }	\\
+%Chosen & \multicolumn{2}{p{7.5cm}}{ change direction }	\\
+%			& \multicolumn{2}{p{7.5cm}}{\textit{ Unbalanced force: force that acts on an object that will change its direction}}	\\
 %%\hline
-%%\multicolumn{2}{l}{Error Type} & Percent \\ 
-%%\hline
-%%\multicolumn{2}{l}{\textbf{Shorter justification with lots of lexical overlap}} & 53.3\%\\
-%%\multicolumn{2}{l}{\textbf{Complex inference required}}  & 43.3\% \\
-%%\hline
+%\multicolumn{3}{p{8cm}}{The system found a sentence in the knowledge base that "justifies" the correct answer.}	\\
 %%
-%%\\
-%%\hline
-%%\multicolumn{2}{l}{\textbf{KB Noise}}  & 6.7\% \\
-%%\hline
-%%Question: & \multicolumn{2}{p{7.5cm}}{ If an object traveling to the right is acted upon by an unbalanced force from behind it  the object will}	\\
-%%Correct: & \multicolumn{2}{p{7.5cm}}{speed up }	\\
-%%Chosen & \multicolumn{2}{p{7.5cm}}{ change direction }	\\
-%%			& \multicolumn{2}{p{7.5cm}}{\textit{ Unbalanced force: force that acts on an object that will change its direction}}	\\
-%%%\hline
-%%\multicolumn{3}{p{8cm}}{The system found a sentence in the knowledge base that "justifies" the correct answer.}	\\
-%%%
-%%\\
-%%\hline
-%%\multicolumn{2}{l}{\textbf{Word order necessary}}	 & 6.7\% \\
-%%\hline
-%%Question: & \multicolumn{2}{p{7.5cm}}{ The acceleration of a small rocket that has just been launched can be quantitatively found by}	\\
-%%Correct: & \multicolumn{2}{p{7.5cm}}{dividing the force acting upon the rocket by its mass }	\\
-%%Chosen & \multicolumn{2}{p{7.5cm}}{ dividing the mass of the rocket by the force acting upon it }	\\
-%%			& \multicolumn{2}{p{7.5cm}}{\textit{ (same for both) acceleration: force divided by mass}}	\\
-%%%\hline
-%%\multicolumn{3}{p{8cm}}{The ordering of the answer choice terms was necessary for answering the question.}	\\
-%%%
-%%\\
-%%\hline
-%%\multicolumn{2}{l}{\textbf{Coverage}} & 6.7\% \\
-%%\hline
-%%Question: & \multicolumn{2}{p{7.5cm}}{ Which activity most effectively ensures the proper functioning of osteocytes?}	\\
-%%Correct: & \multicolumn{2}{p{7.5cm}}{consuming mineral-rich foods}\\
-%%			& \multicolumn{2}{p{7.5cm}}{\textit{ most lipids consumed from food are in the form of triglycerids}}	\\	
-%%Chosen & \multicolumn{2}{p{7.5cm}}{increasing the respiratory rate }	\\
-%%			& \multicolumn{2}{p{7.5cm}}{\textit{ hyperventilation increased respiratory rate}}	\\
-%%%\hline
-%%\multicolumn{3}{p{8cm}}{The knowledge base had no coverage for the concept of \emph{osteocyte}, so the system grasped at proverbial straws.}	\\
-%%%
-%%\\
-%%\hline
-%%\multicolumn{2}{l}{\textbf{Negation}}	& 3.3\% \\
-%%\hline
-%%%\multicolumn{3}{l}{Example}	\\
-%%Question: & \multicolumn{2}{p{7.5cm}}{ Which feature does not form as a result of tectonic plates diverging?}	\\
-%%Chosen: & \multicolumn{2}{p{7.5cm}}{ rift valley }	\\
-%%			& \multicolumn{2}{p{7.5cm}}{\textit{ Rift valley: deep valley formed as tectonic plates move apart. }}	\\
-%%\multicolumn{3}{p{8cm}}{Note that the justification actually shows that the chosen answer is incorrect, rather than justifying it.  This is the expected behavior for the system for these negated questions as we don't handle them differently.}	\\
-%%%
-%%\\
-%%\hline
-%%\multicolumn{2}{l}{\textbf{Other}} & 6.7\% \\
-%%\end{tabular}
-%%\hfill
-%%\end{footnotesize}
-%%\caption{{\footnotesize Summary of the findings of the 30 question error analysis.  Note that a given question may fall into more than one category.}} 
-%%\label{tab:erroranalysis}
-%%\end{center}
-%%\end{table}
-%
-%\begin{table}[t]
-%\begin{center}
-%\begin{footnotesize}
-%\begin{tabular}{p{1cm}p{6cm}}
+%\\
 %\hline
-%Type: & \textbf{Short justification/High lexical overlap}\\
+%\multicolumn{2}{l}{\textbf{Word order necessary}}	 & 6.7\% \\
 %\hline
-%Question: & The length of time between night and day on Earth varies throughout the year. This time variance is explained primarily by $\rule{1cm}{0.15mm}$. \\
-%Correct: & Earth 's angle of tilt \\
-%			 & \textit{ ... the days are very short in the winter because the sun's rays hit the earth at an extreme angle ... due to the tilt of the earth's axis. } \\
-%Chosen: &  Earth 's distance from the Sun \\
-%			& \textit{ Is light year time or distance? Distance}	\\
+%Question: & \multicolumn{2}{p{7.5cm}}{ The acceleration of a small rocket that has just been launched can be quantitatively found by}	\\
+%Correct: & \multicolumn{2}{p{7.5cm}}{dividing the force acting upon the rocket by its mass }	\\
+%Chosen & \multicolumn{2}{p{7.5cm}}{ dividing the mass of the rocket by the force acting upon it }	\\
+%			& \multicolumn{2}{p{7.5cm}}{\textit{ (same for both) acceleration: force divided by mass}}	\\
+%%\hline
+%\multicolumn{3}{p{8cm}}{The ordering of the answer choice terms was necessary for answering the question.}	\\
+%%
+%\\
+%\hline
+%\multicolumn{2}{l}{\textbf{Coverage}} & 6.7\% \\
+%\hline
+%Question: & \multicolumn{2}{p{7.5cm}}{ Which activity most effectively ensures the proper functioning of osteocytes?}	\\
+%Correct: & \multicolumn{2}{p{7.5cm}}{consuming mineral-rich foods}\\
+%			& \multicolumn{2}{p{7.5cm}}{\textit{ most lipids consumed from food are in the form of triglycerids}}	\\	
+%Chosen & \multicolumn{2}{p{7.5cm}}{increasing the respiratory rate }	\\
+%			& \multicolumn{2}{p{7.5cm}}{\textit{ hyperventilation increased respiratory rate}}	\\
+%%\hline
+%\multicolumn{3}{p{8cm}}{The knowledge base had no coverage for the concept of \emph{osteocyte}, so the system grasped at proverbial straws.}	\\
+%%
+%\\
+%\hline
+%\multicolumn{2}{l}{\textbf{Negation}}	& 3.3\% \\
+%\hline
+%%\multicolumn{3}{l}{Example}	\\
+%Question: & \multicolumn{2}{p{7.5cm}}{ Which feature does not form as a result of tectonic plates diverging?}	\\
+%Chosen: & \multicolumn{2}{p{7.5cm}}{ rift valley }	\\
+%			& \multicolumn{2}{p{7.5cm}}{\textit{ Rift valley: deep valley formed as tectonic plates move apart. }}	\\
+%\multicolumn{3}{p{8cm}}{Note that the justification actually shows that the chosen answer is incorrect, rather than justifying it.  This is the expected behavior for the system for these negated questions as we don't handle them differently.}	\\
+%%
+%\\
+%\hline
+%\multicolumn{2}{l}{\textbf{Other}} & 6.7\% \\
 %\end{tabular}
 %\hfill
 %\end{footnotesize}
-%\caption{{\footnotesize Example of the system preferring a justification for which all the terms were found in either the question or answer candidate.
-%% while the justification for the correct answer contained additional information necessary to fully explain the answer. 
-%(Justifications shown in italics)
-%}} 
-%\label{tab:ex_lex_overlap}
-%\vspace{-5mm}
+%\caption{{\footnotesize Summary of the findings of the 30 question error analysis.  Note that a given question may fall into more than one category.}} 
+%\label{tab:erroranalysis}
 %\end{center}
 %\end{table}
-%
-%\subsection{Error Analysis}
-%\label{sec-emnlp2017:erroranalysis}
-%
-%%\todo{provide examples for all without other -- make full width}
-%
-%
-%To better understand the limitations of our current system, we performed an error analysis of 30 incorrectly answered questions.  %Taking advantage of the ability of the chosen justifications to provide insight into what the system found important, we 
-%We examined the top 5 justifications returned for both the correct and chosen answers.  
-%%Among the questions analyzed we found some interesting trends.   
-%Notably, 50\% of the questions analyzed had one or more good justifications in the top 5 returned by our system, but for a variety of reasons, summarized in Table \ref{tab:erroranalysis}, the system incorrectly ranked another answer's justification higher.  
-%
-%The most common form of error was the systems preference 
-%was when the chosen answer's justification contained a 
-%for short justifications with a large degree of lexical overlap with the question and answer choice itself, 
-%%with few unmatched terms, 
-% shown by the example in Table \ref{tab:ex_lex_overlap}.  
-% %This effect was magnified when the correct answer required more "explanation" to connect the question to the answer.  
-%This suggests that the system has learned that generally many unmatched words are indicative of an incorrect answer.  While this may typically be true, extending the system to be able to prefer the \emph{opposite} with certain types of questions would potentially help with these errors.  
-%
+
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{p{2cm}p{12cm}}
+\hline
+Type: & \textbf{Short justification/High lexical overlap}\\
+\hline
+Question: & The length of time between night and day on Earth varies throughout the year. This time variance is explained primarily by $\rule{1cm}{0.15mm}$. \\
+\\
+Correct: & Earth 's angle of tilt \\
+			 & \textit{ ... the days are very short in the winter because the sun's rays hit the earth at an extreme angle ... due to the tilt of the earth's axis. } \\
+\\
+Chosen: &  Earth 's distance from the Sun \\
+			& \textit{ Is light year time or distance? Distance}	\\
+\end{tabular}
+\caption{{ Example of the system preferring a justification for which all the terms were found in either the question or answer candidate, while the justification for the correct answer contained additional information necessary to fully explain the answer. 
+(Justifications shown in italics)
+}} 
+\label{tab:ex_lex_overlap}
+\end{center}
+\end{table}
+
+\subsection{Error Analysis}
+\label{sec-emnlp2017:erroranalysis}
+
+To better understand the limitations of our current system, we performed an error analysis of 30 incorrectly answered questions.  
+We examined the top 5 justifications returned for both the correct and chosen answers.  
+Notably, 50\% of the questions analyzed had one or more good justifications in the top 5 returned by our system, but for a variety of reasons, summarized in Table \ref{tab:erroranalysis}, the system incorrectly ranked another justification higher.  
+
+The table shows that the most common form of error was the system's preference for short justifications with a large degree of lexical overlap with the question and answer choice itself, shown by the example in Table \ref{tab:ex_lex_overlap}.  The effect was magnified when the correct answer required more explanation to connect the question to the answer.  
+This suggests that the system has learned that generally many unmatched words are indicative of an incorrect answer.  While this may typically be true, extending the system to be able to prefer the \emph{opposite} with certain types of questions would potentially help with these errors.  
+
+\begin{table}[!th]
+\begin{center}
+\begin{tabular}{p{2cm}p{12cm}}
+\hline
+Type: & \textbf{Complex inference required}\\
+\hline
+Question: & Mr. Harris mows his lawn twice each month. He claims that it is better to leave the clippings on the ground. Which long term effect will this most likely have on his lawn? \\
+\\
+Correct: &  It will provide the lawn with needed nutrients. \\	
+\end{tabular}
+\caption{{ Example of a question for which complex inference is required.  In order to answer the question, you would need to assemble the event chain: cut grass left on the ground $\rightarrow$ grass decomposes $\rightarrow$ decomposed material provides nutrients.}} 
+\label{tab:ex_complex_inf}
+\end{center}
+\end{table}
+
+The second largest source of errors came from questions requiring complex inference (causal, process, quantitative, or model-based  reasoning) as with the question shown in Table \ref{tab:ex_complex_inf}.  This demonstrates not only the difficulty of the question set but also the need for systems that can robustly handle a variety of question types and their corresponding information needs.  
+
+
 %The second largest source of errors came from questions requiring complex inference (causal, process, quantitative, or model-based  reasoning) as with the question:%.  For example, to answer the question:
-% %\begin{quote}
+ %\begin{quote}
 %\begin{addmargin}[1em]{2em}% 1em left, 2em right 
 % \begin{footnotesize}
 %  \textit{Q: Mr. Harris mows his lawn ...[and leaves] the clippings on the ground. Which long term effect will this most likely have on his lawn? \\
@@ -403,14 +405,36 @@ Additionally, we tracked the number of times a new justification was chosen by t
 %\end{addmargin}
 %To answer this, you would need to link together: \textit{cut grass left on the ground $\rightarrow$ grass decomposes $\rightarrow$ decomposed material provides nutrients}. 
 %These questions constitute a large portion of our errors,  
-%%is a large set of questions that our system is not particularly designed to handle, 
+%is a large set of questions that our system is not particularly designed to handle, 
 %demonstrating not only the difficulty of the question set but also the need for systems that can robustly handle a variety of question types and their corresponding information needs.  
-%
-%Aside from these main groups, there were some smaller trends:  
-%7\% of the incorrectly chosen answers actually had justifications which "validated" them due to noise in the knowledge base, 7\% required word-order to answer (e.g., \emph{mass divided by acceleration} vs. \emph{acceleration divided by mass}), another 7\% of questions suffered from lack of coverage of the question concept in the knowledge base,
-%%(see example in Table \ref{tab:ex_coverage}), 
-% and 3\% failed to appropriately handle negation (i.e., questions of the format \emph{Which of the following are NOT ...}). 
-%
+
+\begin{table}[t]
+\begin{center}
+%\begin{footnotesize}
+\begin{tabular}{p{2cm}p{12cm}}
+\hline
+Type: & \textbf{Knowledge base noise}\\
+\hline
+Question: & If an object traveling to the right is acted upon by an unbalanced force from behind it the object will $\rule{1cm}{0.15mm}$.\\
+\\
+Correct: & speed up\\
+			%& \textit{Change of speed: an object accelerates if it speeds up and decelerates when it slows down}	\\	
+\\
+Chosen & change direction 	\\
+			& \textit{ Unbalanced force: force that acts on an object that will change its direction}	\\
+\end{tabular}
+%\end{footnotesize}
+\caption{{ Example of a question for which knowledge base noise (here, in the form of over-generalization) was an issue.}} 
+\label{tab:ex_noise}
+\end{center}
+\end{table}
+
+
+Aside from these primary sources of error, there were some smaller trends:  
+7\% of the incorrectly chosen answers actually had justifications which ``validated'' them due to noise in the knowledge base (e.g., the example shown in Table \ref{tab:ex_noise}), 7\% required word-order to answer (e.g., \emph{mass divided by acceleration} vs. \emph{acceleration divided by mass}), another 7\% of questions suffered from lack of coverage of the question concept in the knowledge base,
+%(see example in Table \ref{tab:ex_coverage}), 
+ and 3\% failed to appropriately handle negation (i.e., questions of the format \emph{Which of the following are NOT ...}). 
+
 %
 %
 %% bs: no room: - Negative results?
@@ -436,21 +460,4 @@ Additionally, we tracked the number of times a new justification was chosen by t
 %\end{center}
 %\end{table}
 
-
-%\begin{table}[!th]
-%\begin{center}
-%\begin{footnotesize}
-%\begin{tabular}{p{1cm}p{6cm}}
-%\hline
-%Type: & \textbf{Complex inference required}\\
-%\hline
-%Question: & Mr. Harris mows his lawn twice each month. He claims that it is better to leave the clippings on the ground. Which long term effect will this most likely have on his lawn? \\
-%Correct: &  It will provide the lawn with needed nutrients. 	\\
-%\end{tabular}
-%\hfill
-%\end{footnotesize}
-%\caption{{\footnotesize Example of a question for which complex inference is required.  In order to answer the question, you would need to assemble the following chain of events: cut grass left on the ground $\rightarrow$ grass decomposes $\rightarrow$ decomposed material provides nutrients.}} 
-%\label{tab:ex_complex_inf}
-%\end{center}
-%\end{table}
-
+ 

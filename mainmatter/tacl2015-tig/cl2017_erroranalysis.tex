@@ -5,7 +5,6 @@
 % Connection Types in Correct vs Incorrect Answers
 %
 \begin{table}[t]
-\caption{{ Proportion of good justifications with a given number of connecting word categories (Q, A, X) for both correct and incorrect answers. (Top 6) }}
 \small
 \label{tab:errorconnectiontypes}
 \begin{center}
@@ -22,16 +21,15 @@
 3				&	12.7\%		& 3.0\%	\\
 \end{tabular}
 %\end{footnotesize}
-
-
-
+\caption{{ Proportion of good justifications with a given number of connecting word categories (Q, A, X) for both correct and incorrect answers. (Top 6) }}
 \end{center}
 \end{table}
 
 At a high-level, our sentence aggregation model can be thought of as a system for building and evaluating answer justifications.  When questions are answered incorrectly, it is unclear whether the system was unable to \emph{build} a good justification for the correct answer, or unable to \emph{detect} a good justification that was successfully built.  To examine this, in addition to evaluating justification quality for correct answers, we also evaluated the top six justifications for 100 questions that the TAG system answered incorrectly.  We investigated the type of TAG patterns in the correct justifications  (from Section \ref{sec-cl2017:characterizing}), as well as the kinds of inference required for questions that were answered incorrectly.  In addition, we conducted a large open-ended error analysis and identified several broad classes of issues that contribute to poor system performance.\footnote{Our current focus word extractor is not yet well suited to complex multisentence questions. While the question corpus as a whole consists of 62\% single-sentence questions, 25\% two-sentence questions, and 14\% questions which are three sentences or longer, we elected to focus on shorter single-sentence questions for this error analysis whenever possible.  As a result, 96\% of the questions analyzed were single-sentence and 4\% were two-sentence.}
 
 {\flushleft {\bf What patterns of lexical overlap do we observe in justification sentences?}}
-We begin with an encouraging result. For questions that were answered incorrectly, nearly half (45.1\%) contain at least one \emph{good} justification within the top 6 for the correct answer.  This suggests that the current model is much better at generating and broadly ranking justifications than it is at the final step -- pushing the correct justification from the top 6 to the top position.  This result suggests that the TAG model may benefit from an improved ranking model. For example, while we currently use lexicalization to model TAG structures and quantify the overlap between candidate TAGs and the question, none of the features used by the ranking perceptron are explicitly lexicalized. We explored some neural network variants of our models in Section \ref{sec-cl2017:nn}, which were better able to incorporate lexicalization, but did not see a performance gain.  These models can be extended in future work, however, to see if it is ultimately possible to make use of this lexicalization.
+We begin with an encouraging result. For questions that were answered incorrectly, nearly half (45.1\%) contain at least one \emph{good} justification within the top 6 for the correct answer.  This suggests that the current model is much better at generating and broadly ranking justifications than it is at the final step -- pushing the correct justification from the top 6 to the top position.  This result suggests that the TAG model may benefit from an improved ranking model. For example, while we currently use lexicalization to model TAG structures and quantify the overlap between candidate TAGs and the question, none of the features used by the ranking perceptron are explicitly lexicalized. 
+%We explored some neural network variants of our models in Section \ref{sec-cl2017:nn}, which were better able to incorporate lexicalization, but did not see a performance gain.  These models can be extended in future work, however, to see if it is ultimately possible to make use of this lexicalization.
 
 
 Further, for questions answered correctly, the \emph{good} justifications in the top 6 tend to connect on several of the three lexical overlap categories (i.e., question focus words, answer focus words, other shared non-focus words).  Table \ref{tab:errorconnectiontypes} shows that for questions answered correctly, in 69\% of cases good justifications are connected on 2 or 3 lexical overlap categories.  
@@ -45,8 +43,6 @@ This suggests that while less lexically connected answer justifications are not 
 % Knowledge Types
 %
 \begin{table}[t]
-
-\caption{{  A summary of the inference type necessary for incorrectly answered questions.  The summary is broken down into three categories: incorrectly answered questions with a good justification in the top six, incorrectly answered questions without a good justification in the top six, as well as the overall proportions across these two conditions. }} 
 \small
 \begin{center}
 \begin{tabular}{lccc}
@@ -64,20 +60,19 @@ General Inference	& 29\%		&	43\%		& 37\%	\\
 Model-Based			& 13\%		&	34\%		& 25\%	\\
 \hline
 \end{tabular}
+\caption{{  A summary of the inference type necessary for incorrectly answered questions.  The summary is broken down into three categories: incorrectly answered questions with a good justification in the top six, incorrectly answered questions without a good justification in the top six, as well as the overall proportions across these two conditions. }} 
 \label{tab:knowledgetype}
 \end{center}
 \end{table}
 
 {\flushleft {\bf Is it harder to detect justifications for certain kinds of inference? }}
-We predict that questions requiring more challenging kinds of inference as identified by Clark et al.~\citeyear{clark:2013}, like model-based or general inference questions, are likely more difficult for the TAG system to answer than simpler retrieval-based questions. 
+We predict that questions requiring more challenging kinds of inference as identified by \citet{clark:2013}, like model-based or general inference questions, are likely more difficult for the TAG system to answer than simpler retrieval-based questions. 
 Following the criteria described by Clark et al., we classified the 100 questions in the error analysis based on the inference type required to answer them correctly. 
 This analysis, shown in Table~\ref{tab:knowledgetype}, suggests that it is much more challenging to detect \emph{good} justifications for questions that contain challenging inference.  Where 58\% of retrieval-based questions contained a \emph{good} justification within the top 6, this decreased to 29\% for questions requiring general inference, and to 13\% for questions requiring complex model-based reasoning.  Taken in conjunction with our analysis of lexical overlap categories, this suggests that good justifications for complex inference may tend to be less lexically connected, and thus more challenging to detect with our current framework. This suggests important avenues for future work.
 
 \subsection{Broader Error Classes}
 
 \begin{table}[!tb]
-
-\caption{{  A summary of the classes of the errors made by the system. On any given question, more than one error may have been made. The summary is broken down into three categories: incorrectly answered questions with a good justification in the top six, incorrectly answered questions without a good justification in the top six, as well as the overall proportions across these two conditions.}} 
 \small
 \begin{center}
 \begin{tabular}{lccc}
@@ -117,6 +112,7 @@ Coverage of Knowledge Bases				& 	4\%		&	36\%		& 	22\%\\
 Other									& 	29\%		&	9\%		& 	18\%\\
 \hline
 \end{tabular}
+\caption{{  A summary of the classes of the errors made by the system. On any given question, more than one error may have been made. The summary is broken down into three categories: incorrectly answered questions with a good justification in the top six, incorrectly answered questions without a good justification in the top six, as well as the overall proportions across these two conditions.}} 
 \label{tab:errorclasses}
 \end{center}
 \end{table}
@@ -126,7 +122,6 @@ To expand on the above two issues, we conducted a broader, open-ended error anal
 % -------------- FW - MAJOR
  
 \begin{table}[]
-\caption{{  Example of failure to extract appropriate focus words from the question. }} 
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
 \hline
@@ -140,6 +135,7 @@ Focus Word(s) 	& (NN\_bruce, 0.22) (VB\_open, 0.22) (NN\_twist, 0.22) (JJ\_top, 
 \hline
 \end{tabularx}
 \end{footnotesize}
+\caption{{  Example of failure to extract appropriate focus words from the question. }} 
 \label{ex:majorfw}
 \end{table}
 
@@ -165,7 +161,6 @@ We included nearly all sentences contained in each of the five science-domain co
 % -------------- LONGER CHAINS
  
 \begin{table}[]
-\caption{{  Example of a question that needs more than two sentences to answer. }} 
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
 \hline
@@ -190,13 +185,13 @@ Justification 	& A polar bear is a big, white bear that lives in the arctic. (Wi
 \hline
 \end{tabularx}
 \end{footnotesize}
+\caption{{  Example of a question that needs more than two sentences to answer. }} 
 \label{ex:longerchains}
 \end{table}
 
 % -------------- CAUSAL REAS.
  
 \begin{table}[]
-\caption{{  Example of a question that requires reasoning over a causal structure or process. }} 
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
 \hline
@@ -221,6 +216,7 @@ Justification 	& When water vapor changes to liquid water it is called condensat
 \hline
 \end{tabularx}
 \end{footnotesize}
+\caption{{  Example of a question that requires reasoning over a causal structure or process. }} 
 \label{ex:structure}
 
 \end{table}
@@ -229,7 +225,6 @@ Justification 	& When water vapor changes to liquid water it is called condensat
 % -------------- QUANTIFIERS
  
 \begin{table}[]
-\caption{{  Example of a question that requires an understanding of the quantifiers in both the question and the answers. }} 
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
 \hline
@@ -254,13 +249,13 @@ Focus Word(s) &  (NN\_space, 0.92) (NN\_lack, 0.08)\\
 \hline
 \end{tabularx}
 \end{footnotesize}
+\caption{{  Example of a question that requires an understanding of the quantifiers in both the question and the answers. }} 
 \label{ex:quantifiers}
 \end{table}
 
 % -------------- NEGATION
  
 \begin{table}[]
-\caption{{  Example of a question that requires an understanding of negation. }} 
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
 \hline
@@ -285,6 +280,7 @@ Justification 	& Melting of ice is a physical change, {\bf not a chemical change
 \hline
 \end{tabularx}
 \end{footnotesize}
+\caption{{  Example of a question that requires an understanding of negation. }} 
 \label{ex:negations}
 
 \end{table}
@@ -308,7 +304,6 @@ Questions that require causal or process reasoning often require a small structu
 % -------------- CLUSTER MATCHING
  
 \begin{table}[]
-\caption{{  Example of a failure to recognize relatedness or equivalence of words. }} 
 \begin{footnotesize}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{10cm}}
 \hline
@@ -333,6 +328,7 @@ Justification 	& After a few hours or days those puddles disappear. (Barrons SG)
 \hline
 \end{tabularx}
 \end{footnotesize}
+\caption{{  Example of a failure to recognize relatedness or equivalence of words. }} 
 \label{ex:clustermatching}
 
 \end{table}

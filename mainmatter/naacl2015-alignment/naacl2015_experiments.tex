@@ -12,7 +12,7 @@ We tested our approach in two different domains, open-domain and cellular biolog
 
 {\flushleft {\bf Biology QA (Bio):}} 183 \emph{how} and 193 \emph{why}  questions in the cellular biology domain were hand-crafted by a domain expert, and paired with gold answers in the Campbell's Biology textbook~\citep{Reece:2011}.  Each paragraph in the textbook was considered as a candidate answer.  As there were few questions, five fold cross-validation was used with three folds for training, one for development, and one for test.
 
-In both set-ups, candidate answers were assigned a information retrieval (IR) score based on the lexical similarity of the question to the candidate answer.~\footnote{In the Bio task, the IR score also incorporated a similarity between the question and the section containing the candidate answer paragraph.}  That IR score served as both a strong baseline for the models (when used alone) as well as an additional feature to be used alongside the model features described in section \ref{sec-naacl2015:models}.
+In both set-ups, candidate answers were assigned a information retrieval (IR) score based on the lexical similarity of the question to the candidate answer (described in Section \ref{sec-naacl2015:models}).~\footnote{In the Bio task, the IR score also incorporated a similarity between the question and the section containing the candidate answer paragraph.}  That IR score served as both a strong baseline for the models (when used alone) as well as an additional feature to be used alongside the model features described in section \ref{sec-naacl2015:models}.
 %\subsection{Sources for Alignment}
 %\label{sources}
 

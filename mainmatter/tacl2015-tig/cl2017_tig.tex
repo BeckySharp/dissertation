@@ -3,7 +3,7 @@
 
 \begin{figure}[t!]
 \begin{center}
-\includegraphics[width=115mm]{mainmatter/tacl2015-tig/example_graphlets1.pdf}
+\includegraphics[width=\textwidth]{mainmatter/tacl2015-tig/example_graphlets1.pdf}
 %	\centering
 %	\begin{minipage}[b]{0.4\textwidth}	
 %		\includegraphics[scale=0.4]{meter_length_distance.pdf}
@@ -32,7 +32,7 @@
 
 In order to answer complex questions requiring inference, we propose a method for aggregating information from multiple knowledge base sources to form multi-sentence justifications that link questions to their answers.  These human-readable justifications additionally provide a form of interpretability to the model, allowing the human user to see what the model considers important in identifying correct answers as well as where the model goes wrong.  When constructing these justifications, there is a risk of drifting to semantically unrelated concepts and so while we aggregate at the word-level (to maintain robustness), we qualify the aggregation using sentence-level context (to maintain context). 
 
-To achieve this, we represent our knowledge base sentences as lightly-structured graphs, which we call \textbf{graphlets}, and then aggregate them together based on lexical overlap to form our justifications.  The graphlet nodes contain sentence text and the edges capture the syntactic dominance between nodes as well as certain specialized roles (e.g., \emph{instrument} and \emph{cause}), in the form of sparse edge labels.  An example sentence and its corresponding graphlet is shown in Figure \ref{fig:graphlet}.  Below is a description of how we build our graphlets and then assemble them into our multi-sentence justifications, but for more detail, please see \citet{jansen2017framing}.
+To achieve this, we represent our knowledge base sentences as lightly-structured graphs, which we call \textbf{graphlets}, and then aggregate them together based on lexical overlap to form our justifications.  The graphlet nodes contain sentence text and the edges capture the syntactic dominance between nodes as well as certain specialized roles (e.g., \emph{instrument} and \emph{cause}), in the form of sparse edge labels.  Example sentences and corresponding graphlets are shown in Figure \ref{fig:conceptexamples}.  Below is a description of how we build our graphlets and then assemble them into our multi-sentence justifications, but for more detail, please see \citet{jansen2017framing}.
 %The representation is intended to strike a balance between structure and robustness -- i.e., to include enough context in each of the nodes to mitigate semantic drift, while still representing the underlying syntactic structure of the text.  In this way, these graphlets can be construed as a middle ground between free-text and the dependency-syntax graph.
 
 We build our graphlets in two stages.  We first decompose knowledge base sentences into smaller units (along clausal and prepositional boundaries) which we call \textbf{information nuggets} \citep{Voorhees:2003}.  These smaller units reduce the sparsity of the whole sentence while still maintaining clausal context.  Then we connect sentence nuggets together if any of their words were originally linked through syntactic dependencies.  Formally, we use the following algorithm:
@@ -89,8 +89,8 @@ We build our graphlets in two stages.  We first decompose knowledge base sentenc
 \begin{figure}[t!]
 \begin{center}
 
-\includegraphics[width=115mm]{mainmatter/tacl2015-tig/tag_connection_example2.pdf}
-\includegraphics[width=115mm]{mainmatter/tacl2015-tig/tag_example2.pdf}
+\includegraphics[width=\textwidth]{mainmatter/tacl2015-tig/tag_connection_example2.pdf}
+\includegraphics[width=\textwidth]{mainmatter/tacl2015-tig/tag_example2.pdf}
 
 %space{-2mm}
 \caption{
@@ -123,7 +123,6 @@ Once candidate answer justifications have been reframed as text aggregation grap
 
 
 \begin{table}[]
-\caption{{  Features used to score candidate answer justifications represented as TAGs. }} 
 \footnotesize{
 \begin{tabular}{p{35mm}p{105mm}}
 \hline
@@ -162,12 +161,10 @@ massMaxBridgeScore		&	Bridge graphlets are graphlets that contain at at least on
 massMinBridgeScore		&	question and answer, signifying that they are highly relevant to the question and the \\
 massDeltaBridgeScore	&	corresponding answer. A   graphlet's bridge score is the sum of this focus word mass.  We calculate the minimum, maximum, and delta (max $-$ min) bridge scores across all graphlets within a TAG. \\
 \\
-
-
-
 \hline
 \end{tabular}
 }
+\caption{{  Features used to score candidate answer justifications represented as TAGs. }} 
 \label{tab:features}
 \end{table}
 
@@ -192,7 +189,7 @@ Finally, we define a graphlet that contains both question and answer focus words
 %- TAG = path = answer justification
 \begin{figure}[t!]
 \begin{center}
-\includegraphics[width=75mm]{mainmatter/tacl2015-tig/connection_types.pdf}
+\includegraphics[width=100mm]{mainmatter/tacl2015-tig/connection_types.pdf}
 %space{-2mm}
 \caption{{Connections between sentences are characterized based on lexical overlap between graphlets.
 Here, each box represents a two-sentence TAG, with graphlets stacked vertically.  The presence of question or answer focus words is marked with \emph{Q} or \emph{A}, while the presence of other non-focus words shared between the two graphlets is marked with \emph{X}.  Lexical overlap within a category is highlighted.
@@ -213,7 +210,7 @@ This is important in the context of feature representations, because we conjectu
 
 To model this phenomenon, we adapt a technique from the field of domain adaptation~\citep{daume2007}.
 First, we label each of the sentences within a TAG based on whether they contain question focus words and/or answer focus words.  We then characterize the entire TAG by determining whether the words shared between sentences are question focus words, answer focus words, or other non-focus words.  This leads to 14 possible connection types, depicted in Figure \ref{fig:connectiontypes}.\footnote{In practice, for a configuration that allows TAGs of 1 or 2 sentences, we have 15 connection types, including the 14 two-sentence connection types, plus a single-sentence type. We ignore the single-sentence type in this discussion for simplicity, though it is included in our model.}
-Second, following Daum{\'e}'s method, we generate 15 versions for each of the features introduced in Section~\ref{sec-cl2017:featuresandscoring}: a generic one that is type independent, and 14 that are affixed by each of the connection types. For example, for a given feature such as \emph{numFocusQ}, we create 15 copies: \emph{numFocusQ, numFocusQ$_1$ ... numFocusQ$_{14}$}, where the subscript (when present) indicates a specific connection type. For a TAG of connection type \emph{i}, only values for the type-specific feature \emph{numFocusQ$_i$} as well as the general feature \emph{numFocusQ} are populated -- all other \emph{numFocusQ$_j$} features are set to a value of zero. This allows the learning algorithm in the next section to learn whether each feature generalizes across connection types, or not. As shown in~\citep{finkel2010hierarchical}, this approach is equivalent to a joint model with a hierarchical prior. 
+Second, following Daum{\'e}'s method, we generate 15 versions for each of the features introduced in Section~\ref{sec-cl2017:featuresandscoring}: a generic one that is type independent, and 14 that are affixed by each of the connection types. For example, for a given feature such as \emph{numFocusQ}, we create 15 copies: \emph{numFocusQ, numFocusQ$_1$ ... numFocusQ$_{14}$}, where the subscript (when present) indicates a specific connection type. For a TAG of connection type \emph{i}, only values for the type-specific feature \emph{numFocusQ$_i$} as well as the general feature \emph{numFocusQ} are populated -- all other \emph{numFocusQ$_j$} features are set to a value of zero. This allows the learning algorithm in the next section to learn whether each feature generalizes across connection types, or not. As shown in~\citet{finkel2010hierarchical}, this approach is equivalent to a joint model with a hierarchical prior. 
 
 
 
