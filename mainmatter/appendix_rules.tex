@@ -1,0 +1,201 @@
+\chapter{Causal Extraction Rules Appendix \label{appendix:rules}}
+
+The ODIN \citep{valenzuela2016runes} taxonomy and rules used by the approach described in Section \ref{sec-emnlp2016:causalextraction}.  
+\begin{singlespace}
+%\begin{lstlisting}
+\begin{lstlisting}[label = {lst:tax}, caption = {ODIN taxonomy which provides the hierarchy of extracted entities and events.}]
+taxonomy:
+  - Entity:
+    - TransparentChunk
+    - NP
+    - CM:
+      - CM_NP
+      - CM_event
+    - VP
+    - Predicate
+  - Event:
+    - Causal
+\end{lstlisting}
+
+\begin{lstlisting}[label={lst:gramm_rules},
+caption={Rules for grammatical primatives (e.g. noun phrases, prepositional phrases, etc).  These are used in a later step for finding the causal mentions.}]
+
+  - name: entity_rule
+    label: Entity
+    priority: 1
+    type: token
+    pattern: |
+      [word=/.+/]
+
+  - name: np_rule_2
+    label: NP
+    priority: 2
+    type: token
+    unit: "tag"
+    pattern: |
+      /^NN/
+
+  - name: vp_rule_1
+    label: VP
+    priority: 2
+    type: token
+    unit: "tag"
+    pattern: |
+      /^VB/
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Rules for extracting causal mentions (CMs), which are the potential arguments for causal events.}]
+  - name: CM_expansion
+    label: CM_event
+    priority: 4
+    pattern: |
+      trigger = [mention=VP & !lemma=/(cause|result|lead|create)/]
+      deps:Entity* = /^(nsubj|nn|amod|advmod|ccmod|prep_(with|for|into|on|to)|dobj|xcomp|ccomp|agent|vmod)/{1,3}    
+
+
+  - name: CM_expansion_2
+    label: CM_NP
+    priority: 3
+    pattern: |
+      trigger = [mention=NP & !lemma=/(cause|result)/]
+      deps:Entity* = /^(nn|amod|advmod|ccmod|prep_(of|with|for|into|on|to|in)|dobj)/{1,3}   
+
+  - name: CM_expansion_3_copular
+    label: CM_event
+    priority: 3
+    pattern: |
+      trigger = [lemma=be]
+      deps:Entity* = /^(nsubj|prep_(in|on|with|for|of)|dobj|nn|amod)/+ 
+
+
+  - name: nounphrase_with_property_3
+    label: CM_NP
+    priority: 5
+    example: "... will cause huge <np> damage to the reef <\np>."
+    pattern: |
+      trigger = [mention=CM & !lemma=/(cause|result|lead|create)/]
+      modifier:CM = <dobj [lemma=cause & tag=/^VB/] >/(prep_(to|for|of))|xcomp/
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Rules for causal relations (events).  Note that the cause and effect arguments are previously found causal mentions.}] 
+
+ - name: PosReg_syntax_1_verb
+    label: Causal    
+    priority: 9
+    example: ""
+    pattern: |
+      trigger = [lemma=cause]
+      controlled:CM+ = prepc_by? (dobj | xcomp | ccomp) 
+      controller:CM+ = <xcomp? (nsubj | agent | <vmod) /appos|nn|conj_|cc|prep_of|prep_in/{,2}
+
+  - name: causal_2
+    label: Causal
+    priority: 9
+    example: "X will cause huge <np> damage to the reef <\np>."
+    pattern: |
+      trigger = [lemma=cause & tag=/^VB/]
+      controlled:CM+ = dobj 
+      controller:CM+ = nsubj
+
+  - name: causal_3
+    label: Causal
+    priority: 9
+    example: "X cause Y to Z"
+    pattern: |
+      trigger = [lemma=cause & tag=/^VB/]
+      controlled:CM_event+ = xcomp 
+      controller:CM+ = nsubj
+
+  - name: causal_4
+    label: Causal
+    priority: 9
+    example: "X was the cause of Y"
+    pattern: |
+      trigger = [lemma=cause & tag=/^NN/]
+      controlled:CM+ = prep_of
+      controller:CM+ = nsubj
+
+  - name: causal_5
+    label: Causal
+    priority: 9
+    example: "X was caused by Y"
+    pattern: |
+      trigger = [lemma=cause & tag=/^VB/]
+      controlled:CM+ = nsubjpass
+      controller:CM+ = agent
+
+  - name: causal_6
+    label: Causal
+    priority: 9
+    example: "They did not provide a motive for the alleged crime , which caused the city 's first fire-related deaths in more than a decade ."
+    pattern: |
+      trigger = [lemma=cause & tag=/^VB/]
+      controlled:CM_NP = <rcmod (?= >rcmod >nsubj [tag=WDT])
+      controller:CM+ = dobj
+
+  - name: causal_7
+    label: Causal
+    priority: 9
+    example: "After the exam grades begin to count , students often start taking them more seriously , which causes passage rates to increase , Jennings said ."
+    pattern: |
+      trigger = [lemma=cause & tag=/^VB/]
+      controlled:CM_NP = <advcl (?= >advcl >nsubj [tag=WDT])
+      controller:CM+ = dobj
+
+
+  - name: result_1
+    label: Causal
+    priority: 9
+    example: "X resulted in Y"
+    pattern: |
+      trigger = [lemma=result & tag=/^VB/]
+      controlled:CM+ = prep_in
+      controller:CM+ = nsubj
+
+  - name: result_2
+    label: Causal
+    priority: 9
+    example: "X as a result of Y"
+    pattern: |
+      trigger = [lemma=result & tag=/^NN/]
+      controlled:CM+ = <prep_as
+      controller:CM+ = prep_of
+
+  - name: result_3
+    label: Causal
+    priority: 9
+    example: "X was the result of Y"
+    pattern: |
+      trigger = [lemma=result & tag=/^NN/]
+      controlled:CM+ = nsubj
+      controller:CM+ = prep_of
+
+  - name: result_4
+    label: Causal
+    priority: 9
+    example: "Jet lag results when the body 's internal clock is out of sync with daily life , making people sleepy when they want to be awake and wakeful when they want to sleep."
+    pattern: |
+      trigger = [lemma=result & tag=/^VB/]
+      controlled:CM+ = nsubj
+      controller:CM+ = /(advcl|prep_from)/
+
+  - name: led_to_1
+    label: Causal
+    priority: 9
+    example: "X led to Y"
+    pattern: |
+      trigger = [lemma=lead & tag=/^(VB|NN)/] to
+      controller:CM+ = nsubj
+      controlled:CM+ = prep_to
+
+  - name: create_1
+    label: Causal
+    priority: 9
+    example: "X was created by Y"
+    pattern: |
+      trigger = [lemma=create & tag=/^VB/]  
+      controlled:CM+ = nsubjpass
+      controller:CM+ = agent
+
+\end{lstlisting}
+\end{singlespace}

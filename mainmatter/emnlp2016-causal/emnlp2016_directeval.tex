@@ -14,7 +14,7 @@
 
 We begin the assessment of our models with a {\em direct} evaluation to determine whether or not the proposed approaches capture causality better than general-purpose word embeddings and whether their robustness improves upon a simple database look-up.
 For this evaluation, we follow the protocol of \citet{levy2014dependency}.  
-To demonstrate that their embeddings encoded functional similarity rather than relatedness, they ranked a set of word pairs (each of which reflected one of the two types of similarity) using cosine similarity and showed that their dependency-based embeddings was better able to rank word pairs that were functionally similar higher than those with topical similarity, as compared with standard word embeddings.  Here, we use the same setup. 
+To demonstrate that their embeddings encoded functional similarity rather than relatedness, they ranked a set of word pairs (each of which reflected one of the two types of similarity) using cosine similarity and showed that their dependency-based embeddings were better able to rank word pairs that were functionally similar higher than those with topical similarity, as compared with standard word embeddings.  Here, we use the same setup. 
  
 In particular, we create a collection of word pairs, half of which are causally related, with the other half consisting of other relations. 
 These pairs are then ranked by our models and several baselines, with the goal of ranking the causal pairs above the others. 
