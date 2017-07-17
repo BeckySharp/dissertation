@@ -69,10 +69,13 @@ Then, these answer candidates are reranked by a more expressive model that utili
 We compare this alignment-based reranking model against one that uses a state-of-the-art recurrent neural network language model \citep{mikolov10,mikolov13}, which has been successfully applied to QA previously~\citep[e.g.,][]{yih13}.
 
 
-{\flushleft {\bf Alignment Model:}}  The alignment matrices were generated with IBM Model 1 \citep{Brown:93} using GIZA++~\citep{och03}, and the corresponding models were implemented as per \citet{Surdeanu:11} with a global alignment probability, i.e., the conditional probability of observing a question given an answer.
-% ms: the global prob. operates for the whole Q and A!
-%question word given an answer word.
-\footnote{Within \citet{Surdeanu:11} framework, we lightly tuned the smoothing parameter, $\lambda$, to 0.4 and we redistributed the probability mass for each word such that the probability of a word translating to itself was 0.5.}  
+{\flushleft {\bf Alignment Model:}}  The alignment matrices were generated with IBM Model 1 \citep{Brown:93} using GIZA++~\citep{och03}, and they provide the likelihood that a pair of words align.  With this method of generation, we consider only unigrams and word order is not used.  The corresponding alignment models (i.e., that use the generated matrices) were implemented as per \citet{Surdeanu:11} with a feature for the global alignment probability -- the conditional probability of observing an  entire question given an entire answer, $P(Q|A)$.  This feature is calculated as (equations from \citet{Surdeanu:11}):
+\begin{eqnarray}
+P(Q|A)=\prod_{q \in Q} P(q|A) \\
+P(q|A) = (1 - \lambda )P(q|A) + \lambda P(q|\boldsymbol{C}) \\
+P(q|A) = \sum_{a \in A} (T(q|a)P(a|A)) 
+\end{eqnarray}
+where the probability of generating a given question word given the answer, $P(q|A)$, is smoothed by the prior probability of generating that  question word from the entire collection of answers, $\boldsymbol{C}$, using the smoothing parameter $\lambda$.  $T(q|a)$ is the probability that a given answer word, $a$, generates a question word, $q$, as provided by the trained alignment matrix.  For more details, please see \citet{Surdeanu:11}.  \footnote{We lightly tuned the smoothing parameter, $\lambda$ to 0.4 and we redistributed the probability mass for each word such that the probability of a word translating to itself was 0.5.}  
 We extend this alignment model with features from \citet{fried2015higher} that treat each (source) word's probability distribution (over destination words) in the alignment matrix as a distributed semantic representation, and make use of the Jensen-Shannon distance (JSD)\footnote{Jensen-Shannon distance is based on Kullback-Liebler divergence but is a distance metric (finite and symmetric).} between these conditional distributions.  A summary of all these features is shown in Table \ref{tab:Features}.% to derive features representing the {\bf minimum, maximum, and average JSDs} between question and answer words, as well as the {\bf overall JSD} between the composite question and answer distributions. 
 %Using the Jensen-Shannon distance (JSD) between conditional distributions, content words in each question were compared with the content words in its answers.  Features were made from the maximum, minimum, and average JSDs.  Composite distributions were also created for the entire question and for each entire candidate answer, and the JSD between these composite distributions was used as a feature. 
 

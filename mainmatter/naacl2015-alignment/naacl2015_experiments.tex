@@ -31,7 +31,7 @@ In both set-ups, candidate answers were assigned a information retrieval (IR) sc
 
 \begin{figure}[t!]
 \begin{center}
-\includegraphics[width=90mm]{mainmatter/naacl2015-alignment/graphs_new2.pdf}
+\includegraphics[width=120mm]{mainmatter/naacl2015-alignment/graphs_new2.pdf}
 %\vspace{-4mm}
 \caption{{\small Overall performance for the two discourse-based alignment models (the Rhetorical Structure Theory based model and the sequential model),
 compared against the IR baseline, random baseline, and an embedding-based reranker.
@@ -87,9 +87,9 @@ Figure \ref{fig:performance} shows the performance of the discourse models again
 %and the final performance values (when all training data is used) are shown in Table \ref{tab:overall}.   
 We used the standard implementation for precision at 1 (P@1)~\citep{manning08} with the adaptations for Bio described in \citet{jansen14}. We address the following questions.
 
-\paragraph{How does the performance of the RST and SEQ models compare?}
+\paragraph{How does the performance of the Rhetorical Structure Theory (RST) and sequential (SEQ) models compare?}
 
-Comparing the two principal alignment models, the RST-based model significantly outperforms the sequential (SEQ) model by about 0.5\% P@1 in both domains (p $<$ 0.001 for Bio and p $<$ 0.01 for YA)\footnote{All reported statistics were performed at the endpoints, i.e., when all training data is used, using bootstrap resampling with 10,000 iterations.}. This shows that deep discourse analysis (as imperfect as it is today) is beneficial. 
+Comparing the two principal alignment models, the RST-based model significantly outperforms the sequential (SEQ) model by about 0.5\% P@1 in both domains (p $<$ 0.001 for Bio and p $<$ 0.01 for YA).  We report statistics performed at the endpoints, i.e., when all training data is used, using bootstrap resampling\footnote{In this scenario, boostrap resampling is implemented such that a sample dataset is randomly drawn (with replacement) from the true test set, and we determine if the experimental model outperformed the baseline model in this sample dataset.  This sampling is repeated a large number of times, allowing us to determine if the difference between the models is statistically significant.} with 10,000 iterations. This shows that deep discourse analysis (as imperfect as it is today) is beneficial. 
 
 \paragraph{How does the performance of the RST model compare to a model trained on in-domain question-answer pairs?}
 
@@ -145,7 +145,7 @@ Top 6 (92\% of data)  	& 28.98		& 34.00 	\\
 \end{table}
 
 The RST parser itself performs better on relations which occur more frequently.  For our experiments, we use only the relations that comprised at least 1\% of the found discourse relations.  This amounted to six (of 18 possible) relations: \emph{elaboration}, \emph{attribution}, \emph{background}, \emph{contrast}, \emph{same-unit}, and \emph{joint}.
-These six relation accounted for 92\% of all relations in both domains. 
+These six relations accounted for 92\% of all relations in both domains. 
 As shown in Table \ref{tab:ablation}, the bulk of the performance comes from using these six most frequent discourse relations, and using all relations only slightly improves performance by 0.3\% P@1.
 
 
