@@ -73,7 +73,7 @@ We compared our distributional similarity models against three baselines:
 
 \begin{figure*}[t]
 \begin{center}
-\includegraphics[width=\textwidth]{mainmatter/emnlp2016-causal/direct_noBi.pdf} % {rpcurves_all.png}
+\includegraphics[width=\textwidth]{mainmatter/emnlp2016-causal/direct_noBi2.pdf} % {rpcurves_all.png}
 %space{-3mm}
 \caption{{Precision-recall curve showing the ability of each model to rank causal pairs above non-causal pairs. 
 %For clarity, we do not plot the noise aware causal embedding model (cEmbedNoise), which performs worse than its bidirectional variant (cEmbedBiNoise, described in Section \ref{sec-emnlp2016:results}). 
@@ -127,21 +127,33 @@ Some models perform better on the low-recall portion of the curve (e.g., the loo
 % The MAP when using the customized vectors was significantly higher than that of the standard \texttt{word2vec} vectors (68\% versus 58\%, $p<0.01$), and both were higher than the baseline ().  %This suggests that while the standard implementation of \texttt{word2vec} encodes some causality information, our method encodes it far more directly. \todo{better word}.
 
 
-The precision-recall curve for the causal embeddings shows an atypical dip at low-recall.  To examine this, we analyzed its top-ranked 15\% of SemEval pairs, and found that incorrectly ranked pairs were not found in the database of causal tuples.  
+The precision-recall curve for the causal embeddings shows an atypical dip at low-recall.  Though the precision-recall is not expected to be perfectly smooth, typically the low-recall portion of the curve (i.e., the left-most portion) shows the highest precision, as it indicates the data points for which the model was the most confident in its scoring.  In this case, these represent the word pairs that received the \textit{highest} causality score, yet the precision is \textit{lower} than anywhere else on the curve -- these highest-ranked pairs are, in fact, \textit{not} causal.  
+
+To examine this dip, we analyzed its top-ranked 15\% of SemEval pairs, and found that incorrectly ranked pairs were not found in the database of causal tuples.  
 %Instead, these incorrect rankings were largely driven by low frequency words whose embeddings could not be robustly estimated due to lack of direct evidence.  
 %\todo{Optional: I know we're low on space, but the example that Becky had here was great. Any way to put it back?}
 Instead, our analysis suggests that these pairs tend to be incorrectly ranked because the cEmbed model performs a form of soft or approximate inference through indirect learning of word-pair relations.  
 This indirect learning is highly desirable (as it is what provides embedding models with their robustness), but it backfired on these data points.  
 
-We illustrate this with an example from the analysis.  Consider the top-ranked (incorrect) pair:  (\emph{platform} $\rightarrow$ \emph{scaffold}).  As with all the incorrectly top-ranked pairs, there were no instances in our causal database where \emph{platform} and \emph{scaffold} were found together in the same cause-effect tuple.  
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=\linewidth]{mainmatter/emnlp2016-causal/emnlp_inference.pdf} % 
+%space{-3mm}
+\caption{{Illustration of the indirect learning of associations that facilitates approximate inference.  Note that in this illustrated example, the learned associations are noisy, but this mechanism is critical -- it is what allows embedding models to generalize beyond the explicit training examples.  The blue highlight indicates words embedded in the cause (target) space, and the yellow indicates words embedded in the effect (context) space.}}
+%space{-4mm}
+\label{fig:inference}
+\end{center}
+\end{figure*}
+
+We illustrate this with an example from the analysis, depicted in Figure \ref{fig:inference}.  Consider the top-ranked (incorrect) pair:  (\emph{platform} $\rightarrow$ \emph{scaffold}).  As with all the incorrectly top-ranked pairs, there were no instances in our causal database where \emph{platform} and \emph{scaffold} were found together in the same cause-effect tuple.  
 %
 Instead, we found that there were  three other extracted tuples with \emph{scaffold} in the effect text.  
 These tuple effect texts overlapped lexically with other tuples that had \textit{platform} in the cause texts, which we suspect ``pulled'' \textit{platform} closer to \textit{scaffold}.
 %Further, these tuples had other effects  that overlapped lexically with effects of \emph{platform}, which we suspect ``pulled'' \emph{platform} closer to \emph{scaffold}.  
-For example, there are tuples of the form (\textit{... platform...}~$\rightarrow$~\textit{... loss...}) and of the form (\textit{... malfunction...}~$\rightarrow$~\textit{... loss...}).    
-This common co-occurrence with \textit{loss} indirectly draws \textit{malfunction} and \textit{platform} closer together in the target (cause) embedding space (by drawing them each independently closer to \textit{loss}). 
-Further, \textit{malfunction} occurs in other tuples that have \textit{scaffold} in their effect-text, drawing the target vector for \textit{malfunction} closer to the context vector for \textit{scaffold}, indirectly bringing the target vector for \textit{platform} along as well.
-In general, we found that these examples of semantic drift~\citep{curran2007minimising} occur for low frequency items, whose embeddings could not be robustly estimated due to lack of direct evidence.. 
+For example, there are tuples of the form (\textit{... platform...}~$\rightarrow$~\textit{... loss...}) and of the form (\textit{... malfunction...}~$\rightarrow$~\textit{... loss...}), shown in panel A of Figure \ref{fig:inference}.    
+This common co-occurrence with \textit{loss} indirectly draws \textit{malfunction} and \textit{platform} closer together in the target (cause) embedding space (by drawing them each independently closer to \textit{loss}), shown in panel B of Figure \ref{fig:inference} . 
+Further, \textit{malfunction} occurs in other tuples that have \textit{scaffold} in their effect-text, drawing the target vector for \textit{malfunction} closer to the context vector for \textit{scaffold} (panel C), indirectly bringing the target vector for \textit{platform} closer as well (panel D).  While here, this constitutes semantic drift~\citep{curran2007minimising}, as the association between \textit{platform} and \textit{scaffold} is erroneous, this same mechanism of indirectky learning associations is critical for robust models.  Without it, we would not be able to generalize beyond our explicit training data, resulting in very poor coverage.
+In general, we found that these examples of semantic drift occur for low frequency items, whose embeddings could not be robustly estimated due to lack of direct evidence.
 
 Because this sparsity is partially driven by directionality, 
 we implemented a bidirectional embedding model (cEmbedBi) that (a) trains a second embedding model by reversing the input (effects as targets, causes as contexts), and (b) ranks pairs by the \textit{average} of the scores returned by these two unidirectional causal embedding models. 
@@ -162,31 +174,7 @@ where $s_{c \rightarrow e}$ is the score given by the original causal embeddings
 \end{center}
 \end{figure*}
 
-As Figure~\ref{fig:rpcurve_withBi} shows, the bidirectional embedding variants consistently outperform their unidirectional counterparts. 
+As Figure~\ref{fig:rpcurve_withBi} shows, the bidirectional embedding variants consistently outperform their unidirectional counterparts.
 All in all, the best overall model is cEmbedBiNoise, which is both bidirectional and incorporates the noise handling approach from Section~\ref{sec-emnlp2016:models}. This model substantially improves performance in the low-recall portion of the curve, while also showing strong performance across the curve. 
 
-
-
-%
-%The curve for the customized vectors shows an atypical shape in its low-recall part.
-%Here, the highest ranked pairs had \emph{worse} precision rather than the expected higher precision.  To examine this, we analyzed the top-ranked 15\% of the pairs from the ranking produced by  the causal vectors.  
-%%
-%Our analysis found that these pairs tend to be incorrectly ranked because the cEmbed model performs a form of soft approximate inference (which was our goal!), but which backfired on these data points.  For example, the top-ranked (incorrect) pair was \emph{platform} $\rightarrow$ \emph{scaffold}, and there were no instances in our causal database where \emph{platform} and \emph{scaffold} were found together in the same cause-effect pair.  
-%%
-%Instead, we found that there were  three other extracted tuples with \emph{scaffold} in the effect text. Further, these tuples had other effects  that overlapped lexically with effects of \emph{platform}, which ``pulled'' \emph{platform} closer to \emph{scaffold}.  For example, a phrase containing \emph{malfunction} 
-%shares {\em loss} as a common effect with \emph{platform}, and \emph{malfunction} has other effects that contain \emph{scaffold}. 
-%In general, we found that these examples of semantic drift~\cite{curran2007minimising} occur for low frequency data, where neither the direct evidence nor the embeddings are robustly estimated. 
-%
-%%cause \emph{loss}, which brings these two words closer in the target embedding space.
-%%%, since they have similar effects.  
-%%This resulted in \emph{platform}'s effects being close to the effects of \emph{malfunction}, which include \emph{scaffold}.  This demonstrates that the inference is influenced by frequency effects, as words like \emph{scaffold} and \emph{platform} are too infrequent to have robust representations in the embedding space.  
-%%\todo{This last sentence needs better explanation: why does this happen only at low-recall?}
-%
-%As this semantic drift effect is entirely directional, we implemented a bidirectional embedding approach, which: (a) trains a second embedding model by reversing the input, such that the effects served as the targets and the causes were the contexts, and (b) 
-%ranks pairs by the average of the scores returned by the two causal embeddings. As Table~\ref{tab:MAP} and Figure~\ref{fig:rpcurve_all} show, the bidirectional embedding variants consistently outperform their unidirectional counterparts. cEmbedBiNoise, which incorporates the noise handling approach from Section~\ref{sec-emnlp2016:models} and is bidirectional, resolves the dip in low-recall part of the curve, and outperforms cCNN for most of the data. 
-%
-%%As this effect is entirely directional, we trained a set of vectors by reversing the input, such that the effects served as the targets and the causes were the contexts.  The precision-recall curve when using these embeddings to rank the SemEval pairs is shown in Figure \ref{fig:rpcurve_all}, labelled as E2C.  As expected, the curve follows that of the original vectors, as it suffers from the same issues, but with different noisy pairs ranked highly.  We then ranked the SemEval pairs using an average of the scores returned by the two causal embeddings, to mitigate the frequency effects.  That final, bidirectional curve is also shown in Figure \ref{fig:rpcurve_all}.
-%%Instead, we found that many of the causal events which whose cause argument contained the word \emph{platform} had effects which overlapped lexically with those whose cause arguments contained the word \emph{malfunction}, and that there w.  To illustrate, consider the following sentences 
-%%we had several extracted causal events whose cause contained the word \emph{platform} and whose effect contained the words \emph{}
-%
-
+While important, this evaluation is somewhat superficial.  A given model's ability to directly infer causality between two isolated words does not necessarily transfer to a real-world task \citep{faruqui2016problems}, where longer texts and noise interfere with prediction.  Therefore, in addition to this direct evaluation, we also evaluate the utility of our various models in the real-world task of question answering, as described in Section~\ref{sec-emnlp2016:indirecteval}.  
