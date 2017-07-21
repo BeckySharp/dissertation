@@ -2,15 +2,6 @@
 \section{Direct Evaluation: Ranking Word Pairs}
 \label{sec-emnlp2016:directeval}
 
-\begin{figure*}[th!]
-\begin{center}
-\includegraphics[width=\textwidth]{mainmatter/emnlp2016-causal/direct2.pdf} % {rpcurves_all.png}
-%space{-3mm}
-\caption{{Precision-recall curve showing the ability of each model to rank causal pairs above non-causal pairs. For clarity, we do not plot the noise aware causal embedding model (cEmbedNoise), which performs worse than its bidirectional variant (cEmbedBiNoise, described in Section \ref{sec-emnlp2016:results}). The Look-up model has no data points beyond the 35\% recall point.}}
-%space{-4mm}
-\label{fig:rpcurve_all}
-\end{center}
-\end{figure*}
 
 We begin the assessment of our models with a {\em direct} evaluation to determine whether or not the proposed approaches capture causality better than general-purpose word embeddings and whether their robustness improves upon a simple database look-up.
 For this evaluation, we follow the protocol of \citet{levy2014dependency}.  
@@ -80,6 +71,17 @@ We compared our distributional similarity models against three baselines:
 %%MAP for Random: 0.4892479543525109
 %%p < 0.01
 
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{mainmatter/emnlp2016-causal/direct_noBi.pdf} % {rpcurves_all.png}
+%space{-3mm}
+\caption{{Precision-recall curve showing the ability of each model to rank causal pairs above non-causal pairs. 
+%For clarity, we do not plot the noise aware causal embedding model (cEmbedNoise), which performs worse than its bidirectional variant (cEmbedBiNoise, described in Section \ref{sec-emnlp2016:results}). 
+The Look-up model has no data points beyond the 35\% recall point.}}
+%space{-4mm}
+\label{fig:rpcurve_all}
+\end{center}
+\end{figure*}
 
 \subsection{Results}
 \label{sec-emnlp2016:results}
@@ -141,30 +143,26 @@ This common co-occurrence with \textit{loss} indirectly draws \textit{malfunctio
 Further, \textit{malfunction} occurs in other tuples that have \textit{scaffold} in their effect-text, drawing the target vector for \textit{malfunction} closer to the context vector for \textit{scaffold}, indirectly bringing the target vector for \textit{platform} along as well.
 In general, we found that these examples of semantic drift~\citep{curran2007minimising} occur for low frequency items, whose embeddings could not be robustly estimated due to lack of direct evidence.. 
 
-%%cause \emph{loss}, which brings these two words closer in the target embedding space.
-%%%, since they have similar effects.  
-%%This resulted in \emph{platform}'s effects being close to the effects of \emph{malfunction}, which include \emph{scaffold}.  This demonstrates that the inference is influenced by frequency effects, as words like \emph{scaffold} and \emph{platform} are too infrequent to have robust representations in the embedding space.  
-%%\todo{This last sentence needs better explanation: why does this happen only at low-recall?}
-%
-%As this semantic drift effect is entirely directional, we implemented a bidirectional embedding approach, which: (a) trains a second embedding model by reversing the input, such that the effects served as the targets and the causes were the contexts, and (b) 
-%ranks pairs by the average of the scores returned by the two causal embeddings. As Table~\ref{tab:MAP} and Figure~\ref{fig:rpcurve_all} show, the bidirectional embedding variants consistently outperform their unidirectional counterparts. cEmbedBiNoise, which incorporates the noise handling approach from Section~\ref{sec-emnlp2016:models} and is bidirectional, resolves the dip in low-recall part of the curve, and outperforms cCNN for most of the data. 
-%
-%%As this effect is entirely directional, we trained a set of vectors by reversing the input, such that the effects served as the targets and the causes were the contexts.  The precision-recall curve when using these embeddings to rank the SemEval pairs is shown in Figure \ref{fig:rpcurve_all}, labelled as E2C.  As expected, the curve follows that of the original vectors, as it suffers from the same issues, but with different noisy pairs ranked highly.  We then ranked the SemEval pairs using an average of the scores returned by the two causal embeddings, to mitigate the frequency effects.  That final, bidirectional curve is also shown in Figure \ref{fig:rpcurve_all}.
-%%Instead, we found that many of the causal events which whose cause argument contained the word \emph{platform} had effects which overlapped lexically with those whose cause arguments contained the word \emph{malfunction}, and that there w.  To illustrate, consider the following sentences 
-%%we had several extracted causal events whose cause contained the word \emph{platform} and whose effect contained the words \emph{}
-%
-
-
-
 Because this sparsity is partially driven by directionality, 
 we implemented a bidirectional embedding model (cEmbedBi) that (a) trains a second embedding model by reversing the input (effects as targets, causes as contexts), and (b) ranks pairs by the \textit{average} of the scores returned by these two unidirectional causal embedding models. 
 Specifically, the final bidirectional score of the pair, $(e_1, e_2)$, where $e_1$ is the candidate cause and $e_2$ is the candidate effect, is:
 \begin{equation}
 s_{bi}(e_1, e_2) = \tfrac{1}{2}(s_{c{\rightarrow}e}(e_1, e_2) + s_{e \rightarrow c}(e_2, e_1))
 \end{equation}
-where $s_{c \rightarrow e}$ is the score given by the original causal embeddings, i.e., from cause to effect, and $s_{e \rightarrow c}$ is the score given by the reversed-input causal embeddings, i.e., from effect to cause.
+where $s_{c \rightarrow e}$ is the score given by the original causal embeddings, i.e., from cause to effect, and $s_{e \rightarrow c}$ is the score given by the reversed-input causal embeddings, i.e., from effect to cause.  The performance of the bidirectional models are shown in Figure \ref{fig:rpcurve_withBi}.
 
-As Figure~\ref{fig:rpcurve_all} shows, the bidirectional embedding variants consistently outperform their unidirectional counterparts. 
+
+\begin{figure*}[th!]
+\begin{center}
+\includegraphics[width=\textwidth]{mainmatter/emnlp2016-causal/direct2.pdf} % {rpcurves_all.png}
+%space{-3mm}
+\caption{{Precision-recall curve including the bidirectional variants of the causal models. For clarity, we do not plot the basic noise aware causal embedding model (cEmbedNoise), which performs worse than its bidirectional variant (cEmbedBiNoise, described in Section \ref{sec-emnlp2016:results}). }}
+%space{-4mm}
+\label{fig:rpcurve_withBi}
+\end{center}
+\end{figure*}
+
+As Figure~\ref{fig:rpcurve_withBi} shows, the bidirectional embedding variants consistently outperform their unidirectional counterparts. 
 All in all, the best overall model is cEmbedBiNoise, which is both bidirectional and incorporates the noise handling approach from Section~\ref{sec-emnlp2016:models}. This model substantially improves performance in the low-recall portion of the curve, while also showing strong performance across the curve. 
 
 
