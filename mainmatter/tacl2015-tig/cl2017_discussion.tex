@@ -26,7 +26,7 @@ To further characterize the performance of our QA approach, we address the follo
 %\end{center}
 %\end{table}
 
-{\flushleft {\bf How does performance compare with methods using manually constructed knowledge bases?}} The TAG system automatically aggregates sentences from six free-text corpora first by building graphlets from those sentences using syntactic dependencies, then connecting those graphlets together into multisentence text aggregation graphs that are then used to both answer questions and provide a compelling human-readable justification for the selected answers.  Recently, \citet{Khashabi2016QuestionAV} demonstrated that graphs for elementary science QA can also be constructed using a semistructured knowledge base of tables.  In this formalism, dozens of themed tables are manually or semi-automatically constructed, each around a particular theme.  A table's theme is encoded in it's columns, i.e., a table for the color of objects contains two rows, one for the object of interest (e.g., ``leaf''), and another for it's color (e.g., ``green''), while separate instances (e.g., leaf -- green, trunk -- brown) are encoded as different rows.  Each table has between two and five columns.  
+{\flushleft {\bf How does performance compare with methods using manually constructed knowledge bases?}} The TAG system automatically aggregates sentences from six free-text corpora first by building graphlets from those sentences using syntactic dependencies, then connecting those graphlets together into multisentence text aggregation graphs that are then used to both answer questions and provide a compelling human-readable justification for the selected answers.  Recently, \citet{Khashabi2016QuestionAV} demonstrated that graphs for elementary science QA can also be constructed using a semistructured knowledge base of tables.  In this formalism, dozens of themed tables are manually or semi-automatically constructed, each around a particular theme.  A table's theme is encoded in its columns, i.e., a table for the color of objects contains two rows, one for the object of interest (e.g., ``leaf''), and another for it's color (e.g., ``green''), while separate instances (e.g., leaf -- green, trunk -- brown) are encoded as different rows.  Each table has between two and five columns.  
 
 The TableILP algorithm answers questions by chaining facts between different table rows, starting from a row that contains question terms, then traversing to a new table row that contains some lexical overlap with the previous row(s), until answer terms are found.  The TAG and TableILP systems are conceptually similar, with the central differences being: (1) The TableILP table row is roughly equivalent to a TAG graphlet with flat structure, and limited to 2--5 information nuggets containing only single terms, (2) TAG graphlets are read automatically from free text corpora, where TableILP tables are largely manually constructed, with methods to automate this construction being actively developed, and (3) the traversal algorithms are different, with TableILP graph building being modelled as an integer linear programming (ILP) problem which finds paths that maximize QA performance.  
 
@@ -37,29 +37,29 @@ We view these systems as complementary, converging, and with each capable of exp
 %
 % Performance by grade level
 %
-\begin{table}[t]
-\small
-\begin{center}
-\begin{tabular}{lccc}
+%\begin{table}[t]
+%\small
+%\begin{center}
+%\begin{tabular}{lccc}
+%%\cline{2-3}
+%%\begin{tabular}{p{20mm}cc}
+%\hline
+%\multicolumn{1}{c}{Grade Level} & \multicolumn{1}{c}{Questions} &\multicolumn{1}{c}{IR} & \multicolumn{1}{c}{TAG}  \\
 %\cline{2-3}
-%\begin{tabular}{p{20mm}cc}
-\hline
-\multicolumn{1}{c}{Grade Level} & \multicolumn{1}{c}{Questions} &\multicolumn{1}{c}{IR} & \multicolumn{1}{c}{TAG}  \\
-\cline{2-3}
-\hline
-Grade 3 	& 60		&	28.3\%		& 49.2\%	\\
-Grade 4		& 69 	&	50.7\%		& 41.3\%	\\
-Grade 5		& 871	&	40.2\%		& 42.6\%	\\
-
-\end{tabular}
-\caption{{ Precision@1 by grade level. }} % 
-\label{tab:gradelevel}
-\end{center}
-\end{table}
-
-
-{\flushleft {\bf How does performance vary by grade level?}} The question corpus contains third, fourth, and fifth grade questions.  A human with a level of knowledge equivalent to a fourth grade science student might be expected to show better performance for the simpler third grade questions, and decreasing performance as question difficulty increases from fourth to fifth grades.  Table~\ref{tab:gradelevel} shows P@1 performance by grade level for both the IR and best performing TAG model (1G\textsubscript{CT} + 2G\textsubscript{CT}).  The TAG model shows decreasing performance as question difficulty increases, dropping from 49\% for third grade questions to 42\% for fourth and fifth grade questions.  The IR baseline, however, displays a qualitatively different pattern, with a peak performance of 51\% for fourth grade questions, and {\em near chance} performance for third grade questions. 
-We believe that observing such a pattern in performance may suggest that the TAG model is a closer approximation of human inference than the baseline based solely on information retrieval.  Here, the relatively small number of third and fourth grade questions prevents us from drawing any conclusions, but suggests that crafting question sets to allow evaluating the distribution of performance by grade level may provide a further measure of comparison between human and machine performance. 
+%\hline
+%Grade 3 	& 60		&	28.3\%		& 49.2\%	\\
+%Grade 4		& 69 	&	50.7\%		& 41.3\%	\\
+%Grade 5		& 871	&	40.2\%		& 42.6\%	\\
+%
+%\end{tabular}
+%\caption{{ Precision@1 by grade level. }} % 
+%\label{tab:gradelevel}
+%\end{center}
+%\end{table}
+%
+%
+%{\flushleft {\bf How does performance vary by grade level?}} The question corpus contains third, fourth, and fifth grade questions.  A human with a level of knowledge equivalent to a fourth grade science student might be expected to show better performance for the simpler third grade questions, and decreasing performance as question difficulty increases from fourth to fifth grades.  Table~\ref{tab:gradelevel} shows P@1 performance by grade level for both the IR and best performing TAG model (1G\textsubscript{CT} + 2G\textsubscript{CT}).  The TAG model shows decreasing performance as question difficulty increases, dropping from 49\% for third grade questions to 42\% for fourth and fifth grade questions.  The IR baseline, however, displays a qualitatively different pattern, with a peak performance of 51\% for fourth grade questions, and {\em near chance} performance for third grade questions. 
+%We believe that observing such a pattern in performance may suggest that the TAG model is a closer approximation of human inference than the baseline based solely on information retrieval.  Here, the relatively small number of third and fourth grade questions prevents us from drawing any conclusions, but suggests that crafting question sets to allow evaluating the distribution of performance by grade level may provide a further measure of comparison between human and machine performance. 
 
 
 

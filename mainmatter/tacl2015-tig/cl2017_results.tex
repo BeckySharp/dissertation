@@ -5,7 +5,7 @@
 \label{sec-cl2017:data}
 
 
-{\flushleft {\bf Questions:}} We assembled a corpus of 1,000 third to fifth grade standardized elementary school science exam questions, consisting of 346 publicly available questions gathered from standardized exams in 12 states, as well as 654 closed questions from an exam generating service. 
+{\flushleft {\bf Questions:}} We assembled a corpus of 1,000 third to fifth grade standardized elementary school science exam questions, consisting of 346 publicly available questions gathered from standardized exams in 12 states, as well as 654 additional questions from an exam generating service that are not publicly available. 
 All questions are multiple choice with four possible answer candidates. Questions vary in length from 1 to 6 sentences, while the four multiple choice answer candidates are generally either single words or short phrases. 
 Because of the small size of this corpus, our models were evaluated using 5-fold crossvalidation, with 3 folds for training, one for development, and one for test. 
 
@@ -19,7 +19,7 @@ We tuned the following hyperparameters once on the development data to optimize 
 {\flushleft \textbf{Number of candidate justifications:}} 
 Each of the multiple choice answers can have a large number of candidate justifications.  To reduce runtime and assist learning, we filter this initial list of TAGs to include only a subset of TAGs with a high focus word mass. We kept all justifications tied for focus mass with the justification in 25th place, resulting in a variable number of TAGs for each QA pair.  For our dataset, the mean number of TAGs for each QA pair was 141. \\
 
-{\flushleft \textbf{Perceptron Hyperparameters:}} We investigated the perceptron hyperparameters using a coarse grid search and found a stable optimum with 10 epochs, a $\tau$ of 1.0, burn in of 5 epochs (i.e., the weight updates were not added to the average weights for the first five epochs), and a learning rate (which dampened the updates to the weight vector) of 0.1. Since model results can vary depending on the random seed used for initialization, rather than using a single perceptron we use an ensemble of 50 perceptron models initialized with random weights.  These models are combined in a simple voting scheme, where each model casts a single vote for each question (distributing the vote only in the case of ties).\\
+{\flushleft \textbf{Perceptron Hyperparameters:}} We investigated the perceptron hyperparameters using a coarse grid search\footnote{For each hyperparameter, we systematically tried values differing by an order of magnitude (rather than by small increments) to find our final settings.} and found a stable optimum with 10 epochs, a $\tau$ of 1.0, burn in of 5 epochs (i.e., the weight updates were not added to the average weights for the first five epochs), and a learning rate (which dampened the updates to the weight vector) of 0.1. Since model results can vary depending on the random seed used for initialization, rather than using a single perceptron we use an ensemble of 50 perceptron models initialized with random weights.  These models are combined in a by voting -- each model casts a single vote for an answer candidate to each question (distributing the vote only in the case of ties), then the answer candidate with the most votes is selected.\\
 
 {\flushleft \textbf{Feature Normalization:}} To minimize the effect of outliers in the feature space, we log-transformed the feature values, and then rescaled each feature independently to lie within the range of $-1$ to $1$, using the formula
 \mbox{$normalized  = lower + (original - min)\frac{(upper - lower)}{(max - min)}$},
@@ -48,7 +48,7 @@ Because our six corpora are of different genres (study guide, teachers guide, di
 \subsection{Results}
 \label{sec-cl2017:results}
 
-Here we first investigate the performance of two variants of the TAG model with respect to justification length.  We then compare the best-performing model with the baselines, and show that the TAG and IR models can be combined to increase performance. We use the standard implementation for precision at 1 (P@1) ~\citep{manning08} and a tie-aware implementation of mean reciprocal rank (MRR) \citep{mcsherry2008}.  All statistical significance tests were performed using one-tailed bootstrap resampling with 10,000 iterations.
+Here we first investigate the performance of two variants of the TAG model with respect to justification length.  We then compare the best-performing model with the baselines, and show that the TAG and IR models can be combined to increase performance. We use the standard implementation for precision at 1 (P@1) ~\citep{manning08} and a tie-aware implementation of mean reciprocal rank (MRR) \citep{mcsherry2008}.  All statistical significance tests were performed using one-tailed bootstrap resampling with 10,000 iterations (see Section \ref{sec-naacl2015:results}, Footnote \ref{footnote:bootstrap} for implementation).
 
 
 
@@ -371,8 +371,7 @@ Focus Word(s) &   (NN\_grass, 1.00) \\
 The previous experiments demonstrate that our method performs well at identifying correct answers. But how well does it perform at the task of {\em justifying} those answers?
 We evaluated justification performance for both the best baseline (IR) and the best performing TAG model that is independent of IR (i.e., 1G\textsubscript{CT} + 2G\textsubscript{CT}) .  Where TAG justifications took the form of the sentences being aggregated, justifications for the IR model were taken to be the highest-scoring short passages from each of the six knowledge bases.  As the IR model was tuned to a retrieval size of two sentences to maximize P@1 performance, each IR justification was two sentences in length.\footnote{Documents for the dictionary and flashcard corpora typically contained only a single sentence, and so answer justifications from these corpora are often shorter than two sentences.} To facilitate easy comparison, since the IR model provides six justifications (one from each knowledge base), we evaluate the top six scoring TAG justifications.  
 
-The correctness of justifications was independently annotated by two of the authors. Any detected conflicts were resolved post hoc by the two annotators working together.
-%
+Two of the authors independently rated the quality of the justifications. Any detected conflicts were resolved post hoc by the two annotators working together.
 Answer justifications were rated on a four-point scale, based on their ability to provide a convincing justification to the user as to why a given answer choice was correct (see  Table~\ref{tab:justificationsIRexamples} for IR examples, and Figure~\ref{ex:tagQsXs} for a TAG example).   Justifications rated as {\em\bf good} describe the inference required to arrive at the correct answer.  Those rated as {\em\bf half} contained at least a portion of an explanation of the inference, but missed some critical aspect required to answer the question, like discussing producers but not consumers in Table~\ref{tab:justificationsIRexamples}. The two final ratings are for justifications that did not address the inference -- {\em\bf topical} justifications do not address the question but discuss a similar topic, where {\em\bf offtopic} justifications are unrelated to the question. 
 
 %
