@@ -85,11 +85,11 @@ Each point represents the average of 10 samples of training documents.  }}
 Figure \ref{fig:performance} shows the performance of the discourse models against the number of documents used to train the alignment model
 %\footnote{Here we show the graph for Bio \emph{how} is not shown, but the pattern is essentially identical to Bio \emph{why}.} 
 %and the final performance values (when all training data is used) are shown in Table \ref{tab:overall}.   
-We used the standard implementation for precision at 1 (P@1)~\citep{manning08} with the adaptations for Bio described in \citet{jansen14}. We address the following questions.
+We used the standard implementation for precision at 1 \citep[P@1;][]{manning08} with the adaptations for Bio described in \citet{jansen14}. We address the following questions.
 
 \paragraph{How does the performance of the Rhetorical Structure Theory (RST) and sequential (SEQ) models compare?}
 
-Comparing the two principal alignment models, the RST-based model significantly outperforms the sequential (SEQ) model by about 0.5\% P@1 in both domains (p $<$ 0.001 for Bio and p $<$ 0.01 for YA).  We report statistics performed at the endpoints, i.e., when all training data is used, using bootstrap resampling\footnote{\label{footnote:bootstrap} In this scenario, boostrap resampling is implemented such that a sample dataset is randomly drawn (with replacement) from the true test set, and we determine if the experimental model outperformed the baseline model in this sample dataset.  This sampling is repeated a large number of times, allowing us to determine if the difference between the models is statistically significant.} with 10,000 iterations. This shows that deep discourse analysis (as imperfect as it is today) is beneficial. 
+Comparing the two principal alignment models, the RST-based model significantly outperforms the sequential (SEQ) model by about 0.5\% P@1 in both domains (p $<$ 0.001 for Bio and p $<$ 0.01 for YA).  We report statistics performed at the endpoints, i.e., when all training data is used, using bootstrap resampling\footnote{\label{footnote:bootstrap} In this scenario, bootstrap resampling is implemented such that a sample dataset is randomly drawn (with replacement) from the true test set, and we determine if the experimental model outperformed the baseline model in this sample dataset.  This sampling is repeated a large number of times, allowing us to determine if the difference between the models is statistically significant.} with 10,000 iterations. This shows that deep discourse analysis (as imperfect as it is today) is beneficial. 
 
 \paragraph{How does the performance of the RST model compare to a model trained on in-domain question-answer pairs?}
 

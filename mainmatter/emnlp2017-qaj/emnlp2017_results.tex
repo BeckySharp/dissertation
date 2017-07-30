@@ -61,7 +61,7 @@ Rather than seeking to outperform all other systems at selecting the correct ans
 
 \subsection{QA Performance}
 \label{sec-emnlp2017:accuracy}
-We evaluated the accuracy of our system as well as the baselines on the held-out 800 set of test questions.  Performance, measured in precision at 1 (P@1)\citep{manning08}, is shown in Table \ref{tab:p@1} for both the validation (i.e., cross validation on training) and test partitions.  Because NNs are sensitive to initialization, each experimental result shown is the average performance across five runs, each using different random seeds.   
+We evaluated the accuracy of our system as well as the baselines on the held-out 800 set of test questions.  Performance, measured in precision at 1 \citep[P@1;][]{manning08}, is shown in Table \ref{tab:p@1} for both the validation (i.e., cross validation on training) and test partitions.  Because NNs are sensitive to initialization, each experimental result shown is the average performance across five runs, each using different random seeds.   
 
 The best performing baseline on the validation data was a model using only IR$^{++}$ features (line 3), but its performance dropped substantially when evaluated on test due to the failure of several random seed initializations to learn.  For this reason, we assessed significance of our model combinations with respect to both the IR baseline as well as the IR$^{++}$ (indicated by $^*$ and $^{\dagger}$s, respectively). All significance values were determined through a one-tailed bootstrap resampling test with 100,000 iterations (see Section \ref{sec-naacl2015:results}, Footnote \ref{footnote:bootstrap} for implementation).
 %For this reason, we assessed significance of our model combinations with respect to both the IR baseline (indicated by $^*$) as well as the IR$^{++}$ system (indicated by $^{\dagger}$s).
@@ -104,7 +104,7 @@ In comparison to other systems that competed in the Kaggle challenge, our system
 %space{-2mm}
 %\end{flushleft}
 
-\paragraph{Feature Ablation:} To evaluate the contribution of the individual feature groups, we additionally performed an ablation experiment (see Table \ref{tab:ablation}).
+\paragraph{Feature Contribution:} To evaluate the contribution of the individual feature groups, we additionally performed an ablation experiment by removing one feature group at a time and then re-evaluating.  The results of this experiment are shown in Table \ref{tab:ablation}.
 Each of our ablated models performed significantly better than the IR baseline on the validation set, including our simplest model that includes only the lexical overlap and IR-based feature, IR$^{++}$+LO\footnote{As we consider the fully ablated IR$^{++}$ to be a baseline, we do not include it here.}.
 %, and the version which has the IR-based features removed, LO+lexDisc+Emb.  
    
@@ -144,10 +144,10 @@ Each of our ablated models performed significantly better than the IR baseline o
 
 \subsection{Justification Performance}
 \label{sec-emnlp2017:justification_results}
-One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, we assessed the quality of each of the top five justifications.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  
+One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, the quality of each of the top five justifications was assessed by one of the authors.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  
 Each of these justifications was composed of a single sentence from our corpus, though a future version could use multi-sentence passages, or aggregate several sentences together, as in Chapter \ref{chapter:cl2017} \citep{jansen2017framing}.
 
-As in the justification evaluation in Chapter \ref{chapter:cl2017}, each justification received a rating of either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
+As in the justification evaluation in Chapter \ref{chapter:cl2017}, each justification was rated as either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
 
 \begin{table}[t]
 \begin{center}
@@ -373,7 +373,7 @@ To better understand the limitations of our current system, we performed an erro
 We examined the top 5 justifications returned for both the correct and chosen answers.  
 Notably, 50\% of the questions analyzed had one or more good justifications in the top 5 returned by our system, but for a variety of reasons, summarized in Table \ref{tab:erroranalysis}, the system incorrectly ranked another justification higher.  
 
-The table shows that the most common form of error was the system's preference for short justifications with a large degree of lexical overlap with the question and answer choice itself, shown by the example in Table \ref{tab:ex_lex_overlap}.  The effect was magnified when the correct answer required more explanation to connect the question to the answer.  
+The table shows that the most common form of error was the system's apparent preference for short justifications with a large degree of lexical overlap with the question and answer choice itself, shown by the example in Table \ref{tab:ex_lex_overlap}.  The effect was magnified when the correct answer required more explanation to connect the question to the answer.  
 This suggests that the system has learned that generally many unmatched words are indicative of an incorrect answer.  While this may typically be true, extending the system to be able to prefer the \emph{opposite} with certain types of questions would potentially help with these errors.  
 
 \begin{table}[!th]

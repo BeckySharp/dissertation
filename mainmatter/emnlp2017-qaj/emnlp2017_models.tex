@@ -108,7 +108,7 @@ We additionally characterize each justification in terms of a simple set of expl
 We use the discourse parser of \citet{Surdeanu:15} to first fragment the text into elementary discourse units (EDUs) and then recursively connects neighboring EDUs together, assigning each a binary discourse relation label such as \emph{Elaboration} or \emph{Contrast}. Each of these discourse relations consists of a head, a relation label, and a modifier. 
 %which is based on the architecture of \citet{hernault10} and \citet{feng12}.  This parser first parses each justification into its elementary discourse units (EDUs) and then recursively connects neighboring EDUs together, assigning each a binary discourse relation label such as \emph{Elaboration} or \emph{Contrast}. Each of these discourse relations consists of a head, a relation label, and a modifier.  
 %
-For each of the 18 possible relation labels (listed in Table \todo{make table in naacl paper chapter}), we create 
+For each of the 18 possible relation labels (listed in Table \ref{tab:rst} in Section \ref{sec-naacl2015:approach}), we create 
 a set of semi-lexicalized discourse features that indicate the presence of a given discourse relation as well as whether or not the head and modifier texts contain words from the question and/or the answer.  %This is similar to the discourse-based features of \citet{sachan2016science}, which were the concatenation of the question word (i.e., \emph{why} or \emph{how}) to the relation labels of background sentences.   
 
 Consider, for example, the question \emph{Q: What makes water a good solvent...?  A: strong polarity} shown in Figure \ref{fig:discourseexample}.  The discourse parser identified a causal relation in the justifcation:  [{\em Water is an efficient solvent}]$_{e1}$ [{\em because of this polarity.}]$_{e2}$.  From this discourse relation, we create the semi-lexicalized feature \emph{Q}\_\emph{cause}\_\emph{A}, because there is a {\em Cause} relation between EDUs $e1$ and $e2$, $e1$ overlaps lexically with the question (i.e. \textit{water} and \textit{solvent}}, and $e2$ overlaps lexically with the answer (i.e., \textit{polarity}).
@@ -123,7 +123,7 @@ Since there are 18 possible discourse relation labels, and the prefix and suffix
 %\todo{rework in consideration of query details above}
 Finally, we also use a set of four IR-based features which are assigned at the level of the answer candidate (i.e., these features are identical for each of the candidate justifications for that answer choice).   
 %Given a question and answer candidate, we query the IR system with the content lemmas from both.  
-Using the same query method as described in Section \ref{sec-emnlp2017:justretrieval}, for each question and answer candidate we retrieve a set of indexed documents.
+Using the same IR query method as described in Section \ref{sec-emnlp2017:justretrieval}, we query the indexed corpus using question and answer terms (boosting the importance of the answer terms), to retrieve a set of indexed documents for each question and answer candidate.
 Using the \emph{tf-idf} based retrieval scores of these returned documents, 
 $s(d_i)$ for $d_i \in D$, we rank the answer candidates using two methods: 
 \begin{itemize}

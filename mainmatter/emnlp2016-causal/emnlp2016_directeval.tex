@@ -13,7 +13,15 @@ The embedding models rank the pairs using the cosine similarity between the targ
 
 %\flushleft{\textbf{Data:}} 
 \subsection{Data}
-In order to avoid bias towards our extraction methods, we evaluate our models on an external set of word pairs drawn from the SemEval 2010 Task 8 \citep{hendrickx2009semeval}, originally a multi-way classification of semantic relations between nominals.  We used a total of 1730 nominal pairs, 865 of which were from the Cause-Effect relation (e.g., (\emph{dancing $\rightarrow$ happiness})) and an equal number which were randomly selected from the other eight relations (e.g., (\emph{juice $\rightarrow$ grapefruit}), from the Entity-Origin relation).  This set was then randomly divided into equally-sized development and test partitions.
+In order to avoid bias towards our extraction methods, we evaluate our models on an external set of word pairs drawn from the SemEval 2010 Task 8 \citep{hendrickx2009semeval}, originally a multi-way classification of nine semantic relations\footnote{The relations included in the SemEval task are (examples taken directly from \citet{hendrickx2009semeval}): Cause-Effect (e.g.,  \textit{those cancers were caused by radiation exposures}), 
+Instrument-Agency (\textit{phone operator}),
+Product-Producer (\textit{a factory manufactures suits}),
+Content-Container (\textit{a bottle full of honey was weighed}),
+Entity-Origin (\textit{letters from foreign countries}),
+Entity-Destination (\textit{the boy went to bed}),
+Component-Whole (\textit{my apartment has a large kitchen}),
+Member-Collection (\textit{there are many trees in the forest})
+and Message-Topic (\textit{the lecture was about semantics}).} between nominals.  We used a total of 1730 nominal pairs, 865 of which were from the Cause-Effect relation (e.g., (\emph{dancing $\rightarrow$ happiness})) and an equal number which were randomly selected from the other eight relations included in the SemEval data (e.g., (\emph{juice $\rightarrow$ grapefruit}), from the Entity-Origin relation).  This set was then randomly divided into equally-sized development and test partitions.
 
 %\flushleft{\textbf{Baselines:}} 
 \subsection{Baselines}
@@ -152,7 +160,7 @@ These tuple effect texts overlapped lexically with other tuples that had \textit
 %Further, these tuples had other effects  that overlapped lexically with effects of \emph{platform}, which we suspect ``pulled'' \emph{platform} closer to \emph{scaffold}.  
 For example, there are tuples of the form (\textit{... platform...}~$\rightarrow$~\textit{... loss...}) and of the form (\textit{... malfunction...}~$\rightarrow$~\textit{... loss...}), shown in panel A of Figure \ref{fig:inference}.    
 This common co-occurrence with \textit{loss} indirectly draws \textit{malfunction} and \textit{platform} closer together in the target (cause) embedding space (by drawing them each independently closer to \textit{loss}), shown in panel B of Figure \ref{fig:inference} . 
-Further, \textit{malfunction} occurs in other tuples that have \textit{scaffold} in their effect-text, drawing the target vector for \textit{malfunction} closer to the context vector for \textit{scaffold} (panel C), indirectly bringing the target vector for \textit{platform} closer as well (panel D).  While here, this constitutes semantic drift~\citep{curran2007minimising}, as the association between \textit{platform} and \textit{scaffold} is erroneous, this same mechanism of indirectky learning associations is critical for robust models.  Without it, we would not be able to generalize beyond our explicit training data, resulting in very poor coverage.
+Further, \textit{malfunction} occurs in other tuples that have \textit{scaffold} in their effect-text, drawing the target vector for \textit{malfunction} closer to the context vector for \textit{scaffold} (panel C), indirectly bringing the target vector for \textit{platform} closer as well (panel D).  While here, this constitutes semantic drift~\citep{curran2007minimising}, as the association between \textit{platform} and \textit{scaffold} is erroneous, this same mechanism of indirectly learning associations is critical for robust models.  Without it, we would not be able to generalize beyond our explicit training data, resulting in very poor coverage.
 In general, we found that these examples of semantic drift occur for low frequency items, whose embeddings could not be robustly estimated due to lack of direct evidence.
 
 Because this sparsity is partially driven by directionality, 

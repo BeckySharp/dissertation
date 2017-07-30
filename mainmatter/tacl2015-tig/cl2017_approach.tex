@@ -1,7 +1,26 @@
 \section{Using justification reranking to provide interpretable question answering}
 \label{sec-cl2017:relatedwork}
 
-The ability of a user to understand why a question answering model chooses the answer that it does is critical both for having confidence in the model's selections as well as for diagnosing its errors.  Addressing this need, here we propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces high-quality human-readable justifications for why those answers are correct. 
+The ability of a user to understand why a question answering model chooses the answer that it does is critical both for having confidence in the model's selections as well as for diagnosing its errors.  Addressing this need, here we propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces high-quality human-readable justifications for why those answers are correct, such as the example provided in Table \ref{tab:question_and_justification}. 
+
+
+\begin{table}[t]
+\begin{center}
+\begin{tabularx}{0.8\linewidth}{p{0.5cm}p{2cm}p{0.5cm}p{2cm}}
+\multicolumn{4}{p{10cm}}{\textbf{Question:} Which organism is a producer?} \\
+ (A) & frog & (\textbf{C}) & \textbf{grass} \\
+ (B) & mushroom &   (D) & lizard \\
+ \\
+\multicolumn{4}{p{10cm}}{\textbf{Justification:} }\\
+\multicolumn{4}{p{10cm}}{\textit{Producer is an organism that produces its own food and is food for other organisms: usually a green plant.}} \\
+\multicolumn{4}{p{15cm}}{\textit{Grass is a green, leafy plant that often covers the ground.}} \\
+
+\end{tabularx}
+\caption{{  Example of an elementary science question with a high-quality, human-readable justification constructed by our approach (in this case, each sentence comes from a different dictionary resource). Note that while each sentence is relevant to the inference required to answer the question, neither is sufficient without the other.  When combined, however, the sentences complete the necessary inference. }}
+
+\label{tab:question_and_justification}
+\end{center}
+\end{table}
 
 %\todo{summary of continuum again here}
 %

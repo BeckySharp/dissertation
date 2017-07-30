@@ -19,18 +19,19 @@ Intuitively, the function $P$ identifies which justifications (or TAGs) for a gi
 Because $P$ implements a latent operation (i.e., which justification is correct?), its goodness evolves together with the learned model. 
 Note that, at this stage, we do not control how many justifications are produced by function P for a given answer other than constraining it to select {\em at least one}. The function $F$ computes the overall score of a given answer by simply averaging the scores of the justifications chosen by $P$. 
 
-More formally, for a given question $q_i$ and candidate answer $a_j$, $P$ chooses a subset of TAGs from $\boldsymbol{X_{i,j}}$ that are deemed correct, according to the current model. $F$ marginalizes over these TAGs to compute the overall score of the answer $a_j$:
+More formally, for a given question $q_i$ and candidate answer $a_j$, $P$ chooses a subset of TAGs from $\boldsymbol{X_{i,j}}$ that are deemed correct, according to the current model. $F$ averages the scores of these TAGs to compute the overall score of the answer $a_j$:
 
 \begin{equation}
 \label{eq:F}
 F(q_i, a_j) = \frac{\sum_{x \in P(q_i, a_j)} \boldsymbol{\Theta} \cdot \Phi(x)}{|P(q_i, a_j)|}
 \end{equation}
-where the score of a given TAG, $x$, is computed as the dot product between the parameter vector $\boldsymbol{\Theta}$  and the vector produced by a feature function, $\Phi$, which operates over individual TAGs. 
+where the score of a given TAG, $x$, is computed as the dot product between the model's weight vector $\boldsymbol{\Theta}$  and the individual TAG's feature vector $\Phi(x)$. 
 
 Given the functions $P$ and $F$ that control the latent operation of choosing valid answer justifications, the algorithm proceeds similarly to the reranking perceptron~\citep{Shen:Joshi:2005}. If a prediction, i.e., a choice for the correct answer for a given question (line 6), is incorrect (line 7), the algorithm updates its parameter vector, $\boldsymbol{\Theta}$, by adding all valid justifications of the correct answer as produced by $P$ (line 9), and subtracting all TAGs considered valid for the current top answer (line 12). 
 
 
-The fundamental operation here is thus the implementation of $P$. For their classification task, Hoffman et al. implement this function as an edge-cover problem, which guarantees that the overall score for the correct label (similar to our $F$ function) is maximized and at least one sentence supports the correct classification.  
+The fundamental operation here is thus the implementation of $P$. For their classification task, Hoffman et al. implement this function as an edge-cover problem, which guarantees that the overall score for the correct label (similar to our $F$ function) is maximized and at least one sentence supports the correct classification\footnote{
+The edge-cover of a graph is a subset of the graph's edges such that each node in the graph is connected to at least one edge in the subset.  For the task of relation extraction, \citet{hoffmann2011knowledge} construct a fully-connected graph with nodes for each supporting sentence from the corpus and nodes for each relation.  Their approach to relation extraction learns which relations to extract from the supporting sentences by finding the \textit{best} edge-cover for the graph.}.  
 For our reranking task, we found that a conservative interpretation of this {\em at least one} idea, where {\em exactly} one justification is chosen, performed the best.\footnote{In fact, we found that performance consistently dropped as the number of justifications chosen by $P$ increased.} That is, $P$ returns only the top TAG with the highest score according to the dot product with the current $\boldsymbol{\Theta}$. 
 We discuss the other extreme, i.e., using all TAGs, in Section \ref{sec-cl2017:controls} (when taken to this level, the latent layer is essentially disregarded entirely, assuming that each TAG for a correct answer is correct, and that each TAG for an incorrect answer is incorrect).  As discussed there, this performed far worse.
 
