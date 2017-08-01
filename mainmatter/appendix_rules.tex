@@ -1,10 +1,13 @@
 \chapter{Causal Extraction Rules Appendix \label{appendix:rules}}
 
 The ODIN \citep{valenzuela2016runes} taxonomy and rules used by the approach described in Section \ref{sec-emnlp2016:causalextraction}.  
+
 \begin{singlespace}
+\begin{small}
+
 %\begin{lstlisting}
 \begin{lstlisting}[label = {lst:tax}, caption = {ODIN taxonomy which provides the hierarchy of extracted entities and events.}]
-taxonomy:
+  taxonomy:
   - Entity:
     - TransparentChunk
     - NP
@@ -16,6 +19,7 @@ taxonomy:
   - Event:
     - Causal
 \end{lstlisting}
+
 
 \begin{lstlisting}[label={lst:gramm_rules},
 caption={Rules for grammatical primatives (e.g. noun phrases, prepositional phrases, etc).  These are used in a later step for finding the causal mentions.}]
@@ -198,4 +202,6 @@ caption={Rules for grammatical primatives (e.g. noun phrases, prepositional phra
       controller:CM+ = agent
 
 \end{lstlisting}
+\end{small}
 \end{singlespace}
+

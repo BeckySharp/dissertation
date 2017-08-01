@@ -46,6 +46,7 @@ as determined through a one-tailed bootstrap resampling test with 10,000 iterati
 \end{table}
 
 \subsection{Results}
+\label{sec-emnlp2016:results}
 The overall results are summarized in Table~\ref{tab:QA}.
 Lines 1--5 in the table show that each of our baselines performed better than IR by itself, except for vAlign, suggesting that the vanilla alignment model does not generate accurate predictions for causal questions.
 The strongest baseline was IR + vEmbed (line 3), the vanilla embeddings trained over Gigaword, at 34.6\% P@1. For this reason, we consider this to be the baseline to ``beat'', and perform statistical significance of all proposed models with respect to it, using a one-tailed bootstrap resampling test with 10,000 iterations (see Section \ref{sec-naacl2015:results}, Footnote \ref{footnote:bootstrap} for implementation). 
