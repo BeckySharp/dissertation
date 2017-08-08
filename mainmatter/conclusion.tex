@@ -2,7 +2,7 @@
 
 %\address{briefly remind the reader of the big picture, what this work tells us generally}
 
-In this work, we address the task of question answering (QA), which in simple terms comes down to querying a knowledge base to get a desired answer.  Beyond the question sets we use here, QA holds promise as a proving ground for developing tools and techniques to be able to navigate the vast sea of text knowledge that is now available, whose sheer size requires automated tools for usage.  
+In this work, we address the task of question answering (QA), \rev{which in simple terms comes down to querying a knowledge base, which could contain unstructured text or some structured information, to get a desired answer.  With this work we focus on knowledge bases composed of only unstructured text, the more common form of information available.}  Beyond the \rev{specific data} we use here, QA holds promise as a proving ground for developing tools and techniques to be able to navigate the vast sea of text knowledge that is now available, whose sheer size requires automated tools for usage.  
 
 A successful QA approach must go beyond simple lexical lookup to perform inference -- anticipating the desired result based solely on the content of the question and the given background knowledge (i.e., the knowledge base).  As the majority of queries and knowledge base documents are written in natural language, this becomes a bit tougher --  
 developing semantic representations of entire phrases or sentences is extremely difficult due to language variety, and yet when considered in isolation (i.e., a bag-of-words), some words are critical for the inference, some are distracting, and some lose much of their meaning without their context.  

@@ -144,7 +144,7 @@ Each of our ablated models performed significantly better than the IR baseline o
 
 \subsection{Justification Performance}
 \label{sec-emnlp2017:justification_results}
-One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, the quality of each of the top five justifications was assessed by one of the authors\footnote{While annotation by only one author is non-ideal, all justifications assessed and the scores they received are available upon request.}.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  
+One of our key claims is that our approach addresses the related, but more challenging problem of performing \emph{explainable} question answering, i.e., providing a high-quality, compelling justification for the chosen answer.  To evaluate this claim, we evaluated a random set of 100 test questions that both the IR baseline and our full system answered correctly.  For each question, the quality of each of the top five justifications was assessed by one of the authors\footnote{\rev{While annotation by only one author is non-ideal, all justifications assessed and the scores they received are available upon request.}}.  For IR, these were the highest-scoring retrieved documents, and for our system, these were the top-scoring justifications as re-ranked by our model.  
 Each of these justifications was composed of a single sentence from our corpus, though a future version could use multi-sentence passages, or aggregate several sentences together, as in Chapter \ref{chapter:cl2017} \citep{jansen2017framing}.
 
 As in the justification evaluation in Chapter \ref{chapter:cl2017}, each justification was rated as either \emph{Good} (if the connection between the question and correct answer was fully covered), \emph{Half} (if there was a missing link), \emph{Topical} (if the justification was simply of the right topic), or \emph{Off-Topic} (if the justification was completely unrelated to the question). Examples of each rating are provided in Table \ref{tab:justification_examples}.  
@@ -369,7 +369,7 @@ Chosen: &  Earth 's distance from the Sun \\
 \subsection{Error Analysis}
 \label{sec-emnlp2017:erroranalysis}
 
-To better understand the limitations of our current system, we performed an error analysis of 30 incorrectly answered questions.  
+To better understand the limitations of our current system, we performed an error analysis of 30\footnote{\rev{These were randomly selected from a total of 372 questions that were answered incorrectly by the majority of the models from the five random seeds.}} incorrectly answered questions.  
 We examined the top 5 justifications returned for both the correct and chosen answers.  
 Notably, 50\% of the questions analyzed had one or more good justifications in the top 5 returned by our system, but for a variety of reasons, summarized in Table \ref{tab:erroranalysis}, the system incorrectly ranked another justification higher.  
 

@@ -1,7 +1,7 @@
-\section{Using justification reranking to provide interpretable question answering}
-\label{sec-cl2017:relatedwork}
+%\section{Using justification reranking to provide interpretable question answering}
+%\label{sec-cl2017:relatedwork}
 
-The ability of a user to understand why a question answering model chooses the answer that it does is critical both for having confidence in the model's selections as well as for diagnosing its errors.  Addressing this need, here we propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces high-quality human-readable justifications for why those answers are correct, such as the example provided in Table \ref{tab:question_and_justification}. 
+The ability of a user to understand why a question answering model chooses the answer that it does is critical both for having confidence in the model's selections as well as for diagnosing its errors.  Addressing this need, here we propose a question answering (QA) approach for standardized science exams that both identifies correct answers and produces complete, human-readable justifications for why those answers are correct, such as the example provided in Table \ref{tab:question_and_justification}. 
 
 
 \begin{table}[t]
@@ -16,7 +16,7 @@ The ability of a user to understand why a question answering model chooses the a
 \multicolumn{4}{p{15cm}}{\textit{Grass is a green, leafy plant that often covers the ground.}} \\
 
 \end{tabularx}
-\caption{{  Example of an elementary science question with a high-quality, human-readable justification constructed by our approach (in this case, each sentence comes from a different dictionary resource). Note that while each sentence is relevant to the inference required to answer the question, neither is sufficient without the other.  When combined, however, the sentences complete the necessary inference. }}
+\caption{{  Example of an elementary science question with a  justification constructed by our approach (in this case, each sentence comes from a different dictionary resource). Note that while each sentence is relevant to the inference required to answer the question, neither is sufficient without the other.  When combined, however, the sentences complete the necessary inference. }}
 
 \label{tab:question_and_justification}
 \end{center}
@@ -32,6 +32,9 @@ The ability of a user to understand why a question answering model chooses the a
 Our method first identifies the actual information need in a question (i.e., the focus words, or the portion of the question that is relevant to the inference needed to answer it) using psycholinguistic concreteness norms, human-given ratings of how abstract or concrete a concept is (see Section \ref{sec-cl2017:focuswords}).
 Once these focus words have been identified, we then use this information need to construct answer justifications by aggregating multiple sentences from different knowledge bases using syntactic and lexical information.  
 
+\section{Related Work}
+
+
 Information aggregation (or fusion) is broadly defined as the assembly of knowledge from different sources, and has been used in several NLP applications, including summarization and QA.  In the context of summarization, information aggregation has been used to assemble summaries from non-contiguous text fragments~\citep[inter alia]{barzilay1999information,barzilay2005sentence}, while in QA, aggregation has been used to assemble answers to both factoid questions~\citep{pradhan2002building} and definitional questions~\citep{blair2003hybrid}.  Critical to the current work, in an in-depth open-domain QA error analysis, \citet{Moldovan:2003:PIE:763693.763694} identified a subset of questions for which information from a single source is not sufficient, and designated a separate class within their taxonomy of QA systems for those systems which were capable of performing answer fusion. Combining multiple sources, however, creates the need for context disambiguation -- an issue we tackle through the use of question and answer focus words.
 
 Identifying question focus words, a subtask of question decomposition and identifying information needs, was found relevant for QA (especially factoid) early on~\citep[inter alia]{Harabagiu:00,Moldovan:2003:PIE:763693.763694} mainly as a means to identify answer types (e.g., ``What is the {\em capital} of France?'' indicates the expected answer type is \emph{City}).  
@@ -40,13 +43,13 @@ Similarly, here, we use focus words (from both question and answer) to reduce th
 
 Once the candidate answer justifications are assembled, our method selects the answer which corresponds to the best (i.e., highest-scoring) justification.  We learn which justifications are indicative of a correct answer by extending ranking perceptrons~\citep{Shen:Joshi:2005}, which have been previously used in QA~\citep{Surdeanu:11}, to include a latent layer that models the correctness of the justifications. Latent-variable perceptrons have been proposed for several other NLP tasks~\citep{liang2006end,zettlemoyer2007online,sun2009latent,hoffmann2011knowledge,fernandes2012latent,bjorkelund2014learning}, but to our knowledge, we are the first to adapt them to reranking scenarios. 
 
-\subsection{Chapter Outline}
+\section{Chapter Outline}
 
 The remainder of this chapter is organized in the following way.  Section \ref{sec-cl2017:approach} describes our approach and how the various components of our system work together.  Section \ref{sec-cl2017:focuswords} shows how we identify the portions of the question and answer that are relevant for preforming the necessary inference -- the focus words.  Then in Section \ref{sec-cl2017:tag} we explain how we aggregate sentences from various sources to form our intersentence answer justifications.  In Section \ref{sec-cl2017:scoring} we detail the features extracted from these justifications that are used in our machine learning framework, which in turn is formally described in Section \ref{sec-cl2017:perceptron}.  
 %We then rank both answers and their justifications using a reranking perceptron that treats justification quality as a latent variable.  
 Then, in Section \ref{sec-cl2017:experiments} we evaluate our method on 1,000 multiple-choice questions from elementary school science exams, and empirically demonstrate that it performs better than several strong baselines.%, including neural network approaches. 
 
-Our best configuration answers 44\% of the questions correctly, where the top justifications for 57\% of these correct answers contain a high-quality human-readable justification that explains the inference required to arrive at the correct answer.  
+Our best configuration answers 44\% of the questions correctly, where the top justifications for 57\% of these correct answers contain a high-quality human-readable justification, i.e. one that explains the inference required to arrive at the correct answer.  
 The discussion of these results is provided in Section \ref{sec-cl2017:discussion}, then in Section \ref{sec-cl2017:erroranalysis}
 we include a detailed error analysis that characterizes the justification quality for both our method and a strong baseline, and show that information aggregation is key to addressing the information need in complex questions.  Finally, we provide conclusions and future directions in Section \ref{sec-cl2017:conclusion}
 
