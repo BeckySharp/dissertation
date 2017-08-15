@@ -5,10 +5,23 @@ A common model for question answering (QA) is that a good answer is one that is 
 Here we argue that a better approach is to look for answers that are related to the question in a {\em relevant way}, according to the information need of the question (that is, the question type).
 In this way, a QA system might consist of many distinct solvers, each specialized to the inference needs of a particular question type, such as causal inference or reasoning over a process\footnote{\rev{Not addressed here is \textit{how} questions are to be classified, and it is very much open-ended. Not only is the \textit{number} of classes open-ended, but also the \textit{type} of the classes themselves -- for example you could base them on domain (e.g., Biology versus Geology, etc.), or, as discussed here the inference type required (e.g., causal versus definitional, etc.), or some other dimension entirely.  Even after determining a classification scheme, developing the classifier itself is certainly non-trivial, made more difficult by the fact that complex questions can potentially belong to several different classes, as described by \citet{jansen-EtAl:2016:COLING}.  However, this is beyond the scope of the current work.}}.  Here we explore one framework that could be used for these solvers, which we use to answer causal questions.  We argue that this general framework can be extended easily to handle other question types.
 
-\section{Related Work} 
+We are not the first to assert the need for specialized solving methods in QA.  For example, \citet{oh2013question} incorporate a dedicated causal component into their system, and note that it improves the overall performance.  However, their model is limited by the need for explicit lexical overlap between a causal construction found in their knowledge base and the question itself.  Here, we develop a causal QA component that exploits \textit{specialized word embeddings} that are task-specific (i.e., specifically learned to model the desired semantic relation, here \textit{causality}).  
+By using word embeddings, we can model the likelihood of a causal link between two texts even when the exact lexical items were never observed together in the knowledge base, increasing the robustness to lexical variation.
+
+\rev{To train our embeddings, we start by bootstrapping a large number of cause-effect pairs from free text using a small number of syntactic and surface patterns.  We then use these bootstrapped pairs to build several task-specific embedding (and other distributional similarity) models that we then evaluate both directly on a causal-relation identification task and indirectly in a QA task focused on causal questions. }
+
+\section{Chapter overview}
+
+The rest of the Chapter is organized as follows.  In Section \ref{sec-emnlp2016:relatedwork} we review related work.
+%In Section \ref{sec-emnlp2016:approach} we outline our approach to generating and using causal embeddings for question answering.  
+Then, in Section \ref{sec-emnlp2016:causalextraction} we provide details concerning our semi-supervised methods for gathering a large number of cause-effect text pairs that we use for training our models.  In Section \ref{sec-emnlp2016:models} we describe our primary causal embedding models as well as several other variants.  In Section \ref{sec-emnlp2016:directeval} we evaulate these models directly on a causal-relation identification task.  Then, in Section \ref{sec-emnlp2016:indirecteval} we detail the experimental setup for our indirect evaluation: causal QA over a subset of Yahoo! Answers.  We show that explicitly modeling causality improves performance in both the direct and the indirect tasks. In the QA task our best model achieves 37.3\% P@1, significantly outperforming a strong baseline by 7.7\% (relative).
+We also show that the results of these two evaluations are \emph{not} identical: a given model's performance on the direct evaluation does not necessarily transfer to the more complex, real-world QA task, as discussed in our conclusions in Section \ref{sec-emnlp2016:conclusion}.
+
+
+\section{Related Work}
+\label{sec-emnlp2016:relatedwork} 
 %\subsection{Specialized question answering}
-We are not the first to assert the need for specialized solving methods in QA.  For example, \citet{oh2013question} incorporate a dedicated causal component into their system, and note that it improves the overall performance.  However, their model is limited by the need for explicit lexical overlap between a causal construction found in their knowledge base and the question itself.  Here, we develop a causal QA component that exploits specialized word embeddings that are task-specific (i.e., specifically learned to model the desired semantic relation, here \textit{causality}), to gain robustness to lexical variation.  
-By using word embeddings, we can model the likelihood of a causal link between two texts even when the exact lexical items were never observed together in the knowledge base.
+
 
 %\subsection{Embeddings for question answering}
 % Embeddings in QA
@@ -34,6 +47,8 @@ With respect to extracting causal relations from text, Girju et al.~\citeyear{gi
 However, Cole et al.~\citeyear{cole2005lightweight} show that these nominal-based causal relations account for a relatively small percentage of all causal relations, and for this reason, \cite{yang2014multi} allow for more elaborate argument structures in their causal extraction by identifying verbs, and then following the syntactic subtree of the verbal arguments to construct their candidate causes and effects. 
 Additionally, Do et al.~\citeyear{do2011minimally} observe that nouns as well as verbs can signal causality.  
 We follow these intuitions in developing our causal patterns by using both nouns and verbs to signal potential participants in causal relations, and then allowing for the entire dominated structures to serve as the cause and/or effect arguments.
+
+
 
 \section{Chapter overview}
 

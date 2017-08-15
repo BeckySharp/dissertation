@@ -94,7 +94,10 @@
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
 \newcommand{\remove}[1]{\textcolor{omit}{OMIT?: #1}}
 \newcommand{\address}[1]{\textcolor{blue}{-- #1}}
-\newcommand{\rev}[1]{\textcolor{blue}{#1}}
+%------------Revisions in blue/black--------------------
+%\newcommand{\rev}[1]{\textcolor{blue}{#1}}
+\newcommand{\rev}[1]{#1}
+% -------------------------------------------------------------
 \newcommand{\note}[1]{\textcolor{red}{#1}}
 \newcommand{\svmr}{{SVM$^{rank}$}}
 \newcommand{\code}[1]{{\tt {\small #1}}}
@@ -130,17 +133,17 @@
 % for your records.  Then, bring the two signed originals to the
 % graduate college when you submit the final version of the
 % dissertation to the University of Arizona.
-%\approval
-%{\textcolor{red}{11} August 2017}		% Defense Date	
-%{Michael Hammond}		% Dissertation Director
-%{Mihai Surdeanu}		% 2nd committee member
-%{Michael Hammond}		% 1st committee member
-%{Mihai Surdeanu}		% 2nd committee member
-%{Peter Jansen}		    % 3rd committee member
-%{} % 4th committee member (leave empty if None)
+\approval
+{14 August 2017}		% Defense Date	
+{\mbox{Michael Hammond and Mihai Surdeanu}}		% Dissertation Director
+{}		% 2nd committee member
+{Michael Hammond}		% 1st committee member
+{Mihai Surdeanu}		% 2nd committee member
+{Peter Jansen}		    % 3rd committee member
+{} % 4th committee member (leave empty if None)
 
 % Include the ``Statement by Author'' for Dissertations
-%\statementbyauthor
+\statementbyauthor
 
 % bs: Doesn't apply to me I think:
 % If this is a Thesis, use the following form, with your thesis director's
@@ -149,22 +152,22 @@
 %\statementbyauthor[Jane M. Doe\\Professor of Chemistry]
 
 %% Include the ``Acknowledgements''
-%\incacknowledgements{acknowledgements}
+\incacknowledgements{acknowledgements}
 %
 %% Include the ``Dedication''
-%\incdedication{dedication}
+\incdedication{dedication}
 %
 %% Create a ``Table of Contents''
 \tableofcontents
 %
 %% Create a ``List of Figures''
-%\listoffigures
+\listoffigures
 %
 %% Create a ``List of Tables''
-%\listoftables
+\listoftables
 %
 %% Include the ``Abstract''
-%\incabstract{abstract}
+\incabstract{abstract}
 
 % Include the various chapters
 \include{mainmatter/introduction}

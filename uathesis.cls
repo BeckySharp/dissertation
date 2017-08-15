@@ -674,7 +674,7 @@ titled \CompleteTitle~and recommend that it be accepted as fulfilling the
 #7	& 			\\
 	&			\\
 	&			\\
-	& Date: #1	\\
+%	& Date: #1	\\
 %\cline{1-1}
 %#8	& 			\\
 \end{tabular*}
@@ -705,14 +705,14 @@ Dissertation Director: #2	&			\\
 \end{tabular*}
 \end{flushleft}
 % Co-director 2
-\bigskip
-\begin{flushleft}
-\begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
-							& Date: #1	\\
-\cline{1-1}
-Dissertation Director: #3	&			\\
-\end{tabular*}
-\end{flushleft}
+%\bigskip
+%\begin{flushleft}
+%\begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
+%							& Date: #1	\\
+%\cline{1-1}
+%Dissertation Director: #3	&			\\
+%\end{tabular*}
+%\end{flushleft}
 
 
 \vspace{0.5in} % This accounts for the 0.5in larger bottom margin on this page.
