@@ -1,0 +1,98 @@
+\contentsline {chapter}{LIST OF FIGURES}{9}{chapter*.6}
+\contentsline {chapter}{LIST OF TABLES}{12}{chapter*.7}
+\contentsline {chapter}{ABSTRACT}{16}{chapter*.8}
+\contentsline {chapter}{CHAPTER \numberline {1}INTRODUCTION}{17}{chapter.1}
+\contentsline {section}{\numberline {1.1}Robustness}{19}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Aligning questions and answers}{20}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Customizing approaches to a specific question type}{23}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Interpretability}{24}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Multiple choice science questions as a proving ground}{25}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Reranking justifications with weak supervision}{27}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Contributions}{28}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Contribution 1: Using discourse structures to generate artificially aligned pairs for training question answering models}{28}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Contribution 2: Generating customized, task-specific word embeddings based on the question type}{29}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Contribution 3: Creating and ranking justifications for interpretable question answering}{30}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Contribution 4: Using neural networks to rank justifications for interpretable question answering}{31}{subsection.1.3.4}
+\contentsline {section}{\numberline {1.4}Overview}{31}{section.1.4}
+\contentsline {chapter}{CHAPTER \numberline {2}RELATED WORK}{33}{chapter.2}
+\contentsline {chapter}{CHAPTER \numberline {3}Using Free Text to Train Monolingual Alignment Models for Question Answering }{38}{chapter.3}
+\contentsline {section}{\numberline {3.1}Chapter overview}{38}{section.3.1}
+\contentsline {section}{\numberline {3.2}Related Work}{39}{section.3.2}
+\contentsline {section}{\numberline {3.3}Approach}{40}{section.3.3}
+\contentsline {section}{\numberline {3.4}Models and Features}{42}{section.3.4}
+\contentsline {section}{\numberline {3.5}Experiments}{44}{section.3.5}
+\contentsline {section}{\numberline {3.6}Results and Discussion}{45}{section.3.6}
+\contentsline {paragraph}{How does the performance of the Rhetorical Structure Theory (RST) and sequential (SEQ) models compare?}{45}{section*.9}
+\contentsline {paragraph}{How does the performance of the RST model compare to a model trained on in-domain question-answer pairs?}{47}{section*.10}
+\contentsline {paragraph}{How does the performance of the RST model compare to previous work?}{47}{section*.11}
+\contentsline {paragraph}{How do the RST and SEQ models compare to the non-alignment baselines?}{47}{section*.12}
+\contentsline {paragraph}{How does the SEQ model compare to the random baseline?}{48}{section*.13}
+\contentsline {paragraph}{What is the contribution of the individual discourse relations used in generating the alignment pairs?}{48}{table.3.3}
+\contentsline {paragraph}{Why does performance plateau in YA and not in Bio?}{49}{section*.15}
+\contentsline {section}{\numberline {3.7}Conclusion}{49}{section.3.7}
+\contentsline {chapter}{CHAPTER \numberline {4}Creating Causal Embeddings for Question Answering \\with Minimal Supervision }{51}{chapter.4}
+\contentsline {section}{\numberline {4.1}Chapter overview}{52}{section.4.1}
+\contentsline {section}{\numberline {4.2}Related Work}{52}{section.4.2}
+\contentsline {section}{\numberline {4.3}Chapter overview}{54}{section.4.3}
+\contentsline {section}{\numberline {4.4}Extracting Cause-Effect Tuples}{55}{section.4.4}
+\contentsline {section}{\numberline {4.5}Models}{58}{section.4.5}
+\contentsline {section}{\numberline {4.6}Direct Evaluation: Ranking Word Pairs}{61}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Data}{62}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Baselines}{62}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Results}{63}{subsection.4.6.3}
+\contentsline {section}{\numberline {4.7}Indirect Evaluation: QA Task}{67}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}Data}{67}{subsection.4.7.1}
+\contentsline {subsection}{\numberline {4.7.2}Models and Features}{68}{subsection.4.7.2}
+\contentsline {subsection}{\numberline {4.7.3}Results}{70}{subsection.4.7.3}
+\contentsline {subsection}{\numberline {4.7.4}Error Analysis}{72}{subsection.4.7.4}
+\contentsline {section}{\numberline {4.8}Conclusion}{72}{section.4.8}
+\contentsline {chapter}{CHAPTER \numberline {5}Interpretable Question Answering: Building and Ranking Intersentence Answer Justifications }{74}{chapter.5}
+\contentsline {section}{\numberline {5.1}Chapter Outline}{75}{section.5.1}
+\contentsline {section}{\numberline {5.2}Related Work}{76}{section.5.2}
+\contentsline {section}{\numberline {5.3}Approach}{77}{section.5.3}
+\contentsline {section}{\numberline {5.4}Focus Word Extraction}{79}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Scores and weights}{81}{subsection.5.4.1}
+\contentsline {section}{\numberline {5.5}Text Aggregation Graphs}{82}{section.5.5}
+\contentsline {section}{\numberline {5.6}Text Aggregation Graph Features}{86}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Features}{86}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.2}Modeling Different TAG Types Using Domain Adaptation}{88}{subsection.5.6.2}
+\contentsline {section}{\numberline {5.7}Learning Model}{90}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Learning Algorithm}{91}{subsection.5.7.1}
+\contentsline {section}{\numberline {5.8}Experiments}{93}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Data}{93}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Tuning}{94}{subsection.5.8.2}
+\contentsline {subsection}{\numberline {5.8.3}Baselines}{95}{subsection.5.8.3}
+\contentsline {subsection}{\numberline {5.8.4}Results}{97}{subsection.5.8.4}
+\contentsline {subsubsection}{Justification Length}{98}{section*.16}
+\contentsline {subsubsection}{Combined Models}{99}{section*.17}
+\contentsline {subsubsection}{Justifications}{101}{section*.18}
+\contentsline {subsubsection}{Ablation Studies}{103}{section*.19}
+\contentsline {section}{\numberline {5.9}Discussion}{105}{section.5.9}
+\contentsline {section}{\numberline {5.10}Error Analysis}{108}{section.5.10}
+\contentsline {subsection}{\numberline {5.10.1}Broader Error Classes}{111}{subsection.5.10.1}
+\contentsline {subsection}{\numberline {5.10.2}Summary of Errors}{117}{subsection.5.10.2}
+\contentsline {section}{\numberline {5.11}Conclusion}{118}{section.5.11}
+\contentsline {chapter}{CHAPTER \numberline {6}Robust and interpretable: A neural approach }{120}{chapter.6}
+\contentsline {section}{\numberline {6.1}Chapter Outline}{121}{section.6.1}
+\contentsline {section}{\numberline {6.2}Related Work}{121}{section.6.2}
+\contentsline {section}{\numberline {6.3}Approach}{123}{section.6.3}
+\contentsline {section}{\numberline {6.4}Model and Features}{124}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Candidate Justification Retrieval}{126}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Feature Extraction}{126}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Neural Network}{129}{subsection.6.4.3}
+\contentsline {section}{\numberline {6.5}Experiments}{130}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Data and Setup}{130}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Baselines}{131}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.3}Corpora}{131}{subsection.6.5.3}
+\contentsline {subsection}{\numberline {6.5.4}Model Tuning}{132}{subsection.6.5.4}
+\contentsline {section}{\numberline {6.6}Results}{133}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}QA Performance}{133}{subsection.6.6.1}
+\contentsline {paragraph}{Comparison to Previous Work:}{134}{section*.20}
+\contentsline {paragraph}{Feature Contribution:}{135}{section*.21}
+\contentsline {subsection}{\numberline {6.6.2}Justification Performance}{135}{subsection.6.6.2}
+\contentsline {paragraph}{Contribution of Learning to Rerank Justifications:}{137}{section*.22}
+\contentsline {subsection}{\numberline {6.6.3}Error Analysis}{138}{subsection.6.6.3}
+\contentsline {section}{\numberline {6.7}Conclusion}{141}{section.6.7}
+\contentsline {chapter}{CHAPTER \numberline {7}CONCLUSION}{143}{chapter.7}
+\contentsline {chapter}{CHAPTER \numberline {8}Causal Extraction Rules Appendix }{148}{chapter.8}
+\contentsline {chapter}{REFERENCES}{153}{chapter*.23}

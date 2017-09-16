@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: dissertation_withAck.aux
+A level-1 auxiliary file: mainmatter/introduction.aux
+A level-1 auxiliary file: mainmatter/related_work.aux
+A level-1 auxiliary file: mainmatter/conclusion.aux
+A level-1 auxiliary file: mainmatter/appendix_rules.aux
+The style file: uabibnat.bst
+Database file #1: mainmatter/refs.bib
+A bad cross reference---entry "clark:2015"
+refers to entry "DBLP:conf/aaai/2015", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/aaai/2015"
+Warning--missing publisher in Cunningham2011a
+Warning--empty note in rmsprop
+You've used 138 entries,
+            2827 wiz_defined-function locations,
+            1312 strings with 32703 characters,
+and the built_in function-call counts, 97861 in all, are:
+= -- 7491
+> -- 4802
+< -- 124
++ -- 1610
+- -- 1428
+* -- 6768
+:= -- 13979
+add.period$ -- 446
+call.type$ -- 138
+change.case$ -- 1214
+chr.to.int$ -- 130
+cite$ -- 140
+duplicate$ -- 8093
+empty$ -- 7161
+format.name$ -- 1888
+if$ -- 19982
+int.to.chr$ -- 9
+int.to.str$ -- 1
+missing$ -- 1637
+newline$ -- 705
+num.names$ -- 552
+pop$ -- 4004
+preamble$ -- 1
+purify$ -- 1024
+quote$ -- 0
+skip$ -- 3184
+stack$ -- 0
+substring$ -- 3636
+swap$ -- 4015
+text.length$ -- 71
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 1227
+warning$ -- 2
+while$ -- 615
+width$ -- 0
+write$ -- 1784
+(There was 1 error message)

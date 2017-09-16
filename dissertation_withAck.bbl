@@ -1,0 +1,941 @@
+\begin{thebibliography}{138}
+\addcontentsline{toc}{chapter}{\bibname}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{arXiv(2017)}]{arXivstats}
+arXiv (2017).
+\newblock arXiv monthly submission rates.
+\newblock [Online; accessed 24-July-2017].
+
+\bibitem[{Balduccini et~al.(2008)Balduccini, Baral, and
+  Lierler}]{balduccini2008knowledge}
+Balduccini, M., C.~Baral, and Y.~Lierler (2008).
+\newblock Knowledge representation and question answering.
+\newblock \emph{Foundations of Artificial Intelligence}, \textbf{3}, pp.
+  779--819.
+
+\bibitem[{Banarescu et~al.(2013)Banarescu, Bonial, Cai, Georgescu, Griffitt,
+  Hermjakob, Knight, Koehn, Palmer, and Schneider}]{banarescu2012amr}
+Banarescu, L., C.~Bonial, S.~Cai, M.~Georgescu, K.~Griffitt, U.~Hermjakob,
+  K.~Knight, P.~Koehn, M.~Palmer, and N.~Schneider (2013).
+\newblock Abstract Meaning Representation for Sembanking.
+\newblock In \emph{Proceedings of the 7th Linguistic Annotation Workshop and
+  Interoperability with Discourse}, pp. 178–--186. Association for
+  Computational Linguistics.
+
+\bibitem[{Baral and Liang(2012)}]{baral2012knowledge}
+Baral, C. and S.~Liang (2012).
+\newblock From Knowledge Represented in Frame-Based Languages to Declarative
+  Representation and Reasoning via ASP.
+\newblock In \emph{KR}.
+
+\bibitem[{Baral et~al.(2011)Baral, Liang, and Nguyen}]{baral2011towards}
+Baral, C., S.~Liang, and V.~Nguyen (2011).
+\newblock Towards deep reasoning with respect to natural language text in
+  scientific domains.
+\newblock In \emph{DeepKR Workshop}. Citeseer.
+
+\bibitem[{Baral et~al.(2012)Baral, Vo, and Liang}]{baral2012answering}
+Baral, C., N.~H. Vo, and S.~Liang (2012).
+\newblock Answering Why and How questions with respect to a frame-based
+  knowledge base: a preliminary report.
+\newblock In \emph{ICLP (Technical Communications)}, pp. 26--36. Citeseer.
+
+\bibitem[{Barzilay and McKeown(2005)}]{barzilay2005sentence}
+Barzilay, R. and K.~R. McKeown (2005).
+\newblock Sentence fusion for multidocument news summarization.
+\newblock \emph{Computational Linguistics}, \textbf{31}(3), pp. 297--328.
+
+\bibitem[{Barzilay et~al.(1999)Barzilay, McKeown, and
+  Elhadad}]{barzilay1999information}
+Barzilay, R., K.~R. McKeown, and M.~Elhadad (1999).
+\newblock Information fusion in the context of multi-document summarization.
+\newblock In \emph{Proceedings of the 37th annual meeting of the Association
+  for Computational Linguistics on Computational Linguistics}, pp. 550--557.
+  Association for Computational Linguistics.
+
+\bibitem[{Berger et~al.(2000)Berger, Caruana, Cohn, Freytag, and
+  Mittal}]{Berger:00}
+Berger, A., R.~Caruana, D.~Cohn, D.~Freytag, and V.~Mittal (2000).
+\newblock Bridging the Lexical Chasm: Statistical Approaches to Answer Finding.
+\newblock In \emph{Proceedings of the 23rd Annual International ACM SIGIR
+  Conference on Research \& Development on Information Retrieval}. Athens,
+  Greece.
+
+\bibitem[{Bj{\"o}rkelund and Kuhn(2014)}]{bjorkelund2014learning}
+Bj{\"o}rkelund, A. and J.~Kuhn (2014).
+\newblock Learning structured perceptrons for coreference resolution with
+  latent antecedents and non-local features.
+\newblock In \emph{Proceedings of the Association for Computational
+  Linguistics}.
+
+\bibitem[{Blair-Goldensohn et~al.(2003)Blair-Goldensohn, McKeown, and
+  Schlaikjer}]{blair2003hybrid}
+Blair-Goldensohn, S., K.~McKeown, and A.~H. Schlaikjer (2003).
+\newblock A hybrid approach for answering definitional questions.
+\newblock \emph{Technical Report CUCS-006-03, Columbia University}.
+
+\bibitem[{Bordes et~al.(2014)Bordes, Chopra, and Weston}]{bordes2014question}
+Bordes, A., S.~Chopra, and J.~Weston (2014).
+\newblock Question Answering with Subgraph Embeddings.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing (EMNLP) 2014}.
+
+\bibitem[{Bordes et~al.(2015)Bordes, Usunier, Chopra, and
+  Weston}]{Bordes2015LargescaleSQ}
+Bordes, A., N.~Usunier, S.~Chopra, and J.~Weston (2015).
+\newblock Large-scale Simple Question Answering with Memory Networks.
+\newblock \emph{CoRR}, \textbf{abs/1506.02075}.
+
+\bibitem[{Bordes et~al.(2013)Bordes, Usunier, Garc{\'i}a-Dur{\'a}n, Weston, and
+  Yakhnenko}]{Bordes2013TranslatingEF}
+Bordes, A., N.~Usunier, A.~Garc{\'i}a-Dur{\'a}n, J.~Weston, and O.~Yakhnenko
+  (2013).
+\newblock Translating Embeddings for Modeling Multi-relational Data.
+\newblock In \emph{NIPS}.
+
+\bibitem[{Brown et~al.(1993)Brown, Pietra, Pietra, and Mercer}]{Brown:93}
+Brown, P.~F., S.~A.~D. Pietra, V.~J.~D. Pietra, and R.~L. Mercer (1993).
+\newblock The Mathematics of Statistical Machine Translation: Parameter
+  Estimation.
+\newblock \emph{Computational Linguistics}, \textbf{19}(2), pp. 263--311.
+
+\bibitem[{Brysbaert et~al.(2014)Brysbaert, Warriner, and
+  Kuperman}]{brysbaert:2014}
+Brysbaert, M., A.~Warriner, and V.~Kuperman (2014).
+\newblock Concreteness ratings for 40 thousand generally known English word
+  lemmas.
+\newblock \emph{Behavior Research Methods}, \textbf{46}(3), pp. 904--911.
+\newblock \doi{10.3758/s13428-013-0403-5}.
+
+\bibitem[{Chambers et~al.(2007)Chambers, Cer, Grenager, Hall, Kiddon,
+  MacCartney, De~Marneffe, Ramage, Yeh, and Manning}]{chambers2007learning}
+Chambers, N., D.~Cer, T.~Grenager, D.~Hall, C.~Kiddon, B.~MacCartney, M.-C.
+  De~Marneffe, D.~Ramage, E.~Yeh, and C.~D. Manning (2007).
+\newblock Learning alignments and leveraging natural logic.
+\newblock In \emph{Proc. of the ACL-PASCAL Workshop on Textual Entailment and
+  Paraphrasing}, pp. 165--170.
+
+\bibitem[{Chen et~al.(2016)Chen, Bolton, and Manning}]{chen2016thorough}
+Chen, D., J.~Bolton, and C.~D. Manning (2016).
+\newblock A Thorough Examination of the CNN/Daily Mail Reading Comprehension
+  Task.
+\newblock In \emph{Association for Computational Linguistics (ACL)}.
+
+\bibitem[{Chen and Manning(2014{\natexlab{a}})}]{chen14}
+Chen, D. and C.~D. Manning (2014{\natexlab{a}}).
+\newblock A Fast and Accurate Dependency Parser using Neural Networks.
+\newblock In \emph{Proc. of the Conferenc on Empirical Methods for Natural
+  Language Processing (EMNLP)}.
+
+\bibitem[{Chen and Manning(2014{\natexlab{b}})}]{chen2014fast}
+Chen, D. and C.~D. Manning (2014{\natexlab{b}}).
+\newblock A Fast and Accurate Dependency Parser using Neural Networks.
+\newblock In \emph{Empirical MNLP}, pp. 740--750.
+
+\bibitem[{Chollet(2015)}]{chollet2015keras}
+Chollet, F. (2015).
+\newblock Keras.
+\newblock \url{https://github.com/fchollet/keras}.
+
+\bibitem[{Chu-Carroll et~al.(2004)Chu-Carroll, Czuba, Prager, Ittycheriah, and
+  Blair-Goldensohn}]{chu2004ibm}
+Chu-Carroll, J., K.~Czuba, J.~M. Prager, A.~Ittycheriah, and
+  S.~Blair-Goldensohn (2004).
+\newblock {IBM's PIQUANT II in TREC 2004.}
+\newblock In \emph{Text Retrieval Conference (TREC)}.
+
+\bibitem[{Clark(2015)}]{clark:2015}
+Clark, P. (2015).
+\newblock Elementary School Science and Math Tests as a Driver for {AI:} Take
+  the {Aristo} Challenge!
+\newblock In \emph{Proceedings of the Twenty-Ninth {AAAI} Conference on
+  Artificial Intelligence, January 25-30, 2015, Austin, Texas, {USA.}}, pp.
+  4019--4021.
+
+\bibitem[{Clark et~al.(2013{\natexlab{a}})Clark, Harrison, and
+  Balasubramanian}]{clark:2013}
+Clark, P., P.~Harrison, and N.~Balasubramanian (2013{\natexlab{a}}).
+\newblock A study of the knowledge base requirements for passing an elementary
+  science test.
+\newblock In \emph{Proceedings of the 2013 Workshop on Automated Knowledge Base
+  Construction}, AKBC'13, pp. 37--42.
+
+\bibitem[{Clark et~al.(2013{\natexlab{b}})Clark, Harrison, and
+  Balasubramanian}]{clark2013study}
+Clark, P., P.~Harrison, and N.~Balasubramanian (2013{\natexlab{b}}).
+\newblock A study of the knowledge base requirements for passing an elementary
+  science test.
+\newblock In \emph{Proc. of the 2013 workshop on Automated Knowledge Base
+  Construction (AKBC)}, pp. 37--42.
+
+\bibitem[{Cole et~al.(2005)Cole, Royal, Valtorta, Huhns, and
+  Bowles}]{cole2005lightweight}
+Cole, S.~V., M.~D. Royal, M.~G. Valtorta, M.~N. Huhns, and J.~B. Bowles (2005).
+\newblock A lightweight tool for automatically extracting causal relationships
+  from text.
+\newblock In \emph{SoutheastCon, 2006. Proc. of the IEEE}, pp. 125--129.
+
+\bibitem[{Collins(2002)}]{Collins:2002:DTM}
+Collins, M. (2002).
+\newblock Discriminative Training Methods for Hidden Markov Models: Theory and
+  Experiments with Perceptron Algorithms.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, EMNLP '02, pp. 1--8. Association for
+  Computational Linguistics, Stroudsburg, PA, USA.
+\newblock \doi{10.3115/1118693.1118694}.
+
+\bibitem[{Craven and Shavlik(1996)}]{craven1996extracting}
+Craven, M.~W. and J.~W. Shavlik (1996).
+\newblock Extracting tree-structured representations of trained networks.
+\newblock \emph{Advances in neural information processing systems}, pp. 24--30.
+
+\bibitem[{Cunningham et~al.(2011)Cunningham, Maynard, Bontcheva, Tablan,
+  Aswani, Roberts, Gorrell, Funk, Roberts, Damljanovic, Heitz, Greenwood,
+  Saggion, Petrak, Li, and Peters}]{Cunningham2011a}
+Cunningham, H., D.~Maynard, K.~Bontcheva, V.~Tablan, N.~Aswani, I.~Roberts,
+  G.~Gorrell, A.~Funk, A.~Roberts, D.~Damljanovic, T.~Heitz, M.~A. Greenwood,
+  H.~Saggion, J.~Petrak, Y.~Li, and W.~Peters (2011).
+\newblock \emph{{Text Processing with GATE (Version 6)}}.
+\newblock ISBN 978-0956599315.
+
+\bibitem[{Curran et~al.(2007)Curran, Murphy, and Scholz}]{curran2007minimising}
+Curran, J.~R., T.~Murphy, and B.~Scholz (2007).
+\newblock Minimising semantic drift with mutual exclusion bootstrapping.
+\newblock In \emph{Proc. of the 10th Conference of the Pacific Association for
+  Computational Linguistics}, volume~3.
+
+\bibitem[{Daum{\'e}~III(2007)}]{daume2007}
+Daum{\'e}~III, H. (2007).
+\newblock Frustratingly Easy Domain Adaptation.
+\newblock In \emph{Proceedings of the 45th Annual Meeting of the Association of
+  Computational Linguistics}, pp. 256--263. Association for Computational
+  Linguistics, Prague, Czech Republic.
+
+\bibitem[{De~Marneffe and Manning(2008)}]{de2008stanford}
+De~Marneffe, M.-C. and C.~D. Manning (2008).
+\newblock Stanford typed dependencies manual.
+\newblock Technical report, Technical report, Stanford University.
+
+\bibitem[{Do et~al.(2011)Do, Chan, and Roth}]{do2011minimally}
+Do, Q.~X., Y.~S. Chan, and D.~Roth (2011).
+\newblock Minimally supervised event causality identification.
+\newblock In \emph{Proc. of the Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}, pp. 294--303.
+
+\bibitem[{Dong et~al.(2015)Dong, Wei, Zhou, and Xu}]{dong2015question}
+Dong, L., F.~Wei, M.~Zhou, and K.~Xu (2015).
+\newblock Question answering over freebase with multi-column convolutional
+  neural networks.
+\newblock In \emph{Proceedings of Association for Computational Linguistics},
+  pp. 260--269.
+
+\bibitem[{Du et~al.(2017)Du, Shao, and Cardie}]{du2017question}
+Du, X., J.~Shao, and C.~Cardie (2017).
+\newblock Learning to Ask: Neural Question Generation for Reading
+  Comprehension.
+\newblock In \emph{Association for Computational Linguistics (ACL)}.
+
+\bibitem[{Echihabi and Marcu(2003{\natexlab{a}})}]{echihabi2003noisy}
+Echihabi, A. and D.~Marcu (2003{\natexlab{a}}).
+\newblock A noisy-channel approach to question answering.
+\newblock In \emph{Proceedings of the 41st Annual Meeting on Association for
+  Computational Linguistics-Volume 1}, pp. 16--23. Association for
+  Computational Linguistics.
+
+\bibitem[{Echihabi and Marcu(2003{\natexlab{b}})}]{Echihabi:03}
+Echihabi, A. and D.~Marcu (2003{\natexlab{b}}).
+\newblock A Noisy-Channel Approach to Question Answering.
+\newblock In \emph{Proceedings of the 41st Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, pp. 16--23. Sapporo, Japan.
+
+\bibitem[{Etzioni(2011)}]{Etzioni:11}
+Etzioni, O. (2011).
+\newblock Search needs a shake-up.
+\newblock \emph{Nature}, \textbf{476}(7358), pp. 25--26.
+
+\bibitem[{Faruqui et~al.(2016)Faruqui, Tsvetkov, Rastogi, and
+  Dyer}]{faruqui2016problems}
+Faruqui, M., Y.~Tsvetkov, R.~Rastogi, and C.~Dyer (2016).
+\newblock Problems With Evaluation of Word Embeddings Using Word Similarity
+  Tasks.
+\newblock \emph{arXiv preprint arXiv:1605.02276}.
+
+\bibitem[{Feng and Hirst(2012)}]{feng12}
+Feng, V.~W. and G.~Hirst (2012).
+\newblock Text-level Discourse Parsing with Rich Linguistic Features.
+\newblock In \emph{Proceedings of the Association for Computational
+  Linguistics}.
+
+\bibitem[{Fernandes et~al.(2012)Fernandes, Dos~Santos, and
+  Milidi{\'u}}]{fernandes2012latent}
+Fernandes, E.~R., C.~N. Dos~Santos, and R.~L. Milidi{\'u} (2012).
+\newblock Latent structure perceptron with feature induction for unrestricted
+  coreference resolution.
+\newblock In \emph{Joint Conference on Empirical Methods in Natural Language
+  Processing and Computational Natural Language Learning (EMNLP-CoNLL) -Shared
+  Task}, pp. 41--48. Association for Computational Linguistics.
+
+\bibitem[{Ferrucci et~al.(2010)Ferrucci, Brown, Chu-Carroll, Fan, Gondek,
+  Kalyanpur, Lally, Murdock, Nyberg, Prager et~al.}]{ferrucci2010building}
+Ferrucci, D., E.~Brown, J.~Chu-Carroll, J.~Fan, D.~Gondek, A.~A. Kalyanpur,
+  A.~Lally, J.~W. Murdock, E.~Nyberg, J.~Prager, et~al. (2010).
+\newblock {Building Watson: An overview of the DeepQA project}.
+\newblock \emph{AI magazine}, \textbf{31}(3), pp. 59--79.
+
+\bibitem[{Finkel and Manning(2010)}]{finkel2010hierarchical}
+Finkel, J.~R. and C.~D. Manning (2010).
+\newblock Hierarchical joint learning: Improving joint parsing and named entity
+  recognition with non-jointly labeled data.
+\newblock In \emph{Proceedings of the 48th Annual Meeting of the Association
+  for Computational Linguistics}, pp. 720--728. Association for Computational
+  Linguistics.
+
+\bibitem[{FitzGerald et~al.(2015)FitzGerald, T{\"a}ckstr{\"o}m, Ganchev, and
+  Das}]{fitzgerald2015semantic}
+FitzGerald, N., O.~T{\"a}ckstr{\"o}m, K.~Ganchev, and D.~Das (2015).
+\newblock Semantic Role Labeling with Neural Network Factors.
+\newblock In \emph{Proc. of the 2015 Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}, pp. 960--970.
+
+\bibitem[{Fried et~al.(2015)Fried, Jansen, Hahn-Powell, Surdeanu, and
+  Clark}]{fried2015higher}
+Fried, D., P.~Jansen, G.~Hahn-Powell, M.~Surdeanu, and P.~Clark (2015).
+\newblock Higher-order Lexical Semantic Models for Non-factoid Answer
+  Reranking.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  \textbf{3}, pp. 197--210.
+
+\bibitem[{Girju and Moldovan(2002)}]{girju2002text}
+Girju, R. and D.~I. Moldovan (2002).
+\newblock Text mining for causal relations.
+\newblock In \emph{FLAIRS Conference}, pp. 360--364.
+
+\bibitem[{Halliday and Hasan(2014)}]{halliday2014cohesion}
+Halliday, M. A.~K. and R.~Hasan (2014).
+\newblock \emph{Cohesion in english}.
+\newblock Routledge.
+
+\bibitem[{Harabagiu et~al.(2000)Harabagiu, Moldovan, Pasca, Mihalcea, Surdeanu,
+  Bunescu, Girju, Rus, and Morarescu}]{Harabagiu:00}
+Harabagiu, S., D.~Moldovan, M.~Pasca, R.~Mihalcea, M.~Surdeanu, R.~Bunescu,
+  R.~Girju, V.~Rus, and P.~Morarescu (2000).
+\newblock Falcon: Boosting Knowledge for Answer Engines.
+\newblock In \emph{Proceedings of the Text REtrieval Conference (TREC)}.
+  Gaithersburg, MD, USA.
+
+\bibitem[{He and Golub(2016)}]{He2016CharacterLevelQA}
+He, X. and D.~Golub (2016).
+\newblock Character-Level Question Answering with Attention.
+\newblock In \emph{EMNLP}.
+
+\bibitem[{Hearst(1992)}]{hearst1992automatic}
+Hearst, M.~A. (1992).
+\newblock Automatic acquisition of hyponyms from large text corpora.
+\newblock In \emph{Proc. of the 14th conference on Computational linguistics
+  (COLING)}, pp. 539--545.
+
+\bibitem[{Heilman and Smith(2010)}]{Heilman2010GQS}
+Heilman, M. and N.~A. Smith (2010).
+\newblock Good Question! Statistical Ranking for Question Generation.
+\newblock In \emph{Human Language Technologies: The 2010 Annual Conference of
+  the North American Chapter of the Association for Computational Linguistics},
+  pp. 609--617. Association for Computational Linguistics.
+
+\bibitem[{Hendrickx et~al.(2009)Hendrickx, Kim, Kozareva, Nakov,
+  {\'O}~S{\'e}aghdha, Pad{\'o}, Pennacchiotti, Romano, and
+  Szpakowicz}]{hendrickx2009semeval}
+Hendrickx, I., S.~N. Kim, Z.~Kozareva, P.~Nakov, D.~{\'O}~S{\'e}aghdha,
+  S.~Pad{\'o}, M.~Pennacchiotti, L.~Romano, and S.~Szpakowicz (2009).
+\newblock Semeval-2010 task 8: Multi-way classification of semantic relations
+  between pairs of nominals.
+\newblock In \emph{Proc. of the Workshop on Semantic Evaluations: Recent
+  Achievements and Future Directions}, pp. 94--99.
+
+\bibitem[{Hermann et~al.(2015)Hermann, Ko\v{c}isk\'y, Grefenstette, Espeholt,
+  Kay, Suleyman, and Blunsom}]{nips15_hermann}
+Hermann, K.~M., T.~Ko\v{c}isk\'y, E.~Grefenstette, L.~Espeholt, W.~Kay,
+  M.~Suleyman, and P.~Blunsom (2015).
+\newblock Teaching Machines to Read and Comprehend.
+\newblock In \emph{Advances in Neural Information Processing Systems (NIPS)}.
+
+\bibitem[{Hernault et~al.(2010)Hernault, Prendinger, duVerle, and
+  Ishizuka}]{hernault10}
+Hernault, H., H.~Prendinger, D.~duVerle, and M.~Ishizuka (2010).
+\newblock {HILDA}: A Discourse Parser Using Support Vector Machine
+  Classification.
+\newblock \emph{Dialogue and Discourse}, \textbf{1}(3), pp. 1--33.
+
+\bibitem[{Hickl et~al.(2006)Hickl, Williams, Bensley, Roberts, Rink, and
+  Shi}]{hickl2006recognizing}
+Hickl, A., J.~Williams, J.~Bensley, K.~Roberts, B.~Rink, and Y.~Shi (2006).
+\newblock Recognizing textual entailment with LCC’s GROUNDHOG system.
+\newblock In \emph{Proceedings of the Second PASCAL Challenges Workshop}.
+
+\bibitem[{Hochreiter and Schmidhuber(1997)}]{hochreiter1997long}
+Hochreiter, S. and J.~Schmidhuber (1997).
+\newblock Long short-term memory.
+\newblock \emph{Neural computation}, \textbf{9}(8), pp. 1735--1780.
+
+\bibitem[{Hoffmann et~al.(2011)Hoffmann, Zhang, Ling, Zettlemoyer, and
+  Weld}]{hoffmann2011knowledge}
+Hoffmann, R., C.~Zhang, X.~Ling, L.~Zettlemoyer, and D.~S. Weld (2011).
+\newblock Knowledge-based weak supervision for information extraction of
+  overlapping relations.
+\newblock In \emph{Proceedings of the 49th Annual Meeting of the Association
+  for Computational Linguistics: Human Language Technologies-Volume 1}, pp.
+  541--550. Association for Computational Linguistics.
+
+\bibitem[{Iyyer et~al.(2015{\natexlab{a}})Iyyer, Manjunatha, Boyd-Graber, and
+  Daum{\'e}~III}]{iyyer2015deep}
+Iyyer, M., V.~Manjunatha, J.~Boyd-Graber, and H.~Daum{\'e}~III
+  (2015{\natexlab{a}}).
+\newblock Deep unordered composition rivals syntactic methods for text
+  classification.
+\newblock In \emph{Proceedings of the Association for Computational
+  Linguistics}.
+
+\bibitem[{Iyyer et~al.(2015{\natexlab{b}})Iyyer, Manjunatha, Boyd-Graber, and
+  {Daum\'{e} III}}]{Iyyer2015}
+Iyyer, M., V.~Manjunatha, J.~Boyd-Graber, and H.~{Daum\'{e} III}
+  (2015{\natexlab{b}}).
+\newblock Deep Unordered Composition Rivals Syntactic Methods for Text
+  Classification.
+\newblock In \emph{Association for Computational Linguistics}.
+
+\bibitem[{Jansen et~al.(2016)Jansen, Balasubramanian, Surdeanu, and
+  Clark}]{jansen-EtAl:2016:COLING}
+Jansen, P., N.~Balasubramanian, M.~Surdeanu, and P.~Clark (2016).
+\newblock What's in an Explanation? Characterizing Knowledge and Inference
+  Requirements for Elementary Science Exams.
+\newblock In \emph{Proceedings of COLING 2016, the 26th International
+  Conference on Computational Linguistics: Technical Papers}, pp. 2956--2965.
+  The COLING 2016 Organizing Committee, Osaka, Japan.
+
+\bibitem[{Jansen et~al.(2017)Jansen, Sharp, Surdeanu, and
+  Clark}]{jansen2017framing}
+Jansen, P., R.~Sharp, M.~Surdeanu, and P.~Clark (2017).
+\newblock Framing QA as Building and Ranking Intersentence Answer
+  Justifications.
+\newblock \emph{Computational Linguistics}.
+
+\bibitem[{Jansen et~al.(2014)Jansen, Surdeanu, and Clark}]{jansen14}
+Jansen, P., M.~Surdeanu, and P.~Clark (2014).
+\newblock Discourse Complements Lexical Semantics for Non-factoid Answer
+  Reranking.
+\newblock In \emph{Proceedings of the 52nd Annual Meeting of the Association
+  for Computational Linguistics (ACL)}.
+
+\bibitem[{Khashabi et~al.(2016)Khashabi, Khot, Sabharwal, Clark, Etzioni, and
+  Roth}]{Khashabi2016QuestionAV}
+Khashabi, D., T.~Khot, A.~Sabharwal, P.~Clark, O.~Etzioni, and D.~Roth (2016).
+\newblock Question Answering via Integer Programming over Semi-Structured
+  Knowledge.
+\newblock In \emph{Proceedings of the Twenty-Fifth International Joint
+  Conference on Artificial Intelligence (IJCAI-16}, pp. 1145--1152.
+
+\bibitem[{Khoo et~al.(1998)Khoo, Kornfilt, Oddy, and
+  Myaeng}]{khoo1998automatic}
+Khoo, C.~S., J.~Kornfilt, R.~N. Oddy, and S.~H. Myaeng (1998).
+\newblock Automatic extraction of cause-effect information from newspaper text
+  without knowledge-based inferencing.
+\newblock \emph{Literary and Linguistic Computing}, \textbf{13}(4), pp.
+  177--186.
+
+\bibitem[{Khot et~al.(2017)Khot, Sabharwal, and Clark}]{khot2017tupleinf}
+Khot, T., A.~Sabharwal, and P.~Clark (2017).
+\newblock Answering Complex Questions Using Open Information Extraction.
+\newblock In \emph{Proceedings of Association for Computational Linguistics
+  (ACL)}.
+
+\bibitem[{Kiela et~al.(2015)Kiela, Hill, and Clark}]{kielaspecializing}
+Kiela, D., F.~Hill, and S.~Clark (2015).
+\newblock Specializing Word Embeddings for Similarity or Relatedness.
+\newblock In \emph{Proc. of the 2015 Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}.
+
+\bibitem[{Kim et~al.(2015)Kim, Shah, and Doshi-Velez}]{Kim2015MindTG}
+Kim, B., J.~A. Shah, and F.~Doshi-Velez (2015).
+\newblock Mind the Gap: A Generative Approach to Interpretable Feature
+  Selection and Extraction.
+\newblock In \emph{NIPS}.
+
+\bibitem[{Kingma and Ba(2014)}]{kingma2014adam}
+Kingma, D. and J.~Ba (2014).
+\newblock Adam: A method for stochastic optimization.
+\newblock \emph{arXiv preprint arXiv:1412.6980}.
+
+\bibitem[{Le and Mikolov(2014)}]{Le2014DistributedRO}
+Le, Q.~V. and T.~Mikolov (2014).
+\newblock Distributed Representations of Sentences and Documents.
+\newblock In \emph{ICML}.
+
+\bibitem[{Lei et~al.(2016)Lei, Barzilay, and Jaakkola}]{Lei2016RationalizingNP}
+Lei, T., R.~Barzilay, and T.~S. Jaakkola (2016).
+\newblock Rationalizing Neural Predictions.
+\newblock In \emph{EMNLP}.
+
+\bibitem[{Letham et~al.(2015)Letham, Rudin, McCormick, Madigan
+  et~al.}]{letham2015interpretable}
+Letham, B., C.~Rudin, T.~H. McCormick, D.~Madigan, et~al. (2015).
+\newblock Interpretable classifiers using rules and Bayesian analysis: Building
+  a better stroke prediction model.
+\newblock \emph{The Annals of Applied Statistics}, \textbf{9}(3), pp.
+  1350--1371.
+
+\bibitem[{Levy and Goldberg(2014)}]{levy2014dependency}
+Levy, O. and Y.~Goldberg (2014).
+\newblock Dependency-Based Word Embeddings.
+\newblock In \emph{Proc. of the 52nd Annual Meeting of the Association for
+  Computational Linguistics (ACL)}, pp. 302--308.
+
+\bibitem[{Levy et~al.(2015)Levy, Remus, Biemann, Dagan, and
+  Ramat-Gan}]{levy2015supervised}
+Levy, O., S.~Remus, C.~Biemann, I.~Dagan, and I.~Ramat-Gan (2015).
+\newblock Do supervised distributional methods really learn lexical inference
+  relations.
+\newblock In \emph{Proc. of the Conference of the North American Chapter of the
+  Association for Computational Linguistics (NAACL)}.
+
+\bibitem[{Lewis and Steedman(2013)}]{lewis2013combining}
+Lewis, M. and M.~Steedman (2013).
+\newblock Combining Distributional and Logical Semantics.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  \textbf{1}, pp. 179--192.
+
+\bibitem[{Li et~al.(2016)Li, Chen, Hovy, and Jurafsky}]{Li2016VisualizingAU}
+Li, J., X.~Chen, E.~H. Hovy, and D.~Jurafsky (2016).
+\newblock Visualizing and Understanding Neural Models in NLP.
+\newblock In \emph{HLT-NAACL}.
+
+\bibitem[{Liang et~al.(2006)Liang, Bouchard-C{\^o}t{\'e}, Klein, and
+  Taskar}]{liang2006end}
+Liang, P., A.~Bouchard-C{\^o}t{\'e}, D.~Klein, and B.~Taskar (2006).
+\newblock An end-to-end discriminative approach to machine translation.
+\newblock In \emph{Proceedings of the 21st International Conference on
+  Computational Linguistics and the 44th annual meeting of the Association for
+  Computational Linguistics}, pp. 761--768. Association for Computational
+  Linguistics.
+
+\bibitem[{Liang et~al.(2013)Liang, Jordan, and Klein}]{liang2013learning}
+Liang, P., M.~I. Jordan, and D.~Klein (2013).
+\newblock Learning dependency-based compositional semantics.
+\newblock \emph{Computational Linguistics}, \textbf{39}(2), pp. 389--446.
+
+\bibitem[{MacCartney(2009)}]{maccartney2009natural}
+MacCartney, B. (2009).
+\newblock \emph{Natural language inference}.
+\newblock Ph.D. thesis, Citeseer.
+
+\bibitem[{Mann and Thompson(1988)}]{mann88}
+Mann, W.~C. and S.~A. Thompson (1988).
+\newblock Rhetorical Structure Theory: Toward a Functional Theory of Text
+  Organization.
+\newblock \emph{Text}, \textbf{8}(3), pp. 243--281.
+
+\bibitem[{Manning et~al.(2008)Manning, Raghavan, and Sch\"{u}tze}]{manning08}
+Manning, C.~D., P.~Raghavan, and H.~Sch\"{u}tze (2008).
+\newblock \emph{Introduction to Information Retrieval}.
+\newblock Cambridge University Press.
+
+\bibitem[{Manning et~al.(2014{\natexlab{a}})Manning, Surdeanu, Bauer, Finkel,
+  Bethard, and McClosky}]{Manning:14}
+Manning, C.~D., M.~Surdeanu, J.~Bauer, J.~Finkel, S.~J. Bethard, and
+  D.~McClosky (2014{\natexlab{a}}).
+\newblock The {Stanford CoreNLP} Natural Language Processing Toolkit.
+\newblock In \emph{Proc. of the 52nd Annual Meeting of the Association for
+  Computational Linguistics (ACL)}.
+
+\bibitem[{Manning et~al.(2014{\natexlab{b}})Manning, Surdeanu, Bauer, Finkel,
+  Bethard, and McClosky}]{manning2014stanford}
+Manning, C.~D., M.~Surdeanu, J.~Bauer, J.~Finkel, S.~J. Bethard, and
+  D.~McClosky (2014{\natexlab{b}}).
+\newblock The Stanford CoreNLP natural language processing toolkit.
+\newblock In \emph{Proceedings of 52nd Annual Meeting of the Association for
+  Computational Linguistics: System Demonstrations}, pp. 55--60.
+
+\bibitem[{Marcu(1997)}]{marcu97}
+Marcu, D. (1997).
+\newblock \emph{The Rhetorical Parsing, Summarization, and Generation of
+  Natural Language Texts}.
+\newblock Ph.D. thesis, University of Toronto.
+
+\bibitem[{McSherry and Najork(2008)}]{mcsherry2008}
+McSherry, F. and M.~Najork (2008).
+\newblock Computing Information Retrieval Performance Measures Efficiently in
+  the Presence of Tied Scores.
+\newblock In \emph{30th European Conference on IR Research (ECIR)}.
+  Springer-Verlag.
+
+\bibitem[{Mikolov et~al.(2013{\natexlab{a}})Mikolov, Chen, Corrado, and
+  Dean}]{mikolov13}
+Mikolov, T., K.~Chen, G.~Corrado, and J.~Dean (2013{\natexlab{a}}).
+\newblock Efficient Estimation of Word Representations in Vector Space.
+\newblock In \emph{Proceedings of the International Conference on Learning
+  Representations (ICLR)}.
+
+\bibitem[{Mikolov et~al.(2010)Mikolov, Karafiat, Burget, Cernocky, and
+  Khudanpur}]{mikolov10}
+Mikolov, T., M.~Karafiat, L.~Burget, J.~Cernocky, and S.~Khudanpur (2010).
+\newblock Recurrent neural network based language model.
+\newblock In \emph{Proceedings of the 11th Annual Conference of the
+  International Speech Communication Association (INTERSPEECH 2010)}.
+
+\bibitem[{Mikolov et~al.(2013{\natexlab{b}})Mikolov, Sutskever, Chen, Corrado,
+  and Dean}]{mikolov2013distributed}
+Mikolov, T., I.~Sutskever, K.~Chen, G.~S. Corrado, and J.~Dean
+  (2013{\natexlab{b}}).
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In \emph{Advances in neural information processing systems}, pp.
+  3111--3119.
+
+\bibitem[{Moldovan et~al.(2007)Moldovan, Clark, Harabagiu, and
+  Hodges}]{moldovan2007cogex}
+Moldovan, D., C.~Clark, S.~Harabagiu, and D.~Hodges (2007).
+\newblock Cogex: A semantically and contextually enriched logic prover for
+  question answering.
+\newblock \emph{Journal of Applied Logic}, \textbf{5}(1), pp. 49--69.
+
+\bibitem[{Moldovan et~al.(2003{\natexlab{a}})Moldovan, Clark, Harabagiu, and
+  Maiorano}]{moldovan2003cogex}
+Moldovan, D., C.~Clark, S.~Harabagiu, and S.~Maiorano (2003{\natexlab{a}}).
+\newblock Cogex: A logic prover for question answering.
+\newblock In \emph{Proceedings of the 2003 Conference of the North American
+  Chapter of the Association for Computational Linguistics on Human Language
+  Technology-Volume 1}, pp. 87--93. Association for Computational Linguistics.
+
+\bibitem[{Moldovan et~al.(2003{\natexlab{b}})Moldovan, Pa\c{s}ca, Harabagiu,
+  and Surdeanu}]{Moldovan:2003:PIE:763693.763694}
+Moldovan, D., M.~Pa\c{s}ca, S.~Harabagiu, and M.~Surdeanu (2003{\natexlab{b}}).
+\newblock Performance Issues and Error Analysis in an Open-domain Question
+  Answering System.
+\newblock \emph{ACM Trans. Inf. Syst.}, \textbf{21}(2), pp. 133--154.
+\newblock ISSN 1046-8188.
+\newblock \doi{10.1145/763693.763694}.
+
+\bibitem[{Moldovan and Rus(2001)}]{moldovan2001logic}
+Moldovan, D.~I. and V.~Rus (2001).
+\newblock Logic form transformation of wordnet and its applicability to
+  question answering.
+\newblock In \emph{Proceedings of the 39th Annual Meeting on Association for
+  Computational Linguistics}, pp. 402--409. Association for Computational
+  Linguistics.
+
+\bibitem[{Napoles et~al.(2012{\natexlab{a}})Napoles, Gormley, and
+  Van~Durme}]{Napoles2012}
+Napoles, C., M.~Gormley, and B.~Van~Durme (2012{\natexlab{a}}).
+\newblock Annotated Gigaword.
+\newblock In \emph{Proceedings of the Joint Workshop on Automatic Knowledge
+  Base Construction and Web-scale Knowledge Extraction}, AKBC-WEKEX '12, pp.
+  95--100. Association for Computational Linguistics, Stroudsburg, PA, USA.
+
+\bibitem[{Napoles et~al.(2012{\natexlab{b}})Napoles, Gormley, and
+  Van~Durme}]{napoles2012annotated}
+Napoles, C., M.~Gormley, and B.~Van~Durme (2012{\natexlab{b}}).
+\newblock {Annotated gigaword}.
+\newblock In \emph{Proc. of the Joint Workshop on Automatic Knowledge Base
+  Construction and Web-scale Knowledge Extraction}, pp. 95--100.
+
+\bibitem[{Och and Ney(2003)}]{och03}
+Och, F.~J. and H.~Ney (2003).
+\newblock A Systematic Comparison of Various Statistical Alignment Models.
+\newblock \emph{Computational Linguistics}, \textbf{29}(1), pp. 19--51.
+
+\bibitem[{Oh et~al.(2013)Oh, Torisawa, Hashimoto, Sano, De~Saeger, and
+  Ohtake}]{oh2013question}
+Oh, J.-H., K.~Torisawa, C.~Hashimoto, M.~Sano, S.~De~Saeger, and K.~Ohtake
+  (2013).
+\newblock Why-Question Answering using Intra-and Inter-Sentential Causal
+  Relations.
+\newblock In \emph{The 51st Annual Meeting of the Association for Computational
+  Linguistics (ACL)}, pp. 1733--1743.
+
+\bibitem[{Pagliardini et~al.(2017)Pagliardini, Gupta, and
+  Jaggi}]{Pagliardini2017UnsupervisedLO}
+Pagliardini, M., P.~Gupta, and M.~Jaggi (2017).
+\newblock Unsupervised Learning of Sentence Embeddings using Compositional
+  n-Gram Features.
+\newblock \emph{CoRR}, \textbf{abs/1703.02507}.
+
+\bibitem[{Parikh et~al.(2016)Parikh, T{\"a}ckstr{\"o}m, Das, and
+  Uszkoreit}]{Parikh2016ADA}
+Parikh, A.~P., O.~T{\"a}ckstr{\"o}m, D.~Das, and J.~Uszkoreit (2016).
+\newblock A Decomposable Attention Model for Natural Language Inference.
+\newblock In \emph{EMNLP}.
+
+\bibitem[{Park and Croft(2015)}]{Park:2015}
+Park, J.~H. and W.~B. Croft (2015).
+\newblock Using Key Concepts in a Translation Model for Retrieval.
+\newblock In \emph{Proceedings of the 38th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, SIGIR '15, pp.
+  927--930. ACM, New York, NY, USA.
+\newblock ISBN 978-1-4503-3621-5.
+\newblock \doi{10.1145/2766462.2767768}.
+
+\bibitem[{Piaget(1954)}]{Piaget1954}
+Piaget, J. (1954).
+\newblock \emph{The Construction of Reality in the Child}.
+\newblock Basic Books.
+
+\bibitem[{Pradhan et~al.(2002)Pradhan, Krugler, Bethard, Ward, Jurafsky,
+  Martin, Blair-Goldensohn, Schlaikjer, Filatova, Dubou{\'e}
+  et~al.}]{pradhan2002building}
+Pradhan, S.~S., V.~Krugler, S.~Bethard, W.~Ward, D.~Jurafsky, J.~H. Martin,
+  S.~Blair-Goldensohn, A.~H. Schlaikjer, E.~Filatova, P.~A. Dubou{\'e}, et~al.
+  (2002).
+\newblock Building a Foundation System for Producing Short Answers to Factual
+  Questions.
+\newblock In \emph{TREC}.
+
+\bibitem[{{Real Time Statistics Project}(2017)}]{internetstats}
+{Real Time Statistics Project} (2017).
+\newblock Internet Live Stats.
+\newblock [Online; accessed 25-July-2017].
+
+\bibitem[{Reece et~al.(2011)Reece, Urry, Cain, Wasserman, and
+  Minorsky}]{Reece:2011}
+Reece, J., L.~Urry, M.~Cain, S.~Wasserman, and P.~Minorsky (2011).
+\newblock \emph{Campbell Biology}.
+\newblock Pearson Benjamin Cummings.
+\newblock ISBN 9780321558237.
+
+\bibitem[{Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin}]{Ribeiro2016WhySI}
+Ribeiro, M.~T., S.~Singh, and C.~Guestrin (2016).
+\newblock "Why Should I Trust You?": Explaining the Predictions of Any
+  Classifier.
+\newblock In \emph{HLT-NAACL Demos}.
+
+\bibitem[{Riedel et~al.(2013)Riedel, Yao, McCallum, and
+  Marlin}]{riedel2013relation}
+Riedel, S., L.~Yao, A.~McCallum, and B.~M. Marlin (2013).
+\newblock Relation extraction with matrix factorization and universal schemas.
+\newblock In \emph{Proc. of Annual Meeting of the North American Chapter of the
+  Association for Computational Linguistics (NAACL)}.
+
+\bibitem[{Riezler et~al.(2007)Riezler, Vasserman, Tsochantaridis, Mittal, and
+  Liu}]{Riezler:etal:2007}
+Riezler, S., A.~Vasserman, I.~Tsochantaridis, V.~Mittal, and Y.~Liu (2007).
+\newblock Statistical Machine Translation for Query Expansion in Answer
+  Retrieval.
+\newblock In \emph{Proceedings of the 45th Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, pp. 464--471.
+
+\bibitem[{Riloff(1996)}]{riloff1996automatically}
+Riloff, E. (1996).
+\newblock Automatically generating extraction patterns from untagged text.
+\newblock In \emph{Proc. of the National Conference on Artificial Intelligence
+  (AAAI)}, pp. 1044--1049.
+
+\bibitem[{Sachan et~al.(2016)Sachan, Dubey, and Xing}]{sachan2016science}
+Sachan, M., A.~Dubey, and E.~P. Xing (2016).
+\newblock Science Question Answering using Instructional Materials.
+\newblock In \emph{The 54th Annual Meeting of the Association for Computational
+  Linguistics}, p. 467.
+
+\bibitem[{Serban et~al.(2016)Serban, Garc{\'{\i}}a-Dur{\'{a}}n, G{\"{u}}l{\c
+  c}ehre, Ahn, Chandar, Courville, and Bengio}]{Serban2016GeneratingFQ}
+Serban, I.~V., A.~Garc{\'{\i}}a-Dur{\'{a}}n, {\c C}.~G{\"{u}}l{\c c}ehre,
+  S.~Ahn, S.~Chandar, A.~Courville, and Y.~Bengio (2016).
+\newblock Generating Factoid Questions With Recurrent Neural Networks: The 30M
+  Factoid Question-Answer Corpus.
+\newblock In \emph{54th Annual Meeting of the Association for Computational
+  Linguistics}, p. 588. Association for Computational Linguistics.
+
+\bibitem[{Severyn and Moschitti(2012)}]{Severyn:12}
+Severyn, A. and A.~Moschitti (2012).
+\newblock Structural relationships for large-scale learning of answer
+  re-ranking.
+\newblock In \emph{SIGIR}.
+
+\bibitem[{Severyn and Moschitti(2013)}]{Severyn:13a}
+Severyn, A. and A.~Moschitti (2013).
+\newblock Automatic Feature Engineering for Answer Selection and Extraction.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}.
+
+\bibitem[{Severyn and Moschitti(2015)}]{Severyn2015LearningTR}
+Severyn, A. and A.~Moschitti (2015).
+\newblock Learning to Rank Short Text Pairs with Convolutional Deep Neural
+  Networks.
+\newblock In \emph{SIGIR}.
+
+\bibitem[{Severyn et~al.(2013)Severyn, Nicosia, and Moschitti}]{Severyn:13b}
+Severyn, A., M.~Nicosia, and A.~Moschitti (2013).
+\newblock Learning Adaptable Patterns for Passage Reranking.
+\newblock In \emph{Proceedings of the Seventeenth Conference on Computational
+  Natural Language Learning (CoNLL)}.
+
+\bibitem[{Sharma et~al.(2015)Sharma, Vo, Aditya, and Baral}]{sharmatowards}
+Sharma, A., N.~H. Vo, S.~Aditya, and C.~Baral (2015).
+\newblock Towards Addressing the Winograd Schema Challenge-Building and Using a
+  Semantic Parser and a Knowledge Hunting Module.
+\newblock In \emph{Proceedings of the International Joint Conferences on
+  Artificial Intelligence (IJCAI)}.
+
+\bibitem[{Sharp et~al.(2015)Sharp, Jansen, Surdeanu, and
+  Clark}]{sharp-EtAl:2015:NAACL-HLT}
+Sharp, R., P.~Jansen, M.~Surdeanu, and P.~Clark (2015).
+\newblock Spinning Straw into Gold: Using Free Text to Train Monolingual
+  Alignment Models for Non-factoid Question Answering.
+\newblock In \emph{Proceedings of the 2015 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pp. 231--237. Association for Computational Linguistics,
+  Denver, Colorado.
+
+\bibitem[{Shen and Joshi(2005)}]{Shen:Joshi:2005}
+Shen, L. and A.~K. Joshi (2005).
+\newblock Ranking and Reranking with Perceptron.
+\newblock \emph{Machine Learning. Special Issue on Learning in Speech and
+  Language Technologies}, \textbf{60}(1), pp. 73--96.
+
+\bibitem[{Soricut and Brill(2006)}]{Soricut:06}
+Soricut, R. and E.~Brill (2006).
+\newblock Automatic Question Answering Using the Web: Beyond the Factoid.
+\newblock \emph{Journal of Information Retrieval - Special Issue on Web
+  Information Retrieval}, \textbf{9}(2), pp. 191--206.
+
+\bibitem[{Sultan et~al.(2014)Sultan, Bethard, and
+  Sumner}]{sultan-etal:2014:TACL}
+Sultan, M.~A., S.~Bethard, and T.~Sumner (2014).
+\newblock Back to Basics for Monolingual Alignment: Exploiting Word Similarity
+  and Contextual Evidence.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  \textbf{2}, pp. 219--230.
+
+\bibitem[{Sun et~al.(2009)Sun, Matsuzaki, Okanohara, and
+  Tsujii}]{sun2009latent}
+Sun, X., T.~Matsuzaki, D.~Okanohara, and J.~Tsujii (2009).
+\newblock Latent Variable Perceptron Algorithm for Structured Classification.
+\newblock In \emph{IJCAI}, volume~9, pp. 1236--1242.
+
+\bibitem[{Surdeanu et~al.(2011)Surdeanu, Ciaramita, and Zaragoza}]{Surdeanu:11}
+Surdeanu, M., M.~Ciaramita, and H.~Zaragoza (2011).
+\newblock Learning to Rank Answers to Non-Factoid Questions from Web
+  Collections.
+\newblock \emph{Computational Linguistics}, \textbf{37}(2), pp. 351--383.
+
+\bibitem[{Surdeanu et~al.(2015)Surdeanu, Hicks, and
+  Valenzuela-Esc\'{a}rcega}]{Surdeanu:15}
+Surdeanu, M., T.~Hicks, and M.~A. Valenzuela-Esc\'{a}rcega (2015).
+\newblock Two Practical Rhetorical Structure Theory Parsers.
+\newblock In \emph{Proceedings of the North American Chapter of the Association
+  for Computational Linguistics (NAACL): Software Demonstrations}.
+
+\bibitem[{Sutskever et~al.(2014)Sutskever, Vinyals, and
+  Le}]{Sutskever2014SequenceTS}
+Sutskever, I., O.~Vinyals, and Q.~V. Le (2014).
+\newblock Sequence to Sequence Learning with Neural Networks.
+\newblock In \emph{NIPS}.
+
+\bibitem[{Tan et~al.(2016)Tan, dos Santos, Xiang, and Zhou}]{Tan2016ImprovedRL}
+Tan, M., C.~N. dos Santos, B.~Xiang, and B.~Zhou (2016).
+\newblock Improved Representation Learning for Question Answer Matching.
+\newblock In \emph{ACL}.
+
+\bibitem[{Tari and Baral(2006)}]{baral2006using}
+Tari, L. and C.~Baral (2006).
+\newblock Using AnsProlog with Link Grammar and WordNet for QA with deep
+  reasoning.
+\newblock In \emph{Information Technology, 2006. ICIT'06. 9th International
+  Conference on}, pp. 125--128. IEEE.
+
+\bibitem[{{Theano Development Team}(2016)}]{2016arXiv160502688short}
+{Theano Development Team} (2016).
+\newblock {Theano: A {Python} framework for fast computation of mathematical
+  expressions}.
+\newblock \emph{arXiv e-prints}, \textbf{abs/1605.02688}.
+
+\bibitem[{Tieleman and Hinton(2012)}]{rmsprop}
+Tieleman, T. and G.~Hinton (2012).
+\newblock Lecture 6.5-rmsprop: Divide the gradient by a running average of its
+  recent magnitude.
+
+\bibitem[{Valenzuela-Esc\'{a}rcega et~al.(2016)Valenzuela-Esc\'{a}rcega,
+  Hahn-Powell, and Surdeanu}]{valenzuela2016runes}
+Valenzuela-Esc\'{a}rcega, M.~A., G.~Hahn-Powell, and M.~Surdeanu (2016).
+\newblock Odin's Runes: A Rule Language for Information Extraction.
+\newblock In \emph{Proc. of the 10th International Conference on Language
+  Resources and Evaluation (LREC)}.
+
+\bibitem[{Verberne et~al.(2007)Verberne, Boves, Oostdijk, Coppen
+  et~al.}]{Verberne:2007}
+Verberne, S., L.~Boves, N.~Oostdijk, P.-A. Coppen, et~al. (2007).
+\newblock Discourse-based answering of why-questions.
+\newblock \emph{Traitement Automatique des Langues, Discours et document:
+  traitements automatiques}, \textbf{47}(2), pp. 21--41.
+
+\bibitem[{Voorhees(2003)}]{Voorhees:2003}
+Voorhees, E.~M. (2003).
+\newblock Evaluating Answers to Definition Questions.
+\newblock In \emph{Proceedings of the 2003 Conference of the North American
+  Chapter of the Association for Computational Linguistics on Human Language
+  Technology: Companion Volume of the Proceedings of HLT-NAACL 2003--short
+  Papers - Volume 2}, NAACL-Short '03, pp. 109--111. Association for
+  Computational Linguistics, Stroudsburg, PA, USA.
+\newblock \doi{10.3115/1073483.1073520}.
+
+\bibitem[{Wang and Nyberg(2015)}]{wang2015long}
+Wang, D. and E.~Nyberg (2015).
+\newblock A long short-term memory model for answer sentence selection in
+  question answering.
+\newblock \emph{ACL, July}.
+
+\bibitem[{Wang and Manning(2010)}]{Wang2010ProbabilisticTM}
+Wang, M. and C.~D. Manning (2010).
+\newblock Probabilistic Tree-Edit Models with Structured Latent Variables for
+  Textual Entailment and Question Answering.
+\newblock In \emph{COLING}.
+
+\bibitem[{Wikipedia(2017)}]{wiki:wikistats}
+Wikipedia (2017).
+\newblock Wikipedia:Statistics.
+\newblock [Online; accessed 24-July-2017].
+
+\bibitem[{Woodsend and Lapata(2015)}]{woodsenddistributed}
+Woodsend, K. and M.~Lapata (2015).
+\newblock Distributed Representations for Unsupervised Semantic Role Labeling.
+\newblock In \emph{Proc. of the 2015 Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}.
+
+\bibitem[{Yang et~al.(2014)Yang, Duan, Zhou, and Rim}]{yang2014joint}
+Yang, M.-C., N.~Duan, M.~Zhou, and H.-C. Rim (2014).
+\newblock Joint Relational Embeddings for Knowledge-based Question Answering.
+\newblock In \emph{Proc. of the Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}, pp. 645--650.
+
+\bibitem[{Yang and Mao(2014)}]{yang2014multi}
+Yang, X. and K.~Mao (2014).
+\newblock Multi level causal relation identification using extended features.
+\newblock \emph{Expert Systems with Applications}, \textbf{41}(16), pp.
+  7171--7181.
+
+\bibitem[{Yao et~al.(2013)Yao, Van~Durme, Callison-Burch, and Clark}]{yao2013}
+Yao, X., B.~Van~Durme, C.~Callison-Burch, and P.~Clark (2013).
+\newblock Semi-Markov Phrase-based Monolingual Alignment.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}.
+
+\bibitem[{Yih et~al.(2013)Yih, Chang, Meek, and Pastusiak}]{yih13}
+Yih, W.-t., M.-W. Chang, C.~Meek, and A.~Pastusiak (2013).
+\newblock Question Answering Using Enhanced Lexical Semantic Models.
+\newblock In \emph{Proceedings of the 51st Annual Meeting of the Association
+  for Computational Linguistics (ACL)}.
+
+\bibitem[{Zeiler and Fergus(2014)}]{Zeiler2014VisualizingAU}
+Zeiler, M.~D. and R.~Fergus (2014).
+\newblock Visualizing and Understanding Convolutional Networks.
+\newblock In \emph{ECCV}.
+
+\bibitem[{Zettlemoyer and Collins(2007)}]{zettlemoyer2007online}
+Zettlemoyer, L.~S. and M.~Collins (2007).
+\newblock Online Learning of Relaxed CCG Grammars for Parsing to Logical Form.
+\newblock In \emph{Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing and Computational Natural Language Learning
+  (EMNLP-CoNLL)}, pp. 678--687.
+
+\end{thebibliography}

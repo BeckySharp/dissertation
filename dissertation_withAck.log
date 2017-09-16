@@ -1,0 +1,1241 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  31 AUG 2017 08:56
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**dissertation_withAck.tex
+(./dissertation_withAck.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(./uathesis.cls
+Document Class: uathesis 2013/07/03 University of Arizona Thesis Class
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(./cclicenses.sty
+Package: cclicenses 2005/05/20 v0.4 CC licenses typesetting
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 96.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count79
+))
+\Gin@req@height=\dimen102
+\Gin@req@width=\dimen103
+)
+\c@r@tfl@t=\count80
+\rotFPtop=\skip41
+\rotFPbot=\skip42
+\rot@float@box=\box26
+\rot@mess@toks=\toks15
+)
+\chardim=\dimen104
+\hdim=\dimen105
+\htmp=\dimen106
+\hpos=\count81
+\vpos=\count82
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@chapter=\count84
+\c@section=\count85
+\c@subsection=\count86
+\c@subsubsection=\count87
+\c@paragraph=\count88
+\c@subparagraph=\count89
+\c@figure=\count90
+\c@table=\count91
+\abovecaptionskip=\skip43
+\belowcaptionskip=\skip44
+\bibindent=\dimen107
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip45
+\bibsep=\skip46
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count92
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count93
+\lst@gtempboxa=\box27
+\lst@token=\toks16
+\lst@length=\count94
+\lst@currlwidth=\dimen108
+\lst@column=\count95
+\lst@pos=\count96
+\lst@lostspace=\dimen109
+\lst@width=\dimen110
+\lst@newlines=\count97
+\lst@lineno=\count98
+\lst@maxwidth=\dimen111
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count99
+\lst@skipnumbers=\count100
+\lst@framebox=\box28
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count101
+\float@exts=\toks17
+\float@box=\box29
+\@float@everytoks=\toks18
+\@floatcapt=\box30
+)
+\@float@every@algorithm=\toks19
+\c@algorithm=\count102
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count103
+\c@ALC@line=\count104
+\c@ALC@rem=\count105
+\c@ALC@depth=\count106
+\ALC@tlm=\skip47
+\algorithmicindent=\skip48
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count107
+\FV@InFile=\read1
+\FV@TabBox=\box31
+\c@FancyVerbLine=\count108
+\FV@StepNumber=\count109
+\FV@OutFile=\write3
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip49
+\f@ncyO@elh=\skip50
+\f@ncyO@erh=\skip51
+\f@ncyO@olh=\skip52
+\f@ncyO@orh=\skip53
+\f@ncyO@elf=\skip54
+\f@ncyO@erf=\skip55
+\f@ncyO@olf=\skip56
+\f@ncyO@orf=\skip57
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/theorem.sty
+Package: theorem 2014/10/28 v2.2c Theorem extension package (FMi)
+\theorem@style=\toks20
+\theorem@bodyfont=\toks21
+\theorempreskipamount=\skip58
+\theorempostskipamount=\skip59
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/thp.sty
+File: thp.sty 2014/10/28 v2.2c Theorem extension package (FMi)
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2016/05/09 v1.1c Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 144.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip60
+\LTright=\skip61
+\LTpre=\skip62
+\LTpost=\skip63
+\LTchunksize=\count110
+\LTcapwidth=\dimen112
+\LT@head=\box32
+\LT@firsthead=\box33
+\LT@foot=\box34
+\LT@lastfoot=\box35
+\LT@cols=\count111
+\LT@rows=\count112
+\c@LT@tables=\count113
+\c@LT@chunks=\count114
+\LT@p@ftn=\toks22
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen113
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tablefootnote/tablefootnote.sty
+Package: tablefootnote 2014/01/26 v1.1c Table foot notes (HMM)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/letltxmacro.sty
+Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/xifthen/xifthen.sty
+Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count115
+\calc@Bcount=\count116
+\calc@Adimen=\dimen114
+\calc@Bdimen=\dimen115
+\calc@Askip=\skip64
+\calc@Bskip=\skip65
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count117
+\calc@Cskip=\skip66
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
+Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count118
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2016/02/27 v1.2a Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup5
+\symboldletters=\mathgroup6
+\symboldsymbols=\mathgroup7
+\symboldlasy=\mathgroup8
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 142.
+LaTeX Info: Redefining \bm on input line 208.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/fixltx2e.sty
+Package: fixltx2e 2015/06/22 v2.0b fixes to LaTeX (obsolete)
+
+
+Package fixltx2e Warning: fixltx2e is not required with releases after 2015
+(fixltx2e)                All fixes are now in the LaTeX kernel.
+(fixltx2e)                See the latexrelease package for details.
+
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2016/02/03 v2.11 `tabularx' package (DPC)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen116
+\extrarowheight=\dimen117
+\NC@list=\toks23
+\extratabsurround=\skip67
+\backup@length=\skip68
+)
+\TX@col@width=\dimen118
+\TX@old@table=\dimen119
+\TX@old@col=\dimen120
+\TX@target=\dimen121
+\TX@delta=\dimen122
+\TX@cols=\count119
+\TX@ftn=\toks24
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write4
+
+Excluding comment 'comment')
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/03/10 v2.15b AMS math features
+\@mathmargin=\skip69
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks25
+\ex@=\dimen123
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+LaTeX Info: Redefining \boldsymbol on input line 28.
+\pmbraise@=\dimen124
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count120
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count121
+\leftroot@=\count122
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count123
+\DOTSCASE@=\count124
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box36
+\strutbox@=\box37
+\big@size=\dimen125
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
+\macc@depth=\count125
+\c@MaxMatrixCols=\count126
+\dotsspace@=\muskip11
+\c@parentequation=\count127
+\dspbrk@lvl=\count128
+\tag@help=\toks26
+\row@=\count129
+\column@=\count130
+\maxfields@=\count131
+\andhelp@=\toks27
+\eqnshift@=\dimen126
+\alignsep@=\dimen127
+\tagshift@=\dimen128
+\tagwidth@=\dimen129
+\totwidth@=\dimen130
+\lineht@=\dimen131
+\@envbody=\toks28
+\multlinegap=\skip70
+\multlinetaggap=\skip71
+\mathdisplay@stack=\toks29
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup9
+\symAMSb=\mathgroup10
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/supertabular/supertabular.sty
+Package: supertabular 2004/02/20 v4.1e the supertabular environment
+\c@tracingst=\count132
+\ST@wd=\dimen132
+\ST@rightskip=\skip72
+\ST@leftskip=\skip73
+\ST@parfillskip=\skip74
+\ST@pageleft=\dimen133
+\ST@headht=\dimen134
+\ST@tailht=\dimen135
+\ST@pagesofar=\dimen136
+\ST@pboxht=\dimen137
+\ST@lineht=\dimen138
+\ST@stretchht=\dimen139
+\ST@prevht=\dimen140
+\ST@toadd=\dimen141
+\ST@dimen=\dimen142
+\ST@pbox=\box38
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2016/04/27 v1.618033 publication quality tables
+\heavyrulewidth=\dimen143
+\lightrulewidth=\dimen144
+\cmidrulewidth=\dimen145
+\belowrulesep=\dimen146
+\belowbottomsep=\dimen147
+\aboverulesep=\dimen148
+\abovetopsep=\dimen149
+\cmidrulesep=\dimen150
+\cmidrulekern=\dimen151
+\defaultaddspace=\dimen152
+\@cmidla=\count133
+\@cmidlb=\count134
+\@aboverulesep=\dimen153
+\@belowrulesep=\dimen154
+\@thisruleclass=\count135
+\@lastruleclass=\count136
+\@thisrulewidth=\dimen155
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2016/05/05 v6.83n Hypertext links for LaTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
+Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
+Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package hobsub Info: Skipping package `letltxmacro' (already loaded).
+Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
+Package: xcolor-patch 2016/05/16 xcolor patch
+Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
+Package: atbegshi 2016/05/16 v1.17 At begin shipout hook (HO)
+Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
+Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+)
+\@linkdim=\dimen156
+\Hy@linkcounter=\count137
+\Hy@pagecounter=\count138
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2016/05/05 v6.83n Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count139
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `bookmarks' set `true' on input line 4322.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4322.
+Package hyperref Info: Hyper figures OFF on input line 4446.
+Package hyperref Info: Link nesting OFF on input line 4451.
+Package hyperref Info: Hyper index ON on input line 4454.
+Package hyperref Info: Plain pages OFF on input line 4461.
+Package hyperref Info: Backreferencing OFF on input line 4466.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4691.
+\c@Hy@tempcnt=\count140
+LaTeX Info: Redefining \url on input line 5044.
+\XeTeXLinkMargin=\dimen157
+\Fld@menulength=\count141
+\Field@Width=\dimen158
+\Fld@charsize=\dimen159
+Package hyperref Info: Hyper figures OFF on input line 6298.
+Package hyperref Info: Link nesting OFF on input line 6303.
+Package hyperref Info: Hyper index ON on input line 6306.
+Package hyperref Info: backreferencing OFF on input line 6313.
+Package hyperref Info: Link coloring ON on input line 6316.
+Package hyperref Info: Link coloring with OCG OFF on input line 6323.
+Package hyperref Info: PDF/A mode OFF on input line 6328.
+LaTeX Info: Redefining \ref on input line 6368.
+LaTeX Info: Redefining \pageref on input line 6372.
+\Hy@abspage=\count142
+\c@Item=\count143
+\c@Hfootnote=\count144
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2016/05/05 v6.83n Hyperref driver for pdfTeX
+\Fld@listcount=\count145
+\c@bookmark@seq@number=\count146
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip75
+)
+(./dissertation_withAck.aux (./mainmatter/introduction.aux)
+(./mainmatter/related_work.aux)
+
+LaTeX Warning: Label `sec-emnlp2016:results' multiply defined.
+
+
+LaTeX Warning: Label `tab:ablation' multiply defined.
+
+(./mainmatter/conclusion.aux) (./mainmatter/appendix_rules.aux))
+\openout1 = `dissertation_withAck.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count147
+\scratchdimen=\dimen160
+\scratchbox=\box39
+\nofMPsegments=\count148
+\nofMParguments=\count149
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count150
+\MPscratchDim=\dimen161
+\MPnumerator=\count151
+\makeMPintoPDFobject=\count152
+\everyMPtoPDFconversion=\toks31
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count153
+\AtBeginShipoutBox=\box40
+Package hyperref Info: Link coloring ON on input line 122.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count154
+)
+LaTeX Info: Redefining \ref on input line 122.
+LaTeX Info: Redefining \pageref on input line 122.
+LaTeX Info: Redefining \nameref on input line 122.
+
+(./dissertation_withAck.out) (./dissertation_withAck.out)
+\@outlinefile=\write5
+\openout5 = `dissertation_withAck.out'.
+
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 127.
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 127.
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omsphv.fd
+File: omsphv.fd 
+)
+LaTeX Font Info:    Font shape `OMS/phv/b/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 127.
+ [1
+
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for U+lasy on input line 143.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 143.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 143.
+LaTeX Font Info:    Try loading font information for U+msa on input line 143.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 143.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [2
+
+]
+Underfull \hbox (badness 3861) in paragraph at lines 147--147
+\OT1/cmr/m/n/12 work is li-censed un-der the Cre-ative Com-mons Attribution-No 
+Deriva-tive
+ []
+
+
+Underfull \hbox (badness 1622) in paragraph at lines 147--147
+\OT1/cmr/m/n/12 Works 3.0 United States Li-cense. To view a copy of this li-cen
+se, visit
+ []
+
+
+Overfull \hbox (7.98335pt too wide) in alignment at lines 147--147
+[] [] [] 
+ []
+
+[3
+
+]
+Including your file ack2.tex as the acknowledgements.
+(./ack2.tex) [4
+
+]
+Including your file dedication.tex as the dedication.
+(./dedication.tex) [5
+
+] (./dissertation_withAck.toc [6
+
+] [7])
+\tf@toc=\write6
+\openout6 = `dissertation_withAck.toc'.
+
+ [8]
+(./dissertation_withAck.lof [9
+
+] [10])
+\tf@lof=\write7
+\openout7 = `dissertation_withAck.lof'.
+
+ [11] (./dissertation_withAck.lot [12
+
+]
+[13] [14])
+\tf@lot=\write8
+\openout8 = `dissertation_withAck.lot'.
+
+ [15]
+Including your file abstract.tex as the abstract.
+(./abstract.tex) [16
+
+
+]
+\openout2 = `mainmatter/introduction.aux'.
+
+ (./mainmatter/introduction.tex
+CHAPTER 1.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 5.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 5.
+<mainmatter/continuum_new.pdf, id=825, 761.84625pt x 386.44376pt>
+File: mainmatter/continuum_new.pdf Graphic file (type pdf)
+
+<use mainmatter/continuum_new.pdf>
+Package pdftex.def Info: mainmatter/continuum_new.pdf used on input line 14.
+(pdftex.def)             Requested size: 426.39255pt x 216.28319pt.
+ [17
+
+
+] [18 <./mainmatter/continuum_new.pdf>]
+[19] [20]
+Overfull \hbox (10.09135pt too wide) in alignment at lines 74--74
+[][] 
+ []
+
+[21] [22] [23]
+Overfull \hbox (12.39879pt too wide) in alignment at lines 132--132
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 160--160
+[][][] 
+ []
+
+[24] [25] [26] [27] [28] [29] [30]) [31] [32]
+\openout2 = `mainmatter/related_work.aux'.
+
+ (./mainmatter/related_work.tex
+CHAPTER 2.
+[33
+
+
+
+] [34] [35]) [36] [37] (./mainmatter/naacl2015-alignment/naacl2015.tex
+CHAPTER 3.
+(./mainmatter/naacl2015-alignment/naacl2015_approach.tex [38
+
+
+] [39]
+<mainmatter/naacl2015-alignment/rst2a.pdf, id=1245, 480.85648pt x 358.5094pt>
+File: mainmatter/naacl2015-alignment/rst2a.pdf Graphic file (type pdf)
+
+<use mainmatter/naacl2015-alignment/rst2a.pdf>
+Package pdftex.def Info: mainmatter/naacl2015-alignment/rst2a.pdf used on input
+ line 63.
+(pdftex.def)             Requested size: 284.52756pt x 212.13686pt.
+ [40 <./mainmatter/naacl2015-alignment/rst2a.pdf>]) (./mainmatter/naacl2015-ali
+gnment/naacl2015_Models.tex
+[41] [42] [43]) (./mainmatter/naacl2015-alignment/naacl2015_experiments.tex
+[44]
+<mainmatter/naacl2015-alignment/graphs_new2.pdf, id=1401, 614.295pt x 794.97pt>
+File: mainmatter/naacl2015-alignment/graphs_new2.pdf Graphic file (type pdf)
+<use mainmatter/naacl2015-alignment/graphs_new2.pdf>
+Package pdftex.def Info: mainmatter/naacl2015-alignment/graphs_new2.pdf used on
+ input line 34.
+(pdftex.def)             Requested size: 341.43306pt x 441.85648pt.
+ [45] [46 <./mainmatter/naacl2015-alignment/graphs_new2.pdf>] [47] [48] [49]))
+(./mainmatter/emnlp2016-causal/emnlp2016_main.tex [50]
+CHAPTER 4.
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 28.
+
+(./mainmatter/emnlp2016-causal/emnlp2016_approach.tex [51
+
+] [52] [53] [54])
+(./mainmatter/emnlp2016-causal/emnlp2016_causalextraction.tex [55] [56])
+(./mainmatter/emnlp2016-causal/emnlp2016_models.tex [57] [58]
+<mainmatter/emnlp2016-causal/cnn2.png, id=1657, 963.6pt x 542.025pt>
+File: mainmatter/emnlp2016-causal/cnn2.png Graphic file (type png)
+
+<use mainmatter/emnlp2016-causal/cnn2.png>
+Package pdftex.def Info: mainmatter/emnlp2016-causal/cnn2.png used on input lin
+e 28.
+(pdftex.def)             Requested size: 298.47348pt x 167.8854pt.
+ [59 <./mainmatter/emnlp2016-causal/cnn2.png (PNG copy)>] [60])
+(./mainmatter/emnlp2016-causal/emnlp2016_directeval.tex [61]
+<mainmatter/emnlp2016-causal/direct_noBi2.pdf, id=1711, 361.35pt x 216.81pt>
+File: mainmatter/emnlp2016-causal/direct_noBi2.pdf Graphic file (type pdf)
+
+<use mainmatter/emnlp2016-causal/direct_noBi2.pdf>
+Package pdftex.def Info: mainmatter/emnlp2016-causal/direct_noBi2.pdf used on i
+nput line 84.
+(pdftex.def)             Requested size: 426.39255pt x 255.83688pt.
+ [62] [63 <./mainmatter/emnlp2016-causal/direct_noBi2.pdf>]
+<mainmatter/emnlp2016-causal/emnlp_inference.pdf, id=1735, 1515.6625pt x 559.08
+875pt>
+File: mainmatter/emnlp2016-causal/emnlp_inference.pdf Graphic file (type pdf)
+ <use mainmatter/emnlp2016-causal/emnlp_inference.pdf>
+Package pdftex.def Info: mainmatter/emnlp2016-causal/emnlp_inference.pdf used o
+n input line 148.
+(pdftex.def)             Requested size: 426.39255pt x 157.27744pt.
+ [64 <./mainmatter/emnlp2016-causal/emnlp_inference.pdf>] [65]
+<mainmatter/emnlp2016-causal/direct2.pdf, id=1868, 361.35pt x 216.81pt>
+File: mainmatter/emnlp2016-causal/direct2.pdf Graphic file (type pdf)
+
+<use mainmatter/emnlp2016-causal/direct2.pdf>
+Package pdftex.def Info: mainmatter/emnlp2016-causal/direct2.pdf used on input 
+line 177.
+(pdftex.def)             Requested size: 426.39255pt x 255.83688pt.
+)
+(./mainmatter/emnlp2016-causal/emnlp2016_qamodel.tex [66 <./mainmatter/emnlp201
+6-causal/direct2.pdf>] [67]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
+)
+(./mainmatter/emnlp2016-causal/emnlp2016_qa.tex [68] [69] [70] [71]) [72]
+[73]) (./mainmatter/tacl2015-tig/cl2017_main.tex
+CHAPTER 5.
+(./mainmatter/tacl2015-tig/cl2017_approach.tex
+Overfull \hbox (3.72067pt too wide) in paragraph at lines 18--18
+[]|\OT1/cmr/m/n/12 (A)| 
+ []
+
+
+Overfull \hbox (4.66243pt too wide) in paragraph at lines 18--18
+[]|\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 C\OT1/cmr/m/n/12 )| 
+ []
+
+
+Overfull \hbox (3.23318pt too wide) in paragraph at lines 18--18
+[]|\OT1/cmr/m/n/12 (B)| 
+ []
+
+
+Overfull \hbox (3.88596pt too wide) in paragraph at lines 18--18
+[]|\OT1/cmr/m/n/12 (D)| 
+ []
+
+
+Overfull \hbox (97.67601pt too wide) in alignment at lines 18--18
+[][][][] 
+ []
+
+[74
+
+] [75] [76]
+<mainmatter/tacl2015-tig/tag_architecture6c.pdf, id=2024, 453.19313pt x 254.952
+5pt>
+File: mainmatter/tacl2015-tig/tag_architecture6c.pdf Graphic file (type pdf)
+ <use mainmatter/tacl2015-tig/tag_architecture6c.pdf>
+Package pdftex.def Info: mainmatter/tacl2015-tig/tag_architecture6c.pdf used on
+ input line 77.
+(pdftex.def)             Requested size: 426.39255pt x 239.8771pt.
+ [77 <./mainmatter/tacl2015-tig/tag_architecture6c.pdf>])
+(./mainmatter/tacl2015-tig/cl2017_focuswords.tex [78] [79] [80]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 125.
+ [81])
+(./mainmatter/tacl2015-tig/cl2017_tig.tex
+<mainmatter/tacl2015-tig/example_graphlets1.pdf, id=2252, 599.58502pt x 506.558
+49pt>
+File: mainmatter/tacl2015-tig/example_graphlets1.pdf Graphic file (type pdf)
+ <use mainmatter/tacl2015-tig/example_graphlets1.pdf>
+Package pdftex.def Info: mainmatter/tacl2015-tig/example_graphlets1.pdf used on
+ input line 6.
+(pdftex.def)             Requested size: 426.39255pt x 360.24648pt.
+ [82] [83 <./mainmatter/tacl2015-tig/example_graphlets1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+\OT1/cmtt/m/n/10 prep[]from, prep[]to, prep[]as, prep[]into, prep[]by, prep[]in
+, prep[]such[]as,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+\OT1/cmtt/m/n/10 prep[]because[]of, prep[]over, prep[]on, prep[]between, prepc[
+]as, prepc[]by, prepc[]of,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+\OT1/cmtt/m/n/10 prepc[]with, prepc[]after, prepc[]for, prepc[]before, prep[]be
+fore, prep[]after,
+ []
+
+[84]
+<mainmatter/tacl2015-tig/tag_connection_example2.pdf, id=2383, 599.58005pt x 20
+5.4335pt>
+File: mainmatter/tacl2015-tig/tag_connection_example2.pdf Graphic file (type pd
+f)
+ <use mainmatter/tacl2015-tig/tag_connection_example2.pdf>
+Package pdftex.def Info: mainmatter/tacl2015-tig/tag_connection_example2.pdf us
+ed on input line 92.
+(pdftex.def)             Requested size: 426.39255pt x 146.09703pt.
+
+<mainmatter/tacl2015-tig/tag_example2.pdf, id=2384, 617.6405pt x 223.50201pt>
+File: mainmatter/tacl2015-tig/tag_example2.pdf Graphic file (type pdf)
+
+<use mainmatter/tacl2015-tig/tag_example2.pdf>
+Package pdftex.def Info: mainmatter/tacl2015-tig/tag_example2.pdf used on input
+ line 93.
+(pdftex.def)             Requested size: 426.39255pt x 154.2984pt.
+ [85 <./mainmatter/tacl2015-tig/tag_connection_example2.pdf> <./mainmatter/tacl
+2015-tig/tag_example2.pdf>]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 125.
+
+[86] [87]
+<mainmatter/tacl2015-tig/connection_types.pdf, id=2536, 480.85648pt x 256.07469
+pt>
+File: mainmatter/tacl2015-tig/connection_types.pdf Graphic file (type pdf)
+ <use mainmatter/tacl2015-tig/connection_types.pdf>
+Package pdftex.def Info: mainmatter/tacl2015-tig/connection_types.pdf used on i
+nput line 192.
+(pdftex.def)             Requested size: 284.52756pt x 151.52428pt.
+ [88 <./mainmatter/tacl2015-tig/connection_types.pdf>] [89])
+(./mainmatter/tacl2015-tig/cl2017_perceptron.tex [90] [91]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 107.
+ [92])
+(./mainmatter/tacl2015-tig/cl2017_results.tex [93]
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
+
+ []
+
+[94]
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+
+ []
+
+
+Underfull \hbox (badness 1681) in paragraph at lines 24--28
+\OT1/cmr/m/n/12 space, we log-transformed the fea-ture val-ues, and then rescal
+ed each fea-
+ []
+
+
+Underfull \hbox (badness 1038) in paragraph at lines 24--28
+\OT1/cmr/m/n/12 ture in-de-pen-dently to lie within the range of $\OMS/cmsy/m/n
+/12 ^^@\OT1/cmr/m/n/12 1$ to $1$, us-ing the for-mula
+ []
+
+[95] [96] [97] [98]
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 121--121
+[]|\OT1/cmr/m/n/10.95 1| 
+ []
+
+
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 122--122
+[]|\OT1/cmr/m/n/10.95 2| 
+ []
+
+
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 123--123
+[]|\OT1/cmr/m/n/10.95 3| 
+ []
+
+
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 129--129
+[]|\OT1/cmr/m/n/10.95 4| 
+ []
+
+
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 130--130
+[]|\OT1/cmr/m/n/10.95 5| 
+ []
+
+
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 136--136
+[]|\OT1/cmr/m/n/10.95 6| 
+ []
+
+
+Overfull \hbox (4.62143pt too wide) in paragraph at lines 137--137
+[]|\OT1/cmr/m/n/10.95 7| 
+ []
+
+[99] [100]
+Overfull \hbox (2.98038pt too wide) in paragraph at lines 194--194
+[]|\OT1/cmr/m/it/10 Topical| 
+ []
+
+
+Overfull \hbox (6.55814pt too wide) in paragraph at lines 194--194
+[]|\OT1/cmr/m/it/10 Offtopic| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 194--194
+[][] 
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 223.
+
+
+<mainmatter/tacl2015-tig/tag_good_justification.pdf, id=2748, 550.055pt x 220.8
+25pt> <use mainmatter/tacl2015-tig/tag_good_justification.pdf>
+File: mainmatter/tacl2015-tig/tag_good_justification.pdf Graphic file (type pdf
+)
+
+<use mainmatter/tacl2015-tig/tag_good_justification.pdf>
+Package pdftex.def Info: mainmatter/tacl2015-tig/tag_good_justification.pdf use
+d on input line 240.
+(pdftex.def)             Requested size: 327.20668pt x 131.36385pt.
+
+Underfull \hbox (badness 10000) in alignment at lines 240--240
+[][] 
+ []
+
+[101] [102 <./mainmatter/tacl2015-tig/tag_good_justification.pdf>] [103]
+Excluding 'comment' comment.) (./mainmatter/tacl2015-tig/cl2017_discussion.tex
+[104] [105] [106]) (./mainmatter/tacl2015-tig/cl2017_erroranalysis.tex [107]
+[108] [109] [110]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 124.
+
+
+Underfull \hbox (badness 10000) in alignment at lines 136--136
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--138
+
+ []
+
+[111]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 163.
+
+
+Underfull \hbox (badness 6141) in paragraph at lines 186--186
+[]|\OT1/cmr/m/n/10 (JJ[]polar, 0.29) (NN[]population, 0.29) (NN[]arctic, 0.29)
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 186--186
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--188
+
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 194.
+
+
+Underfull \hbox (badness 1365) in paragraph at lines 217--217
+[]|\OT1/cmr/m/n/10 (NN[]condensation, 0.75) (VB[]occur, 0.13) (NN[]water, 0.06)
+
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 217--217
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--219
+
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 227.
+
+
+Underfull \hbox (badness 10000) in alignment at lines 250--250
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 250--252
+
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 258.
+
+
+Underfull \hbox (badness 10000) in alignment at lines 281--281
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--283
+
+ []
+
+[112] [113] [114]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 306.
+
+
+Underfull \hbox (badness 7888) in paragraph at lines 329--329
+[]|\OT1/cmr/m/n/10 (NN[]summer, 0.41) (NN[]afternoon, 0.41) (JJ[]hot, 0.09)
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 329--329
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 329--331
+
+ []
+
+[115] [116] [117]) (./mainmatter/tacl2015-tig/cl2017_conclusion.tex [118]))
+(./mainmatter/emnlp2017-qaj/emnlp2017_main.tex [119]
+CHAPTER 6.
+(./mainmatter/emnlp2017-qaj/emnlp2017_approach.tex [120
+
+] [121]
+<mainmatter/emnlp2017-qaj/arch_overall.png, id=2999, 382.42876pt x 425.59pt>
+File: mainmatter/emnlp2017-qaj/arch_overall.png Graphic file (type png)
+
+<use mainmatter/emnlp2017-qaj/arch_overall.png>
+Package pdftex.def Info: mainmatter/emnlp2017-qaj/arch_overall.png used on inpu
+t line 38.
+(pdftex.def)             Requested size: 213.19627pt x 237.25726pt.
+ [122 <./mainmatter/emnlp2017-qaj/arch_overall.png>]) (./mainmatter/emnlp2017-q
+aj/emnlp2017_models.tex [123]
+<mainmatter/emnlp2017-qaj/ArchDiagram.png, id=3024, 713.66624pt x 476.78125pt>
+File: mainmatter/emnlp2017-qaj/ArchDiagram.png Graphic file (type png)
+
+<use mainmatter/emnlp2017-qaj/ArchDiagram.png>
+Package pdftex.def Info: mainmatter/emnlp2017-qaj/ArchDiagram.png used on input
+ line 4.
+(pdftex.def)             Requested size: 341.11533pt x 227.89207pt.
+ [124 <./mainmatter/emnlp2017-qaj/ArchDiagram.png>] [125] [126]
+<mainmatter/emnlp2017-qaj/DiscourseExample.png, id=3063, 436.63126pt x 132.495p
+t>
+File: mainmatter/emnlp2017-qaj/DiscourseExample.png Graphic file (type png)
+ <use mainmatter/emnlp2017-qaj/DiscourseExample.png>
+Package pdftex.def Info: mainmatter/emnlp2017-qaj/DiscourseExample.png used on 
+input line 99.
+(pdftex.def)             Requested size: 341.11533pt x 103.51144pt.
+ [127] [128 <./mainmatter/emnlp2017-qaj/DiscourseExample.png>] [129])
+(./mainmatter/emnlp2017-qaj/emnlp2017_experiments.tex [130] [131])
+(./mainmatter/emnlp2017-qaj/emnlp2017_results.tex [132] [133] [134]
+Underfull \hbox (badness 1231) in paragraph at lines 96--96
+[][][]\OT1/cmr/m/n/10 Based on the pub-lic leader-board ([][]$\OT1/cmtt/m/n/8 h
+ttps : / / www . kaggle . com / c / the-[]allen-[]ai-[]science-[]challenge /
+ []
+
+
+Overfull \hbox (12.39879pt too wide) in alignment at lines 137--137
+[][] 
+ []
+
+[135] [136]
+<mainmatter/emnlp2017-qaj/justificationChanges.png, id=3213, 573.14125pt x 444.
+66125pt>
+File: mainmatter/emnlp2017-qaj/justificationChanges.png Graphic file (type png)
+
+ <use mainmatter/emnlp2017-qaj/justificationChanges.png>
+Package pdftex.def Info: mainmatter/emnlp2017-qaj/justificationChanges.png used
+ on input line 238.
+(pdftex.def)             Requested size: 298.47348pt x 231.57121pt.
+ [137] [138 <./mainmatter/emnlp2017-qaj/justificationChanges.png>] [139])
+(./mainmatter/emnlp2017-qaj/emnlp2017_conclusion.tex [140] [141])) [142]
+\openout2 = `mainmatter/conclusion.aux'.
+
+
+(./mainmatter/conclusion.tex
+CHAPTER 7.
+[143
+
+
+] [144] [145] [146]) [147]
+\openout2 = `mainmatter/appendix_rules.aux'.
+
+ (./mainmatter/appendix_rules.tex
+CHAPTER 8.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
+[148
+
+
+
+]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 78.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 78.
+ [149]
+[150] [151]) [152] (./dissertation_withAck.bbl
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no “ in font cmr12!
+ [153
+
+
+] [154] [155] [156]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+ [157]
+[158] [159] [160] [161] [162] [163])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 192.
+ [164]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 192.
+ (./dissertation_withAck.aux
+(./mainmatter/introduction.aux) (./mainmatter/related_work.aux)
+(./mainmatter/conclusion.aux) (./mainmatter/appendix_rules.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 192.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 192.
+Package rerunfilecheck Info: File `dissertation_withAck.out' has not changed.
+(rerunfilecheck)             Checksum: E613269C336BAF43A9614068E03C3EB7;6041.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 11182 strings out of 493014
+ 168051 string characters out of 6133351
+ 436822 words of memory out of 5000000
+ 13611 multiletter control sequences out of 15000+600000
+ 23871 words of font info for 90 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 48i,16n,43p,1873b,1764s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.57} has been referenced but does not ex
+ist, replaced by a fixed one
+
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvb8a.pfb>
+Output written on dissertation_withAck.pdf (164 pages, 3537701 bytes).
+PDF statistics:
+ 3819 PDF objects out of 4296 (max. 8388607)
+ 3188 compressed objects within 32 object streams
+ 751 named destinations out of 1000 (max. 500000)
+ 758 words of extra memory for PDF output out of 10000 (max. 10000000)
+
